@@ -42,7 +42,17 @@ const orgLd = {
   email: site.email,
   telephone: site.phone,
   slogan: site.tagline[locale],
-  address: { "@type": "PostalAddress", streetAddress: site.address.bg, addressCountry: "BG" },
+  /* Now that the seat is real, describe it properly rather than dumping the
+     whole Bulgarian string into streetAddress. */
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street[locale],
+    addressLocality: site.address.locality[locale],
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+  taxID: "208173515", // ЕИК
+  vatID: "BG208173515",
   sameAs: Object.values(site.socials).filter(Boolean),
 };
 ---

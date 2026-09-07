@@ -27,33 +27,50 @@ export const site = {
   name: "NV Power",
   tagline: { bg: "Енергия за утрешния ден", en: "Energy for tomorrow" },
 
-  /** [PLACEHOLDER] main phone – appears in header, click-to-call */
-  phone: "+359 XXXXXXX",
-  phoneHref: "+359XXXXXXX",
+  /** Main phone – appears in header, click-to-call and the mobile CTA bar. */
+  phone: "+359 876 109 405",
+  phoneHref: "+359876109405",
 
   email: "info@nvpower.bg",
 
-  /** [PLACEHOLDER] office address */
+  /** Registered seat. `street`/`locality`/`postalCode` feed the JSON-LD. */
   address: {
-    bg: "гр. София 1404, бул. „България“ 69, ет. 3",
-    en: "69 Bulgaria Blvd, fl. 3, 1404 Sofia, Bulgaria",
+    bg: "гр. София 1680, р-н Витоша, ж.к. Манастирски ливади, ул. „Казбек“ 57Б, вх. А, ет. 1, ап. партер",
+    en: "57B Kazbek St, entrance A, floor 1, Manastirski Livadi, 1680 Sofia, Bulgaria",
+    street: {
+      bg: "ж.к. Манастирски ливади, ул. „Казбек“ 57Б, вх. А, ет. 1, ап. партер",
+      en: "57B Kazbek St, entrance A, floor 1, Manastirski Livadi",
+    },
+    locality: { bg: "София", en: "Sofia" },
+    region: { bg: "р-н Витоша", en: "Vitosha district" },
+    postalCode: "1680",
+    country: "BG",
   },
-  /** [PLACEHOLDER] Google Maps embed URL for the office */
-  /** [PLACEHOLDER] empty hides the map: a generic pin is worse than none. */
-  mapsEmbed: "",
+  /** Google Maps embed for the seat. Empty would hide the map entirely. */
+  mapsEmbed: "https://www.google.com/maps?q=%D1%83%D0%BB.%20%D0%9A%D0%B0%D0%B7%D0%B1%D0%B5%D0%BA%2057%D0%91%2C%20%D0%B6.%D0%BA.%20%D0%9C%D0%B0%D0%BD%D0%B0%D1%81%D1%82%D0%B8%D1%80%D1%81%D0%BA%D0%B8%20%D0%BB%D0%B8%D0%B2%D0%B0%D0%B4%D0%B8%2C%201680%20%D0%A1%D0%BE%D1%84%D0%B8%D1%8F%2C%20%D0%91%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D0%B8%D1%8F&output=embed",
 
   workingHours: { bg: "Пон – Пет: 09:00 – 18:00", en: "Mon – Fri: 09:00 – 18:00" },
 
-  /** [PLACEHOLDER] legal identity – ЕИК, ДДС № */
+  /** Legal identity. ДДС регистрация от 14.03.2025 (чл. 100 ал. 2 ЗДДС). */
   legal: {
-    bg: "„НВ Пауър“ ЕООД · ЕИК XXXXXXX · ДДС № BGXXXXXXX",
-    en: "NV Power Ltd · UIC XXXXXXX · VAT BGXXXXXXX",
+    bg: "„ЕН ВИ ПАУЪР“ ООД · ЕИК 208173515 · ДДС № BG208173515",
+    en: "NV Power Ltd · UIC 208173515 · VAT BG208173515",
   },
 
-  /** [PLACEHOLDER] КЕВР license number (publish the PDF in /documents too) */
+  /** КЕВР licence. Covers trading *and* balancing-group coordination. */
   license: {
-    bg: "Лицензия за търговия с електрическа енергия № XXXXXXX / КЕВР",
-    en: "Electricity trading licence No. XXXXXXX / EWRC",
+    bg: "Лицензия № Л-878 от 14.01.2026 г. за търговия с електрическа енергия и координатор на стандартна балансираща група / КЕВР",
+    en: "Licence No. L-878 of 14.01.2026 for electricity trading and standard balancing group coordination / EWRC",
+  },
+
+  /**
+   * Registration with ЕСО as a balancing-group coordinator. This is what
+   * substantiates the "участие в балансиращата ни група" claim the buy-back
+   * plans all make, so it is worth stating rather than leaving implicit.
+   */
+  balancingGroup: {
+    bg: "Координатор на стандартни балансиращи групи към ЕСО ЕАД · договор BAL-091/09.06.2026 г.",
+    en: "Coordinator of standard balancing groups with ESO EAD · contract BAL-091/09.06.2026",
   },
 
   /** [PLACEHOLDER] real social profiles – remove any that don't exist */
