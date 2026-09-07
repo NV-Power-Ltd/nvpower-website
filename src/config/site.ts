@@ -57,20 +57,24 @@ export const site = {
     en: "NV Power Ltd · UIC 208173515 · VAT BG208173515",
   },
 
-  /** КЕВР licence. Covers trading *and* balancing-group coordination. */
+  /**
+   * КЕВР licence, worded as the register states it: one licence covering both
+   * activities. Quoted activity name kept verbatim.
+   */
   license: {
-    bg: "Лицензия № Л-878 от 14.01.2026 г. за търговия с електрическа енергия и координатор на стандартна балансираща група / КЕВР",
-    en: "Licence No. L-878 of 14.01.2026 for electricity trading and standard balancing group coordination / EWRC",
+    bg: "Лицензия № Л-878 от 14.01.2026 г. за дейността „търговия с електрическа енергия и координатор на стандартна балансираща група“, издадена от КЕВР",
+    en: "Licence No. L-878 of 14.01.2026 for the activity of “electricity trading and standard balancing group coordinator”, issued by EWRC",
   },
 
   /**
-   * Standard balancing-group coordinator status. This substantiates the
+   * Registration with ЕСО as a balancing-group coordinator, separate from the
+   * КЕВР licence above. This substantiates the
    * "участие в балансиращата ни група" claim every buy-back plan makes, so it
    * is worth stating rather than leaving implicit.
    */
   balancingGroup: {
-    bg: "Координатор на стандартна балансираща група / КЕВР от 30.04.2026 г.",
-    en: "Coordinator of a standard balancing group / EWRC since 30.04.2026",
+    bg: "Дружеството е регистрирано и като координатор на стандартни балансиращи групи към ЕСО",
+    en: "The company is also registered as a coordinator of standard balancing groups with ESO",
   },
 
   /**
