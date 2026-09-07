@@ -28,7 +28,7 @@ const copy = {
     back: "Назад",
     recTok: {
       title: "Препоръчваме: изкупуване по формула спрямо борсата",
-      text: "Изкупуваме продукцията ти по цена, обвързана с БНЕБ (IBEX), минус ясно определена такса, с включено балансиране. Смяната е безплатна и не спира производството ти.",
+      text: "Изкупуваме продукцията ти по цена, обвързана с БНЕБ (IBEX), минус ясно определена такса, с включено балансиране при NV Фиксиран. Смяната е безплатна и не спира производството ти.",
       route: "tok",
       cta: "Виж плановете за изкупуване",
     },
@@ -81,7 +81,7 @@ const copy = {
     back: "Back",
     recTok: {
       title: "We recommend: buy-back on an exchange-linked formula",
-      text: "We buy your output at a price linked to IBEX (БНЕБ) minus a clearly stated fee, with balancing included. Switching is free and never stops your production.",
+      text: "We buy your output at a price linked to IBEX (БНЕБ) minus a clearly stated fee, with balancing included on NV Fixed. Switching is free and never stops your production.",
       route: "tok",
       cta: "See the buy-back plans",
     },
