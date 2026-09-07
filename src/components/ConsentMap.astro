@@ -1,0 +1,106 @@
+---
+import { MapPin, ExternalLink } from "@lucide/astro";
+import type { Locale } from "../config/site";
+import { site } from "../config/site";
+
+/**
+ * Google Maps, loaded only on request.
+ *
+ * A Maps iframe contacts Google as soon as the page renders, which hands the
+ * visitor's IP and referrer to a third party before they have agreed to
+ * anything. This is the site's only third-party embed, so instead of loading it
+ * we show a placeholder and let the visitor opt in. The choice is remembered in
+ * localStorage so it is asked once, not on every visit.
+ *
+ * Without JS the placeholder still offers a plain link to Google Maps, so the
+ * address is never a dead end.
+ */
+interface Props {
+  locale: Locale;
+  title: string;
+}
+const { locale, title } = Astro.props;
+
+const t =
+  locale === "bg"
+    ? {
+        notice: "Картата се зарежда от Google Maps. При зареждане Google получава IP адреса ти.",
+        load: "Покажи картата",
+        open: "Отвори в Google Maps",
+      }
+    : {
+        notice: "The map is loaded from Google Maps. Loading it shares your IP address with Google.",
+        load: "Show the map",
+        open: "Open in Google Maps",
+      };
+
+/* The embed URL carries `&output=embed`; the plain URL is the same query without it. */
+const plainMapsUrl = site.mapsEmbed.replace("&output=embed", "");
+---
+
+{
+  site.mapsEmbed && (
+    <div class="card mt-5 overflow-hidden" data-consent-map data-src={site.mapsEmbed} data-title={title}>
+      <div class="flex flex-col items-start gap-4 p-6" data-map-placeholder>
+        <span class="flex size-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
+          <MapPin class="size-5" aria-hidden="true" />
+        </span>
+        <p class="text-sm leading-relaxed text-muted">{t.notice}</p>
+        <div class="flex flex-wrap items-center gap-3">
+          <button type="button" class="btn btn-primary !py-2.5 text-sm" data-map-load>
+            {t.load}
+          </button>
+          <a
+            href={plainMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm font-semibold text-accent underline"
+          >
+            {t.open}
+            <ExternalLink class="ml-1 inline size-3.5" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-consent-map]").forEach((box) => {
+    const KEY = "nvpower-map-consent";
+    const src = box.dataset.src;
+    const title = box.dataset.title || "Map";
+    if (!src) return;
+
+    const load = () => {
+      const frame = document.createElement("iframe");
+      frame.src = src;
+      frame.title = title;
+      frame.width = "100%";
+      frame.height = "320";
+      frame.style.border = "0";
+      frame.loading = "lazy";
+      frame.referrerPolicy = "no-referrer-when-downgrade";
+      box.replaceChildren(frame);
+    };
+
+    // Asked once: a previous "yes" loads it straight away on later visits.
+    try {
+      if (localStorage.getItem(KEY) === "granted") {
+        load();
+        return;
+      }
+    } catch (e) {
+      /* storage blocked: fall through and ask */
+    }
+
+    box.querySelector<HTMLButtonElement>("[data-map-load]")?.addEventListener("click", () => {
+      try {
+        localStorage.setItem(KEY, "granted");
+      } catch (e) {
+        /* not fatal: the map still loads for this visit */
+      }
+      load();
+    });
+  });
+</script>
