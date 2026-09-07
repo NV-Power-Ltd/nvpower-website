@@ -25,6 +25,14 @@ export const SITE_INDEXABLE = false;
 
 export const site = {
   name: "NV Power",
+  /**
+   * The company named as a legal person, for the copyright line and anywhere
+   * else the entity signs off. `name` stays the brand form, because it feeds
+   * og:site_name, the JSON-LD and aria labels, where "Ltd." would read oddly.
+   * Latin in both locales, matching the homepage hero. No trailing full stop:
+   * callers supply their own punctuation.
+   */
+  nameLegal: "NV Power Ltd",
   tagline: { bg: "Енергия за утрешния ден", en: "Energy for tomorrow" },
 
   /** Main phone – appears in header, click-to-call and the mobile CTA bar. */
