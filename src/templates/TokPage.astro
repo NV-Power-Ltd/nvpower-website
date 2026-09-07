@@ -57,15 +57,15 @@ const c = {
             {
               id: "flex",
               label: "Standard Flexible",
-              formula: "БНЕБ − 5 €",
-              notice: "3 месеца",
+              formula: "БНЕБ − 3 €",
+              notice: "1 месец",
               hint: "По-кратък срок, повече свобода",
             },
             {
               id: "long",
               label: "Standard Дългосрочен",
-              formula: "БНЕБ − 4 €",
-              notice: "12 месеца",
+              formula: "БНЕБ − 2 €",
+              notice: "6 месеца",
               hint: "Най-добрата цена за стандартен план",
             },
           ],
@@ -107,8 +107,8 @@ const c = {
       cols: ["План", "Формула (БНЕБ)", "Срок на предизвестие", "Целева група", "Основно предимство"],
       rows: [
         { plan: "NV Фиксиран", formula: "БНЕБ − 15 €", notice: "1 месец", target: "Малки ВЕИ централи", advantage: "Пълна свобода с 1 месец предизвестие." },
-        { plan: "NV Standard Flexible", formula: "БНЕБ − 5 €", notice: "3 месеца", target: "Средни ВЕИ", advantage: "Баланс между добра цена и кратък срок." },
-        { plan: "NV Standard Дългосрочен", formula: "БНЕБ − 4 €", notice: "12 месеца", target: "Стабилни ВЕИ", advantage: "Максимална печалба с най-ниска такса за балансиране." },
+        { plan: "NV Standard Flexible", formula: "БНЕБ − 3 €", notice: "1 месец", target: "Средни ВЕИ", advantage: "Баланс между добра цена и кратък срок." },
+        { plan: "NV Standard Дългосрочен", formula: "БНЕБ − 2 €", notice: "6 месеца", target: "Стабилни ВЕИ", advantage: "Максимална печалба с най-ниска такса за балансиране." },
         { plan: "NV Individual", formula: "По договаряне", notice: "По договаряне", target: "Обекти над 1 MW", advantage: "Условия, построени спрямо профила на обекта." },
       ],
     },
@@ -135,7 +135,7 @@ const c = {
         { q: "Колко струва смяната и колко време отнема?", a: "Смяната е напълно безплатна – без такси, без депозити. Подаваме документите до 10-о число на месеца и от 1-во число на следващия вече продаваш при нас. Цялата администрация я поемаме ние." },
         { q: "Какво е балансиране и защо го споменавате?", a: "Всеки производител се отклонява от прогнозата си за производство и някой плаща тези небаланси. Като член на нашата балансираща група отклоненията се компенсират взаимно между членовете – при NV Фиксиран балансирането е включено в цената, без отделни редове изненади." },
         { q: "Как се формира цената, която получавам?", a: "По формулата на избрания план: борсовата цена на БНЕБ за съответния период минус договорената такса – например БНЕБ − 15 €/MWh при NV Фиксиран. Получаваш месечен отчет с пълна разбивка, без скрити удръжки." },
-        { q: "Мога ли да се откажа, ако не съм доволен?", a: "Да, с предизвестието на плана ти – 1 месец при NV Фиксиран, 3 или 12 месеца при NV Standard. Без неустойки и без обвързващи клаузи." },
+        { q: "Мога ли да се откажа, ако не съм доволен?", a: "Да, с предизвестието на плана ти – 1 месец при NV Фиксиран, 1 или 6 месеца при NV Standard. Без неустойки и без обвързващи клаузи." },
       ],
     },
   },
@@ -181,15 +181,15 @@ const c = {
             {
               id: "flex",
               label: "Standard Flexible",
-              formula: "IBEX − €5",
-              notice: "3 months",
+              formula: "IBEX − €3",
+              notice: "1 month",
               hint: "Shorter term, more freedom",
             },
             {
               id: "long",
               label: "Standard Long-term",
-              formula: "IBEX − €4",
-              notice: "12 months",
+              formula: "IBEX − €2",
+              notice: "6 months",
               hint: "The best price in the standard plan",
             },
           ],
@@ -231,8 +231,8 @@ const c = {
       cols: ["Plan", "Formula (IBEX)", "Notice period", "Target group", "Key advantage"],
       rows: [
         { plan: "NV Fixed", formula: "IBEX − €15", notice: "1 month", target: "Small renewable plants", advantage: "Full freedom, one month's notice." },
-        { plan: "NV Standard Flexible", formula: "IBEX − €5", notice: "3 months", target: "Mid-size renewables", advantage: "A balance of good price and a short commitment." },
-        { plan: "NV Standard Long-term", formula: "IBEX − €4", notice: "12 months", target: "Established renewables", advantage: "Maximum return with the lowest balancing fee." },
+        { plan: "NV Standard Flexible", formula: "IBEX − €3", notice: "1 month", target: "Mid-size renewables", advantage: "A balance of good price and a short commitment." },
+        { plan: "NV Standard Long-term", formula: "IBEX − €2", notice: "6 months", target: "Established renewables", advantage: "Maximum return with the lowest balancing fee." },
         { plan: "NV Individual", formula: "Negotiated", notice: "Negotiated", target: "Sites over 1 MW", advantage: "Terms built around your site's profile." },
       ],
     },
@@ -259,7 +259,7 @@ const c = {
         { q: "How much does switching cost and how long does it take?", a: "Switching is completely free – no fees, no deposits. We file the documents by the 10th of the month and from the 1st of the next month you are selling to us. We handle all the administration." },
         { q: "What is balancing and why do you mention it?", a: "Every producer deviates from their generation forecast, and someone pays for those imbalances. As a member of our balancing group, deviations offset each other between members – on NV Fixed, balancing is included in the price, with no surprise line items." },
         { q: "How is the price I receive calculated?", a: "By your plan formula: the IBEX exchange price for the period minus the agreed fee – for example IBEX − €15/MWh on NV Fixed. You get a monthly report with a full breakdown and no hidden deductions." },
-        { q: "Can I leave if I am not happy?", a: "Yes, on your plan notice period – 1 month on NV Fixed, 3 or 12 months on NV Standard. No penalties, no lock-in clauses." },
+        { q: "Can I leave if I am not happy?", a: "Yes, on your plan notice period – 1 month on NV Fixed, 1 or 6 months on NV Standard. No penalties, no lock-in clauses." },
       ],
     },
   },
@@ -275,12 +275,14 @@ const c = {
       </h1>
       <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg">{c.hero.sub}</p>
 
+      {/* Plans lead: the tariff is what a producer is here to compare, so it
+          takes first position and the filled style; the quote CTA follows. */}
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a href={r(locale, "oferta")} class="btn btn-primary !px-7 !py-4 text-base">
-          {c.hero.ctaPrimary}
+        <a href="#planove" class="btn btn-primary !px-7 !py-4 text-base">
+          {c.hero.ctaSecondary}
           <ArrowRight class="size-4" aria-hidden="true" />
         </a>
-        <a href="#planove" class="btn btn-ghost-band !px-7 !py-4 text-base">{c.hero.ctaSecondary}</a>
+        <a href={r(locale, "oferta")} class="btn btn-ghost-band !px-7 !py-4 text-base">{c.hero.ctaPrimary}</a>
       </div>
 
       <ul class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5">
