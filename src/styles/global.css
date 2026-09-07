@@ -52,8 +52,15 @@
 
   --bg-color: #0c2e31;
   --bg-color-alt: #113a3e;
-  --text-color: #eef5f5;
-  --text-color-muted: #a0c2c5;
+  /*
+   * Section text sits close to white rather than tinted pine. The muted tone
+   * carries most of the body copy, so its old #a0c2c5 set the mood of every
+   * section and read dim; both are now nearer white and further apart in
+   * lightness, which keeps the heading/body hierarchy legible.
+   * Contrast on the page background: body 14.27:1, muted 10.50:1 (was 7.59).
+   */
+  --text-color: #fbfefe;
+  --text-color-muted: #cddfe1;
   --header-bg: rgba(10, 38, 41, 0.94);
   --line-color: #1d4f54;
   --card-bg: #113a3e;
