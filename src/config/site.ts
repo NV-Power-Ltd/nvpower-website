@@ -31,7 +31,7 @@ export const site = {
   phone: "+359 876 109 405",
   phoneHref: "+359876109405",
 
-  email: "info@nvpower.bg",
+  email: "office@nvpower.bg",
 
   /** Registered seat. `street`/`locality`/`postalCode` feed the JSON-LD. */
   address: {
@@ -64,19 +64,28 @@ export const site = {
   },
 
   /**
-   * Registration with ЕСО as a balancing-group coordinator. This is what
-   * substantiates the "участие в балансиращата ни група" claim the buy-back
-   * plans all make, so it is worth stating rather than leaving implicit.
+   * Standard balancing-group coordinator status. This substantiates the
+   * "участие в балансиращата ни група" claim every buy-back plan makes, so it
+   * is worth stating rather than leaving implicit.
    */
   balancingGroup: {
-    bg: "Координатор на стандартни балансиращи групи към ЕСО ЕАД · договор BAL-091/09.06.2026 г.",
-    en: "Coordinator of standard balancing groups with ESO EAD · contract BAL-091/09.06.2026",
+    bg: "Координатор на стандартна балансираща група / КЕВР от 30.04.2026 г.",
+    en: "Coordinator of a standard balancing group / EWRC since 30.04.2026",
   },
 
-  /** [PLACEHOLDER] real social profiles – remove any that don't exist */
+  /**
+   * Empty entries are filtered out of the footer and out of the JSON-LD
+   * `sameAs`, so only confirmed profiles ever appear. `sameAs` tells search
+   * engines a page *represents this company*, which is why an unverified URL
+   * does not belong there.
+   *
+   * facebook: left empty on purpose – the previous value
+   * (facebook.com/nvpower) was a placeholder nobody confirmed. Paste the real
+   * page here if there is one.
+   */
   socials: {
-    facebook: "https://www.facebook.com/nvpower",
-    linkedin: "https://www.linkedin.com/company/nvpower",
+    facebook: "",
+    linkedin: "https://www.linkedin.com/company/nv-power-ltd",
     instagram: "",
   },
 

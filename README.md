@@ -78,7 +78,7 @@ npx astro check  # типова проверка
 фалшиво потвърждение – по-добре честен провал, отколкото загубен клиент.
 
 Свържи form service (напр. Formspree) или собствена serverless функция с имейл
-до info@nvpower.bg, и попълни `site.formEndpoint`.
+до office@nvpower.bg, и попълни `site.formEndpoint`.
 
 > **CSP:** ако endpoint-ът е на **друг домейн**, добави origin-а му към
 > `connect-src` и `form-action` – на Vercel това е в **`vercel.json`**.
@@ -217,7 +217,7 @@ an error. A false confirmation is never shown – an honest failure beats a lost
 lead.
 
 Wire a form service (e.g. Formspree) or your own serverless function that emails
-info@nvpower.bg, then set `site.formEndpoint`.
+office@nvpower.bg, then set `site.formEndpoint`.
 
 > **CSP:** if the endpoint is on **another domain**, add its origin to
 > `connect-src` and `form-action` – on Vercel that lives in **`vercel.json`**.
