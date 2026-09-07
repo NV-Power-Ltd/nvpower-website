@@ -93,6 +93,11 @@ const orgLd = {
     )}
     <link rel="sitemap" href="/sitemap-index.xml" />
 
+    <!-- .reveal starts at opacity:0 and is revealed by IntersectionObserver.
+         Without JS that would hide every section heading while the body copy
+         still shows, which reads as broken content rather than as no animation. -->
+    <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content={locale === "bg" ? "bg_BG" : "en_US"} />

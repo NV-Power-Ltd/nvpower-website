@@ -10,8 +10,8 @@ import { site } from "../config/site";
 export default function NoScriptFallback({ locale }: { locale: Locale }) {
   const text =
     locale === "bg"
-      ? "Формата изисква JavaScript. Обади ни се или ни пиши – отговаряме също толкова бързо:"
-      : "This form needs JavaScript. Call or email us instead – we reply just as quickly:";
+      ? "Формата изисква JavaScript. Обади ни се или ни пиши, отговаряме също толкова бързо:"
+      : "This form needs JavaScript. Call or email us instead, we reply just as quickly:";
 
   return (
     <noscript>

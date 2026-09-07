@@ -1,18 +1,5 @@
 ---
-import {
-  ArrowRight,
-  Check,
-  Sun,
-  BatteryCharging,
-  CalendarClock,
-  ShieldCheck,
-  TrendingDown,
-  PlugZap,
-  Home,
-  Landmark,
-  ClipboardList,
-  Wrench,
-} from "@lucide/astro";
+import { ArrowRight, Sun, BatteryCharging, CalendarClock, ShieldCheck, TrendingDown, PlugZap, Home, Landmark, ClipboardList, Wrench } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import CtaBand from "../components/CtaBand.astro";
@@ -33,7 +20,7 @@ const c = {
       "Домашна фотоволтаична система 5–10 kWp с 10 kWh батерия: откупуване за 5–7 години, резервно захранване и лизинг. Ориентировъчни цени и оферта за 2 минути.",
     hero: {
       h1: "Домът ти може сам да си произвежда тока",
-      sub: "Типичната домашна система е 5–10 kWp с 10 kWh батерия – покрива голяма част от потреблението ти и се откупува за 5–7 години. Проектираме, изграждаме и поддържаме – до ключ.",
+      sub: "Типичната домашна система е 5–10 kWp с 10 kWh батерия, покрива голяма част от потреблението ти и се откупува за 5–7 години. Проектираме, изграждаме и поддържаме, до ключ.",
       ctaPrimary: "Вземи оферта до 1 работен ден",
       ctaSecondary: "Изчисли спестяванията",
       checks: [`Отговор до 3 работни дни`, "Без скрити такси", "Възможност за финансиране"],
@@ -41,7 +28,7 @@ const c = {
     facts: {
       eyebrow: "Накратко",
       title: "Типичната система за дом",
-      lead: "Хибридна система с батерия е нашата препоръка за дома – тя превръща дневното слънце във вечерен ток и в резервно захранване.",
+      lead: "Хибридна система с батерия е нашата препоръка за дома, тя превръща дневното слънце във вечерен ток и в резервно захранване.",
       items: [
         { icon: Sun, value: "5–10 kWp", label: "типична мощност за къща" },
         { icon: BatteryCharging, value: "10 kWh", label: "препоръчана батерия" },
@@ -56,21 +43,21 @@ const c = {
         {
           icon: TrendingDown,
           title: "По-ниска сметка",
-          text: "Произвеждаш собствен ток в най-скъпите часове на деня – и купуваш все по-малко от мрежата.",
+          text: "Произвеждаш собствен ток в най-скъпите часове на деня, и купуваш все по-малко от мрежата.",
         },
         {
           icon: BatteryCharging,
           title: "Ток и вечер",
-          text: "10 kWh батерия съхранява дневното производство за вечерните часове – точно когато потреблението у дома е най-високо.",
+          text: "10 kWh батерия съхранява дневното производство за вечерните часове, точно когато потреблението у дома е най-високо.",
         },
         {
           icon: ShieldCheck,
           title: "Резервно захранване",
-          text: "При спиране на тока хибридната система продължава да захранва важните уреди – хладилник, котел, интернет.",
+          text: "При спиране на тока хибридната система продължава да захранва важните уреди, хладилник, котел, интернет.",
         },
         {
           icon: PlugZap,
-          title: "Зарядна станция – опция",
+          title: "Зарядна станция, опция",
           text: "Караш или планираш електромобил? Добавяме зарядна станция и зареждаш направо от слънцето.",
         },
         {
@@ -81,15 +68,15 @@ const c = {
         {
           icon: Landmark,
           title: "Възможност за финансиране",
-          text: "Лизинг и разсрочено плащане – вноската е приблизително колкото сметката, която спираш да плащаш.",
+          text: "Лизинг и разсрочено плащане, вноската е приблизително колкото сметката, която спираш да плащаш.",
         },
       ],
     },
     pricing: {
       eyebrow: "Ориентировъчни цени",
       title: "Колко струва система за дома",
-      lead: "Реалната цена зависи от покрива, конструкцията и оборудването – тези диапазони са честна отправна точка. Точната цена – в офертата.",
-      recommended: "Хибридна – препоръчано",
+      lead: "Реалната цена зависи от покрива, конструкцията и оборудването, тези диапазони са честна отправна точка. Точната цена, в офертата.",
+      recommended: "Хибридна, препоръчано",
       items: [
         {
           name: "Система 5 kWp",
@@ -116,7 +103,7 @@ const c = {
           highlight: true,
         },
       ],
-      disclaimer: "Точната цена – в офертата: изготвяме я по покрива и потреблението ти, без ангажимент.",
+      disclaimer: "Точната цена, в офертата: изготвяме я по покрива и потреблението ти, без ангажимент.",
       cta: "Вземи оферта до 1 работен ден",
     },
     process: {
@@ -126,7 +113,7 @@ const c = {
         {
           icon: ClipboardList,
           title: "Оглед и оферта",
-          text: `Изпращаш запитване за 2 минути, уточняваме детайлите и получаваш оферта с конкретни числа – отговор до 3 работни дни.`,
+          text: `Изпращаш запитване за 2 минути, уточняваме детайлите и получаваш оферта с конкретни числа, отговор до 3 работни дни.`,
         },
         {
           icon: Landmark,
@@ -136,7 +123,7 @@ const c = {
         {
           icon: Wrench,
           title: "Монтаж и пускане",
-          text: "2–3 дни на покрива, присъединяване и настройка на мониторинга – гледаш производството от телефона си.",
+          text: "2–3 дни на покрива, присъединяване и настройка на мониторинга, гледаш производството от телефона си.",
         },
       ],
     },
@@ -146,15 +133,15 @@ const c = {
       items: [
         {
           q: "Подходящ ли е покривът ми?",
-          a: "Най-добре работят южните, югоизточните и югозападните скатове, но и изток–запад дава отлични резултати. Правим безплатен оглед и ти казваме честно какво може да произведе точно твоят покрив – и дали изобщо си заслужава.",
+          a: "Най-добре работят южните, югоизточните и югозападните скатове, но и изток–запад дава отлични резултати. Правим безплатен оглед и ти казваме честно какво може да произведе точно твоят покрив, и дали изобщо си заслужава.",
         },
         {
           q: "Какво става с излишната енергия?",
-          a: "Първо зарежда батерията, а останалото се отдава в мрежата – при желание уреждаме договор за изкупуване на излишъците. Целта на доброто оразмеряване обаче е максимално собствено потребление, защото там е най-голямата икономия.",
+          a: "Първо зарежда батерията, а останалото се отдава в мрежата, при желание уреждаме договор за изкупуване на излишъците. Целта на доброто оразмеряване обаче е максимално собствено потребление, защото там е най-голямата икономия.",
         },
         {
           q: "Мога ли да взема системата на лизинг?",
-          a: "Да – предлагаме лизинг и разсрочено плащане, така че вноската да е приблизително колкото сметката, която спираш да плащаш. Конкретните варианти и числа получаваш заедно с офертата.",
+          a: "Да, предлагаме лизинг и разсрочено плащане, така че вноската да е приблизително колкото сметката, която спираш да плащаш. Конкретните варианти и числа получаваш заедно с офертата.",
         },
       ],
     },
@@ -165,7 +152,7 @@ const c = {
       "A residential photovoltaic system of 5–10 kWp with a 10 kWh battery: 5–7 year payback, backup power and leasing. Indicative prices and a quote in 2 minutes.",
     hero: {
       h1: "Your home can produce its own power",
-      sub: "The typical home system is 5–10 kWp with a 10 kWh battery – it covers a large share of your consumption and pays for itself in 5–7 years. We design, build and maintain it – turnkey.",
+      sub: "The typical home system is 5–10 kWp with a 10 kWh battery, it covers a large share of your consumption and pays for itself in 5–7 years. We design, build and maintain it, turnkey.",
       ctaPrimary: "Get a quote within 1 business day",
       ctaSecondary: "Calculate your savings",
       checks: [`Reply within 3 business days`, "No hidden fees", "Financing available"],
@@ -173,7 +160,7 @@ const c = {
     facts: {
       eyebrow: "At a glance",
       title: "The typical home system",
-      lead: "A hybrid system with a battery is our recommendation for the home – it turns daytime sun into evening power and into a backup supply.",
+      lead: "A hybrid system with a battery is our recommendation for the home, it turns daytime sun into evening power and into a backup supply.",
       items: [
         { icon: Sun, value: "5–10 kWp", label: "typical capacity for a house" },
         { icon: BatteryCharging, value: "10 kWh", label: "recommended battery" },
@@ -188,21 +175,21 @@ const c = {
         {
           icon: TrendingDown,
           title: "A lower bill",
-          text: "You produce your own power during the most expensive hours of the day – and buy less and less from the grid.",
+          text: "You produce your own power during the most expensive hours of the day, and buy less and less from the grid.",
         },
         {
           icon: BatteryCharging,
           title: "Power in the evening",
-          text: "A 10 kWh battery stores the daytime production for the evening hours – exactly when home consumption peaks.",
+          text: "A 10 kWh battery stores the daytime production for the evening hours, exactly when home consumption peaks.",
         },
         {
           icon: ShieldCheck,
           title: "Backup power",
-          text: "During an outage the hybrid system keeps powering your essentials – fridge, boiler, internet.",
+          text: "During an outage the hybrid system keeps powering your essentials, fridge, boiler, internet.",
         },
         {
           icon: PlugZap,
-          title: "EV charger – optional",
+          title: "EV charger, optional",
           text: "Driving or planning an electric car? We add a charging station and you charge straight from the sun.",
         },
         {
@@ -213,15 +200,15 @@ const c = {
         {
           icon: Landmark,
           title: "Financing available",
-          text: "Leasing and instalment plans – the payment is roughly equal to the bill you stop paying.",
+          text: "Leasing and instalment plans, the payment is roughly equal to the bill you stop paying.",
         },
       ],
     },
     pricing: {
       eyebrow: "Indicative prices",
       title: "What a home system costs",
-      lead: "The real price depends on your roof, structure and equipment – these ranges are an honest starting point. The exact price comes with your quote.",
-      recommended: "Hybrid – recommended",
+      lead: "The real price depends on your roof, structure and equipment, these ranges are an honest starting point. The exact price comes with your quote.",
+      recommended: "Hybrid, recommended",
       items: [
         {
           name: "5 kWp system",
@@ -248,7 +235,7 @@ const c = {
           highlight: true,
         },
       ],
-      disclaimer: "The exact price comes with your quote – tailored to your roof and consumption, no commitment.",
+      disclaimer: "The exact price comes with your quote, tailored to your roof and consumption, no commitment.",
       cta: "Get a quote within 1 business day",
     },
     process: {
@@ -258,7 +245,7 @@ const c = {
         {
           icon: ClipboardList,
           title: "Survey & quote",
-          text: `Send an enquiry in 2 minutes, we clarify the details and you get a quote with real numbers – a reply within 3 business days.`,
+          text: `Send an enquiry in 2 minutes, we clarify the details and you get a quote with real numbers, a reply within 3 business days.`,
         },
         {
           icon: Landmark,
@@ -268,7 +255,7 @@ const c = {
         {
           icon: Wrench,
           title: "Installation & launch",
-          text: "2–3 days on the roof, grid connection and monitoring setup – you watch production from your phone.",
+          text: "2–3 days on the roof, grid connection and monitoring setup, you watch production from your phone.",
         },
       ],
     },
@@ -278,15 +265,15 @@ const c = {
       items: [
         {
           q: "Is my roof suitable?",
-          a: "South, south-east and south-west slopes work best, but east–west also delivers excellent results. We do a free survey and tell you honestly what your specific roof can produce – and whether it's worth it at all.",
+          a: "South, south-east and south-west slopes work best, but east–west also delivers excellent results. We do a free survey and tell you honestly what your specific roof can produce, and whether it's worth it at all.",
         },
         {
           q: "What happens to the surplus energy?",
-          a: "It charges the battery first, and the rest is fed into the grid – if you wish, we arrange a contract for selling the surplus. The goal of good sizing, though, is maximum self-consumption, because that's where the biggest savings are.",
+          a: "It charges the battery first, and the rest is fed into the grid, if you wish, we arrange a contract for selling the surplus. The goal of good sizing, though, is maximum self-consumption, because that's where the biggest savings are.",
         },
         {
           q: "Can I get the system on leasing?",
-          a: "Yes – we offer leasing and instalment plans, so the payment is roughly equal to the bill you stop paying. You'll get the specific options and numbers together with your quote.",
+          a: "Yes, we offer leasing and instalment plans, so the payment is roughly equal to the bill you stop paying. You'll get the specific options and numbers together with your quote.",
         },
       ],
     },
@@ -312,7 +299,6 @@ const c = {
       <ul class="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5">
         {c.hero.checks.map((check) => (
           <li class="flex items-center gap-2 text-sm font-medium text-body">
-            <Check class="size-4 text-accent" aria-hidden="true" />
             {check}
           </li>
         ))}
@@ -325,7 +311,7 @@ const c = {
     <SectionHeading eyebrow={c.facts.eyebrow} title={c.facts.title} lead={c.facts.lead} />
     <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {c.facts.items.map((f, i) => (
-        <li class="reveal card flex flex-col items-center gap-2 p-7 text-center" style={`--reveal-delay:${i * 80}ms`}>
+        <li class="card flex flex-col items-center gap-2 p-7 text-center">
           <span class="flex size-12 items-center justify-center rounded-xl bg-accent/10 text-accent"><f.icon class="size-6" aria-hidden="true" /></span>
           <p class="mt-2 font-[family-name:var(--font-display)] text-3xl font-bold text-accent">{f.value}</p>
           <p class="text-sm text-muted">{f.label}</p>
@@ -340,7 +326,7 @@ const c = {
       <SectionHeading eyebrow={c.benefits.eyebrow} title={c.benefits.title} />
       <ul class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {c.benefits.cards.map((card, i) => (
-          <li class="reveal card p-6" style={`--reveal-delay:${(i % 3) * 80}ms`}>
+          <li class="card p-6">
             <span class="flex size-11 items-center justify-center rounded-xl bg-accent/10 text-accent"><card.icon class="size-5.5" aria-hidden="true" /></span>
             <h3 class="mt-3.5 font-[family-name:var(--font-display)] text-base font-bold text-body">{card.title}</h3>
             <p class="mt-1.5 text-sm leading-relaxed text-muted">{card.text}</p>
@@ -357,8 +343,7 @@ const c = {
     <div class="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
       {c.pricing.items.map((p, i) => (
         <article
-          class:list={["reveal card relative flex flex-col gap-5 p-7 md:p-8", p.highlight && "border-accent ring-1 ring-accent"]}
-          style={`--reveal-delay:${i * 90}ms`}
+          class:list={["card relative flex flex-col gap-5 p-7 md:p-8", p.highlight && "border-accent ring-1 ring-accent"]}
         >
           {p.highlight && (
             <span class="absolute -top-3.5 left-6 rounded-full bg-accent px-3.5 py-1.5 text-xs font-bold text-accent-contrast">{c.pricing.recommended}</span>
@@ -369,10 +354,9 @@ const c = {
             <span class="mt-1 block text-sm font-bold text-muted">{p.priceSub}</span>
             <span class="mt-1 block text-sm font-medium text-accent">{p.note}</span>
           </p>
-          <ul class="flex flex-col gap-2.5">
+          <ul class="list-disc space-y-2.5 pl-5 marker:text-accent">
             {p.features.map((f) => (
-              <li class="flex items-start gap-2.5 text-sm text-body">
-                <Check class="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+              <li class="text-sm text-body">
                 {f}
               </li>
             ))}
@@ -381,7 +365,7 @@ const c = {
       ))}
     </div>
 
-    <div class="reveal mx-auto mt-9 max-w-2xl text-center">
+    <div class="mx-auto mt-9 max-w-2xl text-center">
       <p class="text-sm text-muted">{c.pricing.disclaimer}</p>
       <a href={r(locale, "oferta")} class="btn btn-primary mt-5">
         {c.pricing.cta}
@@ -396,7 +380,7 @@ const c = {
       <SectionHeading eyebrow={c.process.eyebrow} title={c.process.title} />
       <ol class="mt-12 grid gap-6 md:grid-cols-3">
         {c.process.steps.map((s, i) => (
-          <li class="reveal card relative p-7" style={`--reveal-delay:${i * 90}ms`}>
+          <li class="card relative p-7">
             <span class="absolute top-6 right-6 font-[family-name:var(--font-display)] text-5xl font-bold text-line">{String(i + 1).padStart(2, "0")}</span>
             <span class="flex size-12 items-center justify-center rounded-xl bg-accent/10 text-accent"><s.icon class="size-6" aria-hidden="true" /></span>
             <h3 class="mt-4 text-lg font-bold text-body">{s.title}</h3>
@@ -410,7 +394,7 @@ const c = {
   <!-- 6 ▸ FAQ -->
   <section class="section container-site">
     <SectionHeading eyebrow={c.faq.eyebrow} title={c.faq.title} />
-    <div class="reveal mx-auto mt-10 max-w-3xl">
+    <div class="mx-auto mt-10 max-w-3xl">
       <FaqAccordion items={c.faq.items} />
     </div>
   </section>

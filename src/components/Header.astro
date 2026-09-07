@@ -34,7 +34,7 @@ const current = Astro.url.pathname;
   style="background: var(--header-bg);"
 >
   <nav class="container-site flex h-16 items-center justify-between gap-3 md:h-20" aria-label={t.a11y.primaryNav}>
-    <a href={r(locale, "home")} aria-label={`${site.name} – ${locale === "bg" ? "начало" : "home"}`}>
+    <a href={r(locale, "home")} aria-label={`${site.name}, ${locale === "bg" ? "начало" : "home"}`}>
       <Logo />
     </a>
 

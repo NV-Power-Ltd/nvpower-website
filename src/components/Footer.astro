@@ -1,5 +1,5 @@
 ---
-import { Phone, Mail, MapPin, Clock } from "@lucide/astro";
+
 import type { Locale } from "../config/site";
 import { site } from "../config/site";
 import { useUI, r } from "../i18n/ui";
@@ -92,20 +92,20 @@ const socials = [
     <div class="mt-12 grid gap-6 border-t border-white/10 pt-8 md:grid-cols-2">
       <ul class="flex flex-col gap-2.5 text-sm text-white/70">
         <li>
-          <a href={`tel:${site.phoneHref}`} class="inline-flex items-center gap-2.5 hover:text-white">
-            <Phone class="size-4 text-[#4db8c4]" aria-hidden="true" />{site.phone}
+          <a href={`tel:${site.phoneHref}`} class="hover:text-white">
+            {site.phone}
           </a>
         </li>
         <li>
-          <a href={`mailto:${site.email}`} class="inline-flex items-center gap-2.5 hover:text-white">
-            <Mail class="size-4 text-[#4db8c4]" aria-hidden="true" />{site.email}
+          <a href={`mailto:${site.email}`} class="hover:text-white">
+            {site.email}
           </a>
         </li>
-        <li class="inline-flex items-center gap-2.5">
-          <MapPin class="size-4 text-[#4db8c4]" aria-hidden="true" />{site.address[locale]}
+        <li>
+          {site.address[locale]}
         </li>
-        <li class="inline-flex items-center gap-2.5">
-          <Clock class="size-4 text-[#4db8c4]" aria-hidden="true" />{site.workingHours[locale]}
+        <li>
+          {site.workingHours[locale]}
         </li>
       </ul>
       <div class="flex flex-col justify-end gap-1.5 text-xs text-white/45 md:text-right">

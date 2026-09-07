@@ -39,7 +39,7 @@ export async function submitLead(
   honeypot?: string,
   file?: File | null,
 ): Promise<LeadResult> {
-  if (honeypot) return "ok"; // bot – pretend success, send nothing
+  if (honeypot) return "ok"; // bot, pretend success, send nothing
 
   const endpoint = site.formEndpoint;
 
@@ -49,7 +49,7 @@ export async function submitLead(
   if (!endpoint.trim()) {
     // Loud on purpose: this must be caught before launch, not after.
     console.error(
-      `[NV Power] No form endpoint configured – the "${kind}" submission was NOT sent. ` +
+      `[NV Power] No form endpoint configured, the "${kind}" submission was NOT sent. ` +
         `Set site.formEndpoint in src/config/site.ts to a real form service or serverless URL.`,
       data,
     );
