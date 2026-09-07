@@ -24,9 +24,9 @@ with battery storage.
 - [ ] **Домейн / индексиране.** `nvpower.bg` все още е старият (Wix) сайт, затова този деплой е демо и е **noindex** (`SITE_INDEXABLE = false` в `src/config/site.ts`; `robots.txt` връща `Disallow: /`). `SITE_URL` умишлено остава `https://nvpower.bg`, за да са верни canonical/hreflang/og:url/sitemap в момента, в който този build стане реалният сайт – тогава просто обърни флага на `true`. Внимавай и за `www` формата: `nvpower.bg` прави 301 към `www.nvpower.bg`.
 
 - [ ] **Form endpoint.** `site.formEndpoint` е празен низ, затова формите не изпращат нищо – посетителят вижда телефон и имейл. Свържи form service или serverless функция (виж раздел „Форми" по-долу). **Докато е празен, качването на файлове се скрива автоматично** (`CAN_ACCEPT_UPLOADS`): блокът за изпращане на отчитане на `/tok/` и полето за прикачване в контактната форма изчезват, за да не искаме документ, който няма къде да отиде. Връщат се сами щом сложиш endpoint.
-- [ ] **Маскирани данни.** Телефон, ЕИК, ДДС №, КЕВР лиценз № и цената на тока са умишлено `XXX` / `XXXXXXX` в `src/config/site.ts` – замени с реалните стойности.
+- [ ] **Маскирана цена.** Единственото останало `XXX` е цената на тока (`site.price` в `src/config/site.ts`). Фирмените данни (телефон, ЕИК, ДДС №, адрес, лиценз Л-878) вече са реалните.
 - [ ] **Примерни проекти.** 4 записа в `src/data/projects.ts` са флагнати със `sample: true`.
-- [ ] **Останали placeholder-и.** Адрес, GA4 id и социалните профили (непроверени – Facebook/LinkedIn в `site.socials`). **Картата и секцията за екипа вече са скрити**, защото `mapsEmbed` е празен и `team` е празен масив – попълни ги с реални данни и се показват автоматично.
+- [ ] **Останали placeholder-и.** GA4 id (`gaMeasurementId`) и Facebook/Instagram в `site.socials` са празни. **Секцията „Екип" е скрита**, защото `team` е празен масив – попълни го и се показва автоматично. Картата вече е реалната, но се зарежда само след клик (виж „Съгласие и трети страни").
 
 **Несъответствия след преориентирането на `/tok/`** – страницата вече е за ВЕИ производители (изкупуване), а не за консуматори:
 
@@ -36,8 +36,7 @@ with battery storage.
 
 **Инфраструктура:**
 
-- [ ] Вторият Vercel проект (`nvpower-website.vercel.app`) не е свързан с `main` и отдава стар build. Линкът в About на repo-то сочи него – изтрий проекта или го насочи към `main`.
-- [ ] Клонът `en-slug-rename` е слят в `main` и може да се изтрие.
+- [ ] Вторият Vercel проект (`nvpower-website.vercel.app`) не е свързан с `main` и отдава стар build. Линкът в About на repo-то вече сочи pink деплоя, но старият проект **е обхождаем** (`robots.txt` там още връща `Allow: /` и сочи sitemap към `nvpower.bg`) – изтрий проекта или го насочи към `main`. Само от Vercel dashboard.
 
 **Приятно за имане:**
 
@@ -62,10 +61,11 @@ npx astro check  # типова проверка
 
 ### ⚠️ Преди публикуване – задължително
 
-**1. Бизнес факти.** Всичко е централизирано в **`src/config/site.ts`**, маркирано
-с `[PLACEHOLDER]`. Телефонът, ЕИК, ДДС № и КЕВР лицензът са умишлено маскирани
-като `XXXXXXX`, за да не бъдат сбъркани с истински. Замени също адрес, екип,
-социални профили и GA4 id.
+**1. Бизнес факти.** Всичко е централизирано в **`src/config/site.ts`**.
+Фирмените данни вече са реалните (телефон, ЕИК, ДДС №, адрес, лиценз Л-878,
+регистрацията към ЕСО). Умишлено маскирана остава **само цената на тока**
+(`site.price`), защото се договаря индивидуално. Празни са още GA4 id, екипът и
+Facebook/Instagram профилите.
 
 **2. Примерни проекти.** `src/data/projects.ts` – записите са флагнати със
 `sample: true`. Замени с реални или изтрий; сайтът показва честно „очаквайте
@@ -121,7 +121,7 @@ src/
 │   └── ui.ts                 # споделени UI низове (re-export на routes)
 ├── styles/global.css         # дизайн токени + utility класове (btn, card, field…)
 ├── layouts/BaseLayout.astro  # SEO head, hreflang, JSON-LD, consent, reveals
-├── components/               # Header, Footer, CtaBand, BackToTop, CookieConsent…
+├── components/               # Header, Footer, CtaBand, BackToTop, CookieConsent, ConsentMap…
 ├── islands/                  # React: OfferWizard, SolarCalculator, форми
 ├── lib/
 │   ├── lead.ts               # изпращане на заявки (FormData + файл)
@@ -140,6 +140,26 @@ src/
   (бутони). Ползвай токена, не `text-white`.
 - Формите имат видими `<label>`, `autocomplete`, и `<noscript>` резервен вариант.
 - Бутонът „нагоре" се появява в края на страницата и връща фокуса в хедъра.
+
+### Съгласие и трети страни
+
+Сайтът **не поставя собствени бисквитки**. В `localStorage` пази точно три
+ключа, изброени и в политиката за поверителност: `nvpower-consent` (избора от
+банера), `theme` и `nvpower-map-consent`.
+
+- **Аналитика.** Google Consent Mode v2 с всичко `denied` по подразбиране.
+  Скриптът на GA4 се вкарва в страницата **само** след съгласие и само ако
+  `site.gaMeasurementId` е попълнен (сега е празен, тоест нищо не се зарежда).
+- **Оттегляне.** Бутонът „Настройки за бисквитки" във футъра отваря банера
+  наново с текущия избор. Слушателите се закачат независимо дали има запазен
+  избор – без това банерът не можеше да се отвори повторно и обещанието в
+  политиката беше невярно. Без JS бутонът е скрит.
+- **Карта.** `ConsentMap.astro` вместо директен iframe: Google получава IP
+  адреса на посетителя само след натискане на бутона. Без JS остава обикновен
+  линк към Google Maps.
+
+Добавиш ли трети скрипт, той минава през същия механизъм и се описва в
+`PrivacyPage.astro` – иначе политиката става невярна.
 
 ### Език и тон
 
@@ -163,9 +183,9 @@ flexible financing.
 - [ ] **Domain / indexing.** `nvpower.bg` still serves the old (Wix) site, so this deployment is a demo and is **noindex** (`SITE_INDEXABLE = false` in `src/config/site.ts`; `robots.txt` returns `Disallow: /`). `SITE_URL` deliberately stays `https://nvpower.bg` so canonical/hreflang/og:url/sitemap are already correct the moment this build becomes the real site – then just flip the flag to `true`. Mind the `www` form too: `nvpower.bg` 301s to `www.nvpower.bg`.
 
 - [ ] **Form endpoint.** `site.formEndpoint` is an empty string, so forms send nothing – visitors get the phone/email fallback. Wire a form service or serverless function (see the Forms section below). **While it is empty, file uploads hide themselves** (`CAN_ACCEPT_UPLOADS`): the settlement-upload block on `/tok/` and the attachment field in the contact form disappear, so we never ask for a document that has nowhere to go. Both return once an endpoint is set.
-- [ ] **Masked data.** Phone, company ID (ЕИК), VAT number, EWRC licence number and the electricity price are deliberately `XXX` / `XXXXXXX` in `src/config/site.ts` – replace with the real values.
+- [ ] **Masked price.** The only remaining `XXX` is the electricity price (`site.price` in `src/config/site.ts`). The company facts (phone, company ID, VAT number, address, licence L-878) are now the real ones.
 - [ ] **Sample projects.** 4 entries in `src/data/projects.ts` are flagged `sample: true`.
-- [ ] **Remaining placeholders.** Address, GA4 id and the social profiles (unverified – Facebook/LinkedIn in `site.socials`). **The map and the Team section are now hidden**, because `mapsEmbed` is empty and `team` is an empty array – fill either with real data and it reappears automatically.
+- [ ] **Remaining placeholders.** The GA4 id (`gaMeasurementId`) and Facebook/Instagram in `site.socials` are empty. **The Team section is hidden**, because `team` is an empty array – fill it and it reappears automatically. The map is the real one now, but it loads only on click (see "Consent and third parties").
 
 **Inconsistencies after repositioning `/tok/`** – that page now targets renewable producers (buy-back), not consumers:
 
@@ -175,8 +195,7 @@ flexible financing.
 
 **Infrastructure:**
 
-- [ ] The second Vercel project (`nvpower-website.vercel.app`) is not wired to `main` and serves a stale build. The repo's About link points at it – delete the project or point it at `main`.
-- [ ] Branch `en-slug-rename` is merged into `main` and can be deleted.
+- [ ] The second Vercel project (`nvpower-website.vercel.app`) is not wired to `main` and serves a stale build. The repo's About link now points at the pink deployment, but the old project **is still crawlable** (its `robots.txt` returns `Allow: /` and points a sitemap at `nvpower.bg`) – delete the project or point it at `main`. Vercel dashboard only.
 
 **Nice to have:**
 
@@ -201,10 +220,11 @@ npx astro check  # type check
 
 ### ⚠️ Before going live – required
 
-**1. Business facts.** All centralised in **`src/config/site.ts`** and marked
-`[PLACEHOLDER]`. The phone number, company ID (ЕИК), VAT number and the EWRC
-licence are deliberately masked as `XXXXXXX` so invented identifiers can never
-be mistaken for real ones. Also replace the address, team, socials and GA4 id.
+**1. Business facts.** All centralised in **`src/config/site.ts`**. The company
+facts are now the real ones (phone, company ID, VAT number, address, licence
+L-878, the ESO registration). Only **the electricity price** stays masked
+(`site.price`), because it is quoted individually. Still empty: the GA4 id, the
+team and the Facebook/Instagram profiles.
 
 **2. Sample projects.** `src/data/projects.ts` – entries are flagged
 `sample: true`. Replace with real installations or delete them; the site renders
@@ -260,7 +280,7 @@ src/
 │   └── ui.ts                 # shared UI strings (re-exports routes)
 ├── styles/global.css         # design tokens + utilities (btn, card, field…)
 ├── layouts/BaseLayout.astro  # SEO head, hreflang, JSON-LD, consent, reveals
-├── components/               # Header, Footer, CtaBand, BackToTop, CookieConsent…
+├── components/               # Header, Footer, CtaBand, BackToTop, CookieConsent, ConsentMap…
 ├── islands/                  # React: OfferWizard, SolarCalculator, forms
 ├── lib/
 │   ├── lead.ts               # lead submission (FormData + file)
@@ -280,6 +300,26 @@ src/
 - Forms have visible `<label>`s, `autocomplete`, and a `<noscript>` fallback.
 - The back-to-top control appears near the page end and returns focus to the
   header, not just the viewport.
+
+### Consent and third parties
+
+The site **sets no cookies of its own**. It keeps exactly three `localStorage`
+keys, the same three listed in the privacy policy: `nvpower-consent` (the banner
+choice), `theme` and `nvpower-map-consent`.
+
+- **Analytics.** Google Consent Mode v2 with everything `denied` by default. The
+  GA4 script is injected **only** after consent, and only if
+  `site.gaMeasurementId` is set (it is empty now, so nothing loads at all).
+- **Withdrawal.** The "Cookie settings" button in the footer reopens the banner
+  with the current choice preselected. Listeners attach whether or not a choice
+  is saved – without that the banner could never be reopened, which made the
+  policy's withdrawal promise untrue. The button is hidden without JS.
+- **Map.** `ConsentMap.astro` instead of a bare iframe: Google only receives the
+  visitor's IP once they press the button. Without JS it degrades to a plain
+  Google Maps link.
+
+If you add a third-party script, route it through the same mechanism and
+describe it in `PrivacyPage.astro` – otherwise the policy becomes false.
 
 ### Voice
 
