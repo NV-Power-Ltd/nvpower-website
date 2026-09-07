@@ -13,9 +13,10 @@ with battery storage.
 
 ## Български
 
-Пълен двуезичен сайт (BG основен, EN огледален) с **30 индексируеми страници**: ток на ясна
-цена за бизнеса и дома, изкупуване на ток от ВЕИ производители, проектиране и
-изграждане на фотоволтаични централи с батерии и гъвкаво финансиране.
+Пълен двуезичен сайт (BG основен, EN огледален) с **30 индексируеми страници**.
+Основното направление е **изкупуване на ток от ВЕИ производители** по формула
+спрямо БНЕБ (IBEX), с включено балансиране; второто е проектиране и изграждане
+на фотоволтаични централи с батерии и гъвкаво финансиране.
 
 ### TO-DO преди публикуване
 
@@ -24,15 +25,15 @@ with battery storage.
 - [ ] **Домейн / индексиране.** `nvpower.bg` все още е старият (Wix) сайт, затова този деплой е демо и е **noindex** (`SITE_INDEXABLE = false` в `src/config/site.ts`; `robots.txt` връща `Disallow: /`). `SITE_URL` умишлено остава `https://nvpower.bg`, за да са верни canonical/hreflang/og:url/sitemap в момента, в който този build стане реалният сайт – тогава просто обърни флага на `true`. Внимавай и за `www` формата: `nvpower.bg` прави 301 към `www.nvpower.bg`.
 
 - [ ] **Form endpoint.** `site.formEndpoint` е празен низ, затова формите не изпращат нищо – посетителят вижда телефон и имейл. Свържи form service или serverless функция (виж раздел „Форми" по-долу). **Докато е празен, качването на файлове се скрива автоматично** (`CAN_ACCEPT_UPLOADS`): блокът за изпращане на отчитане на `/tok/` и полето за прикачване в контактната форма изчезват, за да не искаме документ, който няма къде да отиде. Връщат се сами щом сложиш endpoint.
-- [ ] **Маскирана цена.** Единственото останало `XXX` е цената на тока (`site.price` в `src/config/site.ts`). Фирмените данни (телефон, ЕИК, ДДС №, адрес, лиценз Л-878) вече са реалните.
+- [x] **Цени.** Няма маскирани цени. Сайтът умишлено **не публикува фиксирана цена за ток**: офертите са формула спрямо БНЕБ (IBEX), а формулировката е в `site.pricingBasis` / `pricingBasisShort`. Фирмените данни (телефон, ЕИК, ДДС №, адрес, лиценз Л-878) също са реалните.
 - [ ] **Примерни проекти.** 4 записа в `src/data/projects.ts` са флагнати със `sample: true`.
 - [ ] **Останали placeholder-и.** GA4 id (`gaMeasurementId`) и Facebook/Instagram в `site.socials` са празни. **Секцията „Екип" е скрита**, защото `team` е празен масив – попълни го и се показва автоматично. Картата вече е реалната, но се зарежда само след клик (виж „Съгласие и трети страни").
 
-**Несъответствия след преориентирането на `/tok/`** – страницата вече е за ВЕИ производители (изкупуване), а не за консуматори:
+**След преориентирането към изкупуване** – `/tok/` е основното направление на сайта:
 
-- [ ] Навигацията и футърът още пишат „Ток за бизнеса и дома" и водят към `/tok/`. Реши текста – `nav.tok` и `footer.links.tok` в `src/i18n/ui.ts`.
-- [ ] Началната страница все още е написана за консуматори (доставка), а `/tok/` продава изкупуване. Реши дали консуматорската оферта да се върне на отделна страница.
-- [ ] `0.099` се вижда още на 2 места, и двете като **индикативни**, не като тарифа: допусканията в `/kalkulator/` и „Примерни числа" в `/solar/za-biznesa/`. Ако трябва да се маскират, редът с бизнес случая изисква преписване, не find-and-replace (стойността е изчислена от цената).
+- [ ] **Формата за оферта е соларна.** `/oferta/` (`OfferWizard`) пита за покрив, конструкция и батерия, а CTA-тата на `/tok/` водят точно там. Производител, който иска да продава ток, попада на въпросник за соларна система. Нужен е производителски клон (мощност, точка на присъединяване, профил на производство, текущ търговец, предизвестие) – полетата зависят от процеса на търговския екип.
+- [ ] EN slug-ът на страницата остава `/en/electricity/`. По-точен би бил `/en/power-buy-back/`, но смяната изисква нов 301 в `vercel.json` – реши дали си струва.
+- [ ] `0.099` се вижда още на 2 места, и двете като **индикативни допускания за спестявания от солар**, не като цена по оферта: допусканията в `/kalkulator/` и „Примерни числа" в `/solar/za-biznesa/`. Идват от `site.price.eurPerKwh`.
 
 **Инфраструктура:**
 
@@ -108,8 +109,14 @@ Permissions-Policy), кеширане на `/_astro/*`, `trailingSlash: true` и
 ### Валута
 
 **Само евро.** България е в еврозоната от януари 2026 г.; цените в лева са
-премахнати изцяло. Цената на тока е в `site.price` (€/кВтч), а формулите за
-изкупуване са в €/MWh. Не връщай лева.
+премахнати изцяло. Не връщай лева.
+
+**Няма публикувана цена за ток.** Офертите са формула спрямо дневния пазар на
+БНЕБ (IBEX), затова никъде не се обявява фиксирано €/кВтч, а формулите по
+плановете са в €/MWh (`/tok/`). Изречението, което го казва, е на едно място:
+`site.pricingBasis` (пълно) и `site.pricingBasisShort` (за херо и карти).
+`site.price.eurPerKwh` **не е цена по оферта** – това е индикативна крайна цена
+и служи само за оценка на самопотребената соларна енергия в калкулатора.
 
 ### Структура
 
@@ -171,10 +178,10 @@ src/
 
 ## English
 
-A complete bilingual site (Bulgarian primary, English mirror) of **30 indexable pages**:
-electricity supply at a clear price for business and home, electricity buy-back
-from renewable producers, and turnkey solar plants with battery storage and
-flexible financing.
+A complete bilingual site (Bulgarian primary, English mirror) of **30 indexable
+pages**. The primary business line is **electricity buy-back from renewable
+producers**, priced on a formula against IBEX (БНЕБ) with balancing included;
+the second is turnkey solar plants with battery storage and flexible financing.
 
 ### TO-DO before launch
 
@@ -183,15 +190,15 @@ flexible financing.
 - [ ] **Domain / indexing.** `nvpower.bg` still serves the old (Wix) site, so this deployment is a demo and is **noindex** (`SITE_INDEXABLE = false` in `src/config/site.ts`; `robots.txt` returns `Disallow: /`). `SITE_URL` deliberately stays `https://nvpower.bg` so canonical/hreflang/og:url/sitemap are already correct the moment this build becomes the real site – then just flip the flag to `true`. Mind the `www` form too: `nvpower.bg` 301s to `www.nvpower.bg`.
 
 - [ ] **Form endpoint.** `site.formEndpoint` is an empty string, so forms send nothing – visitors get the phone/email fallback. Wire a form service or serverless function (see the Forms section below). **While it is empty, file uploads hide themselves** (`CAN_ACCEPT_UPLOADS`): the settlement-upload block on `/tok/` and the attachment field in the contact form disappear, so we never ask for a document that has nowhere to go. Both return once an endpoint is set.
-- [ ] **Masked price.** The only remaining `XXX` is the electricity price (`site.price` in `src/config/site.ts`). The company facts (phone, company ID, VAT number, address, licence L-878) are now the real ones.
+- [x] **Prices.** No masked prices left. The site deliberately **publishes no fixed electricity price**: offers are a formula against IBEX (БНЕБ), and the wording lives in `site.pricingBasis` / `pricingBasisShort`. The company facts (phone, company ID, VAT number, address, licence L-878) are the real ones too.
 - [ ] **Sample projects.** 4 entries in `src/data/projects.ts` are flagged `sample: true`.
 - [ ] **Remaining placeholders.** The GA4 id (`gaMeasurementId`) and Facebook/Instagram in `site.socials` are empty. **The Team section is hidden**, because `team` is an empty array – fill it and it reappears automatically. The map is the real one now, but it loads only on click (see "Consent and third parties").
 
-**Inconsistencies after repositioning `/tok/`** – that page now targets renewable producers (buy-back), not consumers:
+**After the shift to buy-back** – `/tok/` is the site's primary business line:
 
-- [ ] Nav and footer still read "Electricity for business & home" while linking to `/tok/`. Decide the wording – `nav.tok` and `footer.links.tok` in `src/i18n/ui.ts`.
-- [ ] The homepage is still written for consumers buying power, while `/tok/` sells buy-back. Decide whether the consumer offering returns on its own page.
-- [ ] `0.099` still appears in 2 places, both framed as **indicative** rather than quoted as a tariff: the `/kalkulator/` assumptions and the "Example numbers" block on `/solar/za-biznesa/`. Masking those needs a rewrite, not a find-and-replace – the business-case value is derived from the rate.
+- [ ] **The quote form is a solar form.** `/oferta/` (`OfferWizard`) asks about roofs, mounting and batteries, and the CTAs on `/tok/` point straight at it. A producer who wants to sell power lands on a solar questionnaire. It needs a producer branch (capacity, connection point, production profile, current trader, notice period) – the fields depend on what the trading desk actually needs.
+- [ ] The page's EN slug is still `/en/electricity/`. `/en/power-buy-back/` would be more accurate, but changing it means another 301 in `vercel.json` – decide whether it's worth it.
+- [ ] `0.099` still appears in 2 places, both as **indicative assumptions for solar savings**, not as an offer price: the `/kalkulator/` assumptions and the "Example numbers" block on `/solar/za-biznesa/`. Both come from `site.price.eurPerKwh`.
 
 **Infrastructure:**
 
@@ -267,8 +274,14 @@ once** – when you add a page, add its slug too.
 ### Currency
 
 **Euro only.** Bulgaria joined the euro area in January 2026; lev pricing has
-been removed entirely. The electricity price lives in `site.price` (€/kWh) and
-the buy-back formulas are in €/MWh. Do not reintroduce the lev.
+been removed entirely. Do not reintroduce the lev.
+
+**No published electricity price.** Offers are a formula against the IBEX
+(БНЕБ) day-ahead market, so no fixed €/kWh figure is quoted anywhere, and the
+per-plan formulas are in €/MWh (`/tok/`). The sentence that says so lives in one
+place: `site.pricingBasis` (full) and `site.pricingBasisShort` (for the hero and
+cards). `site.price.eurPerKwh` is **not an offer price** – it is an indicative
+retail rate, used only to value self-consumed solar energy in the calculator.
 
 ### Structure
 

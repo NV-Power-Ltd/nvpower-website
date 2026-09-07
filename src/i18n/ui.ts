@@ -10,7 +10,7 @@ export { routes, href, r, alternates, enPath, type RouteKey } from "./routes";
 export const ui = {
   bg: {
     nav: {
-      tok: "Ток",
+      tok: "Изкупуване",
       solar: "Соларни системи",
       proekti: "Проекти",
       info: "Инфо",
@@ -49,7 +49,7 @@ export const ui = {
       legal: "Правни",
       contact: "Контакти",
       links: {
-        tok: "Ток за бизнеса и дома",
+        tok: "Изкупуване на ток от ВЕИ",
         solar: "Соларни системи и батерии",
         solarHome: "Соларна система за дома",
         solarBiz: "Соларна система за бизнеса",
@@ -89,7 +89,7 @@ export const ui = {
   },
   en: {
     nav: {
-      tok: "Electricity",
+      tok: "Buy-back",
       solar: "Solar systems",
       proekti: "Projects",
       info: "Info",
@@ -128,7 +128,7 @@ export const ui = {
       legal: "Legal",
       contact: "Contact",
       links: {
-        tok: "Electricity for business & home",
+        tok: "Electricity buy-back for producers",
         solar: "Solar systems & batteries",
         solarHome: "Solar for your home",
         solarBiz: "Solar for your business",

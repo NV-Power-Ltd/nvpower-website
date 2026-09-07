@@ -97,20 +97,33 @@ export const site = {
   responseTime: { bg: "3 работни дни", en: "3 business days" },
 
   /**
-   * Electricity price – published and transparent.
+   * How offer prices are set. There is deliberately no published €/kWh figure:
+   * every offer is a formula against the day-ahead price on the Bulgarian
+   * energy exchange (БНЕБ / IBEX), so a fixed number would be wrong the next
+   * day. The per-plan formulas live on /tok/; this is the one-line framing
+   * reused wherever a page used to quote a rate.
+   *
    * Bulgaria joined the euro area in January 2026, so the euro is the only
    * currency quoted anywhere on the site. Do not reintroduce lev pricing.
    */
+  pricingBasis: {
+    bg: "Цените по офертите са обвързани с цените на БНЕБ (IBEX)",
+    en: "Offer prices are linked to the IBEX (БНЕБ) exchange prices",
+  },
+  /** Short form for hero lines and cards, where the sentence above is too long. */
+  pricingBasisShort: {
+    bg: "по цени, обвързани с БНЕБ (IBEX)",
+    en: "at prices linked to IBEX (БНЕБ)",
+  },
+
   price: {
     /**
-     * [PLACEHOLDER] Indicative rate the solar calculator computes with. It is
-     * NOT shown as a published tariff anywhere – `display` below is masked
-     * until a real price is agreed, so no invented figure can be read as a
-     * commitment. Set both together.
+     * Indicative *retail* rate, used for exactly one thing: valuing the solar
+     * energy a site self-consumes in the calculator. It is never presented as
+     * an offer price, and must not be, buy-back is quoted by formula against
+     * the exchange. See `pricingBasis` above.
      */
     eurPerKwh: 0.099,
-    /** [PLACEHOLDER] the publicly quoted price – masked until confirmed. */
-    display: { bg: "XXX €/кВтч", en: "€XXX/kWh" },
   },
 
   /** [PLACEHOLDER] §2 [TEAM] – at least founder/manager with a real photo */

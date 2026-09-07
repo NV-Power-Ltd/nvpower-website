@@ -18,30 +18,34 @@ const t = useUI(locale);
 
 const c = {
   bg: {
-    title: "NV Power, Енергия за утрешния ден | Ток и соларни системи",
-    description: `Ток на ясна цена, ${site.price.display.bg} и фотоволтаични централи (ФЕЦ) с батерии (BESS), с гъвкаво финансиране. Две направления, един партньор.`,
+    title: "NV Power, Енергия за утрешния ден | Изкупуване на ток и соларни системи",
+    description: `Изкупуваме тока на ВЕИ производители ${site.pricingBasisShort.bg}, с включено балансиране. Проектираме и изграждаме ФЕЦ с батерии (BESS), с гъвкаво финансиране.`,
     hero: {
       h1: "Енергия за утрешния ден",
       /* Three deliberate lines; rendered with <br /> inside one paragraph. */
       sub: [
-        `Ток на ясна цена, ${site.price.display.bg}`,
+        `Изкупуваме тока на ВЕИ производители ${site.pricingBasisShort.bg}.`,
         "Фотоволтаични централи (ФЕЦ) с батерии (BESS), с възможност за гъвкаво финансиране.",
         "Две направления, един партньор: NV Power.",
       ],
-      ctaCalc: "Изчисли спестяванията",
+      ctaPlans: "Виж плановете за изкупуване",
       ctaOffer: "Вземи оферта",
       checks: [t.promises.noFees, t.promises.response, t.promises.financing],
     },
     lines: {
       eyebrow: "Двете направления",
-      title: "Ток днес. Собствена енергия утре.",
-      lead: "Купуваш ток на ясна цена днес и изграждаш собствена централа с лизинг утре, при един и същ партньор.",
+      title: "Продаваш тока си днес. Разширяваш централата утре.",
+      lead: "Изкупуваме продукцията ти по формула спрямо борсата и изграждаме следващата ти централа с батерия, при един и същ партньор.",
       tok: {
-        title: "Ток за твоя бизнес и дом",
-        price: site.price.display.bg,
-        priceNote: "публична цена, без скрити такси",
-        points: ["Смяната е безплатна и без прекъсване", "Без депозити и без обвързващи изненади", "Личен консултант, а не кол център"],
-        cta: "Виж плановете",
+        title: "Изкупуване на ток от ВЕИ",
+        badge: site.pricingBasisShort.bg,
+        priceNote: "балансирането е включено в плана",
+        points: [
+          "Цената следва БНЕБ (IBEX) минус ясно определена такса",
+          "Предизвестие от 1 месец, без дългосрочно обвързване",
+          "За обекти над 1 MW, индивидуална оферта",
+        ],
+        cta: "Виж плановете за изкупуване",
       },
       solar: {
         title: "Твоята соларна централа",
@@ -68,7 +72,7 @@ const c = {
       eyebrow: "Защо NV Power",
       title: "Партньор, който мисли за твоята независимост",
       cards: [
-        { icon: BadgeCheck, title: "Прозрачна цена", text: `Публикуваме цената си, ${site.price.display.bg}, и я спазваме. Без скрити такси.` },
+        { icon: BadgeCheck, title: "Прозрачна формула", text: "Цената ти следва БНЕБ (IBEX) минус такса, записана в договора. Виждаш формулата, преди да подпишеш." },
         { icon: UserRound, title: "Личен консултант", text: "Един човек познава обекта ти и отговаря, по телефон, имейл или Viber." },
         { icon: Landmark, title: "Възможност за финансиране", text: "Лизинг и разсрочено плащане за соларни системи и батерии, започваш без голяма инвестиция." },
         { icon: BatteryCharging, title: "Батерии и независимост", text: "Проектираме хибридни системи, които работят и когато мрежата не работи." },
@@ -88,38 +92,42 @@ const c = {
       title: "Питаш се…",
       more: "Виж всички въпроси и отговори",
       items: [
-        { q: "Смяната на доставчика ще прекъсне ли тока ми?", a: "Не. Смяната е чисто административна, токът ти тече по същите жици, без нито секунда прекъсване. Сменя се само този, който ти издава фактурата." },
-        { q: "Колко струва смяната на доставчик?", a: "Нищо. Смяната е безплатна, без такси и без депозити. Поемаме цялата административна процедура вместо теб." },
+        { q: "Как се формира цената, по която изкупувате тока ми?", a: "По формулата на избрания план: борсовата цена на БНЕБ (IBEX) за съответния период минус договорената такса. Формулата е записана в договора и получаваш месечен отчет с пълна разбивка." },
+        { q: "Плащам ли отделно за балансиране?", a: "Не. Балансирането е включено в плановете ни и влизаш в стандартната ни балансираща група, за която сме регистриран координатор към ЕСО. Без отделни редове изненади." },
         { q: "Колко струва соларна система за дом?", a: "Типична система от 10 kWp с батерия за къща се изплаща за 5–7 години, а с нашето финансиране започваш без голяма първоначална инвестиция. Точното число ще ти дадем в офертата." },
         { q: "Какво прави батерията и трябва ли ми?", a: "Батерията съхранява произведената през деня енергия, за да я ползваш вечер, и те пази при спиране на тока. Ако целта ти е независимост, батерията е разликата." },
-        { q: "Какво е балансираща група?", a: "Обединение на потребители, чиито отклонения в потреблението взаимно се компенсират. Като член на нашата група плащаш по-малко за небаланси, включването е автоматично с договора." },
+        { q: "Какво е балансираща група?", a: "Обединение, в което отклоненията от прогнозата за производство се компенсират взаимно между членовете. Като член на нашата група плащаш по-малко за небаланси, включването е автоматично с договора." },
       ],
     },
   },
   en: {
-    title: "NV Power, Energy for tomorrow | Electricity & solar systems",
-    description: `Electricity at a clear price, ${site.price.display.en} and solar PV plants with battery storage (BESS), with flexible financing. Two business lines, one partner.`,
+    title: "NV Power, Energy for tomorrow | Power buy-back & solar systems",
+    description: `We buy the output of renewable producers ${site.pricingBasisShort.en}, with balancing included. We design and build solar PV plants with battery storage (BESS), with flexible financing.`,
     hero: {
       h1: "Energy for tomorrow",
       sub: [
-        `Electricity at a clear price, ${site.price.display.en}`,
+        `We buy the output of renewable producers ${site.pricingBasisShort.en}.`,
         "Solar PV plants with battery storage (BESS), with flexible financing available.",
         "Two business lines, one partner: NV Power.",
       ],
-      ctaCalc: "Calculate your savings",
+      ctaPlans: "See the buy-back plans",
       ctaOffer: "Get a quote",
       checks: [t.promises.noFees, t.promises.response, t.promises.financing],
     },
     lines: {
       eyebrow: "Two business lines",
-      title: "Power today. Your own energy tomorrow.",
-      lead: "Buy electricity at a clear price today and build your own plant on leasing tomorrow, with the same partner.",
+      title: "Sell your power today. Expand your plant tomorrow.",
+      lead: "We buy your output on a formula against the exchange, and build your next plant with a battery, with the same partner.",
       tok: {
-        title: "Electricity for your business & home",
-        price: site.price.display.en,
-        priceNote: "published price, no hidden fees",
-        points: ["Switching is free, with no interruption", "No deposits, no contract surprises", "A personal consultant, not a call centre"],
-        cta: "See the plans",
+        title: "Power buy-back for producers",
+        badge: site.pricingBasisShort.en,
+        priceNote: "balancing is included in the plan",
+        points: [
+          "Your price follows IBEX (БНЕБ) minus a clearly stated fee",
+          "One month's notice, no long-term lock-in",
+          "For sites above 1 MW, an individual offer",
+        ],
+        cta: "See the buy-back plans",
       },
       solar: {
         title: "Your own solar plant",
@@ -146,7 +154,7 @@ const c = {
       eyebrow: "Why NV Power",
       title: "A partner focused on your independence",
       cards: [
-        { icon: BadgeCheck, title: "Transparent price", text: `We publish our price, ${site.price.display.en}, and we honour it. No hidden fees, guaranteed.` },
+        { icon: BadgeCheck, title: "A transparent formula", text: "Your price follows IBEX (БНЕБ) minus a fee written into the contract. You see the formula before you sign." },
         { icon: UserRound, title: "Personal consultant", text: "One person knows your site and answers, by phone, email or Viber." },
         { icon: Landmark, title: "Financing available", text: "Leasing and instalments for solar systems and batteries, start without a big investment." },
         { icon: BatteryCharging, title: "Batteries & independence", text: "We design hybrid systems that keep working when the grid doesn't." },
@@ -166,11 +174,11 @@ const c = {
       title: "You're wondering…",
       more: "See all questions & answers",
       items: [
-        { q: "Will switching supplier interrupt my power?", a: "No. Switching is purely administrative, your power flows through the same wires without a second of interruption. Only the company issuing your invoice changes." },
-        { q: "How much does switching cost?", a: "Nothing. Switching is free, no fees, no deposits. We handle the whole administrative procedure for you." },
+        { q: "How is the price you buy my power at set?", a: "By your plan's formula: the IBEX (БНЕБ) exchange price for the period minus the agreed fee. The formula is written into the contract and you get a monthly statement with the full breakdown." },
+        { q: "Do I pay separately for balancing?", a: "No. Balancing is included in our plans, and you join our standard balancing group, for which we are a registered coordinator with ESO. No surprise line items." },
         { q: "How much does a home solar system cost?", a: "A typical 10 kWp system with a battery pays for itself in 5–7 years, and with our financing you start without a big upfront investment. You'll get the exact number in your quote." },
         { q: "What does the battery do, do I need one?", a: "The battery stores the energy produced during the day so you can use it in the evening, and keeps you running during outages. If independence is your goal, the battery is the difference." },
-        { q: "What is a balancing group?", a: "A pool of consumers whose deviations offset each other. As a member of our group you pay less for imbalances, joining is automatic with your contract." },
+        { q: "What is a balancing group?", a: "A pool where deviations from the production forecast offset each other between members. As a member of our group you pay less for imbalances, joining is automatic with your contract." },
       ],
     },
   },
@@ -201,8 +209,8 @@ const c = {
       </p>
 
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a href={r(locale, "kalkulator")} class="btn btn-primary !px-7 !py-4 text-base">
-          {c.hero.ctaCalc}
+        <a href={r(locale, "tok")} class="btn btn-primary !px-7 !py-4 text-base">
+          {c.hero.ctaPlans}
           <ArrowRight class="size-4" aria-hidden="true" />
         </a>
         <a href={r(locale, "oferta")} class="btn btn-ghost-band !px-7 !py-4 text-base">{c.hero.ctaOffer}</a>
@@ -227,10 +235,11 @@ const c = {
       <article class="card flex flex-col gap-5 p-8 md:p-10">
         <span class="flex size-13 items-center justify-center rounded-xl bg-accent/10 text-accent"><Zap class="size-6.5" aria-hidden="true" /></span>
         <h3 class="text-2xl font-bold text-body">{c.lines.tok.title}</h3>
-        <p class="font-[family-name:var(--font-display)]">
-          <span class="text-4xl font-bold text-accent">{c.lines.tok.price.split(" ")[0]}</span>
-          <span class="ml-1 text-lg font-semibold text-muted">{c.lines.tok.price.split(" ").slice(1).join(" ")}</span>
-          <span class="mt-1 block text-sm font-medium text-muted">{c.lines.tok.priceNote}</span>
+        <!-- No headline rate to show: buy-back is quoted as a formula against
+             the exchange, so the card states the basis and links to the plans. -->
+        <p>
+          <span class="inline-flex rounded-full bg-accent/10 px-3.5 py-1.5 text-sm font-semibold text-accent">{c.lines.tok.badge}</span>
+          <span class="mt-2 block text-sm font-medium text-muted">{c.lines.tok.priceNote}</span>
         </p>
         <ul class="list-disc space-y-2.5 pl-5 marker:text-accent">
           {c.lines.tok.points.map((p) => (
