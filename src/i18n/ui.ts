@@ -10,7 +10,7 @@ export { routes, href, r, alternates, enPath, type RouteKey } from "./routes";
 export const ui = {
   bg: {
     nav: {
-      tok: "Изкупуване",
+      tok: "Планове",
       solar: "Соларни системи",
       proekti: "Проекти",
       info: "Инфо",
@@ -89,7 +89,7 @@ export const ui = {
   },
   en: {
     nav: {
-      tok: "Buy-back",
+      tok: "Plans",
       solar: "Solar systems",
       proekti: "Projects",
       info: "Info",
