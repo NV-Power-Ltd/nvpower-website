@@ -23,7 +23,7 @@ const t = useUI(locale);
     {t.consent.title}
   </h2>
   <p class="mt-1.5 text-sm leading-relaxed text-muted">
-    {t.consent.text}
+    {t.consent.text}{" "}
     <a href={r(locale, "privacy")} class="font-medium text-accent underline">{t.consent.privacyLink}</a>
   </p>
 
@@ -84,11 +84,14 @@ const t = useUI(locale);
 
     var saved = null;
     try { saved = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) {}
-    if (saved) { apply(!!saved.analytics); return; }
+    if (saved) apply(!!saved.analytics);
 
     var banner = document.getElementById("cc-banner");
     if (!banner) return;
-    banner.hidden = false;
+
+    // Listeners are wired whether or not a choice exists, so the banner can be
+    // reopened later. Withdrawing consent has to be as easy as giving it.
+    banner.hidden = !!saved;
 
     function decide(analytics) {
       try { localStorage.setItem(KEY, JSON.stringify({ analytics: analytics, ts: Date.now() })); } catch (e) {}
@@ -96,15 +99,36 @@ const t = useUI(locale);
       banner.hidden = true;
     }
 
+    var settings = document.getElementById("cc-settings");
+    var toggle = document.getElementById("cc-toggle");
+    var save = document.getElementById("cc-save");
+
     document.getElementById("cc-accept").addEventListener("click", function () { decide(true); });
     document.getElementById("cc-reject").addEventListener("click", function () { decide(false); });
-    document.getElementById("cc-toggle").addEventListener("click", function () {
-      document.getElementById("cc-settings").hidden = false;
-      document.getElementById("cc-save").hidden = false;
+    toggle.addEventListener("click", function () {
+      settings.hidden = false;
+      save.hidden = false;
       this.hidden = true;
     });
-    document.getElementById("cc-save").addEventListener("click", function () {
+    save.addEventListener("click", function () {
       decide(document.getElementById("cc-analytics").checked);
+    });
+
+    // "Cookie settings" in the footer reopens the banner with the current
+    // choice preselected, so it can be changed or revoked at any time.
+    document.addEventListener("click", function (ev) {
+      var trigger = ev.target && ev.target.closest && ev.target.closest("[data-cookie-settings]");
+      if (!trigger) return;
+      ev.preventDefault();
+      var current = null;
+      try { current = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) {}
+      document.getElementById("cc-analytics").checked = !!(current && current.analytics);
+      settings.hidden = false;
+      save.hidden = false;
+      toggle.hidden = true;
+      banner.hidden = false;
+      banner.scrollIntoView({ block: "nearest" });
+      document.getElementById("cc-accept").focus();
     });
   })();
 </script>

@@ -96,7 +96,12 @@ const orgLd = {
     <!-- .reveal starts at opacity:0 and is revealed by IntersectionObserver.
          Without JS that would hide every section heading while the body copy
          still shows, which reads as broken content rather than as no animation. -->
-    <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+    <!-- Same idea for the footer's cookie-settings button: with no JS there is
+         no banner to reopen (and nothing was ever loaded), so it would be dead. -->
+    <noscript><style>
+      .reveal { opacity: 1 !important; transform: none !important; }
+      [data-cookie-settings] { display: none !important; }
+    </style></noscript>
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />

@@ -12,7 +12,13 @@ const { locale } = Astro.props;
 const t = useUI(locale);
 const L = t.footer.links;
 
-const columns = [
+/**
+ * `cookies: true` renders the item as a button instead of a link: reopening the
+ * consent banner is a client-side action, and there is no page to link to.
+ */
+type FooterItem = { href: string; label: string; cookies?: boolean };
+
+const columns: { title: string; items: FooterItem[] }[] = [
   {
     title: t.footer.services,
     items: [
@@ -41,6 +47,7 @@ const columns = [
       { href: r(locale, "privacy"), label: L.privacy },
       { href: r(locale, "terms"), label: L.terms },
       { href: r(locale, "aiInfo"), label: L.aiInfo },
+      { href: "#", label: L.cookieSettings, cookies: true },
     ],
   },
 ];
@@ -81,7 +88,17 @@ const socials = [
           <ul class="flex flex-col gap-1.5">
             {col.items.map((item) => (
               <li>
-                <a href={item.href} class="block py-1 text-sm text-white/70 transition-colors hover:text-white">{item.label}</a>
+                {item.cookies ? (
+                  <button
+                    type="button"
+                    data-cookie-settings
+                    class="block py-1 text-left text-sm text-white/70 transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <a href={item.href} class="block py-1 text-sm text-white/70 transition-colors hover:text-white">{item.label}</a>
+                )}
               </li>
             ))}
           </ul>

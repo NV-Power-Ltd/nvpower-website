@@ -61,6 +61,30 @@ const c = {
         ],
       },
       {
+        h2: "Бисквитки и локално съхранение",
+        blocks: [
+          {
+            p: "Сайтът не поставя собствени бисквитки. Изборът ти в банера и няколко дребни настройки се пазят <strong>локално в браузъра ти</strong> (localStorage), не се изпращат до нас и не могат да те идентифицират:",
+          },
+          {
+            ul: [
+              "<code>nvpower-consent</code>, какво си избрал в банера за бисквитки и кога;",
+              "<code>theme</code>, светла или тъмна тема;",
+              "<code>nvpower-map-consent</code>, дали си разрешил зареждането на картата от Google Maps.",
+            ],
+          },
+          {
+            p: "Аналитичните бисквитки на Google Analytics се зареждат само след изричното ти съгласие. Ако откажеш или не направиш избор, не се зарежда скрипт на трета страна и не се поставя бисквитка. Не използваме бисквитки за реклама, ретаргетиране или профилиране.",
+          },
+          {
+            p: "Картата в страница „Контакти“ също не се зарежда сама. Показваме я само след като натиснеш бутона, защото при зареждане Google получава IP адреса ти.",
+          },
+          {
+            p: "Можеш да промениш или да оттеглиш съгласието си по всяко време чрез „Настройки за бисквитки“ в долната част на всяка страница. Изтриването на данните на сайта през браузъра ти също премахва всички изброени записи.",
+          },
+        ],
+      },
+      {
         h2: "Колко време пазим данните",
         blocks: [
           {
@@ -156,6 +180,30 @@ const c = {
               "<strong>To comply with legal obligations</strong>, accounting and tax requirements (Art. 6(1)(c));",
               "<strong>For site analytics</strong>, solely based on your consent (Art. 6(1)(a)), which you can withdraw at any time from the cookie settings.",
             ],
+          },
+        ],
+      },
+      {
+        h2: "Cookies and local storage",
+        blocks: [
+          {
+            p: "The site sets no cookies of its own. Your choice in the banner and a couple of minor settings are kept <strong>locally in your browser</strong> (localStorage), are never sent to us and cannot identify you:",
+          },
+          {
+            ul: [
+              "<code>nvpower-consent</code>, what you chose in the cookie banner, and when;",
+              "<code>theme</code>, light or dark theme;",
+              "<code>nvpower-map-consent</code>, whether you allowed the Google Maps map to load.",
+            ],
+          },
+          {
+            p: "Google Analytics cookies load only after your explicit consent. If you decline, or make no choice at all, no third-party script is loaded and no cookie is set. We do not use cookies for advertising, retargeting or profiling.",
+          },
+          {
+            p: "The map on the “Contact” page does not load by itself either. We show it only once you press the button, because loading it shares your IP address with Google.",
+          },
+          {
+            p: "You can change or withdraw your consent at any time via “Cookie settings” at the bottom of every page. Clearing the site's data in your browser also removes every entry listed above.",
           },
         ],
       },
@@ -281,6 +329,14 @@ const c = {
   .prose-legal li {
     line-height: 1.7;
     color: var(--text-color);
+  }
+  /* Storage key names in the cookies section. */
+  .prose-legal code {
+    font-size: 0.9em;
+    padding: 0.1em 0.4em;
+    border-radius: 0.375rem;
+    background: var(--bg-color-alt);
+    border: 1px solid var(--line-color);
   }
   .prose-legal a {
     color: var(--accent);
