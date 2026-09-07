@@ -43,6 +43,7 @@ with battery storage.
 
 - [ ] Истинско SVG лого – нужен е векторният оригинал; сегашното е оптимизиран растер (WebP + PNG).
 - [ ] Индикация за скролване (градиент отдясно) на широката сравнителна таблица в мобилен изглед.
+- [ ] Зони за докосване във футъра. Редовете с линкове са 28px високи, телефонът и имейлът 17px, при препоръчани 44px. По ширина се улучват лесно (335px), по височина са тесни. Същото важи за „Виж всички въпроси и отговори" (20px).
 
 ### Стек
 
@@ -106,6 +107,13 @@ Permissions-Policy), кеширане на `/_astro/*`, `trailingSlash: true` и
 `hreflang` двойките и sitemap-ът. **Липсващ запис чупи всичките наведнъж** – ако
 добавяш страница, добави и slug-а.
 
+**Етикети в навигацията.** `nav.tok` е „Планове" / „Plans", а не описание на
+страницата: „Изкупуване на ток" се събираше на два реда при 1280px и влачеше
+„Соларни системи" със себе си. Затова линковете в хедъра са `whitespace-nowrap`
+(по-дълъг етикет ще излезе видимо, вместо да се пренесе тихо), а описателният
+текст живее във футъра: „Изкупуване на ток от ВЕИ" / „Electricity buy-back for
+producers".
+
 ### Валута
 
 **Само евро.** България е в еврозоната от януари 2026 г.; цените в лева са
@@ -145,8 +153,20 @@ src/
 - Контрастът покрива **WCAG AA** в двете теми. `--accent` е ярък за текст върху
   тъмно, а `--accent-contrast` дава преден план за всичко **върху** accent
   (бутони). Ползвай токена, не `text-white`.
+- В тъмната тема текстът на секциите е близо до бялото: `--text-color: #fbfefe`
+  и `--text-color-muted: #cddfe1`. Приглушеният тон носи по-голямата част от
+  текста, затова държи и по-голямата част от усещането за секцията, а старият
+  `#a0c2c5` изглеждаше блед. Контраст върху фона на страницата: 14.27:1 и
+  10.50:1; най-тясната двойка, приглушен текст върху карта, е 8.97:1.
+- Числата 01/02/03 в „Как работи" са **декоративен воден знак**, не текст за
+  четене: 1.24:1 в светлата и 1.35:1 в тъмната тема. Поредността се вижда от
+  подредбата и заглавието, затова ниският контраст е нарочен.
 - Формите имат видими `<label>`, `autocomplete`, и `<noscript>` резервен вариант.
 - Бутонът „нагоре" се появява в края на страницата и връща фокуса в хедъра.
+- Мобилно + тъмна тема, проверено на 375×812 на 10 страници (включително EN):
+  никъде няма хоризонтално преливане (`scrollWidth` = 375), а всеки текст покрива
+  AA. Най-ниската реална стойност е 4.89:1, accent върху карта.
+- Полетата във формите са 16px, за да не зумва iOS при фокус.
 
 ### Съгласие и трети страни
 
@@ -208,6 +228,7 @@ the second is turnkey solar plants with battery storage and flexible financing.
 
 - [ ] A real SVG logo – needs the vector original; the current one is an optimised raster (WebP + PNG).
 - [ ] A scroll affordance (right-edge gradient) on the wide comparison table in mobile view.
+- [ ] Footer tap targets. Link rows are 28px tall and the phone/email lines 17px, against a recommended 44px. They are easy to hit horizontally (335px wide) but tight vertically. Same for "See all questions & answers" (20px).
 
 ### Stack
 
@@ -271,6 +292,13 @@ Navigation, the language switcher, `canonical`, the `hreflang` pair and the
 sitemap are all derived from that map. **A missing entry breaks all of them at
 once** – when you add a page, add its slug too.
 
+**Nav labels.** `nav.tok` is "Планове" / "Plans" rather than a description of
+the page: "Изкупуване на ток" wrapped onto two lines at 1280px and dragged
+"Соларни системи" with it. Header links are therefore `whitespace-nowrap`, so a
+longer label overflows visibly instead of wrapping silently, and the descriptive
+wording lives in the footer: "Изкупуване на ток от ВЕИ" / "Electricity buy-back
+for producers".
+
 ### Currency
 
 **Euro only.** Bulgaria joined the euro area in January 2026; lev pricing has
@@ -310,9 +338,21 @@ src/
 - Contrast meets **WCAG AA** in both themes. `--accent` is bright enough for text
   on dark, and `--accent-contrast` supplies the foreground for anything sitting
   **on** accent (buttons). Use the token, not `text-white`.
+- In dark mode the section text sits close to white: `--text-color: #fbfefe` and
+  `--text-color-muted: #cddfe1`. The muted tone carries most of the body copy, so
+  it sets the mood of every section, and the old `#a0c2c5` read dim. Contrast on
+  the page background is 14.27:1 and 10.50:1; the tightest pairing, muted text on
+  a card, is 8.97:1.
+- The 01/02/03 numerals in "How it works" are a **decorative watermark**, not
+  reading text: 1.24:1 in light, 1.35:1 in dark. Step order comes from the
+  ordering and the title, so the low contrast is deliberate.
 - Forms have visible `<label>`s, `autocomplete`, and a `<noscript>` fallback.
 - The back-to-top control appears near the page end and returns focus to the
   header, not just the viewport.
+- Mobile plus dark theme, checked at 375×812 across 10 pages (English included):
+  no horizontal overflow anywhere (`scrollWidth` = 375) and every text run meets
+  AA. The lowest real value is 4.89:1, accent on a card.
+- Form fields are 16px so iOS does not zoom on focus.
 
 ### Consent and third parties
 
