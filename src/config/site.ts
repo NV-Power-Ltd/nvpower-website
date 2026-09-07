@@ -39,7 +39,8 @@ export const site = {
     en: "69 Bulgaria Blvd, fl. 3, 1404 Sofia, Bulgaria",
   },
   /** [PLACEHOLDER] Google Maps embed URL for the office */
-  mapsEmbed: "https://www.google.com/maps?q=bul.+Bulgaria+69,+Sofia&output=embed",
+  /** [PLACEHOLDER] empty hides the map: a generic pin is worse than none. */
+  mapsEmbed: "",
 
   workingHours: { bg: "Пон – Пет: 09:00 – 18:00", en: "Mon – Fri: 09:00 – 18:00" },
 
@@ -84,12 +85,9 @@ export const site = {
 
   /** [PLACEHOLDER] §2 [TEAM] – at least founder/manager with a real photo */
   team: [
-    {
-      name: { bg: "Николай Върбанов", en: "Nikolay Varbanov" }, // [PLACEHOLDER] mock name
-      role: { bg: "Управител", en: "Managing Director" },
-      photo: "", // /images/team/name.webp
-    },
-  ],
+    // [PLACEHOLDER] Empty hides the whole Team section rather than showing an
+    // invented person. Add real people with real photos to bring it back.
+  ] as { name: Record<Locale, string>; role: Record<Locale, string>; photo: string }[],
 
   /**
    * [PLACEHOLDER] Form endpoint – POST target receiving multipart FormData
@@ -106,3 +104,13 @@ export const site = {
 export type Locale = "bg" | "en";
 
 export const kwhPriceEUR = site.price.eurPerKwh;
+
+/**
+ * Can we honestly ask a visitor to hand over a file?
+ *
+ * Only with a real endpoint: until formEndpoint is set nothing is transmitted,
+ * so an upload control would collect a document and silently drop it. Gates the
+ * invoice-upload block on /tok/ and the attachment field in the contact form —
+ * both come back on their own the moment an endpoint is configured.
+ */
+export const CAN_ACCEPT_UPLOADS = site.formEndpoint.trim().length > 0;

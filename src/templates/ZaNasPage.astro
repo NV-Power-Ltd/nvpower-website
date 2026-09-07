@@ -199,44 +199,50 @@ const c = {
   </section>
 
   <!-- 4 ▸ TEAM -->
-  <section class="section container-site">
-    <SectionHeading eyebrow={c.team.eyebrow} title={c.team.title} lead={c.team.lead} />
-    <ul class="mx-auto mt-12 grid max-w-4xl justify-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        site.team.map((member, i) => (
-          <li class="reveal card flex flex-col items-center p-8 text-center" style={`--reveal-delay:${i * 90}ms`}>
-            {member.photo ? (
-              <img
-                src={member.photo}
-                alt={member.name[locale]}
-                width="96"
-                height="96"
-                loading="lazy"
-                class="size-24 rounded-full object-cover"
-              />
-            ) : (
-              <span
-                class="flex size-24 items-center justify-center rounded-full bg-accent/10 font-[family-name:var(--font-display)] text-2xl font-bold text-accent"
-                aria-hidden="true"
-              >
-                {initials(member.name[locale])}
-              </span>
-            )}
-            <h3 class="mt-5 text-lg font-bold text-body">{member.name[locale]}</h3>
-            <p class="mt-1 text-sm font-medium text-accent">{member.role[locale]}</p>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
+  {
+    /* Hidden while site.team is empty: a heading over an empty grid, or an
+       invented colleague, both read worse than no section at all. */
+    site.team.length > 0 && (
+    <section class="section container-site">
+      <SectionHeading eyebrow={c.team.eyebrow} title={c.team.title} lead={c.team.lead} />
+      <ul class="mx-auto mt-12 grid max-w-4xl justify-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          site.team.map((member, i) => (
+            <li class="reveal card flex flex-col items-center p-8 text-center" style={`--reveal-delay:${i * 90}ms`}>
+              {member.photo ? (
+                <img
+                  src={member.photo}
+                  alt={member.name[locale]}
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  class="size-24 rounded-full object-cover"
+                />
+              ) : (
+                <span
+                  class="flex size-24 items-center justify-center rounded-full bg-accent/10 font-[family-name:var(--font-display)] text-2xl font-bold text-accent"
+                  aria-hidden="true"
+                >
+                  {initials(member.name[locale])}
+                </span>
+              )}
+              <h3 class="mt-5 text-lg font-bold text-body">{member.name[locale]}</h3>
+              <p class="mt-1 text-sm font-medium text-accent">{member.role[locale]}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
 
-  <!-- DOCUMENTS -->
-  <section class="section container-site">
-    <SectionHeading eyebrow={c.documents.eyebrow} title={c.documents.title} lead={c.documents.lead} />
-    <div class="mx-auto mt-10 max-w-3xl">
-      <DocumentsList locale={locale} />
-    </div>
-  </section>
+    <!-- DOCUMENTS -->
+    <section class="section container-site">
+      <SectionHeading eyebrow={c.documents.eyebrow} title={c.documents.title} lead={c.documents.lead} />
+      <div class="mx-auto mt-10 max-w-3xl">
+        <DocumentsList locale={locale} />
+      </div>
+    </section>
+    )
+  }
 
   <!-- 7 ▸ PARTNERS (honest strip) -->
   <section class="container-site pb-16 md:pb-24">

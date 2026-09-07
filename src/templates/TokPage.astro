@@ -6,7 +6,7 @@ import CtaBand from "../components/CtaBand.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
 import InvoiceUpload from "../islands/InvoiceUpload";
 import type { Locale } from "../config/site";
-import { site } from "../config/site";
+import { site, CAN_ACCEPT_UPLOADS } from "../config/site";
 import { r } from "../i18n/ui";
 
 interface Props {
@@ -447,6 +447,10 @@ const c = {
   </section>
 
   <!-- 5 ▸ INVOICE UPLOAD (dark band) -->
+  {
+    /* Hidden until a form endpoint exists: asking for an invoice and then
+       dropping it is worse than not asking. Returns automatically. */
+    CAN_ACCEPT_UPLOADS && (
   <section class="bg-band">
     <div class="container-site section">
       <SectionHeading eyebrow={c.invoice.eyebrow} title={c.invoice.title} lead={c.invoice.lead} on="band" />
@@ -460,6 +464,8 @@ const c = {
       </div>
     </div>
   </section>
+    )
+  }
 
   <!-- 6 ▸ FAQ -->
   <section class="section container-site">

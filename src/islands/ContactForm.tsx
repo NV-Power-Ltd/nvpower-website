@@ -3,7 +3,7 @@ import { submitLead, fileError } from "../lib/lead";
 import { useHydrated } from "../lib/useHydrated";
 import NoScriptFallback from "./NoScriptFallback";
 import type { Locale } from "../config/site";
-import { site } from "../config/site";
+import { site, CAN_ACCEPT_UPLOADS } from "../config/site";
 import { r } from "../i18n/routes";
 
 /* §6.10 contact form – interest dropdown + monthly-bill bracket (silent lead
@@ -179,17 +179,20 @@ export default function ContactForm({ locale }: { locale: Locale }) {
           onChange={setField("message")}
         />
       </label>
-      <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="cf-file">
-        {t.file}
-        <input
-          id="cf-file"
-          name="attachment"
-          type="file"
-          accept=".pdf,.jpg,.jpeg,.png"
-          onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-          className="field cursor-pointer font-normal file:mr-3 file:rounded-lg file:border-0 file:bg-accent file:px-3 file:py-1.5 file:text-xs file:font-bold file:text-accent-contrast"
-        />
-      </label>
+      {/* Hidden without an endpoint — the file would be collected and dropped. */}
+      {CAN_ACCEPT_UPLOADS && (
+        <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="cf-file">
+          {t.file}
+          <input
+            id="cf-file"
+            name="attachment"
+            type="file"
+            accept=".pdf,.jpg,.jpeg,.png"
+            onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+            className="field cursor-pointer font-normal file:mr-3 file:rounded-lg file:border-0 file:bg-accent file:px-3 file:py-1.5 file:text-xs file:font-bold file:text-accent-contrast"
+          />
+        </label>
+      )}
       <input type="text" value={hp} onChange={(e) => setHp(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" name="website" />
       <label className="flex items-start gap-3 text-sm text-muted">
         <input type="checkbox" checked={gdpr} onChange={(e) => setGdpr(e.target.checked)} className="mt-0.5 size-4 accent-accent" />
