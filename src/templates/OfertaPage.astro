@@ -1,9 +1,10 @@
 ---
-import { ShieldCheck, Clock, BadgePercent } from "@lucide/astro";
+import { ShieldCheck, Clock, BadgePercent, Phone, Mail, ArrowRight, Wrench } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import OfferWizard from "../islands/OfferWizard";
 import type { Locale } from "../config/site";
-import { site } from "../config/site";
+import { site, OFFER_WIZARD_READY } from "../config/site";
+import { r } from "../i18n/ui";
 
 interface Props {
   locale: Locale;
@@ -16,22 +17,42 @@ const c = {
     description: `Персонална оферта за ток или соларна система за 2 минути. Отговор от консултант до 3 работни дни, без ангажимент.`,
     h1: "Вземи своята оферта",
     sub: "Отговори на няколко въпроса за обекта си и ще подготвим конкретни числа, цена, икономия и срок на откупуване. Отнема около 90 секунди.",
+    /* Used instead of `sub` while the wizard is hidden: it must not promise a
+       questionnaire that is not on the page. */
+    subOffline:
+      "Обади ни се или ни пиши и ще подготвим конкретни числа за обекта ти, цена, икономия и срок на откупуване.",
     badges: [
       { icon: Clock, text: `Отговор до 3 работни дни` },
       { icon: BadgePercent, text: "Без скрити такси" },
       { icon: ShieldCheck, text: "Без ангажимент и без депозити" },
     ],
+    offline: {
+      title: "Онлайн въпросникът е в подготовка",
+      text: "Преработваме го, за да пита правилните неща и за производителите на ток, не само за соларни системи. Дотогава най-бързият път до оферта е директен контакт, отговаряме до 3 работни дни.",
+      callCta: "Обади се",
+      mailCta: "Пиши ни",
+      contactCta: "Виж всички начини за контакт",
+    },
   },
   en: {
     title: "Get a quote, NV Power",
     description: `A personal quote for electricity or a solar system in 2 minutes. A consultant replies within 3 business days, no commitment.`,
     h1: "Get your quote",
     sub: "Answer a few questions about your site and we'll prepare real numbers, price, savings and payback period. Takes about 90 seconds.",
+    subOffline:
+      "Call or email us and we'll prepare real numbers for your site, price, savings and payback period.",
     badges: [
       { icon: Clock, text: `Reply within 3 business days` },
       { icon: BadgePercent, text: "No hidden fees" },
       { icon: ShieldCheck, text: "No commitment, no deposits" },
     ],
+    offline: {
+      title: "The online questionnaire is being rebuilt",
+      text: "We're reworking it so it asks the right things for power producers too, not only for solar systems. Until then the fastest route to a quote is direct contact, and we reply within 3 business days.",
+      callCta: "Call us",
+      mailCta: "Email us",
+      contactCta: "See every way to reach us",
+    },
   },
 }[locale];
 ---
@@ -40,7 +61,7 @@ const c = {
   <section class="bg-surface-alt border-b border-line">
     <div class="container-site pt-12 pb-28 text-center md:pt-16">
       <h1 class="text-3xl font-bold text-body md:text-5xl">{c.h1}</h1>
-      <p class="mx-auto mt-4 max-w-xl text-muted md:text-lg">{c.sub}</p>
+      <p class="mx-auto mt-4 max-w-xl text-muted md:text-lg">{OFFER_WIZARD_READY ? c.sub : c.subOffline}</p>
       <ul class="mt-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5">
         {c.badges.map((b) => (
           <li class="flex items-center gap-2 text-sm font-medium text-body">
@@ -52,7 +73,43 @@ const c = {
     </div>
   </section>
 
+  <!-- The wizard, or the honest alternative while it is being reworked. The
+       page, its route and every inbound "Вземи оферта" link stay put either
+       way; only what sits in this slot changes. -->
   <section class="container-site -mt-20 pb-20 md:pb-24">
-    <OfferWizard locale={locale} client:load />
+    {
+      OFFER_WIZARD_READY ? (
+        <OfferWizard locale={locale} client:load />
+      ) : (
+        <div class="card mx-auto max-w-2xl p-8 text-center md:p-10">
+          <span class="mx-auto flex size-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+            <Wrench class="size-6" aria-hidden="true" />
+          </span>
+          <h2 class="mt-4 text-xl font-bold text-body md:text-2xl">{c.offline.title}</h2>
+          <p class="mx-auto mt-3 max-w-lg leading-relaxed text-muted">{c.offline.text}</p>
+
+          <div class="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+            <a href={`tel:${site.phoneHref}`} class="btn btn-primary !px-7 !py-4 text-base">
+              <Phone class="size-4" aria-hidden="true" />
+              {c.offline.callCta}, {site.phone}
+            </a>
+            <a href={`mailto:${site.email}`} class="btn btn-outline !px-7 !py-4 text-base">
+              <Mail class="size-4" aria-hidden="true" />
+              {c.offline.mailCta}
+            </a>
+          </div>
+
+          <p class="mt-6">
+            <a
+              href={r(locale, "kontakti")}
+              class="inline-flex items-center gap-1.5 font-semibold text-accent underline decoration-2 underline-offset-4 hover:text-accent-hover"
+            >
+              {c.offline.contactCta}
+              <ArrowRight class="size-4" aria-hidden="true" />
+            </a>
+          </p>
+        </div>
+      )
+    }
   </section>
 </BaseLayout>

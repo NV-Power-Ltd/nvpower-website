@@ -31,7 +31,11 @@ with battery storage.
 
 **След преориентирането към изкупуване** – `/tok/` е основното направление на сайта:
 
-- [ ] **Формата за оферта е соларна.** `/oferta/` (`OfferWizard`) пита за покрив, конструкция и батерия, а CTA-тата на `/tok/` водят точно там. Производител, който иска да продава ток, попада на въпросник за соларна система. Нужен е производителски клон (мощност, точка на присъединяване, профил на производство, текущ търговец, предизвестие) – полетата зависят от процеса на търговския екип.
+- [ ] **Формата за оферта е скрита и чака преработка.** `OFFER_WIZARD_READY = false` в `src/config/site.ts` – докато е `false`, `/oferta/` показва телефон, имейл и линк към контактите вместо въпросника.
+
+  **Защо е скрита.** `OfferWizard` пита само соларни неща (покрив, конструкция, батерия), а всички CTA-та за изкупуване на `/tok/` водят точно там: производител, който иска да продава ток, попадаше на въпросник за соларна система. Освен това `formEndpoint` е празен, тоест нищо от попълненото не се изпращаше. Седем стъпки на вятъра са по-лошо от липсваща форма.
+
+  **Какво трябва, за да се върне.** Производителски клон във въпросника (мощност, точка на присъединяване, профил на производство, текущ търговец, срок на предизвестие) – конкретните полета зависят от това какво ползва търговският екип, за да остойности оферта. Плюс работещ `formEndpoint`. След двете обърни флага на `true`; страницата, маршрутът и всички 15 входящи линка остават непроменени през цялото време.
 - [ ] EN slug-ът на страницата остава `/en/electricity/`. По-точен би бил `/en/power-buy-back/`, но смяната изисква нов 301 в `vercel.json` – реши дали си струва.
 - [ ] `0.099` се вижда още на 2 места, и двете като **индикативни допускания за спестявания от солар**, не като цена по оферта: допусканията в `/kalkulator/` и „Примерни числа" в `/solar/za-biznesa/`. Идват от `site.price.eurPerKwh`.
 
@@ -81,6 +85,11 @@ Facebook/Instagram профилите.
 
 Свържи form service (напр. Formspree) или собствена serverless функция с имейл
 до office@nvpower.bg, и попълни `site.formEndpoint`.
+
+**Кои форми са живи в момента:** контактната на `/kontakti/` и мини
+конфигураторът на началната страница (и двете със същия резервен вариант).
+Въпросникът на `/oferta/` е **скрит** зад `OFFER_WIZARD_READY` – виж TO-DO
+по-горе. Качването на файлове е скрито зад `CAN_ACCEPT_UPLOADS`.
 
 > **CSP:** ако endpoint-ът е на **друг домейн**, добави origin-а му към
 > `connect-src` и `form-action` – на Vercel това е в **`vercel.json`**.
@@ -216,7 +225,11 @@ the second is turnkey solar plants with battery storage and flexible financing.
 
 **After the shift to buy-back** – `/tok/` is the site's primary business line:
 
-- [ ] **The quote form is a solar form.** `/oferta/` (`OfferWizard`) asks about roofs, mounting and batteries, and the CTAs on `/tok/` point straight at it. A producer who wants to sell power lands on a solar questionnaire. It needs a producer branch (capacity, connection point, production profile, current trader, notice period) – the fields depend on what the trading desk actually needs.
+- [ ] **The quote form is hidden, pending a rework.** `OFFER_WIZARD_READY = false` in `src/config/site.ts` – while it is `false`, `/oferta/` shows the phone number, the email address and a link to the contact page instead of the questionnaire.
+
+  **Why it is hidden.** `OfferWizard` asks solar questions only (roof, mounting, battery), while every buy-back CTA on `/tok/` points straight at it: a producer wanting to sell power was handed a solar questionnaire. On top of that `formEndpoint` is empty, so nothing filled in was ever transmitted. Seven steps for nothing is worse than no form.
+
+  **What it needs to come back.** A producer branch in the questionnaire (capacity, connection point, production profile, current trader, notice period) – the exact fields depend on what the trading desk uses to price an offer. Plus a working `formEndpoint`. With both in place, flip the flag to `true`; the page, its route and all 15 inbound links stay unchanged throughout.
 - [ ] The page's EN slug is still `/en/electricity/`. `/en/power-buy-back/` would be more accurate, but changing it means another 301 in `vercel.json` – decide whether it's worth it.
 - [ ] `0.099` still appears in 2 places, both as **indicative assumptions for solar savings**, not as an offer price: the `/kalkulator/` assumptions and the "Example numbers" block on `/solar/za-biznesa/`. Both come from `site.price.eurPerKwh`.
 
@@ -266,6 +279,11 @@ lead.
 
 Wire a form service (e.g. Formspree) or your own serverless function that emails
 office@nvpower.bg, then set `site.formEndpoint`.
+
+**Which forms are live right now:** the contact form on `/kontakti/` and the
+homepage mini configurator (both with the same fallback). The `/oferta/`
+questionnaire is **hidden** behind `OFFER_WIZARD_READY` – see the TO-DO above.
+File uploads are hidden behind `CAN_ACCEPT_UPLOADS`.
 
 > **CSP:** if the endpoint is on **another domain**, add its origin to
 > `connect-src` and `form-action` – on Vercel that lives in **`vercel.json`**.

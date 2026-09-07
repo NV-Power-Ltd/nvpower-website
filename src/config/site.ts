@@ -157,3 +157,17 @@ export const kwhPriceEUR = site.price.eurPerKwh;
  * both come back on their own the moment an endpoint is configured.
  */
 export const CAN_ACCEPT_UPLOADS = site.formEndpoint.trim().length > 0;
+
+/**
+ * Is the /oferta/ wizard fit to show?
+ *
+ * No, on two counts. It asks only solar questions (roof, mounting, battery)
+ * while every buy-back CTA on /tok/ points at it, so a producer wanting to sell
+ * power is handed a solar questionnaire; and with formEndpoint empty nothing it
+ * collects is transmitted anyway. Seven steps for nothing is worse than no form.
+ *
+ * While this is false /oferta/ keeps its route, its SEO and every inbound link,
+ * and offers the phone/email route instead. Flip it back once the wizard has a
+ * producer branch and an endpoint — see the README TO-DO.
+ */
+export const OFFER_WIZARD_READY = false;
