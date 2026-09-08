@@ -81,25 +81,49 @@ export const site = {
   },
 
   /**
-   * КЕВР licence. Two forms of the same fact:
-   *
-   * `license` is the short line for the footer and the contact page, where the
-   * company name and ЕИК already sit on the line above it.
+   * КЕВР licence, in two forms:
    *
    * `licenseFull` is the complete formal self-description, company name and ЕИК
-   * included, for the AI info page, whose whole purpose is handing machines the
-   * canonical wording.
+   * included. It appears on the About page and in the AI facts, and nowhere
+   * else, so the site does not repeat a legal paragraph on every page.
+   *
+   * `licenseRef` is the citation, for the footer, the contact page and the
+   * trust bar.
    *
    * The number is Л-878-15, and the coordinator rights come from the 30.04.2026
    * amending decision rather than from the original licence.
    */
-  license: {
-    bg: "Лицензия № Л-878-15 от 14.01.2026 г. за търговия с електрическа енергия, изменена и допълнена с Решение № И1-Л-878 от 30.04.2026 г. на КЕВР, с права и задължения на координатор на стандартна балансираща група",
-    en: "Licence No. L-878-15 of 14.01.2026 for electricity trading, amended and supplemented by Decision No. И1-Л-878 of 30.04.2026 of the EWRC, with the rights and obligations of a coordinator of a standard balancing group",
-  },
   licenseFull: {
     bg: "„ЕН ВИ ПАУЪР“ ООД (NV Power Ltd.), ЕИК: 208173515, лицензиран търговец на електрическа енергия, притежаващ Лицензия № Л-878-15 от 14.01.2026 г., изменена и допълнена с Решение № И1-Л-878 от 30.04.2026 г. на КЕВР с права и задължения на координатор на Стандартна балансираща група",
     en: "NV Power Ltd („ЕН ВИ ПАУЪР“ ООД), UIC: 208173515, a licensed electricity trader holding Licence No. L-878-15 of 14.01.2026, amended and supplemented by Decision No. И1-Л-878 of 30.04.2026 of the EWRC, with the rights and obligations of a coordinator of a Standard balancing group",
+  },
+
+  /** The licence reduced to a citation, for the footer and the trust bar. */
+  licenseRef: {
+    bg: "Лицензия № Л-878-15 / КЕВР",
+    en: "EWRC licence No. L-878-15",
+  },
+
+  /**
+   * The regulatory status, in the order it earns credibility: what we are
+   * licensed to do, the role the licence grants, and the citation to check it
+   * against. Rendered by TrustBar, so the homepage and the About page cannot
+   * drift apart, and no page repeats the full legal sentence.
+   *
+   * No ЕСО registration number here: it is not verified anywhere in this
+   * repository, and a trust signal nobody can check is worse than none.
+   */
+  trust: {
+    bg: [
+      "Лицензиран търговец на електрическа енергия",
+      "Координатор на стандартна балансираща група",
+      "Лицензия № Л-878-15 / КЕВР",
+    ],
+    en: [
+      "Licensed electricity trader",
+      "Coordinator of a standard balancing group",
+      "EWRC licence No. L-878-15",
+    ],
   },
 
   /**
@@ -109,8 +133,8 @@ export const site = {
    * is worth stating rather than leaving implicit.
    */
   balancingGroup: {
-    bg: "Дружеството е регистрирано и като координатор на стандартни балансиращи групи към ЕСО",
-    en: "The company is also registered as a coordinator of standard balancing groups with ESO",
+    bg: "Дружеството е регистрирано и като координатор на стандартна балансираща група към ЕСО",
+    en: "The company is also registered as a coordinator of a standard balancing group with ESO",
   },
 
   /**

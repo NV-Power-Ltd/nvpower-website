@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import CtaBand from "../components/CtaBand.astro";
 import DocumentsList from "../components/DocumentsList.astro";
+import TrustBar from "../components/TrustBar.astro";
 import type { Locale } from "../config/site";
 import { site } from "../config/site";
 
@@ -155,6 +156,14 @@ const c = {
     <div class="container-site pt-12 pb-12 text-center md:pt-16">
       <h1 class="mx-auto mt-3 max-w-3xl text-3xl font-bold text-body md:text-5xl md:leading-[1.1]">{c.hero.h1}</h1>
       <p class="mx-auto mt-4 max-w-2xl text-muted md:text-lg">{c.hero.sub}</p>
+
+      <!-- Regulatory status up front, then the full wording below it. This is
+           the one page that carries the complete legal sentence. -->
+      <div class="mt-7">
+        <TrustBar locale={locale} />
+      </div>
+      <p class="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-muted">{site.licenseFull[locale]}</p>
+      <p class="mx-auto mt-2 max-w-2xl text-sm leading-relaxed text-muted">{site.balancingGroup[locale]}</p>
     </div>
   </section>
 

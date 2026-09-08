@@ -1,0 +1,42 @@
+---
+import { BadgeCheck } from "@lucide/astro";
+import type { Locale } from "../config/site";
+import { site } from "../config/site";
+
+/**
+ * The regulatory status, compactly.
+ *
+ * For a licensed trader this is the strongest thing on the page: it is
+ * verifiable in the КЕВР register, which "Партньор, който мисли за твоята
+ * независимост" is not. It replaced a row of sales promises in the homepage
+ * hero ("Без скрити такси", "Възможност за финансиране").
+ *
+ * Every item comes from `site.trust`, so the homepage and the About page state
+ * the same three facts in the same order and cannot drift. The full regulatory
+ * sentence deliberately lives only on the About page and in the AI facts, not
+ * repeated across the site.
+ *
+ * `on="band"` for dark hero sections, `on="light"` for content sections.
+ */
+interface Props {
+  locale: Locale;
+  on?: "light" | "band";
+  align?: "center" | "left";
+}
+const { locale, on = "light", align = "center" } = Astro.props;
+
+const itemCls = on === "band" ? "text-white/90" : "text-body";
+const iconCls = on === "band" ? "text-[#6fd0da]" : "text-accent";
+const alignCls = align === "center" ? "justify-center" : "justify-start";
+---
+
+<ul class:list={["flex flex-wrap items-center gap-x-6 gap-y-2.5", alignCls]}>
+  {
+    site.trust[locale].map((item) => (
+      <li class:list={["flex items-center gap-2 text-sm font-medium", itemCls]}>
+        <BadgeCheck class:list={["size-4 shrink-0", iconCls]} aria-hidden="true" />
+        {item}
+      </li>
+    ))
+  }
+</ul>

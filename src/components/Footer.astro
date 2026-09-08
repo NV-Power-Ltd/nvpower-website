@@ -136,8 +136,11 @@ const socials = [
            the max-width stops a 600px-wide line of 12px text. -->
       <div class="flex flex-col justify-end gap-2 text-xs leading-relaxed text-white/45 md:items-end md:text-right">
         <p class="max-w-prose text-balance">{site.legal[locale]}</p>
-        <p class="max-w-prose text-balance">{site.license[locale]}</p>
-        <p class="max-w-prose text-balance">{site.balancingGroup[locale]}</p>
+        <!-- Citation, not the full sentence: the complete regulatory wording is
+             on the About page, and repeating it on all 31 pages is noise. -->
+        <p class="max-w-prose text-balance">
+          {site.licenseRef[locale]} · {site.trust[locale][1]}
+        </p>
         <p class="max-w-prose text-balance">© 2026 {site.nameLegal}. {t.footer.rights}</p>
       </div>
     </div>

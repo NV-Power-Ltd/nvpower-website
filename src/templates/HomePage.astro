@@ -2,6 +2,7 @@
 import { ArrowRight, Zap, Sun, Factory, FileText, PenLine, Wrench, BadgeCheck, UserRound, Landmark, BatteryCharging, LifeBuoy, Flag, MapPin, Battery, PiggyBank } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
+import TrustBar from "../components/TrustBar.astro";
 import CtaBand from "../components/CtaBand.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
 import MiniConfigurator from "../islands/MiniConfigurator";
@@ -30,13 +31,6 @@ const c = {
       ],
       ctaPlans: "Виж направленията",
       ctaOffer: "Свържи се с нас",
-      /* A trust bar, not a promise bar: every item here is verifiable, and
-         none of it is a statistic we cannot substantiate. */
-      checks: [
-        "Лицензия № Л-878-15 от КЕВР",
-        "Координатор на стандартна балансираща група",
-        "Българска компания",
-      ],
     },
     lines: {
       eyebrow: "Направления",
@@ -141,11 +135,6 @@ const c = {
       ],
       ctaPlans: "See the three areas",
       ctaOffer: "Get in touch",
-      checks: [
-        "EWRC licence No. L-878-15",
-        "Standard balancing group coordinator",
-        "A Bulgarian company",
-      ],
     },
     lines: {
       eyebrow: "Business areas",
@@ -270,13 +259,11 @@ const c = {
         <a href={r(locale, "kontakti")} class="btn btn-ghost-band !px-7 !py-4 text-base">{c.hero.ctaOffer}</a>
       </div>
 
-      <ul class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5">
-        {c.hero.checks.map((check) => (
-          <li class="flex items-center gap-2 text-sm font-medium text-white/90">
-            {check}
-          </li>
-        ))}
-      </ul>
+      <!-- The regulatory status, from site.trust. It used to be a row of sales
+           promises; a licence number a producer can look up is worth more. -->
+      <div class="mt-8">
+        <TrustBar locale={locale} on="band" />
+      </div>
     </div>
   </section>
 
