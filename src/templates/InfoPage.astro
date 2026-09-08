@@ -52,7 +52,7 @@ const c = {
         {
           category: "switch",
           q: "Какво е балансираща група и какво е небаланс?",
-          a: "Всеки доставчик прогнозира колко ток ще потребят клиентите му, а реалното потребление винаги се отклонява, това отклонение се нарича небаланс и има цена. Балансиращата група обединява много потребители, чиито отклонения взаимно се компенсират, и така общият небаланс намалява. При нас включването в групата става автоматично с договора, а разходът за балансиране е включен в цената, без отделни редове изненади.",
+          a: "Всеки търговски участник заявява предварително колко енергия ще потреби или ще произведе, а действителните количества винаги се отклоняват от заявеното. Тази разлика се нарича небаланс и има цена. Балансиращата група обединява участници, чиито отклонения взаимно се компенсират, така че общият небаланс е по-малък, а един координатор отговаря за балансирането и за уреждането на небалансите пред системния оператор. При нас включването в групата става автоматично с договора; дали разходът за балансиране е включен в цената зависи от избрания план.",
         },
         {
           category: "switch",
@@ -151,8 +151,10 @@ const c = {
         { t: "Автономна система (off-grid)", d: "Система, независима от мрежата, цялата енергия идва от панелите и батериите. Използва се за отдалечени обекти без достъп до ток." },
         { t: "BESS", d: "Battery Energy Storage System, батерийна система за съхранение на енергия: от домашни батерии до промишлени контейнерни решения." },
         { t: "LiFePO4", d: "Литиево-желязо-фосфатна батерийна химия, стандартът при домашни и бизнес батерии заради безопасността и дългия живот (6000+ цикъла)." },
-        { t: "Балансираща група", d: "Обединение на потребители при един координатор. Отклоненията им взаимно се компенсират и разходите за небаланс намаляват." },
-        { t: "Небаланс", d: "Разликата между прогнозираното и реално потребената енергия. Има цена, която някой плаща, затова има значение в чия балансираща група си." },
+        { t: "Балансираща група", d: "Група от търговски участници, за които един координатор носи отговорност за балансирането и уреждането на небалансите. В групата могат да участват както потребители, така и производители, а отклоненията им взаимно се компенсират." },
+        { t: "Координатор на балансираща група", d: "Участникът, който отговаря за прогнозите, за балансирането и за уреждането на небалансите на членовете на групата пред електроенергийния системен оператор." },
+        { t: "Балансиране", d: "Изравняването на разликата между заявените и действителните количества енергия. Разходът за балансиране се поема от координатора на групата и се урежда съгласно договора." },
+        { t: "Небаланс", d: "Разликата между заявените или прогнозирани и действително измерените количества електрическа енергия за съответния период на сетълмент. Има цена, която някой плаща, затова има значение в чия балансираща група си." },
         { t: "ЗкО", d: "„Задължения към обществото“, регулирана компонента в цената на тока, с която се финансират зелена енергия по преференциални цени и други обществени задължения." },
         { t: "Акциз", d: "Държавен данък върху електроенергията, който доставчикът събира и превежда към бюджета. Еднакъв при всички доставчици." },
         { t: "Монокристален панел", d: "Панел от монокристален силиций, днешният стандарт с най-висок КПД и най-добра работа при слаба светлина." },
@@ -218,7 +220,7 @@ const c = {
         {
           category: "switch",
           q: "What is a balancing group and what is an imbalance?",
-          a: "Every supplier forecasts how much power its clients will consume, and real consumption always deviates, that deviation is called an imbalance, and it has a price. A balancing group pools many consumers whose deviations offset each other, so the total imbalance shrinks. With us, joining the group is automatic with your contract and the balancing cost is included in the price, no surprise line items.",
+          a: "Every market participant nominates in advance how much energy it will consume or generate, and the actual quantities always deviate from what was nominated. That difference is called an imbalance, and it has a price. A balancing group pools participants whose deviations offset each other, so the total imbalance is smaller, and a single coordinator is responsible for the balancing and for settling imbalances towards the system operator. With us, joining the group is automatic with your contract; whether the balancing cost is included in your price depends on the plan you choose.",
         },
         {
           category: "switch",
@@ -317,8 +319,10 @@ const c = {
         { t: "Off-grid system", d: "A system independent of the grid, all energy comes from the panels and batteries. Used for remote sites with no grid access." },
         { t: "BESS", d: "Battery Energy Storage System, from home batteries to industrial containerised solutions." },
         { t: "LiFePO4", d: "Lithium iron phosphate battery chemistry, the standard for home and business batteries thanks to its safety and long life (6,000+ cycles)." },
-        { t: "Balancing group", d: "A pool of consumers under one coordinator. Their deviations offset each other and imbalance costs go down." },
-        { t: "Imbalance", d: "The difference between forecast and actually consumed energy. It has a price someone pays, which is why whose balancing group you're in matters." },
+        { t: "Balancing group", d: "A group of market participants for whom a single coordinator carries responsibility for balancing and for settling imbalances. It can include both consumers and producers, and their deviations offset each other." },
+        { t: "Balancing group coordinator", d: "The participant responsible for the forecasts, the balancing and the settlement of the group members’ imbalances towards the electricity system operator." },
+        { t: "Balancing", d: "Evening out the difference between nominated and actual quantities of energy. The balancing cost is carried by the group coordinator and settled under the contract." },
+        { t: "Imbalance", d: "The difference between the nominated or forecast quantities and the quantities actually metered for the relevant settlement period. It has a price someone pays, which is why whose balancing group you are in matters." },
         { t: "Public obligations charge (ЗкО)", d: "'Obligations to society', a regulated component of the electricity price that funds green energy at preferential prices and other public obligations." },
         { t: "Excise duty", d: "A state tax on electricity that the supplier collects and remits to the budget. Identical with every supplier." },
         { t: "Monocrystalline panel", d: "A panel made of monocrystalline silicon, today's standard, with the highest efficiency and the best low-light performance." },
