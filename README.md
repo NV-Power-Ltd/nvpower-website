@@ -36,6 +36,13 @@ with battery storage.
 - [ ] Преди страницата да се разшири, бизнесът трябва да потвърди: (1) обслужваме ли обекти под 1 MW и от каква мощност нагоре; (2) как се формира цената по доставка (формула, такси, период); (3) процедурата и срокът за смяна на доставчик; (4) какво влиза в месечната фактура. **Докато това не е потвърдено, не добавяй нищо от изброеното на страницата.**
 - [ ] Остатъчният текст за доставка на битови клиенти в `/info/` (3 въпроса: срок за смяна на доставчик, как се чете фактура, ЗкО/акциз) все още е писан за консуматори. Реши дали остава като общообразователен материал, или се преработва за производители.
 
+**Изисква бизнес потвърждение – договорни обещания.** Това са търговска политика, не формулировка, затова не са пренаписвани. Всяко от тях трябва да съвпада с реалния договор:
+
+- [ ] **„Без неустойки и без обвързващи клаузи"** (`/tok/`, FAQ „Мога ли да се откажа ако не съм доволен?"). Изречението стои непосредствено до „1 месец при NV Фиксиран, 1 или 6 месеца при NV Standard". Шестмесечно предизвестие в обичайния език **е** обвързваща клауза, така че двете половини на отговора си противоречат. Потвърдете какво точно липсва: неустойка за предсрочно прекратяване, минимален срок на договора, или и двете, и формулирайте го спрямо договора.
+- [ ] **„Без депозити"** се появява на 6 места (`i18n/ui.ts`, `/tok/`, `/dostavka/`, `/oferta/`, калкулатора). Потвърдете, че важи и за двете направления и за всички планове.
+- [ ] **„Смяната е напълно безплатна, без такси, без депозити"** (`/tok/` и `/info/`). Потвърдете, че няма административна такса при никакъв сценарий.
+- [ ] **„Ако друг доставчик ти иска депозит, питай го защо."** (`/info/`) – сравнителна реплика срещу конкуренти. Решете дали я искате.
+
 **Изисква бизнес потвърждение – соларният модел** (`src/lib/solarModel.ts`):
 
 - [ ] **Собственото потребление без батерия.** `selfUse.pv` (30% за дом, 65% за бизнес и индустрия) е единственото допускане в модела без източник в проекта и е маркирано в кода. `selfUse.pv_bess` (70/80%) идва от стария калкулатор и остава непроменено. Потвърди и двата набора, за предпочитане от реални обекти.
@@ -278,6 +285,13 @@ with battery storage. The route table is under "Routing and i18n".
 - [ ] **The scope is deliberately narrow.** The page promises only what is confirmed: individual offers for consumers **above 1 MW**, with no published tariff. Before the refactor the only confirmed supply content on the whole site was one paragraph inside the >1 MW block on `/tok/`.
 - [ ] Before the page can grow, the business must confirm: (1) whether sites below 1 MW are served, and from what capacity upwards; (2) how a supply price is formed (formula, fees, period); (3) the supplier-switching procedure and its timing; (4) what appears on the monthly invoice. **Until those are confirmed, do not add any of them to the page.**
 - [ ] Residual household-supply copy in `/info/` (3 questions: switching timeline, how to read an invoice, ЗкО/excise) is still written for consumers. Decide whether it stays as general educational material or is reworked for producers.
+
+**Needs business confirmation – contractual promises.** These are commercial policy rather than wording, so they were not rewritten. Each has to match the actual contract:
+
+- [ ] **"Без неустойки и без обвързващи клаузи" / "No penalties, no lock-in clauses"** (`/tok/`, the FAQ "Can I leave if I am not happy?"). The sentence sits immediately after "1 month on NV Fixed, 1 or 6 months on NV Standard". A six-month notice period is, in ordinary language, a binding clause, so the two halves of the answer contradict each other. Confirm what is actually absent — an early-termination penalty, a minimum contract term, or both — and word it against the contract.
+- [ ] **"No deposits"** appears in 6 places (`i18n/ui.ts`, `/tok/`, `/dostavka/`, `/oferta/`, the calculator). Confirm it holds for both business areas and every plan.
+- [ ] **"Switching is completely free, no fees, no deposits"** (`/tok/` and `/info/`). Confirm there is no administrative fee under any scenario.
+- [ ] **"If another supplier asks you for a deposit, ask them why."** (`/info/`) – a comparative jab at competitors. Decide whether you want it.
 
 **Needs business confirmation – the solar model** (`src/lib/solarModel.ts`):
 
