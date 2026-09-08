@@ -36,6 +36,9 @@ const c = {
           icon: Zap,
           badge: "Най-предсказуем",
           name: "NV Фиксиран",
+          /* "Фиксиран" describes the trading component, not the energy price. */
+          mechanism:
+            "Изкупна цена: БНЕБ, пазар „Ден напред“, минус фиксиран търговски компонент от 15 €/MWh. Фиксиран е компонентът, не цената на енергията.",
           priceMain: "БНЕБ − 15 €",
           priceSub: "на MWh",
           term: "предизвестие само 1 месец",
@@ -45,12 +48,14 @@ const c = {
             "Постоянна комуникация и поддръжка от търговския ни екип",
             "Идеален за малки и средни ВЕИ производители",
           ],
-          cta: "Вземи оферта за NV Fixed",
+          cta: "Вземи оферта за NV Фиксиран",
         },
         {
           icon: LineChart,
           badge: "Най-популярен",
           name: "NV Standard",
+          mechanism:
+            "Изкупна цена: БНЕБ, пазар „Ден напред“, минус търговски компонент от 3 или 2 €/MWh според избраното ниво.",
           term: "две нива на гъвкавост",
           /* Two-component plan – the visitor picks a tier inside the card. */
           options: [
@@ -80,6 +85,8 @@ const c = {
           icon: Building2,
           badge: "За големи обекти (над 1 MW)",
           name: "NV Individual",
+          mechanism:
+            "Изкупна цена: по договаряне, спрямо производствения профил на централата и периода на договора.",
           priceMain: "По договаряне",
           priceSub: "спрямо производствения ти профил",
           term: "предизвестие по договор",
@@ -107,7 +114,7 @@ const c = {
       eyebrow: "Сравнение",
       title: "Плановете един до друг",
       lead: "Без звездички и дребен шрифт, това са условията.",
-      cols: ["План", "Формула (БНЕБ)", "Срок на предизвестие", "Целева група", "Основно предимство"],
+      cols: ["План", "Формула (БНЕБ, €/MWh)", "Срок на предизвестие", "Целева група", "Основно предимство"],
       rows: [
         { plan: "NV Фиксиран", formula: "БНЕБ − 15 €", notice: "1 месец", target: "Малки ВЕИ централи", advantage: "Пълна свобода с 1 месец предизвестие." },
         { plan: "NV Standard Flexible", formula: "БНЕБ − 3 €", notice: "1 месец", target: "Средни ВЕИ", advantage: "Баланс между добра цена и кратък срок." },
@@ -167,6 +174,8 @@ const c = {
           icon: Zap,
           badge: "Most predictable",
           name: "NV Fixed",
+          mechanism:
+            "Purchase price: the IBEX day-ahead market, minus a fixed trading component of €15/MWh. The component is fixed, the energy price is not.",
           priceMain: "IBEX − €15",
           priceSub: "per MWh",
           term: "just 1 month's notice",
@@ -182,6 +191,8 @@ const c = {
           icon: LineChart,
           badge: "Most popular",
           name: "NV Standard",
+          mechanism:
+            "Purchase price: the IBEX day-ahead market, minus a trading component of €3 or €2/MWh, depending on the tier you pick.",
           term: "two levels of flexibility",
           /* Two-component plan – the visitor picks a tier inside the card. */
           options: [
@@ -211,6 +222,8 @@ const c = {
           icon: Building2,
           badge: "For large sites (over 1 MW)",
           name: "NV Individual",
+          mechanism:
+            "Purchase price: negotiated, based on the plant's generation profile and the contract period.",
           priceMain: "Negotiated",
           priceSub: "based on your generation profile",
           term: "notice period set by contract",
@@ -236,7 +249,7 @@ const c = {
       eyebrow: "Comparison",
       title: "The plans side by side",
       lead: "No asterisks, no small print, these are the terms.",
-      cols: ["Plan", "Formula (IBEX)", "Notice period", "Target group", "Key advantage"],
+      cols: ["Plan", "Formula (IBEX, €/MWh)", "Notice period", "Target group", "Key advantage"],
       rows: [
         { plan: "NV Fixed", formula: "IBEX − €15", notice: "1 month", target: "Small renewable plants", advantage: "Full freedom, one month's notice." },
         { plan: "NV Standard Flexible", formula: "IBEX − €3", notice: "1 month", target: "Mid-size renewables", advantage: "A balance of good price and a short commitment." },
@@ -340,6 +353,11 @@ const c = {
               <span class="text-xs font-medium text-muted"> ({plan.term})</span>
             )}
           </h3>
+
+          <!-- Directly under the name: what the price actually is. "Фиксиран"
+               describes the trading component, not the energy price, and a
+               market-indexed price must never read as a fixed one. -->
+          <p class="-mt-1 text-[0.8rem] leading-snug text-muted">{plan.mechanism}</p>
 
           {!("options" in plan && plan.options) && (
             <p class="font-[family-name:var(--font-display)]">
