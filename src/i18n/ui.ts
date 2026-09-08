@@ -38,7 +38,7 @@ export const ui = {
     },
     cta: {
       title: "Готов за енергийна независимост?",
-      text: `Вземи оферта онлайн или ни се обади, отговаряме ${responseWithin.bg}.`,
+      text: `Заяви оферта или ни се обади, отговаряме ${responseWithin.bg}.`,
       primary: "Вземи оферта",
       call: "Обади се",
     },
@@ -119,7 +119,7 @@ export const ui = {
     },
     cta: {
       title: "Ready for energy independence?",
-      text: `Get a quote online or give us a call, we reply ${responseWithin.en}.`,
+      text: `Request a quote or give us a call, we reply ${responseWithin.en}.`,
       primary: "Get a quote",
       call: "Call us",
     },

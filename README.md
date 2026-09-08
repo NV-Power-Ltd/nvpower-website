@@ -38,11 +38,15 @@ with battery storage.
 
 **След преориентирането към изкупуване** – `/tok/` е основното направление на сайта:
 
-- [ ] **Формата за оферта е скрита и чака преработка.** `OFFER_WIZARD_READY = false` в `src/config/site.ts` – докато е `false`, `/oferta/` показва телефон, имейл и линк към контактите вместо въпросника.
+- [ ] **Въпросникът за оферта е скрит и чака преработка.** `OFFER_WIZARD_READY = false` в `src/config/site.ts`.
 
   **Защо е скрита.** `OfferWizard` пита само соларни неща (покрив, конструкция, батерия), а всички CTA-та за изкупуване на `/tok/` водят точно там: производител, който иска да продава ток, попадаше на въпросник за соларна система. Освен това `formEndpoint` е празен, тоест нищо от попълненото не се изпращаше. Седем стъпки на вятъра са по-лошо от липсваща форма.
 
-  **Какво трябва, за да се върне.** Производителски клон във въпросника (мощност, точка на присъединяване, профил на производство, текущ търговец, срок на предизвестие) – конкретните полета зависят от това какво ползва търговският екип, за да остойности оферта. Плюс работещ `formEndpoint`. След двете обърни флага на `true`; страницата, маршрутът и всички 15 входящи линка остават непроменени през цялото време.
+  **Докато е скрит, потокът не е задънен.** `/oferta/` е рутер: посетителят избира направление и попада на кратката контактна форма с вече избрана услуга (`/kontakti/?interest=0..3#zapitvane`), а телефонът и имейлът са на същата страница. Никъде не се обещава онлайн въпросник, защото такъв няма.
+
+  **Формата казва истината, когато няма endpoint.** `submitLead` връща `unconfigured`, а `ContactForm` вече го разграничава от истинска грешка: вместо „Нещо се обърка" показва „Изпрати ни запитването директно" с имейл и телефон. Няма фалшиво потвърждение и няма подвеждащ retry.
+
+  **Какво трябва, за да се върне въпросникът.** Производителски клон (мощност, точка на присъединяване, профил на производство, текущ търговец, срок на предизвестие) – полетата зависят от процеса на търговския екип. Плюс работещ `formEndpoint`. След двете обърни флага на `true`.
 - [ ] EN slug-ът на страницата остава `/en/electricity/`. По-точен би бил `/en/power-buy-back/`, но смяната изисква нов 301 в `vercel.json` – реши дали си струва.
 - [ ] `0.099` се вижда още на 2 места, и двете като **индикативни допускания за спестявания от солар**, не като цена по оферта: допусканията в `/kalkulator/` и „Примерни числа" в `/solar/za-biznesa/`. Идват от `site.price.eurPerKwh`.
 
@@ -263,11 +267,15 @@ with battery storage. The route table is under "Routing and i18n".
 
 **After the shift to buy-back** – `/tok/` is the site's primary business line:
 
-- [ ] **The quote form is hidden, pending a rework.** `OFFER_WIZARD_READY = false` in `src/config/site.ts` – while it is `false`, `/oferta/` shows the phone number, the email address and a link to the contact page instead of the questionnaire.
+- [ ] **The quote questionnaire is hidden, pending a rework.** `OFFER_WIZARD_READY = false` in `src/config/site.ts`.
 
   **Why it is hidden.** `OfferWizard` asks solar questions only (roof, mounting, battery), while every buy-back CTA on `/tok/` points straight at it: a producer wanting to sell power was handed a solar questionnaire. On top of that `formEndpoint` is empty, so nothing filled in was ever transmitted. Seven steps for nothing is worse than no form.
 
-  **What it needs to come back.** A producer branch in the questionnaire (capacity, connection point, production profile, current trader, notice period) – the exact fields depend on what the trading desk uses to price an offer. Plus a working `formEndpoint`. With both in place, flip the flag to `true`; the page, its route and all 15 inbound links stay unchanged throughout.
+  **The flow is not a dead end while it is hidden.** `/oferta/` acts as a router: the visitor picks a business area and lands on the short contact form with that service already selected (`/kontakti/?interest=0..3#zapitvane`), with the phone number and email on the same page. Nothing promises an online questionnaire, because there isn't one.
+
+  **The form tells the truth with no endpoint.** `submitLead` returns `unconfigured`, and `ContactForm` now separates that from a genuine failure: instead of "Нещо се обърка" it shows "send us your enquiry directly" with the email and phone. No false confirmation, and no misleading retry.
+
+  **What the questionnaire needs to come back.** A producer branch (capacity, connection point, production profile, current trader, notice period) – the fields depend on the trading desk's process. Plus a working `formEndpoint`. With both, flip the flag to `true`.
 - [ ] The page's EN slug is still `/en/electricity/`. `/en/power-buy-back/` would be more accurate, but changing it means another 301 in `vercel.json` – decide whether it's worth it.
 - [ ] `0.099` still appears in 2 places, both as **indicative assumptions for solar savings**, not as an offer price: the `/kalkulator/` assumptions and the "Example numbers" block on `/solar/za-biznesa/`. Both come from `site.price.eurPerKwh`.
 

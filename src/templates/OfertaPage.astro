@@ -1,5 +1,5 @@
 ---
-import { ShieldCheck, Clock, BadgePercent, Phone, Mail, ArrowRight, Wrench } from "@lucide/astro";
+import { ShieldCheck, Clock, BadgePercent, Phone, Mail, ArrowRight } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import OfferWizard from "../islands/OfferWizard";
 import type { Locale } from "../config/site";
@@ -14,7 +14,7 @@ const { locale } = Astro.props;
 const c = {
   bg: {
     title: "Вземи оферта, NV Power",
-    description: `Персонална оферта за ток или соларна система за 2 минути. Отговор от консултант ${responseWithin.bg}, без ангажимент.`,
+    description: `Заяви оферта за изкупуване на ток, доставка на електроенергия или соларна система. Отговор от консултант ${responseWithin.bg}, без ангажимент.`,
     h1: "Вземи своята оферта",
     sub: "Отговори на няколко въпроса за обекта си и ще подготвим конкретни числа, цена, икономия и срок на откупуване. Отнема около 90 секунди.",
     /* Used instead of `sub` while the wizard is hidden: it must not promise a
@@ -26,19 +26,25 @@ const c = {
       { icon: BadgePercent, text: "Без скрити такси" },
       { icon: ShieldCheck, text: "Без ангажимент и без депозити" },
     ],
+    /* Shown while the wizard is off. It must not mention a questionnaire: there
+       isn't one, and promising it is what made this flow a dead end. */
     offline: {
-      title: "Онлайн въпросникът се актуализира",
-      /* „Дотогава" сочеше към премахнатото изречение; „Междувременно" се връзва
-         направо със заглавието. */
-      text: `Междувременно най-бързият път до оферта е директен контакт, отговаряме ${responseWithin.bg}.`,
+      title: "За какво ти е офертата?",
+      text: `Избери направлението и попълни кратката форма, или ни се обади. Отговаряме ${responseWithin.bg}.`,
+      routes: [
+        { label: "Изкупуване на ток от ВЕИ централа", hint: "мощност, точка на присъединяване, профил на производство", interest: 0 },
+        { label: "Доставка на електроенергия", hint: "за консуматори над 1 MW, по товаров профил", interest: 1 },
+        { label: "Соларна система за дома", hint: "покрив, потребление, батерия", interest: 2 },
+        { label: "Соларна система за бизнеса", hint: "обект, мощност, финансиране", interest: 3 },
+      ],
+      orCall: "Или ни се обади направо:",
       callCta: "Обади се",
       mailCta: "Пиши ни",
-      contactCta: "Виж всички начини за контакт",
     },
   },
   en: {
     title: "Get a quote, NV Power",
-    description: `A personal quote for electricity or a solar system in 2 minutes. A consultant replies ${responseWithin.en}, no commitment.`,
+    description: `Request a quote for power buy-back, electricity supply or a solar system. A consultant replies ${responseWithin.en}, no commitment.`,
     h1: "Get your quote",
     sub: "Answer a few questions about your site and we'll prepare real numbers, price, savings and payback period. Takes about 90 seconds.",
     subOffline:
@@ -49,11 +55,17 @@ const c = {
       { icon: ShieldCheck, text: "No commitment, no deposits" },
     ],
     offline: {
-      title: "The online questionnaire is being updated",
-      text: `In the meantime, the fastest route to a quote is direct contact, and we reply ${responseWithin.en}.`,
+      title: "What do you need a quote for?",
+      text: `Pick your area and fill in the short form, or just call us. We reply ${responseWithin.en}.`,
+      routes: [
+        { label: "Buy-back from a renewable plant", hint: "capacity, connection point, generation profile", interest: 0 },
+        { label: "Electricity supply", hint: "for consumers above 1 MW, priced off a load profile", interest: 1 },
+        { label: "A solar system for a home", hint: "roof, consumption, battery", interest: 2 },
+        { label: "A solar system for a business", hint: "site, capacity, financing", interest: 3 },
+      ],
+      orCall: "Or call us directly:",
       callCta: "Call us",
       mailCta: "Email us",
-      contactCta: "See every way to reach us",
     },
   },
 }[locale];
@@ -83,33 +95,42 @@ const c = {
       OFFER_WIZARD_READY ? (
         <OfferWizard locale={locale} client:load />
       ) : (
-        <div class="card mx-auto max-w-2xl p-8 text-center md:p-10">
-          <span class="mx-auto flex size-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
-            <Wrench class="size-6" aria-hidden="true" />
-          </span>
-          <h2 class="mt-4 text-xl font-bold text-body md:text-2xl">{c.offline.title}</h2>
-          <p class="mx-auto mt-3 max-w-lg leading-relaxed text-muted">{c.offline.text}</p>
+        <div class="card mx-auto max-w-2xl p-7 md:p-9">
+          <h2 class="text-center text-xl font-bold text-body md:text-2xl">{c.offline.title}</h2>
+          <p class="mx-auto mt-3 max-w-lg text-center leading-relaxed text-muted">{c.offline.text}</p>
 
-          <div class="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+          <!-- Each route lands on the contact form with its own service already
+               selected, so the enquiry arrives labelled. -->
+          <ul class="mt-7 flex flex-col gap-3">
+            {c.offline.routes.map((route) => (
+              <li>
+                <a
+                  href={`${r(locale, "kontakti")}?interest=${route.interest}#zapitvane`}
+                  class="card group flex items-center justify-between gap-4 px-5 py-4 transition-all hover:-translate-y-0.5 hover:border-accent"
+                >
+                  <span>
+                    <span class="block font-[family-name:var(--font-display)] font-bold text-body group-hover:text-accent">
+                      {route.label}
+                    </span>
+                    <span class="mt-0.5 block text-sm text-muted">{route.hint}</span>
+                  </span>
+                  <ArrowRight class="size-4 shrink-0 text-accent" aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <p class="mt-7 text-center text-sm font-semibold text-muted">{c.offline.orCall}</p>
+          <div class="mt-3 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
             <a href={`tel:${site.phoneHref}`} class="btn btn-primary !px-7 !py-4 text-base">
               <Phone class="size-4" aria-hidden="true" />
-              {c.offline.callCta}, {site.phone}
+              {site.phone}
             </a>
             <a href={`mailto:${site.email}`} class="btn btn-outline !px-7 !py-4 text-base">
               <Mail class="size-4" aria-hidden="true" />
               {c.offline.mailCta}
             </a>
           </div>
-
-          <p class="mt-6">
-            <a
-              href={r(locale, "kontakti")}
-              class="inline-flex items-center gap-1.5 font-semibold text-accent underline decoration-2 underline-offset-4 hover:text-accent-hover"
-            >
-              {c.offline.contactCta}
-              <ArrowRight class="size-4" aria-hidden="true" />
-            </a>
-          </p>
         </div>
       )
     }

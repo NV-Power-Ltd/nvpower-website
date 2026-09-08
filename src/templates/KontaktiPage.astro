@@ -89,10 +89,12 @@ const channels = [
 
   <!-- form + map -->
   <section class="container-site section grid gap-10 lg:grid-cols-2 lg:gap-14">
-    <div >
+    <!-- #zapitvane is the anchor the offer routes on /oferta/ link to, so a
+         visitor arriving with ?interest= lands on the form itself. -->
+    <div id="zapitvane" class="scroll-mt-24">
       <h2 class="text-2xl font-bold text-body md:text-3xl">{c.formTitle}</h2>
       <div class="mt-6">
-        <ContactForm locale={locale} client:visible />
+        <ContactForm locale={locale} client:load />
       </div>
     </div>
 

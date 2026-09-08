@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { submitLead, fileError } from "../lib/lead";
 import { useHydrated } from "../lib/useHydrated";
 import NoScriptFallback from "./NoScriptFallback";
@@ -15,8 +15,17 @@ const copy = {
     company: "Фирма (по избор)",
     email: "Имейл *",
     phone: "Телефон *",
-    interest: "От какво се интересуваш? *",
-    interests: ["Ток за бизнеса / дома", "Соларна система", "Батерии за съхранение", "Изкупуване на енергия", "Консултация"],
+    interest: "За какво е запитването? *",
+    /* The four enquiry types the business actually runs, in the order of the
+       three areas. The value doubles as the lead's routing label, so it is what
+       the trading desk sees first. */
+    interests: [
+      "Изкупуване на ток от ВЕИ централа",
+      "Доставка на електроенергия (над 1 MW)",
+      "Соларна система за дома",
+      "Соларна система за бизнеса",
+      "Друго / консултация",
+    ],
     bill: "Месечна сметка за ток (по избор)",
     bills: ["До 100 €", "100 – 500 €", "500 – 2 500 €", "Над 2 500 €"],
     message: "Съобщение *",
@@ -30,6 +39,11 @@ const copy = {
     successText: `Ще ти отговорим ${responseWithin.bg}, в работно време.`,
     required: "Попълни задължителните полета и отбележи съгласието.",
     error: "Нещо се обърка. Пиши ни директно на " + site.email + ".",
+    /* Distinct from `error`: nothing went wrong, the form simply has nowhere to
+       send yet. Saying "нещо се обърка" would invite a pointless retry. */
+    unconfiguredTitle: "Изпрати ни запитването директно",
+    unconfiguredText:
+      "Онлайн изпращането още не е активно. Копирай данните в имейл или ни се обади, отговаряме възможно най-скоро.",
     select: "Избери…",
   },
   en: {
@@ -37,8 +51,14 @@ const copy = {
     company: "Company (optional)",
     email: "Email *",
     phone: "Phone *",
-    interest: "What are you interested in? *",
-    interests: ["Electricity for business / home", "A solar system", "Storage batteries", "Energy buy-back", "Consultation"],
+    interest: "What is your enquiry about? *",
+    interests: [
+      "Buy-back from a renewable plant",
+      "Electricity supply (above 1 MW)",
+      "A solar system for a home",
+      "A solar system for a business",
+      "Something else / a consultation",
+    ],
     bill: "Monthly electricity bill (optional)",
     bills: ["Up to €100", "€100 – €500", "€500 – €2,500", "Over €2,500"],
     message: "Message *",
@@ -52,6 +72,9 @@ const copy = {
     successText: `We'll reply ${responseWithin.en}, during business hours.`,
     required: "Fill in the required fields and tick the consent box.",
     error: "Something went wrong. Email us directly at " + site.email + ".",
+    unconfiguredTitle: "Send us your enquiry directly",
+    unconfiguredText:
+      "Online submission is not live yet. Copy your details into an email or give us a call, and we will reply as soon as possible.",
     select: "Select…",
   },
 } as const;
@@ -63,7 +86,19 @@ export default function ContactForm({ locale }: { locale: Locale }) {
   const [gdpr, setGdpr] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [hp, setHp] = useState("");
-  const [state, setState] = useState<"idle" | "sending" | "ok" | "err">("idle");
+  const [state, setState] = useState<"idle" | "sending" | "ok" | "err" | "unconfigured">("idle");
+
+  /* A CTA may arrive with ?interest=<index> so the visitor lands with their own
+     service already chosen. Applied after mount, not during render: the server
+     has no `location`, and differing values would be a hydration mismatch on
+     the <select>. An out-of-range index is ignored. */
+  useEffect(() => {
+    const raw = new URLSearchParams(window.location.search).get("interest");
+    if (raw === null) return;
+    const i = Number(raw);
+    if (!Number.isInteger(i) || i < 0 || i >= t.interests.length) return;
+    setV((prev) => (prev.interest ? prev : { ...prev, interest: t.interests[i] }));
+  }, [t]);
 
   const setField = (k: keyof typeof v) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setV((s) => ({ ...s, [k]: e.target.value }));
@@ -80,7 +115,24 @@ export default function ContactForm({ locale }: { locale: Locale }) {
     }
     setState("sending");
     const result = await submitLead("contact", { ...v, gdpr }, hp, file);
-    setState(result === "ok" ? "ok" : "err");
+    setState(result === "ok" ? "ok" : result === "unconfigured" ? "unconfigured" : "err");
+  }
+
+  if (state === "unconfigured") {
+    return (
+      <div className="card p-8 text-center md:p-10">
+        <h3 className="font-[family-name:var(--font-display)] text-xl font-bold text-body">{t.unconfiguredTitle}</h3>
+        <p className="mx-auto mt-2 max-w-md leading-relaxed text-muted">{t.unconfiguredText}</p>
+        <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+          <a href={`mailto:${site.email}`} className="btn btn-primary !px-7 !py-4 text-base">
+            {site.email}
+          </a>
+          <a href={`tel:${site.phoneHref}`} className="btn btn-outline !px-7 !py-4 text-base">
+            {site.phone}
+          </a>
+        </div>
+      </div>
+    );
   }
 
   if (state === "ok") {
