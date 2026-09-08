@@ -41,7 +41,7 @@ const copy = {
     },
     recSolarBiz: {
       title: "Препоръчваме: соларна централа за бизнеса",
-      text: "Системата се изплаща от сметките, които спираш да плащаш. Проектираме, изграждаме и поддържаме, а с лизинг паричният поток остава при теб.",
+      text: "Собственото потребление намалява сметките за ток през деня. Проектираме, изграждаме и поддържаме, а с лизинг паричният поток остава при теб.",
       route: "solarBiz",
       cta: "Соларни системи за бизнеса",
     },
@@ -94,7 +94,7 @@ const copy = {
     },
     recSolarBiz: {
       title: "We recommend: a solar plant for your business",
-      text: "The system pays for itself from the bills you stop paying. We design, build and maintain it, and with leasing your cash flow stays with you.",
+      text: "Self-consumption cuts your daytime electricity bills. We design, build and maintain the system, and with leasing your cash flow stays with you.",
       route: "solarBiz",
       cta: "Solar for your business",
     },
