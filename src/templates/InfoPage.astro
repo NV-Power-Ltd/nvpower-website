@@ -68,7 +68,7 @@ const c = {
         {
           category: "invoice",
           q: "Как да чета фактурата си за ток?",
-          a: `Фактурата има две основни части: енергия, количеството кВтч по договорената с доставчика цена, и мрежови услуги (пренос и достъп), които са регулирани от КЕВР и са еднакви при всички доставчици. ${site.regulatedComponents.bg} Нашата фактура е една страница с ясни редове, а ако нещо не ти е ясно, консултантът ти я обяснява ред по ред.`,
+          a: `Фактурата има две основни части: енергия, количеството kWh по договорената с доставчика цена, и мрежови услуги (пренос и достъп), които са регулирани от КЕВР и са еднакви при всички доставчици. ${site.regulatedComponents.bg} Нашата фактура е една страница с ясни редове, а ако нещо не ти е ясно, консултантът ти я обяснява ред по ред.`,
         },
         {
           category: "invoice",
@@ -113,7 +113,7 @@ const c = {
         {
           category: "solar",
           q: "Какви гаранции получавам?",
-          a: "Панелите идват с гаранция за производителност от 25 години, производителят гарантира, че и след този срок панелът работи с определен процент от началната си мощност. Инверторите имат гаранция 5–10 години според производителя и модела. Отделно даваме гаранция и за монтажните работи. Всички гаранционни условия са записани в договора, а не в устни обещания.",
+          a: "Гаранцията за производителност на модулите е типично 25 години, а точният срок зависи от модела. Производителят гарантира, че и след този срок панелът работи с определен процент от началната си мощност. Инверторите имат гаранция 5–10 години според производителя и модела. Отделно даваме гаранция и за монтажните работи. Всички гаранционни условия са записани в договора, а не в устни обещания.",
         },
         {
           category: "battery",
@@ -140,7 +140,7 @@ const c = {
     glossary: {
       lead: "Енергетиката е пълна с абревиатури. Ето най-важните, обяснени на човешки език.",
       terms: [
-        { t: "кВтч (киловатчас)", d: "Мярка за енергия: 1 кВтч е работата на уред с мощност 1 киловат за един час. Всичко във фактурата ти за ток се измерва в кВтч." },
+        { t: "kWh (киловатчас)", d: "Мярка за енергия: 1 kWh е работата на уред с мощност 1 киловат за един час. Всичко във фактурата ти за ток се измерва в kWh." },
         { t: "kWp (киловат пик)", d: "Максималната мощност на соларна система при стандартни изпитателни условия. С нея се описва „размерът“ на една централа." },
         { t: "БНЕБ", d: "Българската независима енергийна борса, на която се търгува електроенергия на едро. Борсовите планове следват нейните цени." },
         { t: "КЕВР", d: "Комисията за енергийно и водно регулиране, държавният регулатор, който лицензира търговците и определя регулираните цени и мрежови такси." },
@@ -152,7 +152,7 @@ const c = {
         { t: "Мрежова система (on-grid)", d: "Соларна система, свързана към електрическата мрежа, без батерия. Най-простото решение с най-кратък срок на откупуване." },
         { t: "Автономна система (off-grid)", d: "Система, независима от мрежата, цялата енергия идва от панелите и батериите. Използва се за отдалечени обекти без достъп до ток." },
         { t: "BESS", d: "Battery Energy Storage System, батерийна система за съхранение на енергия: от домашни батерии до промишлени контейнерни решения." },
-        { t: "LiFePO4", d: "Литиево-желязо-фосфатна батерийна химия, стандартът при домашни и бизнес батерии заради безопасността и дългия живот (6000+ цикъла)." },
+        { t: "LiFePO4", d: "Литиево-желязо-фосфатна батерийна химия, стандартът при домашни и бизнес батерии заради безопасността и дългия цикличен живот. Конкретният брой цикли зависи от модела и от режима на работа." },
         { t: "Балансираща група", d: "Група от търговски участници, за които един координатор носи отговорност за балансирането и уреждането на небалансите. В групата могат да участват както потребители, така и производители, а отклоненията им взаимно се компенсират." },
         { t: "Координатор на балансираща група", d: "Участникът, който отговаря за прогнозите, за балансирането и за уреждането на небалансите на членовете на групата пред електроенергийния системен оператор." },
         { t: "Балансиране", d: "Изравняването на разликата между заявените и действителните количества енергия. Разходът за балансиране се поема от координатора на групата и се урежда съгласно договора." },
@@ -282,7 +282,7 @@ const c = {
         {
           category: "solar",
           q: "What warranties do I get?",
-          a: "Panels come with a 25-year performance warranty, the manufacturer guarantees that even after that period the panel still delivers a defined percentage of its original output. Inverters carry a 5–10 year warranty depending on the manufacturer and model. On top of that, we warrant the installation work itself. All warranty terms are written into the contract, not into verbal promises.",
+          a: "The performance warranty on modules is typically 25 years, depending on the manufacturer and the model, and the manufacturer guarantees that even after that period the panel still delivers a defined percentage of its original output. Inverters carry a 5–10 year warranty depending on the manufacturer and model. On top of that, we warrant the installation work itself. All warranty terms are written into the contract, not into verbal promises.",
         },
         {
           category: "battery",
@@ -321,7 +321,7 @@ const c = {
         { t: "Grid-tied system (on-grid)", d: "A solar system connected to the electricity grid, without a battery. The simplest solution with the shortest payback." },
         { t: "Off-grid system", d: "A system independent of the grid, all energy comes from the panels and batteries. Used for remote sites with no grid access." },
         { t: "BESS", d: "Battery Energy Storage System, from home batteries to industrial containerised solutions." },
-        { t: "LiFePO4", d: "Lithium iron phosphate battery chemistry, the standard for home and business batteries thanks to its safety and long life (6,000+ cycles)." },
+        { t: "LiFePO4", d: "Lithium iron phosphate battery chemistry, the standard for home and business batteries thanks to its safety and long cycle life. The actual number of cycles depends on the model and how it is operated." },
         { t: "Balancing group", d: "A group of market participants for whom a single coordinator carries responsibility for balancing and for settling imbalances. It can include both consumers and producers, and their deviations offset each other." },
         { t: "Balancing group coordinator", d: "The participant responsible for the forecasts, the balancing and the settlement of the group members’ imbalances towards the electricity system operator." },
         { t: "Balancing", d: "Evening out the difference between nominated and actual quantities of energy. The balancing cost is carried by the group coordinator and settled under the contract." },

@@ -79,7 +79,7 @@ function buildSteps(locale: Locale): { steps: Step[]; strings: Record<string, st
           fields: [
             { kind: "choice", id: "phase", label: "Захранване", required: true, options: ["Монофазно", "Трифазно", "Не съм сигурен"] },
             { kind: "choice", id: "contractedPower", label: "Договорена мощност", options: ["До 15 kW", "15 – 30 kW", "Над 30 kW", "Не знам"] },
-            { kind: "choice", id: "consumption", label: "Месечна консумация", required: true, options: ["До 500 кВтч", "500 – 1 000 кВтч", "1 000 – 3 000 кВтч", "3 000 – 5 000 кВтч", "Над 5 000 кВтч"] },
+            { kind: "choice", id: "consumption", label: "Месечна консумация", required: true, options: ["До 500 kWh", "500 – 1 000 kWh", "1 000 – 3 000 kWh", "3 000 – 5 000 kWh", "Над 5 000 kWh"] },
           ],
         },
         {
