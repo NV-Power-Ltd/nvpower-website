@@ -1,10 +1,16 @@
 import type { Locale } from "../config/site";
 
 /* ==========================================================================
-   ⚠️  SAMPLE DATA – §2 [PROJECTS]. Replace with REAL completed installations
-   before publishing (location, kWp, battery, photo, client type, savings).
-   Never publish fake projects. Delete entries you can't verify, the site
-   renders an honest "coming soon" state when this list is empty.
+   §2 [PROJECTS]. Deliberately EMPTY.
+
+   It held three invented installations with real city names, real-looking
+   savings and an "В експлоатация · 2025" status, under a page headed „Реални
+   системи. Реални икономии." A visitor could not tell them from real client
+   sites, and a "замени с реален проект" note was visible on the live page.
+
+   Add entries only for installations that actually exist, with the client's
+   permission: location, kWp, battery, photo, segment, measured savings. While
+   this list is empty every surface says so honestly instead.
    ========================================================================== */
 
 export type Project = {
@@ -21,65 +27,11 @@ export type Project = {
   quote?: { text: Record<Locale, string>; author: Record<Locale, string> };
   image: string; // /images/projects/*.webp – real photos only
   featured: boolean;
-  sample: true; // remove this flag on real entries
+  sample?: true; // sample entries only; real installations omit it
 };
 
-export const projects: Project[] = [
-  {
-    slug: "primer-sklad-plovdiv",
-    title: { bg: "Фотоволтаична система за склад (примерен проект)", en: "PV system for a warehouse (sample project)" },
-    segment: "business",
-    location: { bg: "Пловдив", en: "Plovdiv" },
-    kwp: 120,
-    batteryKwh: 100,
-    year: 2025,
-    status: { bg: "В експлоатация", en: "Operational" },
-    annualSavings: { bg: "≈ 19 400 € годишно", en: "≈ €19,400 per year" },
-    story: {
-      bg: "Хибридна система върху плосък покрив с батерия за покриване на вечерните смени. Примерен запис, замени с реален проект.",
-      en: "Hybrid flat-roof system with a battery covering evening shifts. Sample entry, replace with a real project.",
-    },
-    image: "",
-    featured: true,
-    sample: true,
-  },
-  {
-    slug: "primer-dom-sofia",
-    title: { bg: "Хибридна система за къща (примерен проект)", en: "Hybrid system for a house (sample project)" },
-    segment: "home",
-    location: { bg: "София", en: "Sofia" },
-    kwp: 10,
-    batteryKwh: 10,
-    year: 2025,
-    status: { bg: "В експлоатация", en: "Operational" },
-    annualSavings: { bg: "≈ 1 480 € годишно", en: "≈ €1,480 per year" },
-    story: {
-      bg: "Скатен покрив юг, 10 kWp + 10 kWh батерия, зарядна станция за електромобил. Примерен запис, замени с реален проект.",
-      en: "South-facing pitched roof, 10 kWp + 10 kWh battery, EV charger. Sample entry, replace with a real project.",
-    },
-    image: "",
-    featured: true,
-    sample: true,
-  },
-  {
-    slug: "primer-ferma-dobrich",
-    title: { bg: "Централа за земеделско стопанство (примерен проект)", en: "Plant for a farm (sample project)" },
-    segment: "agri",
-    location: { bg: "Добрич", en: "Dobrich" },
-    kwp: 200,
-    batteryKwh: null,
-    year: 2024,
-    status: { bg: "В експлоатация", en: "Operational" },
-    annualSavings: { bg: "≈ 31 200 € годишно", en: "≈ €31,200 per year" },
-    story: {
-      bg: "Наземна конструкция върху свободен терен, захранва напоителна система и хладилни складове. Примерен запис, замени с реален проект.",
-      en: "Ground-mounted on free terrain, powering irrigation and cold storage. Sample entry, replace with a real project.",
-    },
-    image: "",
-    featured: true,
-    sample: true,
-  },
-];
+export const projects: Project[] = [];
+
 
 export const featuredProjects = projects.filter((p) => p.featured).slice(0, 3);
 

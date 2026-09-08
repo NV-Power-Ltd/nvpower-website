@@ -21,6 +21,10 @@ const c = {
       eyebrow: "Проекти",
       h1: "Реални системи. Реални икономии.",
       sub: "Разгледай изградени системи по сегмент, с мощност, батерия, локация и годишна икономия. Без разкрасяване.",
+      /* Shown while the list is empty: the headline above promises real
+         numbers, so it must not sit over a blank page. */
+      h1Empty: "Проектите ще бъдат публикувани скоро",
+      subEmpty: "Публикуваме всеки завършен проект с реални числа и снимки, с разрешение на клиента. Дотогава ще ти изпратим референции при запитване.",
     },
     filterLabel: "Филтрирай проектите по сегмент",
     all: "Всички",
@@ -33,6 +37,7 @@ const c = {
       savings: "Икономия",
     },
     emptyFilter: "В тази категория още няма публикувани проекти. Питай ни какво изграждаме в момента.",
+    emptyAll: "Още не сме публикували завършен проект. Обади ни се и ще ти разкажем какво изграждаме в момента, с реални числа.",
     honest: "Публикуваме всеки завършен проект с реални числа и снимки, с разрешение на клиента.",
     ctaTitle: "Искаш подобна система?",
   },
@@ -44,6 +49,8 @@ const c = {
       eyebrow: "Projects",
       h1: "Real systems. Real savings.",
       sub: "Browse completed systems by segment, with capacity, battery, location and annual savings. No embellishment.",
+      h1Empty: "Our projects will be published soon",
+      subEmpty: "We publish every completed project with real numbers and photos, with the client's permission. Until then we will send you references on request.",
     },
     filterLabel: "Filter projects by segment",
     all: "All",
@@ -56,6 +63,7 @@ const c = {
       savings: "Savings",
     },
     emptyFilter: "No published projects in this category yet. Ask us what we're building right now.",
+    emptyAll: "We have not published a completed project yet. Call us and we'll tell you what we are building right now, with real numbers.",
     honest: "We publish every completed project with real numbers and photos, with the client's permission.",
     ctaTitle: "Want a system like these?",
   },
@@ -66,15 +74,25 @@ const c = {
   <!-- 1 ▸ HERO (light) -->
   <section class="border-b border-line bg-surface-alt">
     <div class="container-site pt-12 pb-12 text-center md:pt-16">
-      <h1 class="mx-auto mt-3 max-w-3xl text-3xl font-bold text-body md:text-5xl">{c.hero.h1}</h1>
-      <p class="mx-auto mt-4 max-w-xl text-muted md:text-lg">{c.hero.sub}</p>
+      <h1 class="mx-auto mt-3 max-w-3xl text-3xl font-bold text-body md:text-5xl">
+        {projects.length > 0 ? c.hero.h1 : c.hero.h1Empty}
+      </h1>
+      <p class="mx-auto mt-4 max-w-xl text-muted md:text-lg">
+        {projects.length > 0 ? c.hero.sub : c.hero.subEmpty}
+      </p>
     </div>
   </section>
 
-  <!-- 2 ▸ FILTER + PROJECT GRID -->
+  <!-- 2 ▸ FILTER + PROJECT GRID (only once there is something to show) -->
   <section class="section container-site">
-    <!-- Filter pills -->
-    <div class="flex flex-wrap items-center justify-center gap-2" role="group" aria-label={c.filterLabel}>
+    {projects.length === 0 && (
+      <p class="mx-auto max-w-lg text-center leading-relaxed text-muted">{c.emptyAll}</p>
+    )}
+    <div
+      class:list={["flex-wrap items-center justify-center gap-2", projects.length > 0 ? "flex" : "hidden"]}
+      role="group"
+      aria-label={c.filterLabel}
+    >
       <button
         type="button"
         data-filter="all"
