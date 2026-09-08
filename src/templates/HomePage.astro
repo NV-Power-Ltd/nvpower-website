@@ -107,6 +107,9 @@ const c = {
     projects: {
       eyebrow: "Проекти",
       title: "Реални системи, реални икономии",
+      /* Used while the list is empty: the heading above claims real results, so
+         it must not sit over a "coming soon" line. */
+      titleEmpty: "Проектите ще бъдат публикувани скоро",
       seeAll: "Виж всички проекти",
       specs: { power: "Мощност", battery: "Батерия", location: "Локация", savings: "Икономия" },
       empty: "Скоро публикуваме първите си реализирани проекти, с реални числа и снимки.",
@@ -213,6 +216,7 @@ const c = {
     projects: {
       eyebrow: "Projects",
       title: "Real systems, real savings",
+      titleEmpty: "Our projects will be published soon",
       seeAll: "See all projects",
       specs: { power: "Capacity", battery: "Battery", location: "Location", savings: "Savings" },
       empty: "We'll publish our first completed projects soon, with real numbers and photos.",
@@ -366,7 +370,10 @@ const c = {
 
   <!-- 7 ▸ FEATURED PROJECTS -->
   <section class="section container-site">
-    <SectionHeading eyebrow={c.projects.eyebrow} title={c.projects.title} />
+    <SectionHeading
+      eyebrow={c.projects.eyebrow}
+      title={featuredProjects.length > 0 ? c.projects.title : c.projects.titleEmpty}
+    />
     {featuredProjects.length === 0 ? (
       <p class="mx-auto mt-10 max-w-md text-center text-muted">{c.projects.empty}</p>
     ) : (
@@ -390,9 +397,11 @@ const c = {
         ))}
       </ul>
     )}
-    <div class="mt-9 text-center">
-      <a href={r(locale, "proekti")} class="btn btn-outline">{c.projects.seeAll}<ArrowRight class="size-4" aria-hidden="true" /></a>
-    </div>
+    {featuredProjects.length > 0 && (
+      <div class="mt-9 text-center">
+        <a href={r(locale, "proekti")} class="btn btn-outline">{c.projects.seeAll}<ArrowRight class="size-4" aria-hidden="true" /></a>
+      </div>
+    )}
   </section>
 
   <!-- FAQ TEASER -->
