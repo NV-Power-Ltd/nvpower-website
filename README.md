@@ -36,6 +36,13 @@ with battery storage.
 - [ ] Преди страницата да се разшири, бизнесът трябва да потвърди: (1) обслужваме ли обекти под 1 MW и от каква мощност нагоре; (2) как се формира цената по доставка (формула, такси, период); (3) процедурата и срокът за смяна на доставчик; (4) какво влиза в месечната фактура. **Докато това не е потвърдено, не добавяй нищо от изброеното на страницата.**
 - [ ] Остатъчният текст за доставка на битови клиенти в `/info/` (3 въпроса: срок за смяна на доставчик, как се чете фактура, ЗкО/акциз) все още е писан за консуматори. Реши дали остава като общообразователен материал, или се преработва за производители.
 
+**Изисква бизнес потвърждение – мощност на батериите и конкретни модели:**
+
+- [ ] **Никъде в проекта няма мощност на батерия в kW.** Всички BESS са дадени само с енергиен капацитет (10 kWh). Нищо не е измислено. Щом има реални стойности, изписвайте ги във формат **„5 kW / 10 kWh"** (мощност / полезен капацитет), а за търговски обекти например „500 kW / 1 MWh".
+- [ ] **Не е избран нито един конкретен модел** панел, инвертор или батерия. Затова сайтът не обещава срок на гаранция, брой цикли или Tier-1. Ако решите да публикувате конкретен модел, проверените му спецификации могат да се върнат в текста.
+
+**Мерни единици – правилото на проекта.** Символите са на латиница навсякъде, включително в българския текст (kWh, не кВтч). Пикова мощност на ФЕЦ е kWp/MWp; мощност на батерия е kW/MW, капацитет е kWh/MWh; борсовите формули са в €/MWh, а цената на дребно в €/kWh. Три стойности умишлено остават в kW/MW, защото са различна величина: облекченият режим „до 20 kW" е нормативен праг, „над 1 MW" на `/dostavka/` и `/tok/` е присъединена мощност, а „До 15 kW" във въпросника е договорена мощност.
+
 **Изисква бизнес потвърждение – договорни обещания.** Това са търговска политика, не формулировка, затова не са пренаписвани. Всяко от тях трябва да съвпада с реалния договор:
 
 - [ ] **„Без неустойки и без обвързващи клаузи"** (`/tok/`, FAQ „Мога ли да се откажа ако не съм доволен?"). Изречението стои непосредствено до „1 месец при NV Фиксиран, 1 или 6 месеца при NV Standard". Шестмесечно предизвестие в обичайния език **е** обвързваща клауза, така че двете половини на отговора си противоречат. Потвърдете какво точно липсва: неустойка за предсрочно прекратяване, минимален срок на договора, или и двете, и формулирайте го спрямо договора.
@@ -285,6 +292,13 @@ with battery storage. The route table is under "Routing and i18n".
 - [ ] **The scope is deliberately narrow.** The page promises only what is confirmed: individual offers for consumers **above 1 MW**, with no published tariff. Before the refactor the only confirmed supply content on the whole site was one paragraph inside the >1 MW block on `/tok/`.
 - [ ] Before the page can grow, the business must confirm: (1) whether sites below 1 MW are served, and from what capacity upwards; (2) how a supply price is formed (formula, fees, period); (3) the supplier-switching procedure and its timing; (4) what appears on the monthly invoice. **Until those are confirmed, do not add any of them to the page.**
 - [ ] Residual household-supply copy in `/info/` (3 questions: switching timeline, how to read an invoice, ЗкО/excise) is still written for consumers. Decide whether it stays as general educational material or is reworked for producers.
+
+**Needs business confirmation – battery power ratings and specific models:**
+
+- [ ] **No battery power rating in kW exists anywhere in the project.** Every BESS is given by energy capacity alone (10 kWh). Nothing was invented to fill the gap. Once real values exist, write them as **"5 kW / 10 kWh"** (power / usable capacity), or for a commercial site, say, "500 kW / 1 MWh".
+- [ ] **No specific panel, inverter or battery model is selected anywhere.** That is why the site promises no warranty term, cycle count or Tier-1 status. If you decide to publish a specific model, its verified specifications can go back into the copy.
+
+**Units – the project rule.** Symbols are Latin everywhere, including in Bulgarian copy (kWh, not кВтч). PV peak capacity is kWp/MWp; battery power is kW/MW and capacity is kWh/MWh; exchange formulas are €/MWh and retail is €/kWh. Three values deliberately stay in kW/MW because they are a different quantity: the eased regime's "до 20 kW" is a statutory threshold, "above 1 MW" on `/dostavka/` and `/tok/` is connected capacity, and "Up to 15 kW" in the wizard is contracted capacity.
 
 **Needs business confirmation – contractual promises.** These are commercial policy rather than wording, so they were not rewritten. Each has to match the actual contract:
 
