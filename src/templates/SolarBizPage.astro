@@ -20,7 +20,7 @@ const c = {
       "Фотоволтаични централи за бизнес, индустрия и земеделие: плоски покриви, конструкции, навеси и земя. Лизинг, който пази паричния поток, и изкупуване на излишъците.",
     hero: {
       h1: "Покривът ти може да работи за бизнеса",
-      sub: "Проектираме и изграждаме централи от 30 kWp до 1 MWp+, върху плоски покриви, метални конструкции, навеси и терен. Режеш цената на дневната енергия и пиковите такси, без да блокираш паричен поток.",
+      sub: "Проектираме и изграждаме централи от 30 kWp до 1 MWp+, върху плоски покриви, метални конструкции, навеси и терен. Централата намалява количеството електроенергия, което обектът купува от мрежата в часовете, в които производството съвпада с потреблението.",
       ctaPrimary: "Вземи оферта",
       ctaSecondary: "Виж примерните числа",
       checks: [responseBadge.bg, "Без скрити такси", "Лизинг и разсрочено плащане"],
@@ -28,7 +28,7 @@ const c = {
     facts: {
       eyebrow: "Мащабът",
       title: "Оразмеряваме по потреблението ти",
-      lead: "Бизнесът харчи енергия точно когато слънцето я произвежда, в работните часове. Затова добре оразмерената покривна централа покрива голяма част от дневното потребление на обекта.",
+      lead: "При много производствени и търговски обекти потреблението е съсредоточено в дневните часове, когато централата произвежда. Затова оразмеряваме по товаровия профил, така че производството да съвпада с потреблението на обекта.",
       items: [
         { icon: Zap, value: "30 kWp – 1 MWp+", label: "диапазон на системите" },
         { icon: Warehouse, value: "4 типа площи", label: "покриви, конструкции, навеси, земя" },
@@ -42,19 +42,19 @@ const c = {
         { label: "Годишно производство", value: "≈ 115 000 kWh" },
         { label: "Стойност на енергията при 0.099 €/кВтч", value: "≈ 11 400 €/год." },
         { label: "Нужна площ при плосък покрив", value: "≈ 550 – 650 м²" },
-        { label: "Производството съвпада с", value: "работните часове, най-скъпата ти енергия" },
+        { label: "Производството съвпада с", value: "работните часове на обекта" },
       ],
       note: "Ориентировъчни стойности за добре изложен обект в България. Точните числа за твоя обект, в офертата, заедно с финансов модел.",
       cta: "Вземи оферта",
     },
     benefits: {
       eyebrow: "Ползите",
-      title: "Защо се изплаща",
+      title: "Какво носи централата",
       cards: [
         {
           icon: Gauge,
-          title: "Режеш пиковете",
-          text: "Производството съвпада с работния ден, точно когато потреблението, цените и пиковите такси са най-високи.",
+          title: "Съвпадение с работния ден",
+          text: "Производството е съсредоточено в работните часове, така че намалява количеството електроенергия, купувано от мрежата тогава, когато обектът потребява най-много. Дали се променят и мрежови или капацитетни компоненти зависи от тарифната структура на обекта и го проверяваме при анализа.",
         },
         {
           icon: PiggyBank,
@@ -64,12 +64,12 @@ const c = {
         {
           icon: BadgePercent,
           title: "Данъчно признат разход",
-          text: "Инвестицията се амортизира, а лизинговите вноски са признат разход, говорим на езика на счетоводството ти.",
+          text: "Инвестицията се амортизира, а лизинговите вноски са признат разход. Конкретното данъчно третиране се преценява от вашия счетоводител.",
         },
         {
           icon: Coins,
           title: "Изкупуваме излишъците",
-          text: "Произведеното през уикендите и празниците не се губи, уреждаме договор за изкупуване на излишната енергия.",
+          text: "Енергията, произведена извън работно време, се отдава в мрежата и уреждаме договор за изкупуването ѝ.",
         },
         {
           icon: Warehouse,
@@ -90,7 +90,7 @@ const c = {
         {
           icon: ClipboardList,
           title: "Анализ и оглед",
-          text: "Разглеждаме товаровия ти профил и обекта, оразмеряваме така, че произведеното да се потребява, а не да се губи.",
+          text: "Разглеждаме товаровия профил и обекта и оразмеряваме така, че производството да съвпада с потреблението, а не да се изнася в мрежата на по-ниска стойност.",
         },
         {
           icon: FileText,
@@ -118,7 +118,11 @@ const c = {
         },
         {
           q: "Какво става с енергията през уикенда?",
-          a: "Излишъците се отдават в мрежата и уреждаме изкупуването им, а с батерия част от тях изчакват понеделник сутрин. При оразмеряването обаче гоним максимално собствено потребление, там е най-голямата стойност.",
+          a: "При спрян или намален товар произведената енергия се отдава в мрежата и се урежда изкупуването ѝ по договор. Батерия може да премести част от енергията във времето, но съхранението е икономически насочено към дневен цикъл, а не към задържане от петък до понеделник. При оразмеряването целим максимално съвпадение между производство и потребление, там е основната стойност.",
+        },
+        {
+          q: "Има ли смисъл от батерия (BESS) за обекта?",
+          a: "BESS позволява част от произведената или закупената енергия да бъде премествана към периоди с по-висока стойност за конкретния обект. Дали това носи измерима полза зависи от три неща: дали цената по договора се променя по часове, какъв е товаровият профил и какви мрежови и капацитетни компоненти се прилагат към обекта. Батерията може и да ограничи върховата мощност, теглена от мрежата, но дали това се отразява на сметката зависи от тарифната структура на конкретния клиент. Затова го проверяваме по реални данни от електромера, преди да предложим капацитет.",
         },
       ],
     },
@@ -129,7 +133,7 @@ const c = {
       "Solar plants for business and industry: roofs, structures and land. Leasing that protects cash flow, plus surplus buy-back.",
     hero: {
       h1: "Your roof can work for the business",
-      sub: "We design and build plants from 30 kWp to 1 MWp+, on flat roofs, steel structures, canopies and land. Cut the cost of daytime energy and peak charges without locking up cash flow.",
+      sub: "We design and build plants from 30 kWp to 1 MWp+, on flat roofs, steel structures, canopies and land. The plant reduces the volume of electricity the site buys from the grid in the hours when generation coincides with consumption.",
       ctaPrimary: "Get a quote",
       ctaSecondary: "See the example numbers",
       checks: [responseBadge.en, "No hidden fees", "Leasing & instalment plans"],
@@ -137,7 +141,7 @@ const c = {
     facts: {
       eyebrow: "The scale",
       title: "We size for your consumption",
-      lead: "Businesses consume energy exactly when the sun produces it, during working hours. That is why a well-sized rooftop plant covers a large share of the site's daytime consumption.",
+      lead: "At many industrial and commercial sites consumption is concentrated in the daytime hours, when the plant generates. So we size against the load profile, so that generation coincides with the site's consumption.",
       items: [
         { icon: Zap, value: "30 kWp – 1 MWp+", label: "system range" },
         { icon: Warehouse, value: "4 surface types", label: "roofs, structures, canopies, land" },
@@ -151,19 +155,19 @@ const c = {
         { label: "Annual production", value: "≈ 115,000 kWh" },
         { label: "Energy value at €0.099/kWh", value: "≈ €11,400/yr" },
         { label: "Area needed on a flat roof", value: "≈ 550 – 650 m²" },
-        { label: "Production coincides with", value: "working hours, your most expensive energy" },
+        { label: "Production coincides with", value: "the site's working hours" },
       ],
       note: "Indicative values for a well-exposed site in Bulgaria. The exact numbers for your site come with the quote, together with a financial model.",
       cta: "Get a quote",
     },
     benefits: {
       eyebrow: "The benefits",
-      title: "Why it pays off",
+      title: "What the plant delivers",
       cards: [
         {
           icon: Gauge,
-          title: "Cut the peaks",
-          text: "Production coincides with the working day, exactly when consumption, prices and peak charges are highest.",
+          title: "Aligned with the working day",
+          text: "Generation is concentrated in working hours, so it reduces the volume of electricity bought from the grid when the site consumes most. Whether network or capacity components change as well depends on the site's tariff structure, which we check during the analysis.",
         },
         {
           icon: PiggyBank,
@@ -173,12 +177,12 @@ const c = {
         {
           icon: BadgePercent,
           title: "Tax-deductible expense",
-          text: "The investment depreciates and lease payments are a recognised expense, we speak your accountant's language.",
+          text: "The investment depreciates and lease payments are a recognised expense. How the cost is treated for tax in your case is your accountant's call.",
         },
         {
           icon: Coins,
           title: "We buy back the surplus",
-          text: "Energy produced on weekends and holidays isn't wasted, we arrange a buy-back contract for the surplus.",
+          text: "Energy generated outside working hours is exported to the grid, and we arrange a buy-back contract for it.",
         },
         {
           icon: Warehouse,
@@ -199,7 +203,7 @@ const c = {
         {
           icon: ClipboardList,
           title: "Analysis & survey",
-          text: "We study your load profile and your site, and size the system so the production gets consumed, not wasted.",
+          text: "We study the load profile and the site, and size the system so that generation coincides with consumption rather than being exported at a lower value.",
         },
         {
           icon: FileText,
@@ -227,7 +231,11 @@ const c = {
         },
         {
           q: "What happens to the energy on weekends?",
-          a: "The surplus is fed into the grid and we arrange its buy-back, and with a battery part of it waits for Monday morning. When sizing, though, we aim for maximum self-consumption, that's where the biggest value is.",
+          a: "When the load stops or drops, the generated energy is exported to the grid and its buy-back is arranged under contract. A battery can move some of that energy in time, but storage is economically aimed at a daily cycle, not at holding energy from Friday to Monday. When sizing, we aim for the greatest overlap between generation and consumption, which is where the value is.",
+        },
+        {
+          q: "Does a battery (BESS) make sense for the site?",
+          a: "A BESS lets part of the generated or purchased energy be moved to periods of higher value for that particular site. Whether that produces a measurable benefit depends on three things: whether the contract price varies by hour, what the load profile looks like, and which network and capacity components apply to the site. A battery can also limit the peak power drawn from the grid, but whether that shows up on the invoice depends on the customer's tariff structure. So we check it against actual meter data before proposing a capacity.",
         },
       ],
     },
