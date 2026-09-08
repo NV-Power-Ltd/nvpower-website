@@ -7,65 +7,75 @@ import FaqAccordion from "../components/FaqAccordion.astro";
 import MiniConfigurator from "../islands/MiniConfigurator";
 import type { Locale } from "../config/site";
 import { site } from "../config/site";
-import { useUI, r } from "../i18n/ui";
+import { r } from "../i18n/ui";
 import { featuredProjects, segmentLabels } from "../data/projects";
 
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
-const t = useUI(locale);
 
 const c = {
   bg: {
-    title: "NV Power, Енергия за утрешния ден | Изкупуване на ток и соларни системи",
-    description: `Изкупуваме тока на ВЕИ производители ${site.pricingBasisShort.bg}, с включено балансиране при NV Фиксиран. Проектираме и изграждаме ФЕЦ с батерии (BESS), с гъвкаво финансиране.`,
+    title: "NV Power, енергийни решения за производители и бизнес",
+    description:
+      "Лицензиран търговец на електрическа енергия и координатор на стандартна балансираща група. Изкупуване на енергия от ВЕИ производители, доставка по индивидуална оферта и изграждане на фотоволтаични централи с батерии (BESS).",
     hero: {
-      h1: "Енергия за утрешния ден",
-      /* Three deliberate lines; rendered with <br /> inside one paragraph. */
+      h1: "Енергийни решения за производители и бизнес",
+      /* Two sentences, rendered with <br /> inside one paragraph. The first
+         states what the company is; the second, who it works with. */
       sub: [
-        "Изкупуваме електроенергия от ВЕИ производители и поемаме балансирането.",
-        "Доставяме електроенергия по индивидуална оферта на големи консуматори.",
-        "Проектираме и изграждаме фотоволтаични централи (ФЕЦ) с батерии (BESS).",
+        "NV Power е лицензиран търговец на електрическа енергия и координатор на стандартна балансираща група.",
+        "Работим с производители на енергия от ВЕИ, с големи консуматори и с инвеститори в соларни и BESS решения.",
       ],
-      ctaPlans: "Виж плановете за изкупуване",
-      ctaOffer: "Вземи оферта",
-      checks: [t.promises.noFees, t.promises.response, t.promises.financing],
+      ctaPlans: "Виж направленията",
+      ctaOffer: "Свържи се с нас",
+      /* A trust bar, not a promise bar: every item here is verifiable, and
+         none of it is a statistic we cannot substantiate. */
+      checks: [
+        "Лицензия № Л-878-15 от КЕВР",
+        "Координатор на стандартна балансираща група",
+        "Българска компания",
+      ],
     },
     lines: {
-      eyebrow: "Трите направления",
-      title: "Продаваш ток, купуваш ток, или изграждаш централа?",
-      lead: "Три различни услуги с три различни договора. Избери своята и виж условията, без да минаваш през чужди.",
+      eyebrow: "Направления",
+      title: "Три направления с отделни условия",
+      lead: "Всяко направление има собствен договор, собствени условия и собствен процес. Изборът по-долу води директно към съответните условия.",
       tok: {
-        audience: "Продавам ток",
-        title: "Изкупуване на ток от ВЕИ",
+        audience: "Производители",
+        title: "Изкупуване и балансиране",
         badge: site.pricingBasisShort.bg,
         priceNote: "с възможност за включено балансиране",
         points: [
-          "Цената следва БНЕБ (IBEX) минус ясно определена такса",
-          "Предизвестие от 1 месец, без дългосрочно обвързване",
-          "За обекти над 1 MW, индивидуална оферта",
+          "Формула спрямо БНЕБ (IBEX), записана в договора",
+          "Балансирането се поема от нашата стандартна балансираща група",
+          "Предизвестие от 1 месец при NV Фиксиран",
         ],
-        cta: "Виж плановете за изкупуване",
+        cta: "Виж условията за изкупуване",
       },
       dostavka: {
-        audience: "Купувам ток",
+        audience: "Потребители",
         title: "Доставка на електроенергия",
         badge: "по индивидуална оферта",
         priceNote: "за консуматори над 1 MW",
         points: [
           "Оферта, изготвена по товаровия профил на обекта",
           "Участие в стандартната ни балансираща група",
-          "Без публикувана тарифа, условията са в договора",
+          "Без публикувана тарифа, условията се договарят",
         ],
-        cta: "Виж доставката",
+        cta: "Виж условията за доставка",
       },
       solar: {
-        audience: "Инвестирам във ФЕЦ",
-        title: "Твоята соларна централа",
-        badge: "с батерия и финансиране",
-        points: ["От проект до пускане, всичко от нас", "Батерии за истинска независимост", "Лизинг и разсрочено плащане"],
-        cta: "Разгледай решенията",
+        audience: "Инвеститори",
+        title: "Проектиране и реализация на ФЕЦ и BESS",
+        badge: "проектиране, изграждане, финансиране",
+        points: [
+          "Проектиране, изграждане и въвеждане в експлоатация",
+          "Фотоволтаични централи с батерии за съхранение (BESS)",
+          "Лизинг и разсрочено плащане",
+        ],
+        cta: "Виж соларните решения",
       },
     },
     quiz: {
@@ -117,53 +127,61 @@ const c = {
     },
   },
   en: {
-    title: "NV Power, Energy for tomorrow | Power buy-back & solar systems",
-    description: `We buy the output of renewable producers ${site.pricingBasisShort.en}, with balancing included on NV Fixed. We design and build solar PV plants with battery storage (BESS), with flexible financing.`,
+    title: "NV Power, energy solutions for producers and business",
+    description:
+      "A licensed electricity trader and coordinator of a standard balancing group. Buy-back of renewable generation, supply on an individual offer, and turnkey solar plants with battery storage (BESS).",
     hero: {
-      h1: "Energy for tomorrow",
+      h1: "Energy solutions for producers and business",
       sub: [
-        "We buy electricity from renewable producers and take on the balancing.",
-        "We supply electricity to large consumers on an individual offer.",
-        "We design and build solar PV plants with battery storage (BESS).",
+        "NV Power is a licensed electricity trader and a coordinator of a standard balancing group.",
+        "We work with renewable generators, with large consumers, and with investors in solar and BESS.",
       ],
-      ctaPlans: "See the buy-back plans",
-      ctaOffer: "Get a quote",
-      checks: [t.promises.noFees, t.promises.response, t.promises.financing],
+      ctaPlans: "See the three areas",
+      ctaOffer: "Get in touch",
+      checks: [
+        "EWRC licence No. L-878-15",
+        "Standard balancing group coordinator",
+        "A Bulgarian company",
+      ],
     },
     lines: {
-      eyebrow: "Three business areas",
-      title: "Selling power, buying power, or building a plant?",
-      lead: "Three different services with three different contracts. Pick yours and see its terms, without wading through the other two.",
+      eyebrow: "Business areas",
+      title: "Three areas, three separate sets of terms",
+      lead: "Each area has its own contract, its own terms and its own process. The choice below leads straight to the relevant terms.",
       tok: {
-        audience: "I sell power",
-        title: "Power buy-back for producers",
+        audience: "Producers",
+        title: "Buy-back and balancing",
         badge: site.pricingBasisShort.en,
         priceNote: "balancing can be included",
         points: [
-          "Your price follows IBEX (БНЕБ) minus a clearly stated fee",
-          "One month's notice, no long-term lock-in",
-          "For sites above 1 MW, an individual offer",
+          "A formula against IBEX (БНЕБ), written into the contract",
+          "Balancing carried by our standard balancing group",
+          "One month's notice on NV Fixed",
         ],
-        cta: "See the buy-back plans",
+        cta: "See the buy-back terms",
       },
       dostavka: {
-        audience: "I buy power",
+        audience: "Consumers",
         title: "Electricity supply",
         badge: "on an individual offer",
         priceNote: "for consumers above 1 MW",
         points: [
-          "An offer built from your site's load profile",
+          "An offer built from the site's load profile",
           "Membership of our standard balancing group",
-          "No published tariff, the terms sit in the contract",
+          "No published tariff, the terms are negotiated",
         ],
-        cta: "See supply",
+        cta: "See the supply terms",
       },
       solar: {
-        audience: "I invest in PV",
-        title: "Your own solar plant",
-        badge: "with battery & financing",
-        points: ["From design to launch, all by us", "Batteries for true independence", "Leasing and instalment plans"],
-        cta: "Explore the solutions",
+        audience: "Investors",
+        title: "Solar PV and BESS, designed and built",
+        badge: "design, build, financing",
+        points: [
+          "Design, construction and commissioning",
+          "Solar plants with battery energy storage (BESS)",
+          "Leasing and instalment plans",
+        ],
+        cta: "See the solar solutions",
       },
     },
     quiz: {
@@ -238,12 +256,14 @@ const c = {
         ))}
       </p>
 
+      <!-- The hero deliberately does not compete with the three business CTAs
+           below: its primary action is to send the visitor into the chooser. -->
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a href={r(locale, "tok")} class="btn btn-primary !px-7 !py-4 text-base">
+        <a href="#napravleniya" class="btn btn-primary !px-7 !py-4 text-base">
           {c.hero.ctaPlans}
           <ArrowRight class="size-4" aria-hidden="true" />
         </a>
-        <a href={r(locale, "oferta")} class="btn btn-ghost-band !px-7 !py-4 text-base">{c.hero.ctaOffer}</a>
+        <a href={r(locale, "kontakti")} class="btn btn-ghost-band !px-7 !py-4 text-base">{c.hero.ctaOffer}</a>
       </div>
 
       <ul class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5">
@@ -261,7 +281,7 @@ const c = {
        what we do, so a producer, a buyer and an investor each recognise their
        own card at a glance. One CTA per card, three different destinations, so
        the calls to action never compete. -->
-  <section class="section container-site">
+  <section id="napravleniya" class="section container-site scroll-mt-24">
     <SectionHeading eyebrow={c.lines.eyebrow} title={c.lines.title} lead={c.lines.lead} />
 
     <div class="mt-12 grid gap-6 lg:grid-cols-3">
