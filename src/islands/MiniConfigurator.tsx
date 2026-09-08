@@ -63,7 +63,7 @@ const copy = {
       required: "Попълни име и телефон и отбележи съгласието.",
     },
     or: "или",
-    fullOffer: "направи си пълна оферта за 2 минути",
+    fullOffer: "виж за какво можем да ти изготвим оферта",
   },
   en: {
     steps: ["What do you need?", "Tell us more", "What's your goal?", "Your recommendation"],
@@ -82,7 +82,7 @@ const copy = {
     back: "Back",
     recTok: {
       title: "We recommend: buy-back on an exchange-linked formula",
-      text: "We buy your output at a price linked to IBEX (БНЕБ) minus a clearly stated fee, with balancing included on NV Fixed. Switching is free and never stops your production.",
+      text: "We buy your output at a price linked to IBEX (БНЕБ) minus a clearly stated fee, with balancing included on NV Fixed. Switching is free and does not stop your production.",
       route: "tok",
       cta: "See the buy-back plans",
     },
@@ -116,7 +116,7 @@ const copy = {
       required: "Fill in name and phone and tick the consent box.",
     },
     or: "or",
-    fullOffer: "build a full quote in 2 minutes",
+    fullOffer: "see what we can prepare a quote for",
   },
 } as const;
 
