@@ -17,10 +17,10 @@ const c = {
   bg: {
     title: "Соларна система за дома – 5–10 kWp с батерия, до ключ | NV Power",
     description:
-      "Домашна фотоволтаична система 5–10 kWp с 10 kWh батерия: откупуване за 5–7 години, резервно захранване и лизинг. Ориентировъчни цени и оферта за 2 минути.",
+      "Домашна фотоволтаична система 5–10 kWp с 10 kWh батерия: резервно захранване, лизинг и ориентировъчни цени. Срокът на възвръщаемост се изчислява за конкретния обект.",
     hero: {
       h1: "Домът ти може сам да си произвежда тока",
-      sub: "Типичната домашна система е 5–10 kWp с 10 kWh батерия, покрива голяма част от потреблението ти и се откупува за 5–7 години. Проектираме, изграждаме и поддържаме, до ключ.",
+      sub: "Типичната домашна система е 5–10 kWp с 10 kWh батерия и покрива голяма част от потреблението ти. Проектираме, изграждаме и поддържаме, до ключ.",
       ctaPrimary: "Вземи оферта",
       ctaSecondary: "Изчисли спестяванията",
       checks: [responseBadge.bg, "Без скрити такси", "Възможност за финансиране"],
@@ -32,7 +32,7 @@ const c = {
       items: [
         { icon: Sun, value: "5–10 kWp", label: "типична мощност за къща" },
         { icon: BatteryCharging, value: "10 kWh", label: "препоръчана батерия" },
-        { icon: CalendarClock, value: "5–7 год.", label: "срок на откупуване" },
+        { icon: CalendarClock, value: "4–8 седмици", label: "от оглед до присъединяване" },
         { icon: ShieldCheck, value: "25 год.", label: "гаранция на панелите" },
       ],
     },
@@ -104,6 +104,15 @@ const c = {
         },
       ],
       disclaimer: "Точната цена, в офертата: изготвяме я по покрива и потреблението ти, без ангажимент.",
+      /* Three separate things, deliberately not collapsed into one headline
+         number: what it costs, what it saves, and how long that takes. */
+      payback: {
+        title: "Инвестиция, икономия и възвръщаемост",
+        investment: "Посочените суми са ориентировъчен диапазон за инвестиция до ключ, не оферта.",
+        savings: "Годишната икономия зависи от това каква част от произведената енергия потребяваш сам и на каква цена я купуваш днес. Индикативна оценка за твоя случай дава калкулаторът, който показва допусканията си.",
+        period: "Срокът на възвръщаемост зависи от инвестицията, профила на потребление, собственото потребление на произведената енергия, цената на електроенергията и конфигурацията на батерията. Затова го изчисляваме за конкретния обект, а не го обявяваме предварително.",
+        cta: "Отвори калкулатора",
+      },
       cta: "Вземи оферта",
     },
     process: {
@@ -149,10 +158,10 @@ const c = {
   en: {
     title: "Home solar system – 5–10 kWp with a battery, turnkey | NV Power",
     description:
-      "A residential photovoltaic system of 5–10 kWp with a 10 kWh battery: 5–7 year payback, backup power and leasing. Indicative prices and a quote in 2 minutes.",
+      "A residential photovoltaic system of 5–10 kWp with a 10 kWh battery: backup power, leasing and indicative prices. The payback period is calculated for the specific site.",
     hero: {
       h1: "Your home can produce its own power",
-      sub: "The typical home system is 5–10 kWp with a 10 kWh battery, it covers a large share of your consumption and pays for itself in 5–7 years. We design, build and maintain it, turnkey.",
+      sub: "The typical home system is 5–10 kWp with a 10 kWh battery and covers a large share of your consumption. We design, build and maintain it, turnkey.",
       ctaPrimary: "Get a quote",
       ctaSecondary: "Calculate your savings",
       checks: [responseBadge.en, "No hidden fees", "Financing available"],
@@ -164,7 +173,7 @@ const c = {
       items: [
         { icon: Sun, value: "5–10 kWp", label: "typical capacity for a house" },
         { icon: BatteryCharging, value: "10 kWh", label: "recommended battery" },
-        { icon: CalendarClock, value: "5–7 yrs", label: "payback period" },
+        { icon: CalendarClock, value: "4–8 weeks", label: "from survey to grid connection" },
         { icon: ShieldCheck, value: "25 yrs", label: "panel warranty" },
       ],
     },
@@ -236,6 +245,13 @@ const c = {
         },
       ],
       disclaimer: "The exact price comes with your quote, tailored to your roof and consumption, no commitment.",
+      payback: {
+        title: "Investment, savings and payback",
+        investment: "The figures above are an indicative range for a turnkey investment, not a quote.",
+        savings: "Annual savings depend on how much of the generated energy you use yourself and what you pay for electricity today. The calculator gives an indicative estimate for your case, and shows the assumptions it uses.",
+        period: "The payback period depends on the investment, the consumption profile, how much of the generated energy is self-consumed, the price of electricity and the battery configuration. That is why we calculate it for the specific site rather than advertising it in advance.",
+        cta: "Open the calculator",
+      },
       cta: "Get a quote",
     },
     process: {
@@ -367,6 +383,23 @@ const c = {
 
     <div class="mx-auto mt-9 max-w-2xl text-center">
       <p class="text-sm text-muted">{c.pricing.disclaimer}</p>
+
+      <!-- Investment, savings and payback stated as three separate things. The
+           page used to assert "5–7 години", which its own published assumptions
+           cannot produce: 12 800 € at 0.099 €/kWh and 1150 kWh/kWp is 16 years
+           at 70% self-consumption, and 11.2 even if every kWh were self-used. -->
+      <div class="card mx-auto mt-8 max-w-3xl p-6 md:p-7">
+        <h3 class="font-[family-name:var(--font-display)] text-lg font-bold text-body">{c.pricing.payback.title}</h3>
+        <ul class="mt-3 flex flex-col gap-2.5 text-sm leading-relaxed text-muted">
+          <li>{c.pricing.payback.investment}</li>
+          <li>{c.pricing.payback.savings}</li>
+          <li>{c.pricing.payback.period}</li>
+        </ul>
+        <a href={r(locale, "kalkulator")} class="btn btn-outline mt-5">
+          {c.pricing.payback.cta}
+          <ArrowRight class="size-4" aria-hidden="true" />
+        </a>
+      </div>
       <a href={r(locale, "oferta")} class="btn btn-primary mt-5">
         {c.pricing.cta}
         <ArrowRight class="size-4" aria-hidden="true" />
