@@ -88,8 +88,10 @@ const c = {
       empty: "Скоро публикуваме първите си реализирани проекти, с реални числа и снимки.",
     },
     faq: {
-      eyebrow: "Въпроси",
-      title: "Питаш се…",
+      /* The eyebrow is not "Въпроси" any more: it renders directly above the
+         title, and "ВЪПРОСИ / Въпроси & Отговори" reads as a stutter. */
+      eyebrow: "Накратко",
+      title: "Въпроси & Отговори",
       more: "Виж всички въпроси и отговори",
       items: [
         { q: "Как се формира цената, по която изкупувате тока ми?", a: "По формулата на избрания план: борсовата цена на БНЕБ (IBEX) за съответния период минус договорената такса. Формулата е записана в договора и получаваш месечен отчет с пълна разбивка." },
@@ -170,8 +172,8 @@ const c = {
       empty: "We'll publish our first completed projects soon, with real numbers and photos.",
     },
     faq: {
-      eyebrow: "Questions",
-      title: "You're wondering…",
+      eyebrow: "In brief",
+      title: "Questions & Answers",
       more: "See all questions & answers",
       items: [
         { q: "How is the price you buy my power at set?", a: "By your plan's formula: the IBEX (БНЕБ) exchange price for the period minus the agreed fee. The formula is written into the contract and you get a monthly statement with the full breakdown." },
