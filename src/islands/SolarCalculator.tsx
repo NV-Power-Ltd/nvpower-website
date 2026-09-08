@@ -1,28 +1,21 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Sun, Zap, PiggyBank, CalendarClock, Leaf, TreePine, Car, ArrowRight } from "lucide-react";
+import { Sun, Zap, PiggyBank, CalendarClock, Leaf, TreePine, Car, BatteryCharging, Wallet, ArrowRight } from "lucide-react";
 import type { Locale } from "../config/site";
-import { kwhPriceEUR } from "../config/site";
 import { r } from "../i18n/routes";
+import { SOLAR_ASSUMPTIONS as A, computeSolar } from "../lib/solarModel";
+import type { ObjectType, SolarMode } from "../lib/solarModel";
 
-/* /kalkulator – client-side solar savings calculator with fully transparent
-   assumptions (expandable footnote). No contact data needed; the CTA hands
-   the numbers to the offer wizard via query params. */
+/* /kalkulator – client-side indicative estimate with fully transparent
+   assumptions (expandable footnote). No contact data needed.
 
-/* ---------- transparent assumptions (also rendered in the footnote) ----------
-   All money is in euro: Bulgaria joined the euro area in January 2026. */
-const PRICE_EUR = kwhPriceEUR; // €/kWh from the central config
-const YIELD_KWH_PER_KWP = 1150; // annual yield per kWp in Bulgaria
-const M2_PER_KWP = 5; // roof area needed per kWp
-const SELF_USE = { home: 0.7, business: 0.8, industry: 0.8 } as const; // share of production used on site
-const COST_EUR_PER_KWP = { home: 970, business: 770, industry: 770 } as const; // indicative turnkey cost
-const CO2_KG_PER_KWH = 0.4;
-const TREE_KG_PER_YEAR = 21; // one tree absorbs ~21 kg CO₂/year
-const SOFIA_RING_KM = 61; // one lap of the Sofia ring road
-const CAR_KG_PER_KM = 0.12; // petrol car ~120 g CO₂/km
-const KG_PER_LAP = SOFIA_RING_KM * CAR_KG_PER_KM;
+   The arithmetic lives in src/lib/solarModel.ts, not here: the same assumptions
+   have to hold for the product pages, and a model buried in a UI island is a
+   model nobody can check. This file only collects input and renders output. */
 
-type ObjectType = keyof typeof SELF_USE;
-type Mode = "bill" | "kwh";
+const KG_PER_LAP = A.sofiaRingKm * A.carKgPerKm;
+const pct = (x: number) => `${Math.round(x * 100)}%`;
+
+type Basis = "bill" | "kwh";
 
 const copy = {
   bg: {
@@ -34,15 +27,27 @@ const copy = {
     kwhUnit: "кВтч",
     object: "Тип обект",
     objects: { home: "Дом", business: "Бизнес", industry: "Индустрия" },
+    config: "Конфигурация",
+    configs: { pv: "Само фотоволтаици", pv_bess: "Фотоволтаици + батерия" },
+    configHint: "Батерията вдига собственото потребление, но и инвестицията. Затова двете се смятат отделно.",
     area: "Покривна площ в m² (по избор)",
     areaHint: "Ако я знаеш, ще съобразим системата с покрива ти.",
     resultsTitle: "Твоята система, на един поглед",
+    estimate: "Ориентировъчна оценка, не оферта.",
     empty: "Въведи сметка или консумация и ще изчислим системата ти на момента, без данни за контакт.",
-    kwpLabel: "Препоръчана система",
+    kwpLabel: "Мощност на централата",
+    bessLabel: "Батерия, полезен капацитет",
     productionLabel: "Годишно производство",
     savingsLabel: "Годишна икономия",
-    paybackLabel: "Срок на откупуване",
+    capexLabel: "Ориентировъчна инвестиция",
+    paybackLabel: "Прост срок на откупуване",
     paybackUnit: "години",
+    usedTitle: "Използвани допускания",
+    usedSelfUse: "собствено потребление",
+    usedPrice: "цена на тока",
+    usedYield: "добив",
+    surplusNote: "Останалата произведена енергия излиза в мрежата. Тук е приета за нула, но може да се продава по договор за изкупуване.",
+    surplusCta: "Виж условията за изкупуване",
     co2Label: "Спестен CO₂ годишно",
     co2Unit: "тона",
     treesPrefix: "колкото",
@@ -51,19 +56,27 @@ const copy = {
     lapsSuffix: "обиколки на София с бензинов автомобил по-малко",
     areaCapNote: "Ограничихме системата според посочената покривна площ.",
     cta: "Вземи точна оферта",
-    ctaNote: "Оферта за 2 минути · Без ангажимент · Без депозити",
+    ctaNote: "Ориентировъчна оценка · Без ангажимент · Без депозити",
     assumptionsTitle: "Как смятаме? Всички допускания, открито",
     billPh: "напр. 130",
     kwhPh: "напр. 1200",
     areaPh: "напр. 60",
-    assumptions: [
-      `Цена на тока: ${PRICE_EUR.toFixed(3)} €/кВтч, индикативна цена, използвана в изчислението.`,
-      `1 kWp фотоволтаици произвежда ~${YIELD_KWH_PER_KWP} кВтч годишно в България.`,
-      `1 kWp изисква ~${M2_PER_KWP} m² покривна площ.`,
-      "Собствено потребление: 70% за дом (с батерия) и 80% за бизнес/индустрия, останалото се изкупува или губи и не го броим за икономия.",
-      `Ориентировъчна цена на система: ~${COST_EUR_PER_KWP.home} €/kWp за дом и ~${COST_EUR_PER_KWP.business} €/kWp за бизнес, до ключ, преди финансиране.`,
-      `CO₂: ${CO2_KG_PER_KWH} кг спестен CO₂ на произведен кВтч; 1 дърво поглъща ~${TREE_KG_PER_YEAR} кг CO₂/год; 1 обиколка на околовръстното на София е ~${SOFIA_RING_KM} км при ~120 г CO₂/км за бензинов автомобил.`,
-      "Числата са ориентировъчни, точните зависят от покрива, засенчването и профила на потребление. Затова финалната оферта я прави инженер, не калкулатор.",
+    assumptions: (m: SolarMode) => [
+      `Цена на тока: ${A.priceEurPerKwh.toFixed(3)} €/кВтч. Индикативна стойност за изчислението, не оферта.`,
+      `1 kWp фотоволтаици произвежда ~${A.yieldKwhPerKwp} кВтч годишно в България.`,
+      `1 kWp изисква ~${A.m2PerKwp} m² покривна площ.`,
+      m === "pv"
+        ? `Собствено потребление без батерия: ${pct(A.selfUse.pv.home)} за дом и ${pct(A.selfUse.pv.business)} за бизнес и индустрия. Без съхранение вечерното потребление не се покрива от покрива, а бизнесът консумира предимно през деня.`
+        : `Собствено потребление с батерия: ${pct(A.selfUse.pv_bess.home)} за дом и ${pct(A.selfUse.pv_bess.business)} за бизнес и индустрия.`,
+      "Икономията идва само от енергията, която потребяваш сам. Излишъкът е приет за нула, макар че може да се продава по договор за изкупуване на цена, обвързана с борсата, затова оценката е консервативна.",
+      m === "pv"
+        ? `Инвестиция: ~${A.capexEurPerKwp.home} €/kWp за дом и ~${A.capexEurPerKwp.business} €/kWp за бизнес и индустрия, до ключ, преди финансиране, без батерия.`
+        : `Инвестиция: ~${A.capexEurPerKwp.home} €/kWp за дом и ~${A.capexEurPerKwp.business} €/kWp за бизнес и индустрия, плюс ~${A.bessEurPerKwh} €/кВтч за батерията. Батерията е оразмерена ${A.bessKwhPerKwp} кВтч на kWp, както в публикуваната хибридна конфигурация 10 kWp + 10 kWh.`,
+      "Съотношението 1 кВтч на kWp идва от публикуваната домашна конфигурация. За по-голям обект батерията се оразмерява по товаровия профил, затова там числото е само ориентир.",
+      "Мощността на батерията в kW и режимът на резервно захранване се определят при проектирането на конкретния обект, затова не ги допускаме тук.",
+      "Срокът е прост: инвестиция, делена на годишна икономия. Без дисконтиране, без деградация на панелите и без бъдещи промени в цената на тока.",
+      `CO₂: ${A.co2KgPerKwh} кг спестен CO₂ на произведен кВтч; 1 дърво поглъща ~${A.treeKgPerYear} кг CO₂/год; 1 обиколка на околовръстното на София е ~${A.sofiaRingKm} км при ~120 г CO₂/км за бензинов автомобил.`,
+      "Числата са ориентировъчна оценка, не оферта. Точните зависят от покрива, засенчването и профила на потребление, затова финалната оферта я прави инженер, а не калкулатор.",
     ],
   },
   en: {
@@ -75,15 +88,27 @@ const copy = {
     kwhUnit: "kWh",
     object: "Site type",
     objects: { home: "Home", business: "Business", industry: "Industry" },
+    config: "Configuration",
+    configs: { pv: "Photovoltaics only", pv_bess: "Photovoltaics + battery" },
+    configHint: "A battery raises self-consumption, and the investment with it. That is why the two are costed separately.",
     area: "Roof area in m² (optional)",
     areaHint: "If you know it, we'll size the system to your roof.",
     resultsTitle: "Your system at a glance",
+    estimate: "An indicative estimate, not a quote.",
     empty: "Enter a bill or consumption and we'll size your system instantly, no contact details needed.",
-    kwpLabel: "Recommended system",
+    kwpLabel: "Installed capacity",
+    bessLabel: "Battery, usable capacity",
     productionLabel: "Annual production",
     savingsLabel: "Annual savings",
-    paybackLabel: "Payback period",
+    capexLabel: "Indicative investment",
+    paybackLabel: "Simple payback",
     paybackUnit: "years",
+    usedTitle: "Assumptions used",
+    usedSelfUse: "self-consumption",
+    usedPrice: "electricity price",
+    usedYield: "yield",
+    surplusNote: "The rest of the generated energy goes to the grid. It is valued at zero here, but it can be sold under a buy-back contract.",
+    surplusCta: "See the buy-back terms",
     co2Label: "CO₂ saved per year",
     co2Unit: "tonnes",
     treesPrefix: "like",
@@ -92,19 +117,27 @@ const copy = {
     lapsSuffix: "fewer laps around Sofia in a petrol car",
     areaCapNote: "We capped the system to the roof area you entered.",
     cta: "Get an exact quote",
-    ctaNote: "A quote in 2 minutes · No commitment · No deposits",
+    ctaNote: "An indicative estimate · No commitment · No deposits",
     assumptionsTitle: "How do we calculate? All assumptions, in the open",
     billPh: "e.g. 130",
     kwhPh: "e.g. 1200",
     areaPh: "e.g. 60",
-    assumptions: [
-      `Electricity price: €${PRICE_EUR.toFixed(3)}/kWh, indicative rate used in this calculation.`,
-      `1 kWp of photovoltaics produces ~${YIELD_KWH_PER_KWP} kWh per year in Bulgaria.`,
-      `1 kWp needs ~${M2_PER_KWP} m² of roof area.`,
-      "Self-consumption: 70% for a home (with battery) and 80% for business/industry, the rest is sold back or lost, and we don't count it as savings.",
-      `Indicative system cost: ~€${COST_EUR_PER_KWP.home}/kWp for homes and ~€${COST_EUR_PER_KWP.business}/kWp for business, turnkey, before financing.`,
-      `CO₂: ${CO2_KG_PER_KWH} kg of CO₂ saved per kWh produced; 1 tree absorbs ~${TREE_KG_PER_YEAR} kg CO₂/year; 1 lap of the Sofia ring road is ~${SOFIA_RING_KM} km at ~120 g CO₂/km for a petrol car.`,
-      "These numbers are indicative, the exact ones depend on your roof, shading and consumption profile. That's why the final quote comes from an engineer, not a calculator.",
+    assumptions: (m: SolarMode) => [
+      `Electricity price: €${A.priceEurPerKwh.toFixed(3)}/kWh. An indicative rate for this calculation, not a quote.`,
+      `1 kWp of photovoltaics produces ~${A.yieldKwhPerKwp} kWh per year in Bulgaria.`,
+      `1 kWp needs ~${A.m2PerKwp} m² of roof area.`,
+      m === "pv"
+        ? `Self-consumption without a battery: ${pct(A.selfUse.pv.home)} for a home and ${pct(A.selfUse.pv.business)} for business and industry. Without storage the evening load cannot be met from the roof, while a business consumes mostly during the day.`
+        : `Self-consumption with a battery: ${pct(A.selfUse.pv_bess.home)} for a home and ${pct(A.selfUse.pv_bess.business)} for business and industry.`,
+      "Savings come only from the energy you use yourself. The surplus is valued at zero here, although it can be sold under a buy-back contract at a market-linked price, so the estimate is a conservative one.",
+      m === "pv"
+        ? `Investment: ~€${A.capexEurPerKwp.home}/kWp for homes and ~€${A.capexEurPerKwp.business}/kWp for business and industry, turnkey, before financing, without a battery.`
+        : `Investment: ~€${A.capexEurPerKwp.home}/kWp for homes and ~€${A.capexEurPerKwp.business}/kWp for business and industry, plus ~€${A.bessEurPerKwh}/kWh for the battery. The battery is sized at ${A.bessKwhPerKwp} kWh per kWp, as in the published 10 kWp + 10 kWh hybrid configuration.`,
+      "The ratio of 1 kWh per kWp comes from the published residential configuration. On a larger site storage is sized to the load profile, so there the figure is only an indication.",
+      "Battery power in kW and the backup-supply arrangement are set when the specific site is designed, so we make no assumption about them here.",
+      "The payback is simple: investment divided by annual savings. No discounting, no panel degradation and no future changes in the price of electricity.",
+      `CO₂: ${A.co2KgPerKwh} kg of CO₂ saved per kWh produced; 1 tree absorbs ~${A.treeKgPerYear} kg CO₂/year; 1 lap of the Sofia ring road is ~${A.sofiaRingKm} km at ~120 g CO₂/km for a petrol car.`,
+      "These numbers are an indicative estimate, not a quote. The exact ones depend on your roof, shading and consumption profile, which is why the final quote comes from an engineer, not a calculator.",
     ],
   },
 } as const;
@@ -144,63 +177,49 @@ export default function SolarCalculator({ locale }: { locale: Locale }) {
   const t = copy[locale];
   // Number formatting follows the reading locale; the currency is always EUR.
   const numLocale = locale === "bg" ? "bg-BG" : "en-GB";
-  const [mode, setMode] = useState<Mode>("bill");
+  const [basis, setBasis] = useState<Basis>("bill");
   const [bill, setBill] = useState("");
   const [kwh, setKwh] = useState("");
   const [objectType, setObjectType] = useState<ObjectType>("home");
+  const [config, setConfig] = useState<SolarMode>("pv_bess");
   const [area, setArea] = useState("");
 
   const res = useMemo(() => {
-    const billNum = parseFloat(bill.replace(",", "."));
-    const kwhNum = parseFloat(kwh.replace(",", "."));
-    const areaNum = parseFloat(area.replace(",", "."));
-
-    const billEUR = mode === "bill" ? billNum : NaN;
-    const monthlyKwh = mode === "bill" ? billEUR / PRICE_EUR : kwhNum;
+    const monthlyKwh =
+      basis === "bill"
+        ? parseFloat(bill.replace(",", ".")) / A.priceEurPerKwh
+        : parseFloat(kwh.replace(",", "."));
     if (!Number.isFinite(monthlyKwh) || monthlyKwh <= 0) return null;
 
-    const annualKwh = monthlyKwh * 12;
-    let kwp = annualKwh / YIELD_KWH_PER_KWP;
-    let capped = false;
-    if (Number.isFinite(areaNum) && areaNum > 0 && areaNum / M2_PER_KWP < kwp) {
-      kwp = areaNum / M2_PER_KWP;
-      capped = true;
-    }
-    kwp = Math.max(0.5, Math.round(kwp * 2) / 2); // round to 0.5, sensible minimum
-
-    const production = kwp * YIELD_KWH_PER_KWP;
-    const useful = Math.min(production * SELF_USE[objectType], annualKwh);
-    const savingsEUR = useful * PRICE_EUR;
-    const costEUR = kwp * COST_EUR_PER_KWP[objectType];
-    const payback = savingsEUR > 0 ? costEUR / savingsEUR : 0;
-
-    const co2Kg = production * CO2_KG_PER_KWH;
-    const monthlyBillEUR = mode === "bill" ? billEUR : monthlyKwh * PRICE_EUR;
+    const areaNum = parseFloat(area.replace(",", "."));
+    const m = computeSolar({
+      annualKwh: monthlyKwh * 12,
+      objectType,
+      mode: config,
+      areaM2: Number.isFinite(areaNum) ? areaNum : undefined,
+    });
+    if (!m) return null;
 
     return {
-      kwp,
-      capped,
-      production: Math.round(production),
-      savingsEUR: Math.round(savingsEUR),
-      payback: Math.round(payback * 10) / 10,
-      co2Tons: Math.round((co2Kg / 1000) * 10) / 10,
-      trees: Math.max(1, Math.round(co2Kg / TREE_KG_PER_YEAR)),
-      laps: Math.max(1, Math.round(co2Kg / KG_PER_LAP)),
-      monthlyBillEUR: Math.round(monthlyBillEUR),
+      ...m,
+      co2Tons: Math.round((m.co2Kg / 1000) * 10) / 10,
+      trees: Math.max(1, Math.round(m.co2Kg / A.treeKgPerYear)),
+      laps: Math.max(1, Math.round(m.co2Kg / KG_PER_LAP)),
     };
-  }, [mode, bill, kwh, objectType, area]);
+  }, [basis, bill, kwh, objectType, config, area]);
 
   const aKwp = useCountUp(res?.kwp ?? 0, numLocale, 1);
-  const aProduction = useCountUp(res?.production ?? 0, numLocale);
-  const aSavingsEUR = useCountUp(res?.savingsEUR ?? 0, numLocale);
-  const aPayback = useCountUp(res?.payback ?? 0, numLocale, 1);
+  const aBess = useCountUp(res?.bessKwh ?? 0, numLocale);
+  const aProduction = useCountUp(res?.productionKwh ?? 0, numLocale);
+  const aSavingsEUR = useCountUp(res?.annualSavingsEur ?? 0, numLocale);
+  const aCapex = useCountUp(res?.capexEur ?? 0, numLocale);
+  const aPayback = useCountUp(res?.paybackYears ?? 0, numLocale, 1);
   const aCo2 = useCountUp(res?.co2Tons ?? 0, numLocale, 1);
 
-  const objectSlugs: Record<ObjectType, string> = { home: "dom", business: "biznes", industry: "industria" };
-  const offerBase = r(locale, "oferta");
-  const offerHref = res
-    ? `${offerBase}?bill=${res.monthlyBillEUR}&object=${objectSlugs[objectType]}&kwp=${res.kwp}`
-    : offerBase;
+  /* The enquiry form is the real next step, so send people straight to it with
+     their subject already chosen. Indexes match ContactForm's interest list. */
+  const interest = objectType === "home" ? 2 : 3;
+  const offerHref = `${r(locale, "kontakti")}?interest=${interest}#zapitvane`;
 
   return (
     <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
@@ -214,9 +233,9 @@ export default function SolarCalculator({ locale }: { locale: Locale }) {
             <button
               key={m}
               type="button"
-              onClick={() => setMode(m)}
-              aria-pressed={mode === m}
-              className={`rounded-xl border px-3 py-2.5 text-sm font-semibold transition-all ${mode === m ? "border-accent bg-accent text-accent-contrast shadow-md" : "border-line bg-surface-alt text-body hover:border-accent/50"}`}
+              onClick={() => setBasis(m)}
+              aria-pressed={basis === m}
+              className={`rounded-xl border px-3 py-2.5 text-sm font-semibold transition-all ${basis === m ? "border-accent bg-accent text-accent-contrast shadow-md" : "border-line bg-surface-alt text-body hover:border-accent/50"}`}
             >
               {label}
             </button>
@@ -224,7 +243,7 @@ export default function SolarCalculator({ locale }: { locale: Locale }) {
         </div>
 
         <div className="mt-5 flex flex-col gap-5">
-          {mode === "bill" ? (
+          {basis === "bill" ? (
             <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="calc-bill">
               {t.bill}
               <span className="flex items-center gap-2">
@@ -279,6 +298,27 @@ export default function SolarCalculator({ locale }: { locale: Locale }) {
             </div>
           </fieldset>
 
+          {/* PV and PV+BESS are costed and sized on separate assumptions; the
+              old single model mixed a battery's self-consumption with a
+              battery-free price. */}
+          <fieldset>
+            <legend className="mb-2 text-sm font-semibold text-body">{t.config}</legend>
+            <div className="grid grid-cols-2 gap-2">
+              {(["pv", "pv_bess"] as const).map((k) => (
+                <button
+                  key={k}
+                  type="button"
+                  onClick={() => setConfig(k)}
+                  aria-pressed={config === k}
+                  className={`rounded-xl border px-3 py-2.5 text-sm font-semibold transition-all ${config === k ? "border-accent bg-accent text-accent-contrast shadow-md" : "border-line bg-surface-alt text-body hover:border-accent/50"}`}
+                >
+                  {t.configs[k]}
+                </button>
+              ))}
+            </div>
+            <p className="mt-2 text-xs text-muted">{t.configHint}</p>
+          </fieldset>
+
           <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="calc-area">
             {t.area}
             <input
@@ -304,6 +344,7 @@ export default function SolarCalculator({ locale }: { locale: Locale }) {
             <Sun className="size-5 text-accent" aria-hidden="true" />
             {t.resultsTitle}
           </h2>
+          <p className="mt-1 text-sm text-white/70">{t.estimate}</p>
         </div>
 
         {!res ? (
@@ -322,6 +363,17 @@ export default function SolarCalculator({ locale }: { locale: Locale }) {
                   {aKwp} <span className="text-base font-bold">kWp</span>
                 </p>
               </div>
+              {config === "pv_bess" && (
+                <div className="rounded-xl bg-accent/10 p-4">
+                  <p className="flex items-center gap-2 text-xs font-bold tracking-wide text-accent uppercase">
+                    <BatteryCharging className="size-3.5" aria-hidden="true" />
+                    {t.bessLabel}
+                  </p>
+                  <p className="mt-1.5 font-[family-name:var(--font-display)] text-3xl font-bold text-accent">
+                    {aBess} <span className="text-base font-bold">{t.kwhUnit}</span>
+                  </p>
+                </div>
+              )}
               <div className="rounded-xl bg-surface-alt p-4">
                 <p className="flex items-center gap-2 text-xs font-bold tracking-wide text-muted uppercase">
                   <Sun className="size-3.5" aria-hidden="true" />
@@ -352,6 +404,24 @@ export default function SolarCalculator({ locale }: { locale: Locale }) {
               </div>
               <div className="rounded-xl bg-surface-alt p-4">
                 <p className="flex items-center gap-2 text-xs font-bold tracking-wide text-muted uppercase">
+                  <Wallet className="size-3.5" aria-hidden="true" />
+                  {t.capexLabel}
+                </p>
+                <p className="mt-1.5 font-[family-name:var(--font-display)] text-3xl font-bold text-body">
+                  {locale === "en" ? (
+                    <>
+                      <span className="text-base font-bold">€</span>
+                      {aCapex}
+                    </>
+                  ) : (
+                    <>
+                      {aCapex} <span className="text-base font-bold">€</span>
+                    </>
+                  )}
+                </p>
+              </div>
+              <div className="rounded-xl bg-surface-alt p-4">
+                <p className="flex items-center gap-2 text-xs font-bold tracking-wide text-muted uppercase">
                   <CalendarClock className="size-3.5" aria-hidden="true" />
                   {t.paybackLabel}
                 </p>
@@ -361,7 +431,23 @@ export default function SolarCalculator({ locale }: { locale: Locale }) {
               </div>
             </div>
 
-            {res.capped && <p className="rounded-xl bg-accent/10 px-4 py-2.5 text-sm font-medium text-accent">{t.areaCapNote}</p>}
+            {/* The three numbers that move the result most, next to the result
+                itself rather than only in the footnote below. */}
+            <p className="text-sm text-muted">
+              <strong className="font-semibold text-body">{t.usedTitle}:</strong> {t.usedSelfUse} {pct(res.selfUseShare)} · {t.usedPrice}{" "}
+              {A.priceEurPerKwh.toFixed(3)} €/{t.kwhUnit} · {t.usedYield} {A.yieldKwhPerKwp} {t.kwhUnit}/kWp
+            </p>
+
+            {/* Only self-consumed energy is counted as a saving, so the larger
+                the exported share the more conservative the payback above. */}
+            <p className="text-sm text-muted">
+              {t.surplusNote}{" "}
+              <a href={r(locale, "tok")} className="font-semibold text-accent underline underline-offset-2">
+                {t.surplusCta}
+              </a>
+            </p>
+
+            {res.cappedByArea && <p className="rounded-xl bg-accent/10 px-4 py-2.5 text-sm font-medium text-accent">{t.areaCapNote}</p>}
 
             <div className="rounded-xl border border-accent/25 bg-accent/10 p-4">
               <p className="flex items-center gap-2 text-xs font-bold tracking-wide text-accent uppercase">
@@ -403,7 +489,7 @@ export default function SolarCalculator({ locale }: { locale: Locale }) {
           </svg>
         </summary>
         <ul className="mt-3 flex list-disc flex-col gap-1.5 pl-5 text-sm leading-relaxed text-muted">
-          {t.assumptions.map((a) => (
+          {t.assumptions(config).map((a) => (
             <li key={a}>{a}</li>
           ))}
         </ul>
