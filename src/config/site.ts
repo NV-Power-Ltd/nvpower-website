@@ -164,6 +164,29 @@ export const site = {
     en: "at prices linked to IBEX (БНЕБ)",
   },
 
+  /**
+   * The reference market, named once so the Bulgarian and English copy cannot
+   * drift apart. `market` is the short form used inside cards and tables;
+   * `marketFull` is the first-mention form a professional customer expects.
+   */
+  market: {
+    bg: "БНЕБ, пазар „Ден напред“",
+    en: "IBEX, Day-Ahead Market",
+  },
+  marketFull: {
+    bg: "Българска независима енергийна борса (БНЕБ), пазар „Ден напред“",
+    en: "Bulgarian Independent Energy Exchange (IBEX), Day-Ahead Market",
+  },
+  /**
+   * Published formulas are the commercial headline, not the whole mechanism:
+   * settlement and balancing rules live in the contract. Stated wherever a
+   * formula is shown, so none of them reads as a complete methodology.
+   */
+  pricingMethodology: {
+    bg: "Точната методика за остойностяване и балансиране се определя в договора.",
+    en: "The exact valuation and balancing methodology is set out in the contract.",
+  },
+
   price: {
     /**
      * Indicative *retail* rate, used for exactly one thing: valuing the solar

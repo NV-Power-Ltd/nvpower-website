@@ -39,8 +39,8 @@ const c = {
           /* "Фиксиран" describes the trading component, not the energy price. */
           mechanism:
             "Изкупна цена: БНЕБ, пазар „Ден напред“, минус фиксиран търговски компонент от 15 €/MWh. Фиксиран е компонентът, не цената на енергията.",
-          priceMain: "БНЕБ − 15 €",
-          priceSub: "на MWh",
+          priceMain: "БНЕБ − 15 €/MWh",
+          priceSub: site.market.bg,
           term: "предизвестие само 1 месец",
           features: [
             "Предизвестие: само 1 месец, без дългосрочно обвързване",
@@ -55,21 +55,21 @@ const c = {
           badge: "Най-популярен",
           name: "NV Standard",
           mechanism:
-            "Изкупна цена: БНЕБ, пазар „Ден напред“, минус търговски компонент от 3 или 2 €/MWh според избраното ниво.",
+            "Изкупна цена: БНЕБ, пазар „Ден напред“, минус търговски компонент от 3 или 2 €/MWh според избраната опция.",
           term: "две нива на гъвкавост",
           /* Two-component plan – the visitor picks a tier inside the card. */
           options: [
             {
               id: "flex",
               label: "Standard Flexible",
-              formula: "БНЕБ − 3 €",
+              formula: "БНЕБ − 3 €/MWh",
               notice: "1 месец",
               hint: "По-кратък срок, повече свобода",
             },
             {
               id: "long",
               label: "Standard Дългосрочен",
-              formula: "БНЕБ − 2 €",
+              formula: "БНЕБ − 2 €/MWh",
               notice: "6 месеца",
               hint: "Най-добрата цена за стандартен план",
             },
@@ -113,12 +113,13 @@ const c = {
     compare: {
       eyebrow: "Сравнение",
       title: "Плановете един до друг",
-      lead: "Без звездички и дребен шрифт, това са условията.",
-      cols: ["План", "Формула (БНЕБ, €/MWh)", "Срок на предизвестие", "Целева група", "Основно предимство"],
+      methodology: site.pricingMethodology.bg,
+      lead: `Референтен пазар: ${site.marketFull.bg}. Всички търговски компоненти са в €/MWh. Без звездички и дребен шрифт, това са условията.`,
+      cols: ["План", "Формула", "Срок на предизвестие", "Целева група", "Основно предимство"],
       rows: [
-        { plan: "NV Фиксиран", formula: "БНЕБ − 15 €", notice: "1 месец", target: "Малки ВЕИ централи", advantage: "Пълна свобода с 1 месец предизвестие." },
-        { plan: "NV Standard Flexible", formula: "БНЕБ − 3 €", notice: "1 месец", target: "Средни ВЕИ", advantage: "Баланс между добра цена и кратък срок." },
-        { plan: "NV Standard Дългосрочен", formula: "БНЕБ − 2 €", notice: "6 месеца", target: "Стабилни ВЕИ", advantage: "Максимална печалба с най-ниска такса за балансиране." },
+        { plan: "NV Фиксиран", formula: "БНЕБ − 15 €/MWh", notice: "1 месец", target: "Малки ВЕИ централи", advantage: "Пълна свобода с 1 месец предизвестие." },
+        { plan: "NV Standard Flexible", formula: "БНЕБ − 3 €/MWh", notice: "1 месец", target: "Средни ВЕИ", advantage: "Баланс между добра цена и кратък срок." },
+        { plan: "NV Standard Дългосрочен", formula: "БНЕБ − 2 €/MWh", notice: "6 месеца", target: "Стабилни ВЕИ", advantage: "Максимална печалба с най-ниска такса за балансиране." },
         { plan: "NV Individual", formula: "По договаряне", notice: "По договаряне", target: "Обекти над 1 MW", advantage: "Условия, построени спрямо профила на обекта." },
       ],
     },
@@ -148,7 +149,7 @@ const c = {
         { q: "Ще спре ли производството ми при смяна на купувача?", a: "Не, нито за секунда. Смяната е чисто административна, енергията тръгва по същата мрежа, поддържана от същия мрежов оператор. Променя се само търговецът, който изкупува продукцията ти." },
         { q: "Колко струва смяната и колко време отнема?", a: "Смяната е напълно безплатна, без такси, без депозити. Подаваме документите до 10-о число на месеца и от 1-во число на следващия вече продаваш при нас. Цялата администрация я поемаме ние." },
         { q: "Какво е балансиране и защо го споменавате?", a: "Всеки производител се отклонява от прогнозата си за производство и някой плаща тези небаланси. Като член на нашата балансираща група отклоненията се компенсират взаимно между членовете, при NV Фиксиран план балансирането е включено в цената, без неочаквани изненади." },
-        { q: "Как се формира цената, която получавам?", a: "По формулата на избрания план: борсовата цена на БНЕБ за съответния период минус договорената такса, например БНЕБ − 15 €/MWh при NV Фиксиран. Получаваш месечен отчет с пълна разбивка, без скрити удръжки." },
+        { q: "Как се формира цената, която получавам?", a: `По формулата на избрания план: борсовата цена на ${site.market.bg} за съответния период на сетълмент, минус договорения търговски компонент, например БНЕБ − 15 €/MWh при NV Фиксиран. ${site.pricingMethodology.bg} Получаваш месечен отчет с пълна разбивка, без скрити удръжки.` },
         { q: "Мога ли да се откажа ако не съм доволен?", a: "Да, с предизвестието на плана ти – 1 месец при NV Фиксиран, 1 или 6 месеца при NV Standard. Без неустойки и без обвързващи клаузи." },
       ],
     },
@@ -176,8 +177,8 @@ const c = {
           name: "NV Fixed",
           mechanism:
             "Purchase price: the IBEX day-ahead market, minus a fixed trading component of €15/MWh. The component is fixed, the energy price is not.",
-          priceMain: "IBEX − €15",
-          priceSub: "per MWh",
+          priceMain: "IBEX − €15/MWh",
+          priceSub: site.market.en,
           term: "just 1 month's notice",
           features: [
             "Notice period: just 1 month, no long-term lock-in",
@@ -192,21 +193,21 @@ const c = {
           badge: "Most popular",
           name: "NV Standard",
           mechanism:
-            "Purchase price: the IBEX day-ahead market, minus a trading component of €3 or €2/MWh, depending on the tier you pick.",
+            "Purchase price: the IBEX day-ahead market, minus a trading component of €3 or €2/MWh, depending on the option you pick.",
           term: "two levels of flexibility",
           /* Two-component plan – the visitor picks a tier inside the card. */
           options: [
             {
               id: "flex",
               label: "Standard Flexible",
-              formula: "IBEX − €3",
+              formula: "IBEX − €3/MWh",
               notice: "1 month",
               hint: "Shorter term, more freedom",
             },
             {
               id: "long",
               label: "Standard Long-term",
-              formula: "IBEX − €2",
+              formula: "IBEX − €2/MWh",
               notice: "6 months",
               hint: "The best price in the standard plan",
             },
@@ -248,12 +249,13 @@ const c = {
     compare: {
       eyebrow: "Comparison",
       title: "The plans side by side",
-      lead: "No asterisks, no small print, these are the terms.",
-      cols: ["Plan", "Formula (IBEX, €/MWh)", "Notice period", "Target group", "Key advantage"],
+      methodology: site.pricingMethodology.en,
+      lead: `Reference market: ${site.marketFull.en}. All trading components are stated in €/MWh. No asterisks, no small print, these are the terms.`,
+      cols: ["Plan", "Formula", "Notice period", "Target group", "Key advantage"],
       rows: [
-        { plan: "NV Fixed", formula: "IBEX − €15", notice: "1 month", target: "Small renewable plants", advantage: "Full freedom, one month's notice." },
-        { plan: "NV Standard Flexible", formula: "IBEX − €3", notice: "1 month", target: "Mid-size renewables", advantage: "A balance of good price and a short commitment." },
-        { plan: "NV Standard Long-term", formula: "IBEX − €2", notice: "6 months", target: "Established renewables", advantage: "Maximum return with the lowest balancing fee." },
+        { plan: "NV Fixed", formula: "IBEX − €15/MWh", notice: "1 month", target: "Small renewable plants", advantage: "Full freedom, one month's notice." },
+        { plan: "NV Standard Flexible", formula: "IBEX − €3/MWh", notice: "1 month", target: "Mid-size renewables", advantage: "A balance of good price and a short commitment." },
+        { plan: "NV Standard Long-term", formula: "IBEX − €2/MWh", notice: "6 months", target: "Established renewables", advantage: "Maximum return with the lowest balancing fee." },
         { plan: "NV Individual", formula: "Negotiated", notice: "Negotiated", target: "Sites over 1 MW", advantage: "Terms built around your site's profile." },
       ],
     },
@@ -283,7 +285,7 @@ const c = {
         { q: "Will my generation stop when I change buyer?", a: "No, not for a second. The change is purely administrative, the energy flows through the same grid, maintained by the same grid operator. Only the trader purchasing your output changes." },
         { q: "How much does switching cost and how long does it take?", a: "Switching is completely free, no fees, no deposits. We file the documents by the 10th of the month and from the 1st of the next month you are selling to us. We handle all the administration." },
         { q: "What is balancing and why do you mention it?", a: "Every producer deviates from their generation forecast, and someone pays for those imbalances. As a member of our balancing group, deviations offset each other between members, on the NV Fixed plan, balancing is included in the price, with no surprises." },
-        { q: "How is the price I receive calculated?", a: "By your plan formula: the IBEX exchange price for the period minus the agreed fee, for example IBEX − €15/MWh on NV Fixed. You get a monthly report with a full breakdown and no hidden deductions." },
+        { q: "How is the price I receive calculated?", a: `By your plan formula: the ${site.market.en} price for the relevant settlement period, minus the agreed trading component, for example IBEX − €15/MWh on NV Fixed. ${site.pricingMethodology.en} You get a monthly report with a full breakdown and no hidden deductions.` },
         { q: "Can I leave if I am not happy?", a: "Yes, on your plan notice period – 1 month on NV Fixed, 1 or 6 months on NV Standard. No penalties, no lock-in clauses." },
       ],
     },
@@ -372,7 +374,10 @@ const c = {
               {plan.options.map((opt) => (
                 <div class="flex flex-col rounded-xl border border-line bg-surface-alt p-3">
                   <p class="text-[11px] leading-tight font-bold tracking-wide text-accent uppercase">{opt.label}</p>
-                  <p class="mt-2 font-[family-name:var(--font-display)] text-base leading-none font-bold whitespace-nowrap text-accent">{opt.formula}</p>
+                  <!-- No nowrap: with the unit spelled out, "БНЕБ − 3 €/MWh" is 144px of
+                       text in a 108px box at 375px. Letting it break at the space
+                       puts the unit on its own line instead of clipping it. -->
+                  <p class="mt-2 font-[family-name:var(--font-display)] text-base leading-tight font-bold text-accent">{opt.formula}</p>
                   <p class="mt-2 text-xs leading-snug font-semibold text-body">
                     {c.plans.noticeLabel}: <span class="whitespace-nowrap">{opt.notice}</span>
                   </p>
@@ -463,6 +468,9 @@ const c = {
             ))}
           </tbody>
         </table>
+      <!-- A published formula is the headline, not the mechanism: settlement
+           and balancing rules are contractual. Said once, under the table. -->
+      <p class="mt-4 text-sm leading-relaxed text-muted">{c.compare.methodology}</p>
       </div>
     </div>
   </section>
