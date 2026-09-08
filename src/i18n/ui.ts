@@ -36,6 +36,12 @@ export const ui = {
       noDeposit: "Без депозити",
       financing: "Възможност за финансиране",
     },
+    ctaFormal: {
+      title: "Готови ли сте да започнем?",
+      text: `Заявете оферта или се свържете с нас, отговаряме ${responseWithin.bg}.`,
+      primary: "Заявете оферта",
+      call: "Обадете се",
+    },
     cta: {
       title: "Готов за енергийна независимост?",
       text: `Заяви оферта или ни се обади, отговаряме ${responseWithin.bg}.`,
@@ -44,7 +50,7 @@ export const ui = {
     },
     footer: {
       oneLiner:
-        "Ток на ясна цена и соларни централи с батерии, от един партньор, който мисли за твоята дългосрочна независимост.",
+        "Ток на ясна цена и соларни централи с батерии, от партньор с поглед към дългосрочната енергийна независимост.",
       services: "Услуги",
       company: "Компания",
       information: "Информация",
@@ -71,7 +77,7 @@ export const ui = {
     },
     consent: {
       title: "Използваме бисквитки",
-      text: "Използваме бисквитки за анализ на трафика и подобряване на сайта. Можеш да приемеш всички или да избереш кои.",
+      text: "Използваме бисквитки за анализ на трафика и подобряване на сайта. Можете да приемете всички или да изберете кои.",
       acceptAll: "Приемам всички",
       rejectAll: "Само необходимите",
       settings: "Настройки",
@@ -116,6 +122,12 @@ export const ui = {
       offer2min: "A quote in 2 minutes",
       noDeposit: "No deposits",
       financing: "Financing available",
+    },
+    ctaFormal: {
+      title: "Ready to get started?",
+      text: `Request an offer or get in touch, we reply ${responseWithin.en}.`,
+      primary: "Request an offer",
+      call: "Call us",
     },
     cta: {
       title: "Ready for energy independence?",

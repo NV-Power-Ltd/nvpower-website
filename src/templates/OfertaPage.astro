@@ -20,7 +20,7 @@ const c = {
     /* Used instead of `sub` while the wizard is hidden: it must not promise a
        questionnaire that is not on the page. */
     subOffline:
-      "Обади ни се или ни пиши и ще подготвим конкретни числа за обекта ти, цена, икономия и срок на откупуване.",
+      "Обади ни се или ни пиши и ще подготвим конкретни числа за Вашия обект: цена, икономия и срок на откупуване.",
     badges: [
       { icon: Clock, text: responseBadge.bg },
       { icon: BadgePercent, text: "Без скрити такси" },
@@ -29,7 +29,7 @@ const c = {
     /* Shown while the wizard is off. It must not mention a questionnaire: there
        isn't one, and promising it is what made this flow a dead end. */
     offline: {
-      title: "За какво ти е офертата?",
+      title: "За какво Ви е офертата?",
       text: `Избери направлението и попълни кратката форма, или ни се обади. Отговаряме ${responseWithin.bg}.`,
       routes: [
         { label: "Изкупуване на ток от ВЕИ централа", hint: "мощност, точка на присъединяване, профил на производство", interest: 0 },

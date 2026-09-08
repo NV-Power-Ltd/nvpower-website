@@ -252,8 +252,23 @@ src/
 
 ### Език и тон
 
-Целият сайт е на приятелско-неформално **„ти"** (никога „Вие"). Английската
-версия е **пълно огледало**, не резюме.
+Обръщението **зависи от аудиторията на страницата**, не е едно за целия сайт.
+
+| Регистър | Страници |
+| --- | --- |
+| **„Вие"** – професионален | `/tok/`, `/dostavka/`, `/solar/za-biznesa/`, `/za-nas/`, `/info/`, `/proekti/`, `/kontakti/`, `/oferta/`, `/pravila/`, `/poveritelnost/` |
+| **„ти"** – приятелски | `/`, `/solar/`, `/solar/za-doma/`, `/kalkulator/` и мини конфигураторът |
+
+Причината: лицензиран търговец, който говори на „ти" на производител или на
+финансов директор, звучи като лендинг страница. Обратното, домашният клиент
+няма нужда от канцеларски език.
+
+**Споделените компоненти работят и в двата регистъра.** `CtaBand` приема
+`tone="formal"` и сменя целия блок (`ui.ctaFormal`); футърът и банерът за
+бисквитки са неутрални или на „Вие", защото се показват навсякъде. Ако добавиш
+страница, избери регистър и подай `tone` на `CtaBand` съответно.
+
+Английската версия е **пълно огледало**, не резюме.
 
 **Срок за отговор.** `site.responseTime.confirmed` е `false`, затова целият сайт
 казва **„възможно най-скоро"** вместо число. Причината: имаше две обещания
@@ -509,8 +524,24 @@ describe it in `PrivacyPage.astro` – otherwise the policy becomes false.
 
 ### Voice
 
-The Bulgarian copy uses the informal **„ти"** throughout, never „Вие". The
-English version is a **full mirror**, not a summary.
+Bulgarian address **depends on the page's audience**, it is not one setting
+for the whole site.
+
+| Register | Pages |
+| --- | --- |
+| **„Вие"** – professional | `/tok/`, `/dostavka/`, `/solar/za-biznesa/`, `/za-nas/`, `/info/`, `/proekti/`, `/kontakti/`, `/oferta/`, `/pravila/`, `/poveritelnost/` |
+| **„ти"** – friendly | `/`, `/solar/`, `/solar/za-doma/`, `/kalkulator/` and the mini configurator |
+
+The reason: a licensed trader addressing a producer or a CFO informally reads
+as a landing page. The reverse is also true, a homeowner does not need
+officialese.
+
+**Shared components work in both registers.** `CtaBand` takes `tone="formal"`
+and swaps the whole band (`ui.ctaFormal`); the footer and the cookie banner are
+neutral or formal, because they appear everywhere. When adding a page, pick a
+register and pass `tone` to `CtaBand` accordingly.
+
+The English version is a **full mirror**, not a summary.
 
 **Response time.** `site.responseTime.confirmed` is `false`, so the whole site
 says **"as soon as possible"** rather than a number. The reason: it promised two

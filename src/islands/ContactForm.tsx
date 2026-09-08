@@ -35,8 +35,8 @@ const copy = {
     gdpr: "Съгласен съм NV Power да обработи данните ми, за да отговори на запитването, съгласно политиката за поверителност.",
     submit: "Изпрати запитването",
     sending: "Изпращане…",
-    successTitle: "Получихме съобщението ти!",
-    successText: `Ще ти отговорим ${responseWithin.bg}, в работно време.`,
+    successTitle: "Получихме съобщението Ви!",
+    successText: `Ще Ви отговорим ${responseWithin.bg}, в работно време.`,
     required: "Попълни задължителните полета и отбележи съгласието.",
     error: "Нещо се обърка. Пиши ни директно на " + site.email + ".",
     /* Distinct from `error`: nothing went wrong, the form simply has nowhere to

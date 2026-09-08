@@ -8,9 +8,13 @@ interface Props {
   locale: Locale;
   title?: string;
   text?: string;
+  /** Producer, business and regulatory pages address the reader formally;
+      residential ones keep the friendly „ти". */
+  tone?: "informal" | "formal";
 }
-const { locale, title, text } = Astro.props;
-const t = useUI(locale);
+const { locale, title, text, tone = "informal" } = Astro.props;
+const ui = useUI(locale);
+const t = { ...ui, cta: tone === "formal" ? ui.ctaFormal : ui.cta };
 ---
 
 <!-- Dark CTA band – every page ends with one; no dead-end pages (§8) -->
