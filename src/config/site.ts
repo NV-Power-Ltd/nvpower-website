@@ -189,6 +189,24 @@ export const site = {
   },
 
   /**
+   * What sits on top of the energy price, said in a way that survives a change
+   * of regulatory period.
+   *
+   * The old wording, "върху тях се начисляват ЗкО, акциз и ДДС", asserted three
+   * charges as universal. ЗкО is set by КЕВР per regulatory period and can be
+   * zero; excise rates differ by type of consumption; VAT treatment depends on
+   * the customer. Anything more specific than this belongs in an individual
+   * offer, not on a marketing page.
+   *
+   * If a concrete regulated value is ever published on the site, it must carry
+   * the period it applies to. None is published today.
+   */
+  regulatedComponents: {
+    bg: "Към цената на електрическата енергия могат да се прилагат мрежови, данъчни и други нормативно определени компоненти според типа клиент и действащата регулаторна рамка.",
+    en: "Network, tax and other statutory components may apply on top of the electricity price, depending on the type of client and the regulatory framework in force.",
+  },
+
+  /**
    * The reference market, named once so the Bulgarian and English copy cannot
    * drift apart. `market` is the short form used inside cards and tables;
    * `marketFull` is the first-mention form a professional customer expects.

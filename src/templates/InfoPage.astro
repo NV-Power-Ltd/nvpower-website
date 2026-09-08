@@ -5,6 +5,7 @@ import CtaBand from "../components/CtaBand.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
 import DocumentsList from "../components/DocumentsList.astro";
 import type { Locale } from "../config/site";
+import { site } from "../config/site";
 
 interface Props {
   locale: Locale;
@@ -67,12 +68,12 @@ const c = {
         {
           category: "invoice",
           q: "Как да чета фактурата си за ток?",
-          a: "Фактурата има две основни части: енергия, количеството кВтч по договорената с доставчика цена, и мрежови услуги (пренос и достъп), които са регулирани от КЕВР и са еднакви при всички доставчици. Върху тях се начисляват ЗкО, акциз и ДДС. Нашата фактура е една страница с ясни редове, а ако нещо не ти е ясно, консултантът ти я обяснява ред по ред.",
+          a: `Фактурата има две основни части: енергия, количеството кВтч по договорената с доставчика цена, и мрежови услуги (пренос и достъп), които са регулирани от КЕВР и са еднакви при всички доставчици. ${site.regulatedComponents.bg} Нашата фактура е една страница с ясни редове, а ако нещо не ти е ясно, консултантът ти я обяснява ред по ред.`,
         },
         {
           category: "invoice",
           q: "Какво са ЗкО и акциз във фактурата?",
-          a: "„Задължения към обществото“ (ЗкО) е регулирана компонента в цената на тока, с която се финансират изкупуването на зелена енергия по преференциални цени и други обществени задължения, определя я КЕВР и е еднаква при всички доставчици. Акцизът е държавен данък върху електроенергията. Нито едното, нито другото остава при доставчика, ние само ги събираме и превеждаме.",
+          a: "„Задължения към обществото“ (ЗкО) е регулирана компонента, с която се финансират изкупуването на зелена енергия по преференциални цени и други обществени задължения. Определя се от КЕВР с решение за съответния регулаторен период и е еднаква при всички доставчици; размерът ѝ се променя между периодите и може да бъде нулев. Акцизът е държавен данък върху електроенергията, със ставки, определени със закон и различни според вида потребление. Когато са приложими, нито едното, нито другото остава при доставчика, ние само ги събираме и превеждаме.",
         },
         {
           category: "solar",
@@ -155,7 +156,7 @@ const c = {
         { t: "Координатор на балансираща група", d: "Участникът, който отговаря за прогнозите, за балансирането и за уреждането на небалансите на членовете на групата пред електроенергийния системен оператор." },
         { t: "Балансиране", d: "Изравняването на разликата между заявените и действителните количества енергия. Разходът за балансиране се поема от координатора на групата и се урежда съгласно договора." },
         { t: "Небаланс", d: "Разликата между заявените или прогнозирани и действително измерените количества електрическа енергия за съответния период на сетълмент. Има цена, която някой плаща, затова има значение в чия балансираща група си." },
-        { t: "ЗкО", d: "„Задължения към обществото“, регулирана компонента в цената на тока, с която се финансират зелена енергия по преференциални цени и други обществени задължения." },
+        { t: "ЗкО", d: "„Задължения към обществото“, регулирана компонента в цената на тока, с която се финансират зелена енергия по преференциални цени и други обществени задължения. Определя се от КЕВР за съответния регулаторен период и размерът ѝ може да се променя." },
         { t: "Акциз", d: "Държавен данък върху електроенергията, който доставчикът събира и превежда към бюджета. Еднакъв при всички доставчици." },
         { t: "Монокристален панел", d: "Панел от монокристален силиций, днешният стандарт с най-висок КПД и най-добра работа при слаба светлина." },
         { t: "Стринг", d: "Група панели, свързани последователно към един вход на инвертора. Правилното оразмеряване на стринговете е ключова част от проектирането." },
@@ -235,12 +236,12 @@ const c = {
         {
           category: "invoice",
           q: "How do I read my electricity invoice?",
-          a: "The invoice has two main parts: energy, the kWh you consumed at the price agreed with your supplier, and network services (transmission and access), which are regulated by EWRC and identical with every supplier. On top of those come the public obligations charge, excise duty and VAT. Our invoice is one page with clear lines, and if anything is unclear, your consultant explains it line by line.",
+          a: `The invoice has two main parts: energy, the kWh you consumed at the price agreed with your supplier, and network services (transmission and access), which are regulated by EWRC and identical with every supplier. ${site.regulatedComponents.en} Our invoice is one page with clear lines, and if anything is unclear, your consultant explains it line by line.`,
         },
         {
           category: "invoice",
           q: "What are the public obligations charge and excise duty on my invoice?",
-          a: "The 'obligations to society' charge is a regulated component of the electricity price that funds the purchase of green energy at preferential prices and other public obligations, it is set by EWRC and is identical with every supplier. Excise duty is a state tax on electricity. Neither stays with the supplier, we simply collect and remit them.",
+          a: "The 'obligations to society' charge (ЗкО) is a regulated component that funds the purchase of green energy at preferential prices and other public obligations. It is set by EWRC in a decision for the relevant regulatory period and is identical with every supplier; the level changes between periods and can be zero. Excise duty is a state tax on electricity, at rates set by law that differ by type of consumption. Where they apply, neither stays with the supplier, we simply collect and remit them.",
         },
         {
           category: "solar",
@@ -323,7 +324,7 @@ const c = {
         { t: "Balancing group coordinator", d: "The participant responsible for the forecasts, the balancing and the settlement of the group members’ imbalances towards the electricity system operator." },
         { t: "Balancing", d: "Evening out the difference between nominated and actual quantities of energy. The balancing cost is carried by the group coordinator and settled under the contract." },
         { t: "Imbalance", d: "The difference between the nominated or forecast quantities and the quantities actually metered for the relevant settlement period. It has a price someone pays, which is why whose balancing group you are in matters." },
-        { t: "Public obligations charge (ЗкО)", d: "'Obligations to society', a regulated component of the electricity price that funds green energy at preferential prices and other public obligations." },
+        { t: "Public obligations charge (ЗкО)", d: "'Obligations to society', a regulated component of the electricity price that funds green energy at preferential prices and other public obligations. It is set by EWRC for the relevant regulatory period and its level can change." },
         { t: "Excise duty", d: "A state tax on electricity that the supplier collects and remits to the budget. Identical with every supplier." },
         { t: "Monocrystalline panel", d: "A panel made of monocrystalline silicon, today's standard, with the highest efficiency and the best low-light performance." },
         { t: "String", d: "A group of panels connected in series to one inverter input. Correct string sizing is a key part of the design." },

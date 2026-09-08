@@ -153,6 +153,13 @@ Permissions-Policy), кеширане на `/_astro/*`, `trailingSlash: true` и
 **Само евро.** България е в еврозоната от януари 2026 г.; цените в лева са
 премахнати изцяло. Не връщай лева.
 
+**Регулирани компоненти.** Сайтът умишлено не твърди, че ЗкО, акцизът и ДДС се
+начисляват винаги: ЗкО се определя за регулаторен период и може да е нулев,
+акцизните ставки се различават по вид потребление, а ДДС зависи от клиента.
+Формулировката е на едно място, `site.regulatedComponents`. **Ако някога се
+публикува конкретна регулирана стойност, тя задължително носи периода, за който
+важи.** В момента такава стойност няма никъде на сайта.
+
 **Няма публикувана цена за ток.** Офертите са формула спрямо дневния пазар на
 БНЕБ (IBEX), затова никъде не се обявява фиксирано €/кВтч, а формулите по
 плановете са в €/MWh (`/tok/`). Изречението, което го казва, е на едно място:
@@ -380,6 +387,13 @@ to fit on one line at 1024px. The descriptive wording lives in the footer.
 
 **Euro only.** Bulgaria joined the euro area in January 2026; lev pricing has
 been removed entirely. Do not reintroduce the lev.
+
+**Regulated components.** The site deliberately does not assert that ЗкО, excise
+and VAT always apply: ЗкО is set per regulatory period and can be zero, excise
+rates differ by type of consumption, and VAT depends on the customer. The wording
+lives in one place, `site.regulatedComponents`. **If a concrete regulated value
+is ever published, it must carry the period it applies to.** None is published
+anywhere today.
 
 **No published electricity price.** Offers are a formula against the IBEX
 (БНЕБ) day-ahead market, so no fixed €/kWh figure is quoted anywhere, and the
