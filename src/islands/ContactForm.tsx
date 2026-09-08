@@ -3,7 +3,7 @@ import { submitLead, fileError } from "../lib/lead";
 import { useHydrated } from "../lib/useHydrated";
 import NoScriptFallback from "./NoScriptFallback";
 import type { Locale } from "../config/site";
-import { site, CAN_ACCEPT_UPLOADS } from "../config/site";
+import { site, CAN_ACCEPT_UPLOADS, responseWithin } from "../config/site";
 import { r } from "../i18n/routes";
 
 /* §6.10 contact form – interest dropdown + monthly-bill bracket (silent lead
@@ -27,7 +27,7 @@ const copy = {
     submit: "Изпрати запитването",
     sending: "Изпращане…",
     successTitle: "Получихме съобщението ти!",
-    successText: `Ще ти отговорим до 3 работни дни в работно време.`,
+    successText: `Ще ти отговорим ${responseWithin.bg}, в работно време.`,
     required: "Попълни задължителните полета и отбележи съгласието.",
     error: "Нещо се обърка. Пиши ни директно на " + site.email + ".",
     select: "Избери…",
@@ -49,7 +49,7 @@ const copy = {
     submit: "Send the enquiry",
     sending: "Sending…",
     successTitle: "We got your message!",
-    successText: `We'll reply within 3 business days during business hours.`,
+    successText: `We'll reply ${responseWithin.en}, during business hours.`,
     required: "Fill in the required fields and tick the consent box.",
     error: "Something went wrong. Email us directly at " + site.email + ".",
     select: "Select…",

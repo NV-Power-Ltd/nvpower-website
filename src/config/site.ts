@@ -129,8 +129,20 @@ export const site = {
     instagram: "",
   },
 
-  /** Response promise repeated sitewide (§8): "в рамките на 3 работни дни". */
-  responseTime: { bg: "3 работни дни", en: "3 business days" },
+  /**
+   * How long a reply takes.
+   *
+   * `confirmed: false` means the business has not signed off an SLA. While it
+   * is false, every surface on the site says "възможно най-скоро" instead of a
+   * number, via the two exports at the bottom of this file.
+   *
+   * To publish a real commitment: set `bg`/`en` to the agreed period, then flip
+   * `confirmed` to true. Nothing else needs editing.
+   *
+   * [NEEDS BUSINESS CONFIRMATION] The site previously promised two different
+   * periods at once, "оферта до 1 работен ден" and "отговор до 3 работни дни".
+   */
+  responseTime: { confirmed: false, bg: "3 работни дни", en: "3 business days" },
 
   /**
    * How offer prices are set. There is deliberately no published €/kWh figure:
@@ -207,3 +219,16 @@ export const CAN_ACCEPT_UPLOADS = site.formEndpoint.trim().length > 0;
  * producer branch and an endpoint — see the README TO-DO.
  */
 export const OFFER_WIZARD_READY = false;
+
+/**
+ * The response period as it drops into a sentence:
+ * `отговаряме ${responseWithin.bg}` / `we reply ${responseWithin.en}`.
+ */
+export const responseWithin = site.responseTime.confirmed
+  ? { bg: `до ${site.responseTime.bg}`, en: `within ${site.responseTime.en}` }
+  : { bg: "възможно най-скоро", en: "as soon as possible" };
+
+/** The same fact as a standalone badge, for the hero check rows. */
+export const responseBadge = site.responseTime.confirmed
+  ? { bg: `Отговор до ${site.responseTime.bg}`, en: `Reply within ${site.responseTime.en}` }
+  : { bg: "Отговаряме възможно най-скоро", en: "We reply as soon as possible" };

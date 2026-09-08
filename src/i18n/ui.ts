@@ -1,4 +1,5 @@
 import type { Locale } from "../config/site";
+import { responseWithin, responseBadge } from "../config/site";
 
 /* Routing lives in ./routes so client-side islands can import the helpers
    without pulling this whole translation dictionary into their bundle. */
@@ -29,7 +30,7 @@ export const ui = {
       backToTop: "Обратно към началото на страницата",
     },
     promises: {
-      response: `Отговор до 3 работни дни`,
+      response: responseBadge.bg,
       noFees: "Без скрити такси",
       offer2min: "Оферта за 2 минути",
       noDeposit: "Без депозити",
@@ -37,7 +38,7 @@ export const ui = {
     },
     cta: {
       title: "Готов за енергийна независимост?",
-      text: `Вземи оферта онлайн или ни се обади, отговаряме до 3 работни дни.`,
+      text: `Вземи оферта онлайн или ни се обади, отговаряме ${responseWithin.bg}.`,
       primary: "Вземи оферта",
       call: "Обади се",
     },
@@ -110,7 +111,7 @@ export const ui = {
       backToTop: "Back to top of page",
     },
     promises: {
-      response: `Reply within 3 business days`,
+      response: responseBadge.en,
       noFees: "No hidden fees",
       offer2min: "A quote in 2 minutes",
       noDeposit: "No deposits",
@@ -118,7 +119,7 @@ export const ui = {
     },
     cta: {
       title: "Ready for energy independence?",
-      text: `Get a quote online or give us a call, we reply within 3 business days.`,
+      text: `Get a quote online or give us a call, we reply ${responseWithin.en}.`,
       primary: "Get a quote",
       call: "Call us",
     },

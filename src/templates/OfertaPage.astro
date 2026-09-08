@@ -3,7 +3,7 @@ import { ShieldCheck, Clock, BadgePercent, Phone, Mail, ArrowRight, Wrench } fro
 import BaseLayout from "../layouts/BaseLayout.astro";
 import OfferWizard from "../islands/OfferWizard";
 import type { Locale } from "../config/site";
-import { site, OFFER_WIZARD_READY } from "../config/site";
+import { site, OFFER_WIZARD_READY, responseBadge, responseWithin } from "../config/site";
 import { r } from "../i18n/ui";
 
 interface Props {
@@ -14,7 +14,7 @@ const { locale } = Astro.props;
 const c = {
   bg: {
     title: "Вземи оферта, NV Power",
-    description: `Персонална оферта за ток или соларна система за 2 минути. Отговор от консултант до 3 работни дни, без ангажимент.`,
+    description: `Персонална оферта за ток или соларна система за 2 минути. Отговор от консултант ${responseWithin.bg}, без ангажимент.`,
     h1: "Вземи своята оферта",
     sub: "Отговори на няколко въпроса за обекта си и ще подготвим конкретни числа, цена, икономия и срок на откупуване. Отнема около 90 секунди.",
     /* Used instead of `sub` while the wizard is hidden: it must not promise a
@@ -22,7 +22,7 @@ const c = {
     subOffline:
       "Обади ни се или ни пиши и ще подготвим конкретни числа за обекта ти, цена, икономия и срок на откупуване.",
     badges: [
-      { icon: Clock, text: `Отговор до 3 работни дни` },
+      { icon: Clock, text: responseBadge.bg },
       { icon: BadgePercent, text: "Без скрити такси" },
       { icon: ShieldCheck, text: "Без ангажимент и без депозити" },
     ],
@@ -30,7 +30,7 @@ const c = {
       title: "Онлайн въпросникът се актуализира",
       /* „Дотогава" сочеше към премахнатото изречение; „Междувременно" се връзва
          направо със заглавието. */
-      text: "Междувременно най-бързият път до оферта е директен контакт, отговаряме до 3 работни дни.",
+      text: `Междувременно най-бързият път до оферта е директен контакт, отговаряме ${responseWithin.bg}.`,
       callCta: "Обади се",
       mailCta: "Пиши ни",
       contactCta: "Виж всички начини за контакт",
@@ -38,19 +38,19 @@ const c = {
   },
   en: {
     title: "Get a quote, NV Power",
-    description: `A personal quote for electricity or a solar system in 2 minutes. A consultant replies within 3 business days, no commitment.`,
+    description: `A personal quote for electricity or a solar system in 2 minutes. A consultant replies ${responseWithin.en}, no commitment.`,
     h1: "Get your quote",
     sub: "Answer a few questions about your site and we'll prepare real numbers, price, savings and payback period. Takes about 90 seconds.",
     subOffline:
       "Call or email us and we'll prepare real numbers for your site, price, savings and payback period.",
     badges: [
-      { icon: Clock, text: `Reply within 3 business days` },
+      { icon: Clock, text: responseBadge.en },
       { icon: BadgePercent, text: "No hidden fees" },
       { icon: ShieldCheck, text: "No commitment, no deposits" },
     ],
     offline: {
       title: "The online questionnaire is being updated",
-      text: "In the meantime, the fastest route to a quote is direct contact, and we reply within 3 business days.",
+      text: `In the meantime, the fastest route to a quote is direct contact, and we reply ${responseWithin.en}.`,
       callCta: "Call us",
       mailCta: "Email us",
       contactCta: "See every way to reach us",

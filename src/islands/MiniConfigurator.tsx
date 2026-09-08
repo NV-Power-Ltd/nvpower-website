@@ -4,6 +4,7 @@ import { useHydrated } from "../lib/useHydrated";
 import NoScriptFallback from "./NoScriptFallback";
 import type { Locale } from "../config/site";
 import { r, type RouteKey } from "../i18n/routes";
+import { responseWithin } from "../config/site";
 
 /* §7.1 – homepage mini-configurator: 4 branching questions → recommendation
    card + inline mini lead form. Progress dots, „ти" tone. */
@@ -57,7 +58,7 @@ const copy = {
       submit: "Искам да ме потърсите",
       sending: "Изпращане…",
       gdpr: "Съгласен съм NV Power да обработи данните ми, за да отговори на запитването.",
-      success: "Готово! Ще ти се обадим в рамките на 3 работни дни.",
+      success: `Готово! Ще ти се обадим ${responseWithin.bg}.`,
       error: "Нещо се обърка. Обади ни се директно.",
       required: "Попълни име и телефон и отбележи съгласието.",
     },
@@ -110,7 +111,7 @@ const copy = {
       submit: "Call me back",
       sending: "Sending…",
       gdpr: "I agree that NV Power may process my data to answer this enquiry.",
-      success: "Done! We'll call you within 3 business days.",
+      success: `Done! We'll call you ${responseWithin.en}.`,
       error: "Something went wrong. Please call us directly.",
       required: "Fill in name and phone and tick the consent box.",
     },

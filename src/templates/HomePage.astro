@@ -6,7 +6,7 @@ import CtaBand from "../components/CtaBand.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
 import MiniConfigurator from "../islands/MiniConfigurator";
 import type { Locale } from "../config/site";
-import { site } from "../config/site";
+import { site, responseBadge, responseWithin } from "../config/site";
 import { r } from "../i18n/ui";
 import { featuredProjects, segmentLabels } from "../data/projects";
 
@@ -88,7 +88,7 @@ const c = {
       title: "Три стъпки до по-добра енергия",
       steps: [
         { icon: FileText, title: "Изпращаш запитване", text: "Онлайн за 2 минути, или ни се обаждаш директно." },
-        { icon: PenLine, title: `Получаваш оферта до 3 работни дни`, text: "Конкретни числа за твоя обект, без ангажимент." },
+        { icon: PenLine, title: `Получаваш оферта ${responseWithin.bg}`, text: "Конкретни числа за твоя обект, без ангажимент." },
         { icon: Wrench, title: "Договор онлайн / монтаж", text: "Смяната на доставчик е дистанционна; централата изграждаме до ключ." },
       ],
     },
@@ -197,7 +197,7 @@ const c = {
       title: "Three steps to better energy",
       steps: [
         { icon: FileText, title: "Send an enquiry", text: "Online in 2 minutes, or just call us." },
-        { icon: PenLine, title: `Get a quote within 3 business days`, text: "Real numbers for your site, no commitment." },
+        { icon: PenLine, title: `Get a quote ${responseWithin.en}`, text: "Real numbers for your site, no commitment." },
         { icon: Wrench, title: "Contract online / installation", text: "Supplier switching is remote; we build plants turnkey." },
       ],
     },

@@ -6,7 +6,7 @@ import CtaBand from "../components/CtaBand.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
 import InvoiceUpload from "../islands/InvoiceUpload";
 import type { Locale } from "../config/site";
-import { site, CAN_ACCEPT_UPLOADS } from "../config/site";
+import { site, CAN_ACCEPT_UPLOADS, responseBadge, responseWithin } from "../config/site";
 import { r } from "../i18n/ui";
 
 interface Props {
@@ -21,9 +21,9 @@ const c = {
     hero: {
       h1: "Продавай тока си. При ясни условия.",
       sub: "Лицензиран търговец на електроенергия. Изкупуваме продукцията на ВЕИ производители, с прозрачна формула и включено балансиране при NV Фиксиран.",
-      ctaPrimary: "Вземи оферта до 1 работен ден",
+      ctaPrimary: "Вземи оферта",
       ctaSecondary: "Виж плановете",
-      checks: [`Отговор до 3 работни дни`, "Включено балансиране при NV Фиксиран", "Без депозити"],
+      checks: [responseBadge.bg, "Включено балансиране при NV Фиксиран", "Без депозити"],
     },
     plans: {
       eyebrow: "Планове",
@@ -128,11 +128,11 @@ const c = {
     invoice: {
       eyebrow: "Провери сам",
       title: "Изпрати ни последното си отчитане, ще ти покажем разликата",
-      lead: `Прикачи последната си фактура или отчет за произведена енергия и ще получиш сравнителна оферта до 3 работни дни, с конкретни числа, не с обещания.`,
+      lead: `Прикачи последната си фактура или отчет за произведена енергия и ще получиш сравнителна оферта ${responseWithin.bg}, с конкретни числа, не с обещания.`,
     },
     ctaBand: {
       title: "Искаш оферта за изкупуване на продукцията си?",
-      text: "Изпрати ни мощността, точката на присъединяване и профила на производство. Отговаряме до 3 работни дни.",
+      text: `Изпрати ни мощността, точката на присъединяване и профила на производство. Отговаряме ${responseWithin.bg}.`,
     },
     faq: {
       eyebrow: "Въпроси",
@@ -152,9 +152,9 @@ const c = {
     hero: {
       h1: "Sell your power. On clear terms.",
       sub: "A licensed electricity trader. We buy the output of renewable producers, a transparent formula with balancing included on NV Fixed.",
-      ctaPrimary: "Get a quote within 1 business day",
+      ctaPrimary: "Get a quote",
       ctaSecondary: "See the plans",
-      checks: [`Reply within 3 business days`, "Balancing included on NV Fixed", "No deposits"],
+      checks: [responseBadge.en, "Balancing included on NV Fixed", "No deposits"],
     },
     plans: {
       eyebrow: "Plans",
@@ -257,11 +257,11 @@ const c = {
     invoice: {
       eyebrow: "Check for yourself",
       title: "Send us your latest settlement, we'll show you the difference",
-      lead: `Attach your latest invoice or generation report and you'll get a comparative offer within 3 business days, with real numbers, not promises.`,
+      lead: `Attach your latest invoice or generation report and you'll get a comparative offer ${responseWithin.en}, with real numbers, not promises.`,
     },
     ctaBand: {
       title: "Want a buy-back offer for your output?",
-      text: "Send us the capacity, the connection point and your generation profile. We reply within 3 business days.",
+      text: `Send us the capacity, the connection point and your generation profile. We reply ${responseWithin.en}.`,
     },
     faq: {
       eyebrow: "Questions",
@@ -473,7 +473,7 @@ const c = {
     <div class="container-site section">
       <SectionHeading eyebrow={c.invoice.eyebrow} title={c.invoice.title} lead={c.invoice.lead} on="band" />
       <ul class="mt-7 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5">
-        <li class="flex items-center gap-2 text-sm font-medium text-white/85"><Clock class="size-4 text-[#6fd0da]" aria-hidden="true" /> {locale === "bg" ? `Отговор до 3 работни дни` : `Reply within 3 business days`}</li>
+        <li class="flex items-center gap-2 text-sm font-medium text-white/85"><Clock class="size-4 text-[#6fd0da]" aria-hidden="true" /> {locale === "bg" ? responseBadge.bg : responseBadge.en}</li>
         <li class="flex items-center gap-2 text-sm font-medium text-white/85"><BadgePercent class="size-4 text-[#6fd0da]" aria-hidden="true" /> {locale === "bg" ? "Без скрити такси" : "No hidden fees"}</li>
         <li class="flex items-center gap-2 text-sm font-medium text-white/85"><ShieldCheck class="size-4 text-[#6fd0da]" aria-hidden="true" /> {locale === "bg" ? "Без ангажимент" : "No commitment"}</li>
       </ul>

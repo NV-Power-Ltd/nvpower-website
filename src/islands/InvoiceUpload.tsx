@@ -3,7 +3,7 @@ import { submitLead, fileError } from "../lib/lead";
 import { useHydrated } from "../lib/useHydrated";
 import NoScriptFallback from "./NoScriptFallback";
 import type { Locale } from "../config/site";
-import { site } from "../config/site";
+import { site, responseWithin } from "../config/site";
 import { r } from "../i18n/routes";
 
 /* /tok invoice-upload block – send us a recent invoice, get a comparative
@@ -20,7 +20,7 @@ const copy = {
     submit: "Изпрати фактурата",
     sending: "Изпращане…",
     successTitle: "Фактурата е при нас!",
-    successText: `Ще получиш сравнителна оферта до 3 работни дни.`,
+    successText: `Ще получиш сравнителна оферта ${responseWithin.bg}.`,
     required: "Прикачи фактура, попълни телефон и отбележи съгласието.",
     error: "Нещо се обърка. Пиши ни директно на " + site.email + ".",
     fileHint: "Числата от фактурата ни стигат, не ни трябва нищо друго.",
@@ -34,7 +34,7 @@ const copy = {
     submit: "Send the invoice",
     sending: "Sending…",
     successTitle: "We've got your invoice!",
-    successText: `You'll receive a comparative quote within 3 business days.`,
+    successText: `You'll receive a comparative quote ${responseWithin.en}.`,
     required: "Attach an invoice, fill in your phone and tick the consent box.",
     error: "Something went wrong. Email us directly at " + site.email + ".",
     fileHint: "The numbers on the invoice are all we need, nothing else.",

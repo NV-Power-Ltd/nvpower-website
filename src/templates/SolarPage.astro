@@ -5,7 +5,7 @@ import SectionHeading from "../components/SectionHeading.astro";
 import CtaBand from "../components/CtaBand.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
 import type { Locale } from "../config/site";
-import { site } from "../config/site";
+import { site, responseBadge, responseWithin } from "../config/site";
 import { r } from "../i18n/ui";
 
 interface Props {
@@ -22,9 +22,9 @@ const c = {
       h1a: "От слънцето",
       h1b: "до твоята сметка",
       sub: "Проектираме и изграждаме фотоволтаични централи с батерии, до ключ. От огледа и документите до мониторинга след пускане, всичко минава през един екип.",
-      ctaPrimary: "Вземи оферта до 1 работен ден",
+      ctaPrimary: "Вземи оферта",
       ctaSecondary: "Виж процеса",
-      checks: [`Отговор до 3 работни дни`, "Без скрити такси", "Възможност за финансиране"],
+      checks: [responseBadge.bg, "Без скрити такси", "Възможност за финансиране"],
     },
     segments: {
       eyebrow: "За кого",
@@ -75,7 +75,7 @@ const c = {
         },
         {
           icon: Clock,
-          title: `Оферта до 3 работни дни`,
+          title: `Оферта ${responseWithin.bg}`,
           text: "Конкретни числа: мощност, годишно производство, икономия и срок на откупуване. Без ангажимент.",
         },
         {
@@ -128,7 +128,7 @@ const c = {
       title: "Вноската ≈ сметката, която спираш да плащаш",
       lead: "Лизинг и разсрочено плащане за дома и бизнеса, започваш без голяма първоначална инвестиция, а централата се изплаща от икономията, която сама произвежда.",
       checks: ["Лизинг и разсрочено плащане", "За дома и за бизнеса", "Данъчно признат разход за фирми"],
-      cta: "Вземи оферта до 1 работен ден",
+      cta: "Вземи оферта",
     },
     calc: {
       title: "Колко ще спестиш със слънце?",
@@ -166,9 +166,9 @@ const c = {
       h1a: "From the sun",
       h1b: "to your bill",
       sub: "We design and build photovoltaic plants with batteries, turnkey. From the site survey and paperwork to post-launch monitoring, everything runs through one team.",
-      ctaPrimary: "Get a quote within 1 business day",
+      ctaPrimary: "Get a quote",
       ctaSecondary: "See the process",
-      checks: [`Reply within 3 business days`, "No hidden fees", "Financing available"],
+      checks: [responseBadge.en, "No hidden fees", "Financing available"],
     },
     segments: {
       eyebrow: "Who it's for",
@@ -219,7 +219,7 @@ const c = {
         },
         {
           icon: Clock,
-          title: `A quote within 3 business days`,
+          title: `A quote ${responseWithin.en}`,
           text: "Real numbers: capacity, annual production, savings and payback period. No commitment.",
         },
         {
@@ -272,7 +272,7 @@ const c = {
       title: "The payment ≈ the bill you stop paying",
       lead: "Leasing and instalment plans for homes and business, start without a big upfront investment, while the plant pays for itself with the savings it generates.",
       checks: ["Leasing & instalment plans", "For homes and business", "Tax-deductible expense for companies"],
-      cta: "Get a quote within 1 business day",
+      cta: "Get a quote",
     },
     calc: {
       title: "How much can the sun save you?",

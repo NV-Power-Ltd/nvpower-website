@@ -221,8 +221,18 @@ src/
 ### Език и тон
 
 Целият сайт е на приятелско-неформално **„ти"** (никога „Вие"). Английската
-версия е **пълно огледало**, не резюме. Обещанието за отговор е **3 работни дни**
-и се повтаря навсякъде – сменя се от `site.responseTime`.
+версия е **пълно огледало**, не резюме.
+
+**Срок за отговор.** `site.responseTime.confirmed` е `false`, затова целият сайт
+казва **„възможно най-скоро"** вместо число. Причината: имаше две обещания
+едновременно, „оферта до 1 работен ден" в 16 CTA бутона и „отговор до 3 работни
+дни" на 51 други места, понякога едно до друго в едно и също херо. `responseTime`
+съществуваше, но само един шаблон го четеше.
+
+Всяка повърхност вече минава през `responseWithin` (в изречение) и
+`responseBadge` (самостоятелен етикет) от `src/config/site.ts`. **За да обявите
+реален срок:** сложете периода в `responseTime.bg`/`.en` и обърнете `confirmed`
+на `true`. Нищо друго не се пипа. CTA бутоните умишлено вече не носят срок.
 
 ---
 
@@ -436,5 +446,16 @@ describe it in `PrivacyPage.astro` – otherwise the policy becomes false.
 ### Voice
 
 The Bulgarian copy uses the informal **„ти"** throughout, never „Вие". The
-English version is a **full mirror**, not a summary. The response promise is
-**3 business days**, repeated sitewide – change it in `site.responseTime`.
+English version is a **full mirror**, not a summary.
+
+**Response time.** `site.responseTime.confirmed` is `false`, so the whole site
+says **"as soon as possible"** rather than a number. The reason: it promised two
+periods at once, "оферта до 1 работен ден" in 16 CTA labels and "отговор до
+3 работни дни" in 51 other places, sometimes side by side in the same hero.
+`responseTime` existed, but only one template read it.
+
+Every surface now goes through `responseWithin` (in a sentence) and
+`responseBadge` (a standalone label) from `src/config/site.ts`. **To publish a
+real commitment:** put the period in `responseTime.bg`/`.en` and flip `confirmed`
+to `true`. Nothing else needs editing. CTA labels deliberately no longer carry a
+response time.

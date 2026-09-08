@@ -5,7 +5,7 @@ import SectionHeading from "../components/SectionHeading.astro";
 import CtaBand from "../components/CtaBand.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
 import type { Locale } from "../config/site";
-import { site } from "../config/site";
+import { site, responseBadge, responseWithin } from "../config/site";
 import { r } from "../i18n/ui";
 
 interface Props {
@@ -21,9 +21,9 @@ const c = {
     hero: {
       h1: "Покривът ти може да работи за бизнеса",
       sub: "Проектираме и изграждаме централи от 30 kWp до 1 MWp+, върху плоски покриви, метални конструкции, навеси и терен. Режеш цената на дневната енергия и пиковите такси, без да блокираш паричен поток.",
-      ctaPrimary: "Вземи оферта до 1 работен ден",
+      ctaPrimary: "Вземи оферта",
       ctaSecondary: "Виж примерните числа",
-      checks: [`Отговор до 3 работни дни`, "Без скрити такси", "Лизинг и разсрочено плащане"],
+      checks: [responseBadge.bg, "Без скрити такси", "Лизинг и разсрочено плащане"],
     },
     facts: {
       eyebrow: "Мащабът",
@@ -45,7 +45,7 @@ const c = {
         { label: "Производството съвпада с", value: "работните часове, най-скъпата ти енергия" },
       ],
       note: "Ориентировъчни стойности за добре изложен обект в България. Точните числа за твоя обект, в офертата, заедно с финансов модел.",
-      cta: "Вземи оферта до 1 работен ден",
+      cta: "Вземи оферта",
     },
     benefits: {
       eyebrow: "Ползите",
@@ -95,7 +95,7 @@ const c = {
         {
           icon: FileText,
           title: "Оферта и финансов модел",
-          text: `Мощност, производство, икономия, откупуване и лизингов вариант, числа, готови за финансовия ти директор. Отговор до 3 работни дни.`,
+          text: `Мощност, производство, икономия, откупуване и лизингов вариант, числа, готови за финансовия ти директор. Отговаряме ${responseWithin.bg}.`,
         },
         {
           icon: Wrench,
@@ -130,9 +130,9 @@ const c = {
     hero: {
       h1: "Your roof can work for the business",
       sub: "We design and build plants from 30 kWp to 1 MWp+, on flat roofs, steel structures, canopies and land. Cut the cost of daytime energy and peak charges without locking up cash flow.",
-      ctaPrimary: "Get a quote within 1 business day",
+      ctaPrimary: "Get a quote",
       ctaSecondary: "See the example numbers",
-      checks: [`Reply within 3 business days`, "No hidden fees", "Leasing & instalment plans"],
+      checks: [responseBadge.en, "No hidden fees", "Leasing & instalment plans"],
     },
     facts: {
       eyebrow: "The scale",
@@ -154,7 +154,7 @@ const c = {
         { label: "Production coincides with", value: "working hours, your most expensive energy" },
       ],
       note: "Indicative values for a well-exposed site in Bulgaria. The exact numbers for your site come with the quote, together with a financial model.",
-      cta: "Get a quote within 1 business day",
+      cta: "Get a quote",
     },
     benefits: {
       eyebrow: "The benefits",
@@ -204,7 +204,7 @@ const c = {
         {
           icon: FileText,
           title: "Quote & financial model",
-          text: `Capacity, production, savings, payback and a leasing option, numbers ready for your CFO. A reply within 3 business days.`,
+          text: `Capacity, production, savings, payback and a leasing option, numbers ready for your CFO. We reply ${responseWithin.en}.`,
         },
         {
           icon: Wrench,

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import type { Locale } from "../config/site";
-import { site, SITE_URL, OFFER_WIZARD_READY } from "../config/site";
+import { site, SITE_URL, OFFER_WIZARD_READY, responseBadge, responseWithin } from "../config/site";
 
 interface Props {
   locale: Locale;
@@ -54,8 +54,8 @@ const c = {
       {
         q: "Как се взима оферта?",
         a: OFFER_WIZARD_READY
-          ? `Чрез формата на адрес <a href="${SITE_URL}/oferta/">${SITE_URL}/oferta/</a>, отнема около 2 минути. Компанията отговаря с конкретна оферта до 3 работни дни в рамките на работното време.`
-          : `По телефон <a href="tel:${site.phoneHref}">${site.phone}</a> или на имейл <a href="mailto:${site.email}">${site.email}</a>. Компанията отговаря с конкретна оферта до 3 работни дни в рамките на работното време. Онлайн въпросникът на <a href="${SITE_URL}/oferta/">${SITE_URL}/oferta/</a> в момента се актуализира и на страницата са публикувани телефонът и имейлът.`,
+          ? `Чрез формата на адрес <a href="${SITE_URL}/oferta/">${SITE_URL}/oferta/</a>, отнема около 2 минути. Компанията отговаря с конкретна оферта ${responseWithin.bg}, в рамките на работното време.`
+          : `По телефон <a href="tel:${site.phoneHref}">${site.phone}</a> или на имейл <a href="mailto:${site.email}">${site.email}</a>. Компанията отговаря с конкретна оферта ${responseWithin.bg}, в рамките на работното време. Онлайн въпросникът на <a href="${SITE_URL}/oferta/">${SITE_URL}/oferta/</a> в момента се актуализира и на страницата са публикувани телефонът и имейлът.`,
       },
       {
         q: "Как се сменя доставчикът на ток?",
@@ -108,8 +108,8 @@ const c = {
       {
         q: "How do you get a quote?",
         a: OFFER_WIZARD_READY
-          ? `Via the form at <a href="${SITE_URL}/en/request-a-quote/">${SITE_URL}/en/request-a-quote/</a>, it takes about 2 minutes. The company replies with a concrete quote within 3 business days during business hours.`
-          : `By phone on <a href="tel:${site.phoneHref}">${site.phone}</a> or by email at <a href="mailto:${site.email}">${site.email}</a>. The company replies with a concrete quote within 3 business days during business hours. The online questionnaire at <a href="${SITE_URL}/en/request-a-quote/">${SITE_URL}/en/request-a-quote/</a> is being updated, and the page carries the phone number and email address instead.`,
+          ? `Via the form at <a href="${SITE_URL}/en/request-a-quote/">${SITE_URL}/en/request-a-quote/</a>, it takes about 2 minutes. The company replies with a concrete quote ${responseWithin.en}, during business hours.`
+          : `By phone on <a href="tel:${site.phoneHref}">${site.phone}</a> or by email at <a href="mailto:${site.email}">${site.email}</a>. The company replies with a concrete quote ${responseWithin.en}, during business hours. The online questionnaire at <a href="${SITE_URL}/en/request-a-quote/">${SITE_URL}/en/request-a-quote/</a> is being updated, and the page carries the phone number and email address instead.`,
       },
       {
         q: "How do you switch electricity supplier?",
