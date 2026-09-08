@@ -1,0 +1,198 @@
+---
+import { ArrowRight, Phone, ShieldCheck, LineChart, Users, FileSignature } from "@lucide/astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import CtaBand from "../components/CtaBand.astro";
+import type { Locale } from "../config/site";
+import { site } from "../config/site";
+import { r } from "../i18n/ui";
+
+/**
+ * Electricity supply — the buyer-facing half of the trading licence.
+ *
+ * Deliberately narrow. The only supply offering with confirmed commercial
+ * content is the individual offer for large consumers that used to sit inside
+ * the >1 MW block on /tok/, which mixed seller and buyer language on one page.
+ *
+ * Nothing here quotes a price, a switching timeline or an invoice breakdown,
+ * because none of that is confirmed for this business line. Household and
+ * small-business supply is NOT offered on this page. See the README TO-DO for
+ * what the business has to confirm before this page can grow.
+ */
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+
+const c = {
+  bg: {
+    title: "Доставка на електроенергия за големи консуматори | NV Power",
+    description:
+      "NV Power е лицензиран търговец на електрическа енергия. Изготвяме индивидуални оферти за доставка на консуматори с присъединена мощност над 1 MW, на база профила на потребление.",
+    hero: {
+      h1: "Купуваш електроенергия. По индивидуална оферта.",
+      sub: "Лицензиран търговец на електрическа енергия. Изготвяме индивидуални оферти за доставка на консуматори с мощност над 1 MW, на база специфичния профил на потребление на обекта.",
+      ctaPrimary: "Заяви оферта за доставка",
+      ctaSecondary: "Обади се",
+      checks: [`Отговор до ${site.responseTime.bg}`, "Индивидуална оферта", "Без депозити"],
+    },
+    what: {
+      eyebrow: "За кого е",
+      title: "Индивидуална доставка за големи обекти",
+      lead: "Не публикуваме тарифа за доставка. Всяка оферта се изготвя за конкретния обект, защото цената зависи от профила на потребление и от периода на договора.",
+      cards: [
+        {
+          icon: LineChart,
+          title: "Оферта по профил на потребление",
+          text: "Разглеждаме товаровия ти профил и на негова база предлагаме условия, обвързани с цените на БНЕБ (IBEX).",
+        },
+        {
+          icon: Users,
+          title: "Стандартна балансираща група",
+          text: "Влизаш в балансиращата ни група, за която сме регистриран координатор. Отклоненията на членовете взаимно се компенсират.",
+        },
+        {
+          icon: FileSignature,
+          title: "Договор на разбираем език",
+          text: "Формулата, таксите и срокът на предизвестие се записват в договора. Администрацията по смяната я поемаме ние.",
+        },
+      ],
+    },
+    scope: {
+      title: "Обхват на тази услуга",
+      text: "Тази страница се отнася за консуматори с присъединена мощност над 1 MW. Ако обектът ти е под този праг, пиши ни или се обади и ще ти кажем откровено дали можем да бъдем полезни, вместо да ти обещаваме условия предварително.",
+    },
+    seller: {
+      title: "Продаваш ток, а не купуваш?",
+      text: "Ако имаш ВЕИ централа и търсиш изкупуване на продукцията, условията са на отделна страница.",
+      cta: "Виж изкупуването от ВЕИ",
+    },
+    cta: {
+      title: "Искаш оферта за доставка на електроенергия?",
+      text: "Изпрати ни данните на обекта и товаровия профил, ако разполагаш с него. Отговаряме до 3 работни дни.",
+    },
+  },
+  en: {
+    title: "Electricity supply for large consumers | NV Power",
+    description:
+      "NV Power is a licensed electricity trader. We prepare individual supply offers for consumers with more than 1 MW of connected capacity, based on their consumption profile.",
+    hero: {
+      h1: "You buy electricity. On an individual offer.",
+      sub: "A licensed electricity trader. We prepare individual supply offers for consumers above 1 MW, based on the specific consumption profile of the site.",
+      ctaPrimary: "Request a supply offer",
+      ctaSecondary: "Call us",
+      checks: [`Reply within ${site.responseTime.en}`, "An individual offer", "No deposits"],
+    },
+    what: {
+      eyebrow: "Who it is for",
+      title: "Individual supply for large sites",
+      lead: "We publish no supply tariff. Every offer is prepared for the specific site, because the price depends on the consumption profile and on the contract period.",
+      cards: [
+        {
+          icon: LineChart,
+          title: "Priced off your load profile",
+          text: "We look at your load profile and, on that basis, offer terms linked to the IBEX (БНЕБ) exchange prices.",
+        },
+        {
+          icon: Users,
+          title: "A standard balancing group",
+          text: "You join our balancing group, for which we are a registered coordinator. Members' deviations offset each other.",
+        },
+        {
+          icon: FileSignature,
+          title: "A contract in plain language",
+          text: "The formula, the fees and the notice period are written into the contract. We handle the switching paperwork.",
+        },
+      ],
+    },
+    scope: {
+      title: "The scope of this service",
+      text: "This page covers consumers with more than 1 MW of connected capacity. If your site is below that threshold, write or call and we will tell you honestly whether we can help, rather than promising terms up front.",
+    },
+    seller: {
+      title: "Selling power rather than buying it?",
+      text: "If you have a renewable plant and are looking for buy-back, those terms are on a separate page.",
+      cta: "See renewable buy-back",
+    },
+    cta: {
+      title: "Want a supply offer?",
+      text: "Send us the site details and your load profile, if you have one. We reply within 3 business days.",
+    },
+  },
+}[locale];
+---
+
+<BaseLayout locale={locale} title={c.title} description={c.description} path="/dostavka/">
+  <!-- 1 ▸ HERO. Buyer language only; no seller vocabulary anywhere on this page. -->
+  <section class="bg-band">
+    <div class="container-site pt-14 pb-16 text-center md:pt-20 md:pb-20">
+      <h1 class="mx-auto max-w-3xl text-3xl font-bold text-white md:text-5xl md:leading-[1.12]">{c.hero.h1}</h1>
+      <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">{c.hero.sub}</p>
+
+      <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a href={r(locale, "kontakti")} class="btn btn-primary !px-7 !py-4 text-base">
+          {c.hero.ctaPrimary}
+          <ArrowRight class="size-4" aria-hidden="true" />
+        </a>
+        <a href={`tel:${site.phoneHref}`} class="btn btn-ghost-band !px-7 !py-4 text-base">
+          <Phone class="size-4" aria-hidden="true" />
+          {c.hero.ctaSecondary}
+        </a>
+      </div>
+
+      <ul class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5">
+        {c.hero.checks.map((check) => (
+          <li class="flex items-center gap-2 text-sm font-medium text-white/90">{check}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2 ▸ WHAT THE OFFER ACTUALLY IS -->
+  <section class="section container-site">
+    <SectionHeading eyebrow={c.what.eyebrow} title={c.what.title} lead={c.what.lead} />
+    <ul class="mt-12 grid gap-5 md:grid-cols-3">
+      {c.what.cards.map((card) => (
+        <li class="card p-6">
+          <span class="flex size-11 items-center justify-center rounded-xl bg-accent/10 text-accent">
+            <card.icon class="size-5.5" aria-hidden="true" />
+          </span>
+          <h3 class="mt-3.5 font-[family-name:var(--font-display)] text-base font-bold text-body">{card.title}</h3>
+          <p class="mt-1.5 text-sm leading-relaxed text-muted">{card.text}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- 3 ▸ SCOPE. Says plainly where the service stops, instead of implying it
+       covers everyone. -->
+  <section class="bg-surface-alt">
+    <div class="container-site section">
+      <div class="mx-auto flex max-w-2xl flex-col items-start gap-4 md:flex-row">
+        <span class="flex size-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
+          <ShieldCheck class="size-5.5" aria-hidden="true" />
+        </span>
+        <div>
+          <h2 class="font-[family-name:var(--font-display)] text-xl font-bold text-body">{c.scope.title}</h2>
+          <p class="mt-2 leading-relaxed text-muted">{c.scope.text}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 ▸ THE OTHER SIDE OF THE TRADE, clearly signposted rather than mixed in -->
+  <section class="section container-site">
+    <div class="card mx-auto flex max-w-2xl flex-col items-start gap-4 p-7 md:flex-row md:items-center md:justify-between">
+      <div>
+        <h2 class="font-[family-name:var(--font-display)] text-lg font-bold text-body">{c.seller.title}</h2>
+        <p class="mt-1.5 text-sm leading-relaxed text-muted">{c.seller.text}</p>
+      </div>
+      <a href={r(locale, "tok")} class="btn btn-outline shrink-0">
+        {c.seller.cta}
+        <ArrowRight class="size-4" aria-hidden="true" />
+      </a>
+    </div>
+  </section>
+
+  <CtaBand locale={locale} title={c.cta.title} text={c.cta.text} />
+</BaseLayout>

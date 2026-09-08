@@ -12,6 +12,12 @@ import type { Locale } from "../config/site";
 export const routes = {
   home: "/",
   tok: "/tok/",
+  /**
+   * Supply is the narrow half of the trading licence: individual offers for
+   * large consumers, no published product. It exists as its own route so
+   * /tok/ can stay purely seller-facing, per the three-area architecture.
+   */
+  dostavka: "/dostavka/",
   solar: "/solar/",
   solarHome: "/solar/za-doma/",
   solarBiz: "/solar/za-biznesa/",
@@ -31,6 +37,7 @@ export type RouteKey = keyof typeof routes;
 /** BG-canonical path → EN slug. Paths absent here are identical in both. */
 const EN_SLUGS: Record<string, string> = {
   "/tok/": "/electricity/",
+  "/dostavka/": "/electricity-supply/",
   "/solar/za-doma/": "/solar/residential/",
   "/solar/za-biznesa/": "/solar/for-business/",
   "/oferta/": "/request-a-quote/",

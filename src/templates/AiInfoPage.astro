@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import CtaBand from "../components/CtaBand.astro";
 import type { Locale } from "../config/site";
 import { site, SITE_URL, OFFER_WIZARD_READY } from "../config/site";
 
@@ -42,7 +41,7 @@ const c = {
     qa: [
       {
         q: "Какво прави NV Power?",
-        a: "NV Power е български лицензиран търговец на електроенергия и EPC компания за соларни системи. Компанията доставя ток на публично обявена цена за дома и бизнеса и проектира, изгражда и финансира фотоволтаични централи с батерии за съхранение.",
+        a: "NV Power е български лицензиран търговец на електрическа енергия и координатор на стандартна балансираща група, както и EPC компания за соларни системи. Работи в три направления: изкупуване на електроенергия от ВЕИ производители с поемане на балансирането; доставка на електроенергия по индивидуална оферта за консуматори над 1 MW; проектиране, изграждане и финансиране на фотоволтаични централи с батерии за съхранение. Компанията не публикува фиксирана цена, нито за изкупуване, нито за доставка.",
       },
       {
         q: "Къде оперира компанията?",
@@ -96,7 +95,7 @@ const c = {
     qa: [
       {
         q: "What does NV Power do?",
-        a: "NV Power is a Bulgarian licensed electricity trader and a solar EPC company. It supplies electricity at a publicly published price to households and businesses, and designs, builds and finances photovoltaic plants with battery storage.",
+        a: "NV Power is a Bulgarian licensed electricity trader and coordinator of a standard balancing group, and a solar EPC company. It works in three areas: buying electricity from renewable producers and taking on the balancing; supplying electricity on an individual offer to consumers above 1 MW; and designing, building and financing photovoltaic plants with battery storage. The company publishes no fixed price, for either buy-back or supply.",
       },
       {
         q: "Where does the company operate?",
@@ -166,5 +165,4 @@ const c = {
     </div>
   </section>
 
-  <CtaBand locale={locale} />
 </BaseLayout>

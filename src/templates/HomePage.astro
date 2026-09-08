@@ -1,5 +1,5 @@
 ---
-import { ArrowRight, Zap, Sun, FileText, PenLine, Wrench, BadgeCheck, UserRound, Landmark, BatteryCharging, LifeBuoy, Flag, MapPin, Battery, PiggyBank } from "@lucide/astro";
+import { ArrowRight, Zap, Sun, Factory, FileText, PenLine, Wrench, BadgeCheck, UserRound, Landmark, BatteryCharging, LifeBuoy, Flag, MapPin, Battery, PiggyBank } from "@lucide/astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import CtaBand from "../components/CtaBand.astro";
@@ -24,19 +24,20 @@ const c = {
       h1: "Енергия за утрешния ден",
       /* Three deliberate lines; rendered with <br /> inside one paragraph. */
       sub: [
-        `Изкупуваме тока на ВЕИ производители ${site.pricingBasisShort.bg}.`,
-        "Фотоволтаични централи (ФЕЦ) с батерии (BESS), с възможност за гъвкаво финансиране.",
-        "Две направления, един партньор: NV Power Ltd.",
+        "Изкупуваме електроенергия от ВЕИ производители и поемаме балансирането.",
+        "Доставяме електроенергия по индивидуална оферта на големи консуматори.",
+        "Проектираме и изграждаме фотоволтаични централи (ФЕЦ) с батерии (BESS).",
       ],
       ctaPlans: "Виж плановете за изкупуване",
       ctaOffer: "Вземи оферта",
       checks: [t.promises.noFees, t.promises.response, t.promises.financing],
     },
     lines: {
-      eyebrow: "Двете направления",
-      title: "Продаваш тока си днес. Разширяваш централата утре.",
-      lead: "Изкупуваме продукцията ти по формула спрямо борсата и изграждаме следващата ти централа с батерия, при един и същ партньор.",
+      eyebrow: "Трите направления",
+      title: "Продаваш ток, купуваш ток, или изграждаш централа?",
+      lead: "Три различни услуги с три различни договора. Избери своята и виж условията, без да минаваш през чужди.",
       tok: {
+        audience: "Продавам ток",
         title: "Изкупуване на ток от ВЕИ",
         badge: site.pricingBasisShort.bg,
         priceNote: "с възможност за включено балансиране",
@@ -47,7 +48,20 @@ const c = {
         ],
         cta: "Виж плановете за изкупуване",
       },
+      dostavka: {
+        audience: "Купувам ток",
+        title: "Доставка на електроенергия",
+        badge: "по индивидуална оферта",
+        priceNote: "за консуматори над 1 MW",
+        points: [
+          "Оферта, изготвена по товаровия профил на обекта",
+          "Участие в стандартната ни балансираща група",
+          "Без публикувана тарифа, условията са в договора",
+        ],
+        cta: "Виж доставката",
+      },
       solar: {
+        audience: "Инвестирам във ФЕЦ",
         title: "Твоята соларна централа",
         badge: "с батерия и финансиране",
         points: ["От проект до пускане, всичко от нас", "Батерии за истинска независимост", "Лизинг и разсрочено плащане"],
@@ -108,19 +122,20 @@ const c = {
     hero: {
       h1: "Energy for tomorrow",
       sub: [
-        `We buy the output of renewable producers ${site.pricingBasisShort.en}.`,
-        "Solar PV plants with battery storage (BESS), with flexible financing available.",
-        "Two business lines, one partner: NV Power Ltd.",
+        "We buy electricity from renewable producers and take on the balancing.",
+        "We supply electricity to large consumers on an individual offer.",
+        "We design and build solar PV plants with battery storage (BESS).",
       ],
       ctaPlans: "See the buy-back plans",
       ctaOffer: "Get a quote",
       checks: [t.promises.noFees, t.promises.response, t.promises.financing],
     },
     lines: {
-      eyebrow: "Two business lines",
-      title: "Sell your power today. Expand your plant tomorrow.",
-      lead: "We buy your output on a formula against the exchange, and build your next plant with a battery, with the same partner.",
+      eyebrow: "Three business areas",
+      title: "Selling power, buying power, or building a plant?",
+      lead: "Three different services with three different contracts. Pick yours and see its terms, without wading through the other two.",
       tok: {
+        audience: "I sell power",
         title: "Power buy-back for producers",
         badge: site.pricingBasisShort.en,
         priceNote: "balancing can be included",
@@ -131,7 +146,20 @@ const c = {
         ],
         cta: "See the buy-back plans",
       },
+      dostavka: {
+        audience: "I buy power",
+        title: "Electricity supply",
+        badge: "on an individual offer",
+        priceNote: "for consumers above 1 MW",
+        points: [
+          "An offer built from your site's load profile",
+          "Membership of our standard balancing group",
+          "No published tariff, the terms sit in the contract",
+        ],
+        cta: "See supply",
+      },
       solar: {
+        audience: "I invest in PV",
         title: "Your own solar plant",
         badge: "with battery & financing",
         points: ["From design to launch, all by us", "Batteries for true independence", "Leasing and instalment plans"],
@@ -228,45 +256,50 @@ const c = {
     </div>
   </section>
 
-  <!-- TWO BUSINESS LINES -->
+  <!-- THREE BUSINESS AREAS – the audience chooser.
+       Each card leads with what the *visitor* does ("Продавам ток"), not with
+       what we do, so a producer, a buyer and an investor each recognise their
+       own card at a glance. One CTA per card, three different destinations, so
+       the calls to action never compete. -->
   <section class="section container-site">
     <SectionHeading eyebrow={c.lines.eyebrow} title={c.lines.title} lead={c.lines.lead} />
 
-    <div class="mt-12 grid gap-6 lg:grid-cols-2">
-      <!-- Ток -->
-      <article class="card flex flex-col gap-5 p-8 md:p-10">
-        <span class="flex size-13 items-center justify-center rounded-xl bg-accent/10 text-accent"><Zap class="size-6.5" aria-hidden="true" /></span>
-        <h3 class="text-2xl font-bold text-body">{c.lines.tok.title}</h3>
-        <!-- No headline rate to show: buy-back is quoted as a formula against
-             the exchange, so the card states the basis and links to the plans. -->
-        <p>
-          <span class="inline-flex rounded-full bg-accent/10 px-3.5 py-1.5 text-sm font-semibold text-accent">{c.lines.tok.badge}</span>
-          <span class="mt-2 block text-sm font-medium text-muted">{c.lines.tok.priceNote}</span>
-        </p>
-        <ul class="list-disc space-y-2.5 pl-5 marker:text-accent">
-          {c.lines.tok.points.map((p) => (
-            <li class="text-[0.95rem] text-body">
-              {p}
-            </li>
-          ))}
-        </ul>
-        <a href={r(locale, "tok")} class="btn btn-primary mt-auto self-start">{c.lines.tok.cta}<ArrowRight class="size-4" aria-hidden="true" /></a>
-      </article>
-
-      <!-- Солар -->
-      <article class="card flex flex-col gap-5 p-8 md:p-10">
-        <span class="flex size-13 items-center justify-center rounded-xl bg-accent/10 text-accent"><Sun class="size-6.5" aria-hidden="true" /></span>
-        <h3 class="text-2xl font-bold text-body">{c.lines.solar.title}</h3>
-        <p><span class="inline-flex rounded-full bg-accent/10 px-3.5 py-1.5 text-sm font-semibold text-accent">{c.lines.solar.badge}</span></p>
-        <ul class="list-disc space-y-2.5 pl-5 marker:text-accent">
-          {c.lines.solar.points.map((p) => (
-            <li class="text-[0.95rem] text-body">
-              {p}
-            </li>
-          ))}
-        </ul>
-        <a href={r(locale, "solar")} class="btn btn-outline mt-auto self-start">{c.lines.solar.cta}<ArrowRight class="size-4" aria-hidden="true" /></a>
-      </article>
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      {
+        [
+          { d: c.lines.tok, icon: Zap, route: "tok" as const, primary: true },
+          { d: c.lines.dostavka, icon: Factory, route: "dostavka" as const, primary: false },
+          { d: c.lines.solar, icon: Sun, route: "solar" as const, primary: false },
+        ].map(({ d, icon: Icon, route, primary }) => (
+          <article class="card flex flex-col gap-4 p-7 md:p-8">
+            <span class="flex size-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
+              <Icon class="size-6" aria-hidden="true" />
+            </span>
+            <p class="font-[family-name:var(--font-display)] text-sm font-bold tracking-wide text-accent uppercase">
+              {d.audience}
+            </p>
+            <h3 class="text-xl font-bold text-body md:text-2xl">{d.title}</h3>
+            <p>
+              <span class="inline-flex rounded-full bg-accent/10 px-3.5 py-1.5 text-sm font-semibold text-accent">{d.badge}</span>
+              {"priceNote" in d && d.priceNote && (
+                <span class="mt-2 block text-sm font-medium text-muted">{d.priceNote}</span>
+              )}
+            </p>
+            <ul class="list-disc space-y-2.5 pl-5 marker:text-accent">
+              {d.points.map((p) => (
+                <li class="text-[0.95rem] text-body">{p}</li>
+              ))}
+            </ul>
+            <a
+              href={r(locale, route)}
+              class:list={["btn mt-auto self-start", primary ? "btn-primary" : "btn-outline"]}
+            >
+              {d.cta}
+              <ArrowRight class="size-4" aria-hidden="true" />
+            </a>
+          </article>
+        ))
+      }
     </div>
   </section>
 

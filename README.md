@@ -13,10 +13,11 @@ with battery storage.
 
 ## Български
 
-Пълен двуезичен сайт (BG основен, EN огледален) с **30 индексируеми страници**.
-Основното направление е **изкупуване на ток от ВЕИ производители** по формула
-спрямо БНЕБ (IBEX), с включено балансиране; второто е проектиране и изграждане
-на фотоволтаични централи с батерии и гъвкаво финансиране.
+Пълен двуезичен сайт (BG основен, EN огледален) с **30 индексируеми страници**,
+подреден около **три направления**: изкупуване на ток от ВЕИ производители с
+поемане на балансирането; доставка на електроенергия по индивидуална оферта за
+консуматори над 1 MW; и проектиране и изграждане на фотоволтаични централи с
+батерии. Таблицата с маршрутите е в „Маршрути и двуезичност“.
 
 ### TO-DO преди публикуване
 
@@ -26,8 +27,14 @@ with battery storage.
 
 - [ ] **Form endpoint.** `site.formEndpoint` е празен низ, затова формите не изпращат нищо – посетителят вижда телефон и имейл. Свържи form service или serverless функция (виж раздел „Форми" по-долу). **Докато е празен, качването на файлове се скрива автоматично** (`CAN_ACCEPT_UPLOADS`): блокът за изпращане на отчитане на `/tok/` и полето за прикачване в контактната форма изчезват, за да не искаме документ, който няма къде да отиде. Връщат се сами щом сложиш endpoint.
 - [x] **Цени.** Няма маскирани цени. Сайтът умишлено **не публикува фиксирана цена за ток**: офертите са формула спрямо БНЕБ (IBEX), а формулировката е в `site.pricingBasis` / `pricingBasisShort`. Фирмените данни (телефон, ЕИК, ДДС №, адрес, лиценз Л-878) също са реалните.
-- [ ] **Примерни проекти.** 4 записа в `src/data/projects.ts` са флагнати със `sample: true`.
+- [x] **Примерни проекти.** Премахнати. `src/data/projects.ts` е празен масив, а `/proekti/` казва, че проектите предстоят. Добавяй само реално изградени обекти, с разрешение на клиента.
 - [ ] **Останали placeholder-и.** GA4 id (`gaMeasurementId`) и Facebook/Instagram в `site.socials` са празни. **Секцията „Екип" е скрита**, защото `team` е празен масив – попълни го и се показва автоматично. Картата вече е реалната, но се зарежда само след клик (виж „Съгласие и трети страни").
+
+**Изисква бизнес потвърждение – направление „Доставка"** (`/dostavka/`):
+
+- [ ] **Обхватът на доставката е ограничен умишлено.** Страницата обещава само това, което е потвърдено: индивидуални оферти за консуматори **над 1 MW**, без публикувана тарифа. Единственото потвърдено съдържание преди рефакторинга беше един абзац в блока над 1 MW на `/tok/`.
+- [ ] Преди страницата да се разшири, бизнесът трябва да потвърди: (1) обслужваме ли обекти под 1 MW и от каква мощност нагоре; (2) как се формира цената по доставка (формула, такси, период); (3) процедурата и срокът за смяна на доставчик; (4) какво влиза в месечната фактура. **Докато това не е потвърдено, не добавяй нищо от изброеното на страницата.**
+- [ ] Остатъчният текст за доставка на битови клиенти в `/info/` (3 въпроса: срок за смяна на доставчик, как се чете фактура, ЗкО/акциз) все още е писан за консуматори. Реши дали остава като общообразователен материал, или се преработва за производители.
 
 **След преориентирането към изкупуване** – `/tok/` е основното направление на сайта:
 
@@ -73,9 +80,10 @@ npx astro check  # типова проверка
 (`site.price`), защото се договаря индивидуално. Празни са още GA4 id, екипът и
 Facebook/Instagram профилите.
 
-**2. Примерни проекти.** `src/data/projects.ts` – записите са флагнати със
-`sample: true`. Замени с реални или изтрий; сайтът показва честно „очаквайте
-скоро", ако списъкът е празен.
+**2. Проекти.** `src/data/projects.ts` е **празен** и това е правилното
+състояние, докато няма реални обекти: и `/proekti/`, и блокът на началната
+страница казват честно, че проектите предстоят. Добавяй записи само за реално
+изградени системи.
 
 **3. Форми – единственият реален блокер.** Формите POST-ват
 `multipart/form-data` (включително прикачения файл) към `site.formEndpoint`.
@@ -116,12 +124,25 @@ Permissions-Policy), кеширане на `/_astro/*`, `trailingSlash: true` и
 `hreflang` двойките и sitemap-ът. **Липсващ запис чупи всичките наведнъж** – ако
 добавяш страница, добави и slug-а.
 
-**Етикети в навигацията.** `nav.tok` е „Планове" / „Plans", а не описание на
-страницата: „Изкупуване на ток" се събираше на два реда при 1280px и влачеше
-„Соларни системи" със себе си. Затова линковете в хедъра са `whitespace-nowrap`
-(по-дълъг етикет ще излезе видимо, вместо да се пренесе тихо), а описателният
-текст живее във футъра: „Изкупуване на ток от ВЕИ" / „Electricity buy-back for
-producers".
+**Три направления, три маршрута.** Сайтът е подреден около това какво прави
+посетителят, не какво правим ние:
+
+| Направление | Маршрут | Аудитория |
+| --- | --- | --- |
+| Изкупуване и балансиране | `/tok/` · `/en/electricity/` | ВЕИ производители |
+| Доставка на електроенергия | `/dostavka/` · `/en/electricity-supply/` | Консуматори над 1 MW |
+| Соларни ФЕЦ и BESS | `/solar/` + подстраниците | Дом и бизнес |
+
+Правилото, което държи структурата: **никоя страница не смесва език на продавач
+и на купувач.** Преди рефакторинга `/tok/` го правеше – в блока над 1 MW
+предлагаше и доставка. Затова доставката има собствен маршрут, а двете страници
+се сочат взаимно с явен надпис вместо да делят текст.
+
+**Етикети в навигацията.** `nav.tok` е „Изкупуване", `nav.dostavka` е „Доставка":
+етикетът трябва да казва от коя страна на сделката е посетителят, затова не е
+„Планове" (планове за какво?). Линковете в хедъра са `whitespace-nowrap`, за да
+излезе по-дълъг етикет видимо, вместо да се пренесе тихо; проверено е, че шестте
+елемента се събират на един ред при 1024px. Описателният текст живее във футъра.
 
 ### Валута
 
@@ -208,9 +229,10 @@ src/
 ## English
 
 A complete bilingual site (Bulgarian primary, English mirror) of **30 indexable
-pages**. The primary business line is **electricity buy-back from renewable
-producers**, priced on a formula against IBEX (БНЕБ) with balancing included;
-the second is turnkey solar plants with battery storage and flexible financing.
+pages**, organised around **three business areas**: buying electricity from
+renewable producers and taking on the balancing; supplying electricity on an
+individual offer to consumers above 1 MW; and designing and building solar plants
+with battery storage. The route table is under "Routing and i18n".
 
 ### TO-DO before launch
 
@@ -220,8 +242,14 @@ the second is turnkey solar plants with battery storage and flexible financing.
 
 - [ ] **Form endpoint.** `site.formEndpoint` is an empty string, so forms send nothing – visitors get the phone/email fallback. Wire a form service or serverless function (see the Forms section below). **While it is empty, file uploads hide themselves** (`CAN_ACCEPT_UPLOADS`): the settlement-upload block on `/tok/` and the attachment field in the contact form disappear, so we never ask for a document that has nowhere to go. Both return once an endpoint is set.
 - [x] **Prices.** No masked prices left. The site deliberately **publishes no fixed electricity price**: offers are a formula against IBEX (БНЕБ), and the wording lives in `site.pricingBasis` / `pricingBasisShort`. The company facts (phone, company ID, VAT number, address, licence L-878) are the real ones too.
-- [ ] **Sample projects.** 4 entries in `src/data/projects.ts` are flagged `sample: true`.
+- [x] **Sample projects.** Removed. `src/data/projects.ts` is an empty array and `/proekti/` says the projects are coming. Add only installations actually built, with the client's permission.
 - [ ] **Remaining placeholders.** The GA4 id (`gaMeasurementId`) and Facebook/Instagram in `site.socials` are empty. **The Team section is hidden**, because `team` is an empty array – fill it and it reappears automatically. The map is the real one now, but it loads only on click (see "Consent and third parties").
+
+**Needs business confirmation – the Supply area** (`/dostavka/`):
+
+- [ ] **The scope is deliberately narrow.** The page promises only what is confirmed: individual offers for consumers **above 1 MW**, with no published tariff. Before the refactor the only confirmed supply content on the whole site was one paragraph inside the >1 MW block on `/tok/`.
+- [ ] Before the page can grow, the business must confirm: (1) whether sites below 1 MW are served, and from what capacity upwards; (2) how a supply price is formed (formula, fees, period); (3) the supplier-switching procedure and its timing; (4) what appears on the monthly invoice. **Until those are confirmed, do not add any of them to the page.**
+- [ ] Residual household-supply copy in `/info/` (3 questions: switching timeline, how to read an invoice, ЗкО/excise) is still written for consumers. Decide whether it stays as general educational material or is reworked for producers.
 
 **After the shift to buy-back** – `/tok/` is the site's primary business line:
 
@@ -310,12 +338,25 @@ Navigation, the language switcher, `canonical`, the `hreflang` pair and the
 sitemap are all derived from that map. **A missing entry breaks all of them at
 once** – when you add a page, add its slug too.
 
-**Nav labels.** `nav.tok` is "Планове" / "Plans" rather than a description of
-the page: "Изкупуване на ток" wrapped onto two lines at 1280px and dragged
-"Соларни системи" with it. Header links are therefore `whitespace-nowrap`, so a
-longer label overflows visibly instead of wrapping silently, and the descriptive
-wording lives in the footer: "Изкупуване на ток от ВЕИ" / "Electricity buy-back
-for producers".
+**Three areas, three routes.** The site is organised around what the visitor
+does, not around what we do:
+
+| Area | Route | Audience |
+| --- | --- | --- |
+| Buy-back & balancing | `/tok/` · `/en/electricity/` | Renewable producers |
+| Electricity supply | `/dostavka/` · `/en/electricity-supply/` | Consumers above 1 MW |
+| Solar PV & BESS | `/solar/` + children | Home and business |
+
+The rule that holds the structure together: **no page mixes seller and buyer
+language.** Before the refactor `/tok/` did exactly that, offering supply inside
+its >1 MW block. Supply therefore has its own route, and the two pages signpost
+each other explicitly rather than sharing copy.
+
+**Nav labels.** `nav.tok` is "Изкупуване", `nav.dostavka` is "Доставка": the label
+has to say which side of the trade the visitor is on, which is why it is not
+"Планове" (plans for what?). Header links are `whitespace-nowrap` so a longer
+label overflows visibly instead of wrapping silently; the six items are verified
+to fit on one line at 1024px. The descriptive wording lives in the footer.
 
 ### Currency
 

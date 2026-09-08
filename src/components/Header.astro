@@ -19,7 +19,10 @@ const otherHref = locale === "bg" ? (hasTwin ? alt.en : "/en/") : hasTwin ? alt.
 const otherLabel = locale === "bg" ? "EN" : "БГ";
 
 const links = [
+  /* The three business areas first, in the order a visitor self-selects:
+     selling, buying, investing. */
   { href: r(locale, "tok"), label: t.nav.tok },
+  { href: r(locale, "dostavka"), label: t.nav.dostavka },
   { href: r(locale, "solar"), label: t.nav.solar },
   { href: r(locale, "proekti"), label: t.nav.proekti },
   { href: r(locale, "info"), label: t.nav.info },
