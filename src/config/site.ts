@@ -45,6 +45,21 @@ export const site = {
   address: {
     bg: "гр. София 1680, р-н Витоша, ж.к. Манастирски ливади, ул. „Казбек“ 57Б, вх. А, ет. 1, ап. партер",
     en: "57B Kazbek St, entrance A, floor 1, Manastirski Livadi, 1680 Sofia, Bulgaria",
+    /**
+     * The same seat, broken where it should break on screen. The single-line
+     * forms above stay, because the privacy policy and the terms set the address
+     * inside a running sentence and the JSON-LD wants it unbroken.
+     */
+    lines: {
+      bg: [
+        "гр. София 1680, р-н Витоша, ж.к. Манастирски ливади,",
+        "ул. „Казбек“ 57Б, вх. А, ет. 1, ап. партер",
+      ],
+      en: [
+        "57B Kazbek St, entrance A, floor 1,",
+        "Manastirski Livadi, 1680 Sofia, Bulgaria",
+      ],
+    },
     street: {
       bg: "ж.к. Манастирски ливади, ул. „Казбек“ 57Б, вх. А, ет. 1, ап. партер",
       en: "57B Kazbek St, entrance A, floor 1, Manastirski Livadi",
@@ -66,12 +81,25 @@ export const site = {
   },
 
   /**
-   * КЕВР licence, worded as the register states it: one licence covering both
-   * activities. Quoted activity name kept verbatim.
+   * КЕВР licence. Two forms of the same fact:
+   *
+   * `license` is the short line for the footer and the contact page, where the
+   * company name and ЕИК already sit on the line above it.
+   *
+   * `licenseFull` is the complete formal self-description, company name and ЕИК
+   * included, for the AI info page, whose whole purpose is handing machines the
+   * canonical wording.
+   *
+   * The number is Л-878-15, and the coordinator rights come from the 30.04.2026
+   * amending decision rather than from the original licence.
    */
   license: {
-    bg: "Лицензия № Л-878 от 14.01.2026 г. за дейността „търговия с електрическа енергия и координатор на стандартна балансираща група“, издадена от КЕВР",
-    en: "Licence No. L-878 of 14.01.2026 for the activity of “electricity trading and standard balancing group coordinator”, issued by EWRC",
+    bg: "Лицензия № Л-878-15 от 14.01.2026 г. за търговия с електрическа енергия, изменена и допълнена с Решение № И1-Л-878 от 30.04.2026 г. на КЕВР, с права и задължения на координатор на стандартна балансираща група",
+    en: "Licence No. L-878-15 of 14.01.2026 for electricity trading, amended and supplemented by Decision No. И1-Л-878 of 30.04.2026 of the EWRC, with the rights and obligations of a coordinator of a standard balancing group",
+  },
+  licenseFull: {
+    bg: "„ЕН ВИ ПАУЪР“ ООД (NV Power Ltd.), ЕИК: 208173515, лицензиран търговец на електрическа енергия, притежаващ Лицензия № Л-878-15 от 14.01.2026 г., изменена и допълнена с Решение № И1-Л-878 от 30.04.2026 г. на КЕВР с права и задължения на координатор на Стандартна балансираща група",
+    en: "NV Power Ltd („ЕН ВИ ПАУЪР“ ООД), UIC: 208173515, a licensed electricity trader holding Licence No. L-878-15 of 14.01.2026, amended and supplemented by Decision No. И1-Л-878 of 30.04.2026 of the EWRC, with the rights and obligations of a coordinator of a Standard balancing group",
   },
 
   /**

@@ -100,7 +100,14 @@ const channels = [
       <h2 class="text-2xl font-bold text-body md:text-3xl">{c.addressTitle}</h2>
       <p class="mt-4 flex items-start gap-2.5 text-muted">
         <MapPin class="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
-        {site.address[locale]}
+        <span>
+          {site.address.lines[locale].map((line, i) => (
+            <>
+              {i > 0 && <br />}
+              {line}
+            </>
+          ))}
+        </span>
       </p>
       {/* Click-to-load: the iframe would otherwise contact Google before the
           visitor has agreed to anything. Renders nothing if mapsEmbed is empty. */}
