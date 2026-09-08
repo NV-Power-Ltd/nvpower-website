@@ -83,7 +83,7 @@ const c = {
         {
           category: "solar",
           q: "Каква е разликата между хибридна и мрежова система?",
-          a: "Мрежовата система работи само заедно с електрическата мрежа, произвежда, докато има слънце, а вечер ползваш ток от мрежата. Хибридната добавя батерия, денем зарежда, вечер ползваш собствената си енергия, а ако е монтирана с резервен изход, може да захранва избрани вериги и при спряла мрежа. Ако целта ти е максимална независимост и защита от прекъсвания, хибридната е правилният избор. Ако търсиш най-кратък срок на откупуване, мрежовата често печели.",
+          a: "Мрежовата система работи само заедно с електрическата мрежа, произвежда, докато има слънце, а вечер ползваш ток от мрежата. Хибридната добавя батерия, денем зарежда, вечер ползваш собствената си енергия. Ако е проектирана и за резервно захранване, може автоматично да поеме предварително определени товари и при спряла мрежа. Ако целта ти е максимална независимост и защита от прекъсвания, хибридната е правилният избор. Ако търсиш най-кратък срок на откупуване, мрежовата често печели.",
         },
         {
           category: "solar",
@@ -123,7 +123,7 @@ const c = {
         {
           category: "battery",
           q: "Ще имам ли ток, ако мрежата спре?",
-          a: "С хибридна система с батерия и резервен изход, да. Резервното захранване се предвижда при проектирането: избрани вериги се извеждат на отделна група и при отпадане на мрежата се захранват автоматично от батерията, хладилник, осветление, интернет, отопление. Колко дълго, зависи от капацитета на батерията и от това какво захранваш. Обикновената мрежова система без батерия се изключва при спряла мрежа от съображения за безопасност.",
+          a: "Само ако системата е проектирана за това. Батерията сама по себе си повишава собственото потребление, но не поема обекта при авария, това е отделна функция. При система, проектирана за резервно захранване, батерията може автоматично да поеме предварително определени товари при отпадане на мрежовото захранване. За целта са нужни четири неща: инвертор с резервен изход, автоматично превключване при отпадане на мрежата, електрически проект, който извежда избраните вериги на отделно табло, и предварителен избор кои товари влизат в него, например хладилник, осветление, интернет и отопление. Колко дълго издържат, зависи от капацитета на батерията и от това какво е включено. Мрежова система без батерия се изключва при спряла мрежа по съображения за безопасност.",
         },
         {
           category: "finance",
@@ -147,7 +147,8 @@ const c = {
         { t: "ЕРП", d: "Електроразпределително предприятие, компанията, която поддържа мрежата и електромерите в твоя регион (Електрохолд, EVN или Енерго-Про)." },
         { t: "ЕСО", d: "Електроенергийният системен оператор, управлява преносната мрежа на България и балансира системата в реално време." },
         { t: "Инвертор", d: "Устройството, което превръща постоянния ток от панелите в променлив ток за дома и мрежата. „Мозъкът“ на всяка соларна система." },
-        { t: "Хибриден инвертор", d: "Инвертор, който освен панелите управлява и батерия, насочва енергията към потребление, съхранение или мрежата според нуждите." },
+        { t: "Хибриден инвертор", d: "Инвертор, който освен панелите управлява и батерия, насочва енергията към потребление, съхранение или мрежата според нуждите. Сам по себе си не означава резервно захранване, за него е нужен модел с резервен изход и съответният електрически проект." },
+        { t: "Резервно захранване (EPS)", d: "Функция, различна от обикновената работа на батерията. При система, проектирана за резервно захранване, батерията може автоматично да поеме предварително определени товари при отпадане на мрежовото захранване. Зависи от архитектурата на инвертора, от възможността за автоматично превключване, от електрическия проект и от това кои товари са избрани за резервното табло." },
         { t: "Мрежова система (on-grid)", d: "Соларна система, свързана към електрическата мрежа, без батерия. Най-простото решение с най-кратък срок на откупуване." },
         { t: "Автономна система (off-grid)", d: "Система, независима от мрежата, цялата енергия идва от панелите и батериите. Използва се за отдалечени обекти без достъп до ток." },
         { t: "BESS", d: "Battery Energy Storage System, батерийна система за съхранение на енергия: от домашни батерии до промишлени контейнерни решения." },
@@ -251,7 +252,7 @@ const c = {
         {
           category: "solar",
           q: "What's the difference between a hybrid and a grid-tied system?",
-          a: "A grid-tied system works only together with the electricity grid, it produces while the sun shines, and in the evening you use grid power. A hybrid system adds a battery, it charges by day and powers you with your own energy in the evening, and if it is installed with a backup output it can supply selected circuits even when the grid is down. If your goal is maximum independence and outage protection, hybrid is the right choice. If you want the shortest payback, grid-tied often wins.",
+          a: "A grid-tied system works only together with the electricity grid, it produces while the sun shines, and in the evening you use grid power. A hybrid system adds a battery, it charges by day and powers you with your own energy in the evening. If it is also designed for backup supply, it can automatically pick up pre-determined loads when the grid is down. If your goal is maximum independence and outage protection, hybrid is the right choice. If you want the shortest payback, grid-tied often wins.",
         },
         {
           category: "solar",
@@ -291,7 +292,7 @@ const c = {
         {
           category: "battery",
           q: "Will I have power if the grid goes down?",
-          a: "With a hybrid system, a battery and a backup output, yes. Backup is planned at design time: selected circuits are wired to a separate group and, when the grid drops, they are powered automatically from the battery, fridge, lighting, internet, heating. For how long depends on the battery capacity and what you're powering. A plain grid-tied system without a battery shuts down during an outage for safety reasons.",
+          a: "Only if the system is designed for it. A battery on its own raises self-consumption but does not carry the site through a fault, that is a separate capability. In a system designed for backup supply, the battery can automatically pick up pre-determined loads when the grid supply fails. Four things are needed for that: an inverter with a backup output, automatic switching when the grid drops, an electrical design that takes the selected circuits to their own board, and a decision in advance about which loads go into it, say the fridge, lighting, internet and heating. How long they last depends on the battery capacity and what is connected. A grid-tied system without a battery shuts down during an outage for safety reasons.",
         },
         {
           category: "finance",
@@ -315,7 +316,8 @@ const c = {
         { t: "DSO (ЕРП)", d: "The distribution system operator, the company maintaining the grid and meters in your region (Electrohold, EVN or Energo-Pro)." },
         { t: "ESO (ЕСО)", d: "The Electricity System Operator, it runs Bulgaria's transmission grid and balances the system in real time." },
         { t: "Inverter", d: "The device that converts the direct current from the panels into alternating current for your home and the grid. The 'brain' of every solar system." },
-        { t: "Hybrid inverter", d: "An inverter that manages a battery in addition to the panels, routing energy to consumption, storage or the grid as needed." },
+        { t: "Hybrid inverter", d: "An inverter that manages a battery in addition to the panels, routing energy to consumption, storage or the grid as needed. By itself it does not mean backup supply, which needs a model with a backup output and the electrical design to match." },
+        { t: "Backup supply (EPS)", d: "A capability distinct from ordinary battery operation. In a system designed for backup supply, the battery can automatically pick up pre-determined loads when the grid supply fails. It depends on the inverter architecture, on automatic switching, on the electrical design and on which loads are selected for the backup board." },
         { t: "Grid-tied system (on-grid)", d: "A solar system connected to the electricity grid, without a battery. The simplest solution with the shortest payback." },
         { t: "Off-grid system", d: "A system independent of the grid, all energy comes from the panels and batteries. Used for remote sites with no grid access." },
         { t: "BESS", d: "Battery Energy Storage System, from home batteries to industrial containerised solutions." },

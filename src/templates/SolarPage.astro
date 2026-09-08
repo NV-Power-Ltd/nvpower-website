@@ -114,7 +114,7 @@ const c = {
       battery: {
         eyebrow: "Батерии, нашата специалност",
         title: "Батерията прави разликата",
-        text: "Слънцето свети денем, а ти харчиш вечер. Батерията съхранява дневното производство, за да го ползваш точно когато ти трябва, а при подходяща конфигурация захранва избрани вериги и когато мрежата изключи.",
+        text: "Слънцето свети денем, а ти харчиш вечер. Батерията съхранява дневното производство, за да го ползваш точно когато ти трябва. При система, проектирана и за резервно захранване, тя може автоматично да поеме предварително определени товари, когато мрежата изключи.",
         points: [
           "LiFePO4 химия, безопасна и дълговечна, обикновено 6000+ цикъла според модела",
           "Покриваш вечерното потребление със слънце от деня",
@@ -149,7 +149,7 @@ const c = {
         },
         {
           q: "Какво става при спиране на тока?",
-          a: "Зависи от конфигурацията. Резервното захранване изисква хибридният инвертор да е монтиран с резервен изход, а важните товари да са изведени на отделна група. Тогава при отпадане на мрежата те се захранват автоматично от батерията, а колко дълго зависи от капацитета ѝ и от това какво е включено. Система без батерия спира по стандарт за безопасност.",
+          a: "Зависи от това дали системата е проектирана за резервно захранване, защото батерията сама по себе си не поема обекта при авария. При система, проектирана за целта, батерията може автоматично да поеме предварително определени товари при отпадане на мрежовото захранване. Нужни са инвертор с резервен изход и автоматично превключване, отделно табло за избраните вериги и решение кои товари влизат в него. Колко дълго издържат, зависи от капацитета на батерията и от товара. Система без батерия спира по стандарт за безопасност.",
         },
         {
           q: "Какво покрива поддръжката?",
@@ -258,7 +258,7 @@ const c = {
       battery: {
         eyebrow: "Batteries, our specialty",
         title: "The battery makes the difference",
-        text: "The sun shines during the day, but you consume in the evening. The battery stores the daytime production so you use it exactly when you need it, and in the right configuration it powers selected circuits when the grid goes down.",
+        text: "The sun shines during the day, but you consume in the evening. The battery stores the daytime production so you use it exactly when you need it. In a system also designed for backup supply, it can automatically pick up pre-determined loads when the grid goes down.",
         points: [
           "LiFePO4 chemistry, safe and durable, typically 6,000+ cycles depending on the model",
           "Cover your evening consumption with daytime sun",
@@ -293,7 +293,7 @@ const c = {
         },
         {
           q: "What happens during a power outage?",
-          a: "It depends on the configuration. Backup power requires the hybrid inverter to be installed with a backup output and the essential loads to be wired to a separate circuit. Then, when the grid drops, they run from the battery, and for how long depends on its capacity and what is connected. A system without a battery shuts down as a safety standard.",
+          a: "It depends on whether the system is designed for backup supply, because a battery on its own does not carry the site through a fault. In a system designed for it, the battery can automatically pick up pre-determined loads when the grid supply fails. That needs an inverter with a backup output and automatic switching, a separate board for the selected circuits, and a decision about which loads go into it. How long they last depends on the battery capacity and the load. A system without a battery shuts down as a safety standard.",
         },
         {
           q: "What does maintenance cover?",
