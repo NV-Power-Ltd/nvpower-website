@@ -424,8 +424,8 @@ const c = {
               {c.plans.b2b.title}
             </h3>
             <p class="mt-3 max-w-2xl text-base leading-relaxed text-white/80">{c.plans.b2b.text}</p>
-            <!-- Buyers used to be served from inside this block. They now get a
-                 signpost to their own page instead of shared copy. -->
+            {/* Buyers were previously served from inside this block; they now
+                get a signpost to their own page instead of shared copy. */}
             <p class="mt-4 text-sm text-white/70">
               {c.plans.b2b.supplyNote}{" "}
               <a href={r(locale, "dostavka")} class="font-semibold text-white underline decoration-2 underline-offset-4">
