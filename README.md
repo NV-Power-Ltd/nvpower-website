@@ -36,6 +36,13 @@ with battery storage.
 - [ ] Преди страницата да се разшири, бизнесът трябва да потвърди: (1) обслужваме ли обекти под 1 MW и от каква мощност нагоре; (2) как се формира цената по доставка (формула, такси, период); (3) процедурата и срокът за смяна на доставчик; (4) какво влиза в месечната фактура. **Докато това не е потвърдено, не добавяй нищо от изброеното на страницата.**
 - [ ] Остатъчният текст за доставка на битови клиенти в `/info/` (3 въпроса: срок за смяна на доставчик, как се чете фактура, ЗкО/акциз) все още е писан за консуматори. Реши дали остава като общообразователен материал, или се преработва за производители.
 
+**Изисква бизнес потвърждение – соларният модел** (`src/lib/solarModel.ts`):
+
+- [ ] **Собственото потребление без батерия.** `selfUse.pv` (30% за дом, 65% за бизнес и индустрия) е единственото допускане в модела без източник в проекта и е маркирано в кода. `selfUse.pv_bess` (70/80%) идва от стария калкулатор и остава непроменено. Потвърди и двата набора, за предпочитане от реални обекти.
+- [ ] **Цената на батерията, 565 €/кВтч**, е изведена от двете публикувани карти на `/solar/za-doma/`: средата на 12 800 – 17 900 € за 10 kWp + 10 kWh, минус фотоволтаичната част по 970 €/kWp. Широкият публикуван диапазон допуска 310 – 820 €/кВтч. Ако имате реална доставна цена, сложете нея.
+- [ ] **Съотношението 1 кВтч батерия на kWp** идва от домашната конфигурация. За търговски обект батерията се оразмерява по товаровия профил – калкулаторът го казва, но ако има типично съотношение за бизнес, добавете го.
+- [ ] Моделът брои за икономия **само собственото потребление** и приема излишъка за нула, защото няма източник за борсова цена в проекта. Затова оценките са консервативни, а срокът на откупуване за дом излиза 19 – 28 години при публикуваните цени. Ако решите да остойностявате излишъка, това е мястото.
+
 **След преориентирането към изкупуване** – `/tok/` е основното направление на сайта:
 
 - [ ] **Въпросникът за оферта е скрит и чака преработка.** `OFFER_WIZARD_READY = false` в `src/config/site.ts`.
@@ -271,6 +278,13 @@ with battery storage. The route table is under "Routing and i18n".
 - [ ] **The scope is deliberately narrow.** The page promises only what is confirmed: individual offers for consumers **above 1 MW**, with no published tariff. Before the refactor the only confirmed supply content on the whole site was one paragraph inside the >1 MW block on `/tok/`.
 - [ ] Before the page can grow, the business must confirm: (1) whether sites below 1 MW are served, and from what capacity upwards; (2) how a supply price is formed (formula, fees, period); (3) the supplier-switching procedure and its timing; (4) what appears on the monthly invoice. **Until those are confirmed, do not add any of them to the page.**
 - [ ] Residual household-supply copy in `/info/` (3 questions: switching timeline, how to read an invoice, ЗкО/excise) is still written for consumers. Decide whether it stays as general educational material or is reworked for producers.
+
+**Needs business confirmation – the solar model** (`src/lib/solarModel.ts`):
+
+- [ ] **Self-consumption without a battery.** `selfUse.pv` (30% for a home, 65% for business and industry) is the only assumption in the model with no source in the project, and it is marked as such in the code. `selfUse.pv_bess` (70/80%) comes from the old calculator and is unchanged. Confirm both sets, ideally against real sites.
+- [ ] **The battery price of €565/kWh** is derived from the two published cards on `/solar/za-doma/`: the midpoint of €12,800–17,900 for 10 kWp + 10 kWh, less the PV part at €970/kWp. The width of the published range admits €310–820/kWh. If you have a real supply price, use that instead.
+- [ ] **The ratio of 1 kWh of storage per kWp** comes from the residential configuration. On a commercial site storage is sized to the load profile – the calculator says so, but if there is a typical commercial ratio, add it.
+- [ ] The model counts **only self-consumed energy** as a saving and values the surplus at zero, because the project holds no source for an exchange price. That makes the estimates conservative, and residential payback lands at 19–28 years against the published prices. If you decide to value the surplus, this is where it goes.
 
 **After the shift to buy-back** – `/tok/` is the site's primary business line:
 
