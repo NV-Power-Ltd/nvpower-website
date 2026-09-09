@@ -43,6 +43,15 @@ with battery storage.
 
 **Мерни единици – правилото на проекта.** Символите са на латиница навсякъде, включително в българския текст (kWh, не кВтч). Пикова мощност на ФЕЦ е kWp/MWp; мощност на батерия е kW/MW, капацитет е kWh/MWh; борсовите формули са в €/MWh, а цената на дребно в €/kWh. Три стойности умишлено остават в kW/MW, защото са различна величина: облекченият режим „до 20 kW" е нормативен праг, „над 1 MW" на `/dostavka/` и `/tok/` е присъединена мощност, а „До 15 kW" във въпросника е договорена мощност.
 
+**Изисква правен преглед – текстът на чекбокса в формите.** Политиката посочва, че основанието да отговорим на запитване е **преддоговорни отношения по Ваше искане (чл. 6, ал. 1, б. „б")**. Четирите форми обаче искаха **съгласие**: „Съгласен съм NV Power да обработи данните ми…". Това твърди основание, на което политиката не се позовава.
+
+Чекбоксът вече е потвърждение, не съгласие: **„Запознах се с Политиката за поверителност."** Не е правен извод, само премахване на противоречието с политиката, към която сочи. **Финалният текст трябва да се потвърди от юрист.**
+
+- [ ] Юрист да потвърди формулировката и дали е нужен чекбокс изобщо при преддоговорно основание.
+- Няма маркетингово съгласие никъде в сайта (проверено за бюлетин, маркетинг, промоции), затова нищо задължително не е вързано с нещо опционално. **Ако се добави маркетингова комуникация, тя трябва да е отделен, необвързан и незадължителен чекбокс.**
+- Полето, което се изпраща с формата, вече се нарича `privacyAcknowledged`, а не `gdpr`, за да не се записва „съгласие" в CRM за нещо, което не е съгласие.
+- Линкът към политиката беше „→" в две от формите (връзка без достъпно име), а в мини конфигуратора липсваше. Сега и в четирите линкът се казва „Политиката за поверителност".
+
 **Изисква бизнес потвърждение – имената на плановете.** Българската страница сменя азбуката без правило: **NV Фиксиран** (кирилица), **NV Standard** (латиница), **NV Individual** (латиница), а вътре в NV Standard нивата са **„Standard Flexible"** (латиница) до **„Standard Дългосрочен"** (кирилица). Пет имена, без модел.
 
 Нищо не е преименувано, защото кои от тези са официални продуктови имена не се вижда от кода. Вместо това всеки план получи **описателен подзаглавен ред** (`nameNote`), който носи уточнението, което марковото име не може – най-важното при „NV Фиксиран": фиксиран е търговският компонент, не цената на енергията.
@@ -328,6 +337,15 @@ with battery storage. The route table is under "Routing and i18n".
 - [ ] **No specific panel, inverter or battery model is selected anywhere.** That is why the site promises no warranty term, cycle count or Tier-1 status. If you decide to publish a specific model, its verified specifications can go back into the copy.
 
 **Units – the project rule.** Symbols are Latin everywhere, including in Bulgarian copy (kWh, not кВтч). PV peak capacity is kWp/MWp; battery power is kW/MW and capacity is kWh/MWh; exchange formulas are €/MWh and retail is €/kWh. Three values deliberately stay in kW/MW because they are a different quantity: the eased regime's "до 20 kW" is a statutory threshold, "above 1 MW" on `/dostavka/` and `/tok/` is connected capacity, and "Up to 15 kW" in the wizard is contracted capacity.
+
+**Needs legal review – the form checkbox wording.** The policy states that the basis for answering an enquiry is **pre-contractual relations at your request (Art. 6(1)(b))**. All four forms nevertheless asked for **consent** — "Съгласен съм NV Power да обработи данните ми…" — claiming a basis the policy does not rely on.
+
+The checkbox is now an acknowledgement rather than a consent: **"Запознах се с Политиката за поверителност." / "I have read the Privacy Policy."** No legal conclusion is drawn; the wording simply stops contradicting the policy it links to. **The final wording must be confirmed by a lawyer.**
+
+- [ ] Have counsel confirm the wording, and whether a checkbox is needed at all on a pre-contractual basis.
+- There is no marketing consent anywhere on the site (checked for newsletter, marketing and promotional wording), so nothing mandatory is bundled with anything optional. **If marketing communication is added, it needs its own separate, unbundled, optional checkbox.**
+- The field submitted with the form is now called `privacyAcknowledged` rather than `gdpr`, so a CRM does not record "consent" for something that is not consent.
+- The policy link was "→" in two forms (a link with no accessible name) and absent from the mini configurator. All four now name it.
 
 **Needs business confirmation – plan names.** The Bulgarian page switches alphabet with no rule: **NV Фиксиран** (Cyrillic), **NV Standard** (Latin), **NV Individual** (Latin), and inside NV Standard the tiers read **"Standard Flexible"** (Latin) next to **"Standard Дългосрочен"** (Cyrillic). Five names, no pattern.
 

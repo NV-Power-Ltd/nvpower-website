@@ -57,10 +57,11 @@ const copy = {
       phone: "Телефон",
       submit: "Искам да ме потърсите",
       sending: "Изпращане…",
-      gdpr: "Съгласен съм NV Power да обработи данните ми, за да отговори на запитването.",
+      gdpr: "Запознах се с",
+      gdprLink: "Политиката за поверителност",
       success: `Готово! Ще ти се обадим ${responseWithin.bg}.`,
       error: "Нещо се обърка. Обади ни се директно.",
-      required: "Попълни име и телефон и отбележи съгласието.",
+      required: "Попълни име и телефон и отбележи, че си се запознал с политиката.",
     },
     or: "или",
     fullOffer: "виж за какво можем да ти изготвим оферта",
@@ -110,10 +111,11 @@ const copy = {
       phone: "Phone",
       submit: "Call me back",
       sending: "Sending…",
-      gdpr: "I agree that NV Power may process my data to answer this enquiry.",
+      gdpr: "I have read the",
+      gdprLink: "Privacy Policy",
       success: `Done! We'll call you ${responseWithin.en}.`,
       error: "Something went wrong. Please call us directly.",
-      required: "Fill in name and phone and tick the consent box.",
+      required: "Fill in name and phone and tick the privacy-policy box.",
     },
     or: "or",
     fullOffer: "see what we can prepare a quote for",
@@ -149,7 +151,7 @@ export default function MiniConfigurator({ locale }: { locale: Locale }) {
     setState("sending");
     const result = await submitLead(
       "mini-configurator",
-      { name, phone, need, size: size !== null ? q2.a[size] : null, goal: goal !== null ? t.q3a[goal] : null, gdpr },
+      { name, phone, need, size: size !== null ? q2.a[size] : null, goal: goal !== null ? t.q3a[goal] : null, privacyAcknowledged: gdpr },
       hp,
     );
     setState(result === "ok" ? "ok" : "err");
@@ -251,7 +253,13 @@ export default function MiniConfigurator({ locale }: { locale: Locale }) {
               <input type="text" value={hp} onChange={(e) => setHp(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" name="website" />
               <label className="mt-3 flex items-start gap-2.5 text-xs text-muted">
                 <input type="checkbox" checked={gdpr} onChange={(e) => setGdpr(e.target.checked)} className="mt-0.5 size-4 accent-accent" />
-                {t.form.gdpr}
+                <span>
+                  {t.form.gdpr}{" "}
+                  <a href={r(locale, "privacy")} className="text-accent underline" target="_blank" rel="noopener noreferrer">
+                    {t.form.gdprLink}
+                  </a>
+                  .
+                </span>
               </label>
               {state === "err" && (
                 <p className="mt-2 text-xs font-medium text-red-600">

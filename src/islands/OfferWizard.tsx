@@ -49,8 +49,8 @@ function buildSteps(locale: Locale): { steps: Step[]; strings: Record<string, st
         sending: "Изпращане…",
         stepOf: "Стъпка",
         of: "от",
-        gdpr: "Съгласен съм NV Power да обработи личните ми данни, за да изготви офертата, съгласно политиката за поверителност.",
-        gdprRequired: "Отбележи съгласието, за да продължим.",
+        gdpr: "Запознах се с",
+        gdprRequired: "Отбележете, че сте се запознали с политиката, за да продължим.",
         requiredField: "Попълни задължителните полета, за да продължиш.",
         successTitle: "Запитването е при нас! 🎉",
         successText: `Ще получиш потвърждение веднага и обаждане от консултант ${responseWithin.bg} (в работно време). Междувременно можеш да разгледаш проектите ни.`,
@@ -130,8 +130,8 @@ function buildSteps(locale: Locale): { steps: Step[]; strings: Record<string, st
       sending: "Sending…",
       stepOf: "Step",
       of: "of",
-      gdpr: "I agree that NV Power may process my personal data to prepare the quote, per the privacy policy.",
-      gdprRequired: "Tick the consent box to continue.",
+      gdpr: "I have read the",
+      gdprRequired: "Tick the privacy-policy box to continue.",
       requiredField: "Fill in the required fields to continue.",
       successTitle: "Your enquiry is in! 🎉",
       successText: `You'll get an instant confirmation and a call from a consultant ${responseWithin.en} (during business hours). Meanwhile, have a look at our projects.`,
@@ -244,7 +244,7 @@ export default function OfferWizard({ locale }: { locale: Locale }) {
       return;
     }
     setState("sending");
-    const result = await submitLead("offer-wizard", { ...answers, gdpr }, hp);
+    const result = await submitLead("offer-wizard", { ...answers, privacyAcknowledged: gdpr }, hp);
     setState(result === "ok" ? "ok" : "fail");
     if (result !== "ok") setErr(strings.error);
   }
@@ -367,8 +367,9 @@ export default function OfferWizard({ locale }: { locale: Locale }) {
                 <span>
                   {strings.gdpr}{" "}
                   <a href={r(locale, "privacy")} className="text-accent underline" target="_blank" rel="noopener noreferrer">
-                    {locale === "en" ? "Privacy policy" : "Политика за поверителност"}
+                    {locale === "en" ? "Privacy Policy" : "Политиката за поверителност"}
                   </a>
+                  .
                 </span>
               </label>
             </>

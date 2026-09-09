@@ -32,12 +32,13 @@ const copy = {
     messagePh: "Разкажи ни накратко за обекта или въпроса си…",
     phonePh: "+359 88 123 4567",
     file: "Прикачете файл (по избор, напр. фактура)",
-    gdpr: "Съгласен съм NV Power да обработи данните ми, за да отговори на запитването, съгласно политиката за поверителност.",
+    gdpr: "Запознах се с",
+    gdprLink: "Политиката за поверителност",
     submit: "Изпратете запитването",
     sending: "Изпращане…",
     successTitle: "Получихме съобщението Ви!",
     successText: `Ще Ви отговорим ${responseWithin.bg}, в работно време.`,
-    required: "Попълнете задължителните полета и отбележи съгласието.",
+    required: "Попълнете задължителните полета и отбележете, че сте се запознали с политиката.",
     error: "Нещо се обърка. Пишете ни директно на " + site.email + ".",
     /* Distinct from `error`: nothing went wrong, the form simply has nowhere to
        send yet. Saying "нещо се обърка" would invite a pointless retry. */
@@ -65,12 +66,13 @@ const copy = {
     messagePh: "Tell us briefly about your site or question…",
     phonePh: "+359 88 123 4567",
     file: "Attach a file (optional, e.g. an invoice)",
-    gdpr: "I agree that NV Power may process my data to answer this enquiry, per the privacy policy.",
+    gdpr: "I have read the",
+    gdprLink: "Privacy Policy",
     submit: "Send the enquiry",
     sending: "Sending…",
     successTitle: "We got your message!",
     successText: `We'll reply ${responseWithin.en}, during business hours.`,
-    required: "Fill in the required fields and tick the consent box.",
+    required: "Fill in the required fields and tick the privacy-policy box.",
     error: "Something went wrong. Email us directly at " + site.email + ".",
     unconfiguredTitle: "Send us your enquiry directly",
     unconfiguredText:
@@ -114,7 +116,7 @@ export default function ContactForm({ locale }: { locale: Locale }) {
       return;
     }
     setState("sending");
-    const result = await submitLead("contact", { ...v, gdpr }, hp, file);
+    const result = await submitLead("contact", { ...v, privacyAcknowledged: gdpr }, hp, file);
     setState(result === "ok" ? "ok" : result === "unconfigured" ? "unconfigured" : "err");
   }
 
@@ -250,7 +252,10 @@ export default function ContactForm({ locale }: { locale: Locale }) {
         <input type="checkbox" checked={gdpr} onChange={(e) => setGdpr(e.target.checked)} className="mt-0.5 size-4 accent-accent" />
         <span>
           {t.gdpr}{" "}
-          <a href={r(locale, "privacy")} className="text-accent underline" target="_blank" rel="noopener noreferrer">→</a>
+          <a href={r(locale, "privacy")} className="text-accent underline" target="_blank" rel="noopener noreferrer">
+            {t.gdprLink}
+          </a>
+          .
         </span>
       </label>
       {state === "err" && (

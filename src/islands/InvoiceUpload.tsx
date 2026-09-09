@@ -16,12 +16,13 @@ const copy = {
     phone: "Телефон за връзка *",
     phonePh: "+359 88 123 4567",
     email: "Имейл (по избор)",
-    gdpr: "Съгласен съм NV Power да обработи данните ми, за да изготви сравнителна оферта, съгласно политиката за поверителност.",
+    gdpr: "Запознах се с",
+    gdprLink: "Политиката за поверителност",
     submit: "Изпратете фактурата",
     sending: "Изпращане…",
     successTitle: "Фактурата е при нас!",
     successText: `Ще получите сравнителна оферта ${responseWithin.bg}.`,
-    required: "Прикачете фактура, попълнете телефон и отбележи съгласието.",
+    required: "Прикачете фактура, попълнете телефон и отбележете, че сте се запознали с политиката.",
     error: "Нещо се обърка. Пишете ни директно на " + site.email + ".",
     fileHint: "Числата от фактурата ни стигат, не ни трябва нищо друго.",
   },
@@ -30,12 +31,13 @@ const copy = {
     phone: "Contact phone *",
     phonePh: "+359 88 123 4567",
     email: "Email (optional)",
-    gdpr: "I agree that NV Power may process my data to prepare a comparative quote, per the privacy policy.",
+    gdpr: "I have read the",
+    gdprLink: "Privacy Policy",
     submit: "Send the invoice",
     sending: "Sending…",
     successTitle: "We've got your invoice!",
     successText: `You'll receive a comparative quote ${responseWithin.en}.`,
-    required: "Attach an invoice, fill in your phone and tick the consent box.",
+    required: "Attach an invoice, fill in your phone and tick the privacy-policy box.",
     error: "Something went wrong. Email us directly at " + site.email + ".",
     fileHint: "The numbers on the invoice are all we need, nothing else.",
   },
@@ -61,7 +63,7 @@ export default function InvoiceUpload({ locale }: { locale: Locale }) {
       return;
     }
     setState("sending");
-    const result = await submitLead("invoice", { phone, email, gdpr }, hp, file);
+    const result = await submitLead("invoice", { phone, email, privacyAcknowledged: gdpr }, hp, file);
     setState(result === "ok" ? "ok" : "err");
   }
 
@@ -125,7 +127,10 @@ export default function InvoiceUpload({ locale }: { locale: Locale }) {
         <input type="checkbox" checked={gdpr} onChange={(e) => setGdpr(e.target.checked)} className="mt-0.5 size-4 accent-accent" />
         <span>
           {t.gdpr}{" "}
-          <a href={r(locale, "privacy")} className="text-accent underline" target="_blank" rel="noopener noreferrer">→</a>
+          <a href={r(locale, "privacy")} className="text-accent underline" target="_blank" rel="noopener noreferrer">
+            {t.gdprLink}
+          </a>
+          .
         </span>
       </label>
       {state === "err" && (
