@@ -490,6 +490,19 @@ const faqLd = {
       });
     }
 
+    /* A link may point straight at a panel, e.g. the footer's /info/#glossary.
+       Without this the target panel stays hidden and the anchor goes nowhere. */
+    const fromHash = location.hash.replace(/^#/, "");
+    if (fromHash) {
+      const wanted = tabBtns.find(
+        (t) => t.getAttribute("aria-controls") === fromHash || t.getAttribute("aria-controls") === `panel-${fromHash}`,
+      );
+      if (wanted) {
+        selectTab(wanted);
+        document.getElementById("info-tabs")?.scrollIntoView({ block: "start" });
+      }
+    }
+
     tabBtns.forEach((tab, i) => {
       tab.addEventListener("click", () => selectTab(tab));
       tab.addEventListener("keydown", (e) => {

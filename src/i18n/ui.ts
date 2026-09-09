@@ -12,7 +12,7 @@ export const ui = {
   bg: {
     nav: {
       tok: "Изкупуване",
-      dostavka: "Доставка на ток",
+      dostavka: "Доставка",
       solar: "Соларни системи",
       proekti: "Проекти",
       info: "Ресурси",
@@ -94,6 +94,7 @@ export const ui = {
         proekti: "Проекти",
         kontakti: "Контакти",
         info: "Информационен център",
+        glossary: "Речник на термините",
         privacy: "Политика за поверителност",
         terms: "Общи условия",
         cookieSettings: "Настройки за бисквитки",
@@ -124,7 +125,7 @@ export const ui = {
   en: {
     nav: {
       tok: "Electricity offtake",
-      dostavka: "Electricity supply",
+      dostavka: "Supply",
       solar: "Solar systems",
       proekti: "Projects",
       info: "Resources",
@@ -206,6 +207,7 @@ export const ui = {
         proekti: "Projects",
         kontakti: "Contact",
         info: "Info centre",
+        glossary: "Glossary of terms",
         privacy: "Privacy policy",
         terms: "Terms & conditions",
         cookieSettings: "Cookie settings",

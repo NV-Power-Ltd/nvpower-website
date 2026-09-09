@@ -40,7 +40,11 @@ const columns: { title: string; items: FooterItem[] }[] = [
   },
   {
     title: t.footer.information,
-    items: [{ href: r(locale, "info"), label: L.info }],
+    items: [
+      { href: r(locale, "info"), label: L.info },
+      /* The glossary is a tab on /info/; the hash opens it directly. */
+      { href: `${r(locale, "info")}#glossary`, label: L.glossary },
+    ],
   },
   {
     title: t.footer.legal,
