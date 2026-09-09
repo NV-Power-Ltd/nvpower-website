@@ -13,7 +13,7 @@ export const ui = {
     nav: {
       tok: "Изкупуване",
       dostavka: "Доставка",
-      solar: "Соларни системи",
+      solar: "ВЕИ системи",
       proekti: "Проекти",
       info: "Ресурси",
       kontakti: "Контакти",

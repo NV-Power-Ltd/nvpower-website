@@ -123,12 +123,12 @@ export const site = {
     bg: [
       "Лицензиран търговец на електрическа енергия",
       "Координатор на стандартна балансираща група",
-      "Лицензия № Л-878-15 / КЕВР",
+      "Разнообразно портфолио от клиенти",
     ],
     en: [
       "Licensed electricity trader",
       "Coordinator of a standard balancing group",
-      "EWRC licence No. L-878-15",
+      "A diverse client portfolio",
     ],
   },
 
