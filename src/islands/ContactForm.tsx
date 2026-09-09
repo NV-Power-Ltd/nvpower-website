@@ -20,7 +20,7 @@ const copy = {
        three areas. The value doubles as the lead's routing label, so it is what
        the trading desk sees first. */
     interests: [
-      "Изкупуване на ток от ВЕИ централа",
+      "Изкупуване на електроенергия от централа",
       "Доставка на електроенергия (над 1 MW)",
       "Соларна система за дома",
       "Соларна система за бизнеса",

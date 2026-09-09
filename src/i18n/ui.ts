@@ -11,7 +11,7 @@ export { routes, href, r, alternates, enPath, type RouteKey } from "./routes";
 export const ui = {
   bg: {
     nav: {
-      tok: "Изкупуване от ВЕИ",
+      tok: "Изкупуване",
       dostavka: "Доставка на ток",
       solar: "Соларни системи",
       proekti: "Проекти",
@@ -76,14 +76,14 @@ export const ui = {
     },
     footer: {
       oneLiner:
-        "Лицензиран търговец на електроенергия в България. Прозрачни условия, личен подход и дигитален процес.",
+        "Лицензиран търговец на електроенергия в България. Прозрачни условия, индивидуален подход и оптимизиран процес.",
       services: "Услуги",
       company: "Компания",
       information: "Информация",
       legal: "Правни",
       contact: "Контакти",
       links: {
-        tok: "Изкупуване на ток от ВЕИ",
+        tok: "Изкупуване на електроенергия",
         dostavka: "Доставка на електроенергия",
         solar: "Соларни системи и батерии",
         solarHome: "Соларна система за дома",
@@ -123,7 +123,7 @@ export const ui = {
   },
   en: {
     nav: {
-      tok: "Renewables buy-back",
+      tok: "Electricity offtake",
       dostavka: "Electricity supply",
       solar: "Solar systems",
       proekti: "Projects",
@@ -188,7 +188,7 @@ export const ui = {
     },
     footer: {
       oneLiner:
-        "A licensed electricity trader in Bulgaria. Transparent terms, a personal approach and a digital process.",
+        "A licensed electricity trader in Bulgaria. Transparent terms, an individual approach and a streamlined process.",
       services: "Services",
       company: "Company",
       information: "Information",

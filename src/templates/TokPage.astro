@@ -20,7 +20,7 @@ const { locale } = Astro.props;
 const serviceLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: locale === "bg" ? "Изкупуване на електрическа енергия от ВЕИ производители" : "Electricity buy-back from renewable producers",
+  name: locale === "bg" ? "Изкупуване на електрическа енергия от производители" : "Electricity offtake from generators",
   serviceType: "Electricity purchase agreement",
   description: locale === "bg" ? "Изкупуване на произведената електроенергия по цена, обвързана с борсовия пазар „Ден напред“ на БНЕБ, минус договорен търговски компонент. NV Power е координатор на стандартна балансираща група и поема балансирането." : "Purchase of generated electricity at a price linked to the IBEX day-ahead market, minus an agreed trading component. NV Power is a standard balancing group coordinator and takes on the balancing.",
   url: `${SITE_URL}${r(locale, "tok")}`,
@@ -30,11 +30,11 @@ const serviceLd = {
 };
 const c = {
   bg: {
-    title: "Изкупуване на ток от ВЕИ производители | NV Power",
+    title: "Изкупуване на електроенергия от производители | NV Power",
     description: `Продавайте тока си при ясни условия: NV Фиксиран (БНЕБ − 15 €/MWh), NV Standard или индивидуална оферта над 1 MW. Балансирането е включено при NV Фиксиран.`,
     hero: {
       h1: "Продавайте тока си. При ясни условия.",
-      sub: "Лицензиран търговец на електроенергия. Изкупуваме продукцията на ВЕИ производители, с прозрачна формула и включено балансиране при NV Фиксиран.",
+      sub: "Лицензиран търговец на електроенергия. Изкупуваме продукцията на производители на електроенергия, с прозрачна формула и включено балансиране при NV Фиксиран.",
       ctaPrimary: "Вземете оферта",
       ctaSecondary: "Вижте плановете",
       checks: [responseBadge.bg, "Включено балансиране при NV Фиксиран", "Без депозити"],
@@ -120,7 +120,7 @@ const c = {
          one never mixes buyer and seller language. */
       b2b: {
         badge: "За централи над 1 MW",
-        title: "Индивидуална оферта за големи ВЕИ централи",
+        title: "Индивидуална оферта за големи централи",
         text: "За производители с мощност над 1 MW изготвяме персонализирани условия за изкупуване, на база специфичния профил на производство.",
         cta: "Заявете индивидуална оферта",
         supplyNote: "Търсите доставка на електроенергия за свой обект, а не изкупуване?",

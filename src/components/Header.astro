@@ -48,7 +48,7 @@ const current = Astro.url.pathname;
             <a
               href={l.href}
               aria-current={current === l.href ? "page" : undefined}
-              class="rounded-lg px-3 py-2 text-sm font-medium whitespace-nowrap text-muted transition-colors hover:text-body aria-[current=page]:text-accent"
+              class="rounded-lg px-2.5 py-2 text-sm font-medium whitespace-nowrap text-muted transition-colors hover:text-body aria-[current=page]:text-accent"
             >
               {l.label}
             </a>
@@ -60,7 +60,7 @@ const current = Astro.url.pathname;
     <div class="flex items-center gap-2">
       <a
         href={`tel:${site.phoneHref}`}
-        class="hidden items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold text-body transition-colors hover:text-accent xl:inline-flex"
+        class="hidden items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold whitespace-nowrap text-body transition-colors hover:text-accent xl:inline-flex"
       >
         <Phone class="size-4 text-accent" aria-hidden="true" />
         {site.phone}
@@ -85,7 +85,7 @@ const current = Astro.url.pathname;
         {otherLabel}
       </a>
 
-      <a href={r(locale, "oferta")} class="btn btn-primary hidden !px-5 !py-2.5 lg:inline-flex">
+      <a href={r(locale, "oferta")} class="btn btn-primary hidden whitespace-nowrap !px-5 !py-2.5 lg:inline-flex">
         {t.nav.oferta}
       </a>
 
