@@ -13,14 +13,14 @@ const { locale } = Astro.props;
 
 const c = {
   bg: {
-    title: "Вземи оферта, NV Power",
-    description: `Заяви оферта за изкупуване на ток, доставка на електроенергия или соларна система. Отговор от консултант ${responseWithin.bg}, без ангажимент.`,
-    h1: "Вземи своята оферта",
+    title: "Вземете оферта, NV Power",
+    description: `Заявете оферта за изкупуване на ток, доставка на електроенергия или соларна система. Отговор от консултант ${responseWithin.bg}, без ангажимент.`,
+    h1: "Вземете своята оферта",
     sub: "Отговори на няколко въпроса за обекта си и ще подготвим конкретни числа, цена, икономия и срок на откупуване. Отнема около 90 секунди.",
     /* Used instead of `sub` while the wizard is hidden: it must not promise a
        questionnaire that is not on the page. */
     subOffline:
-      "Обади ни се или ни пиши и ще подготвим конкретни числа за Вашия обект: цена, икономия и срок на откупуване.",
+      "Обадете ни се или ни пишете и ще подготвим конкретни числа за Вашия обект: цена, икономия и срок на откупуване.",
     badges: [
       { icon: Clock, text: responseBadge.bg },
       { icon: BadgePercent, text: "Без скрити такси" },
@@ -30,16 +30,16 @@ const c = {
        isn't one, and promising it is what made this flow a dead end. */
     offline: {
       title: "За какво Ви е офертата?",
-      text: `Избери направлението и попълни кратката форма, или ни се обади. Отговаряме ${responseWithin.bg}.`,
+      text: `Изберете направлението и попълнете кратката форма, или ни се обадете. Отговаряме ${responseWithin.bg}.`,
       routes: [
         { label: "Изкупуване на ток от ВЕИ централа", hint: "мощност, точка на присъединяване, профил на производство", interest: 0 },
         { label: "Доставка на електроенергия", hint: "за консуматори над 1 MW, по товаров профил", interest: 1 },
         { label: "Соларна система за дома", hint: "покрив, потребление, батерия", interest: 2 },
         { label: "Соларна система за бизнеса", hint: "обект, мощност, финансиране", interest: 3 },
       ],
-      orCall: "Или ни се обади направо:",
-      callCta: "Обади се",
-      mailCta: "Пиши ни",
+      orCall: "Или ни се обадете направо:",
+      callCta: "Обадете се",
+      mailCta: "Пишете ни",
     },
   },
   en: {
@@ -88,7 +88,7 @@ const c = {
   </section>
 
   <!-- The wizard, or the honest alternative while it is being reworked. The
-       page, its route and every inbound "Вземи оферта" link stay put either
+       page, its route and every inbound quote link stay put either
        way; only what sits in this slot changes. -->
   <section class="container-site -mt-20 pb-20 md:pb-24">
     {

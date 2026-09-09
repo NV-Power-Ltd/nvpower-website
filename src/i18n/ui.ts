@@ -11,22 +11,22 @@ export { routes, href, r, alternates, enPath, type RouteKey } from "./routes";
 export const ui = {
   bg: {
     nav: {
-      tok: "Изкупуване",
-      dostavka: "Доставка",
+      tok: "Изкупуване от ВЕИ",
+      dostavka: "Доставка на ток",
       solar: "Соларни системи",
       proekti: "Проекти",
-      info: "Инфо",
+      info: "Ресурси",
       kontakti: "Контакти",
-      oferta: "Вземи оферта",
+      oferta: "Заявете оферта",
     },
     a11y: {
       skip: "Към съдържанието",
-      openMenu: "Отвори менюто",
+      openMenu: "Отворете менюто",
       closeMenu: "Затвори менюто",
       primaryNav: "Основна навигация",
       footerNav: "Навигация в долната част",
       langSwitch: "Switch to English",
-      call: "Обади се",
+      call: "Обадете се",
       backToTop: "Обратно към началото на страницата",
     },
     promises: {
@@ -63,7 +63,7 @@ export const ui = {
         solarHome: "Соларна система за дома",
         solarBiz: "Соларна система за бизнеса",
         kalkulator: "Соларен калкулатор",
-        oferta: "Вземи оферта",
+        oferta: "Заявете оферта",
         zaNas: "За нас",
         proekti: "Проекти",
         kontakti: "Контакти",
@@ -98,11 +98,11 @@ export const ui = {
   },
   en: {
     nav: {
-      tok: "Buy-back",
-      dostavka: "Supply",
+      tok: "Renewables buy-back",
+      dostavka: "Electricity supply",
       solar: "Solar systems",
       proekti: "Projects",
-      info: "Info",
+      info: "Resources",
       kontakti: "Contact",
       oferta: "Get a quote",
     },

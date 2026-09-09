@@ -17,12 +17,12 @@ const { locale } = Astro.props;
 const c = {
   bg: {
     title: "Изкупуване на ток от ВЕИ производители | NV Power",
-    description: `Продай тока си при ясни условия: NV Фиксиран (БНЕБ − 15 €/MWh), NV Standard или индивидуална оферта над 1 MW. Балансирането е включено при NV Фиксиран.`,
+    description: `Продавайте тока си при ясни условия: NV Фиксиран (БНЕБ − 15 €/MWh), NV Standard или индивидуална оферта над 1 MW. Балансирането е включено при NV Фиксиран.`,
     hero: {
-      h1: "Продавай тока си. При ясни условия.",
+      h1: "Продавайте тока си. При ясни условия.",
       sub: "Лицензиран търговец на електроенергия. Изкупуваме продукцията на ВЕИ производители, с прозрачна формула и включено балансиране при NV Фиксиран.",
-      ctaPrimary: "Вземи оферта",
-      ctaSecondary: "Виж плановете",
+      ctaPrimary: "Вземете оферта",
+      ctaSecondary: "Вижте плановете",
       checks: [responseBadge.bg, "Включено балансиране при NV Фиксиран", "Без депозити"],
     },
     plans: {
@@ -36,7 +36,9 @@ const c = {
           icon: Zap,
           badge: "Най-предсказуем",
           name: "NV Фиксиран",
-          /* "Фиксиран" describes the trading component, not the energy price. */
+          /* The name says „фиксиран"; only the component is. The qualifier rides
+             on the name so a scanner cannot miss it. */
+          nameNote: "фиксиран е търговският компонент, не цената на енергията",
           mechanism:
             "Изкупна цена: БНЕБ, пазар „Ден напред“, минус фиксиран търговски компонент от 15 €/MWh. Фиксиран е компонентът, не цената на енергията.",
           priceMain: "БНЕБ − 15 €/MWh",
@@ -48,12 +50,13 @@ const c = {
             "Постоянна комуникация и поддръжка от търговския ни екип",
             "Идеален за малки и средни ВЕИ производители",
           ],
-          cta: "Вземи оферта за NV Фиксиран",
+          cta: "Вземете оферта за NV Фиксиран",
         },
         {
           icon: LineChart,
           badge: "Най-популярен",
           name: "NV Standard",
+          nameNote: "борсова цена, с по-нисък компонент при по-дълго предизвестие",
           mechanism:
             "Изкупна цена: БНЕБ, пазар „Ден напред“, минус търговски компонент от 3 или 2 €/MWh според избраната опция.",
           term: "две нива на гъвкавост",
@@ -79,12 +82,13 @@ const c = {
             "По-ниска такса за балансиране при по-дългосрочен договор",
             "Включено пълно управление на балансиращата група",
           ],
-          cta: "Избери NV Standard",
+          cta: "Изберете NV Standard",
         },
         {
           icon: Building2,
           badge: "За големи обекти (над 1 MW)",
           name: "NV Individual",
+          nameNote: "договорени условия по производствения профил на обекта",
           mechanism:
             "Изкупна цена: по договаряне, спрямо производствения профил на централата и периода на договора.",
           priceMain: "По договаряне",
@@ -96,7 +100,7 @@ const c = {
             "Анализ на производствения профил преди офертата",
             "Личен акаунт мениджър и индивидуална търговска стратегия",
           ],
-          cta: "Заяви индивидуална оферта",
+          cta: "Заявете индивидуална оферта",
         },
       ],
       /* Producers only. Supply for large consumers has its own page, so this
@@ -105,9 +109,9 @@ const c = {
         badge: "За централи над 1 MW",
         title: "Индивидуална оферта за големи ВЕИ централи",
         text: "За производители с мощност над 1 MW изготвяме персонализирани условия за изкупуване, на база специфичния профил на производство.",
-        cta: "Заяви индивидуална оферта",
+        cta: "Заявете индивидуална оферта",
         supplyNote: "Търсите доставка на електроенергия за свой обект, а не изкупуване?",
-        supplyCta: "Виж доставката",
+        supplyCta: "Вижте доставката",
       },
     },
     compare: {
@@ -134,13 +138,13 @@ const c = {
       ],
     },
     invoice: {
-      eyebrow: "Провери сам",
+      eyebrow: "Проверете сами",
       title: "Изпратете последното си отчитане и ще Ви покажем разликата",
       lead: `Прикачете последната фактура или отчет за произведена енергия и ще получите сравнителна оферта ${responseWithin.bg}, с конкретни числа, не с обещания.`,
     },
     ctaBand: {
       title: "Искате оферта за изкупуване на продукцията си?",
-      text: `Изпрати ни мощността, точката на присъединяване и профила на производство. Отговаряме ${responseWithin.bg}.`,
+      text: `Изпратете ни мощността, точката на присъединяване и профила на производство. Отговаряме ${responseWithin.bg}.`,
     },
     faq: {
       eyebrow: "Въпроси",
@@ -175,6 +179,7 @@ const c = {
           icon: Zap,
           badge: "Most predictable",
           name: "NV Fixed",
+          nameNote: "the trading component is fixed, the energy price is not",
           mechanism:
             "Purchase price: the IBEX day-ahead market, minus a fixed trading component of €15/MWh. The component is fixed, the energy price is not.",
           priceMain: "IBEX − €15/MWh",
@@ -192,6 +197,7 @@ const c = {
           icon: LineChart,
           badge: "Most popular",
           name: "NV Standard",
+          nameNote: "the market price, with a lower component for a longer notice period",
           mechanism:
             "Purchase price: the IBEX day-ahead market, minus a trading component of €3 or €2/MWh, depending on the option you pick.",
           term: "two levels of flexibility",
@@ -223,6 +229,7 @@ const c = {
           icon: Building2,
           badge: "For large sites (over 1 MW)",
           name: "NV Individual",
+          nameNote: "terms negotiated around the site's generation profile",
           mechanism:
             "Purchase price: negotiated, based on the plant's generation profile and the contract period.",
           priceMain: "Negotiated",
@@ -349,16 +356,19 @@ const c = {
           <span class="mt-2 flex size-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
             <plan.icon class="size-6" aria-hidden="true" />
           </span>
-          <h3 class="text-xl font-bold text-body">
-            {plan.name}
-            {"options" in plan && plan.options && (
-              <span class="text-xs font-medium text-muted"> ({plan.term})</span>
-            )}
-          </h3>
+          {/* The name says „фиксиран"; only the trading component is, so the
+              qualifier rides on the name where a scanner cannot miss it, and
+              the sentence below carries the full mechanism. */}
+          <div>
+            <h3 class="text-xl font-bold text-body">
+              {plan.name}
+              {"options" in plan && plan.options && (
+                <span class="text-xs font-medium text-muted"> ({plan.term})</span>
+              )}
+            </h3>
+            <p class="mt-1 text-xs leading-snug font-medium text-accent">{plan.nameNote}</p>
+          </div>
 
-          <!-- Directly under the name: what the price actually is. "Фиксиран"
-               describes the trading component, not the energy price, and a
-               market-indexed price must never read as a fixed one. -->
           <p class="-mt-1 text-[0.8rem] leading-snug text-muted">{plan.mechanism}</p>
 
           {!("options" in plan && plan.options) && (

@@ -43,18 +43,32 @@ with battery storage.
 
 **Мерни единици – правилото на проекта.** Символите са на латиница навсякъде, включително в българския текст (kWh, не кВтч). Пикова мощност на ФЕЦ е kWp/MWp; мощност на батерия е kW/MW, капацитет е kWh/MWh; борсовите формули са в €/MWh, а цената на дребно в €/kWh. Три стойности умишлено остават в kW/MW, защото са различна величина: облекченият режим „до 20 kW" е нормативен праг, „над 1 MW" на `/dostavka/` и `/tok/` е присъединена мощност, а „До 15 kW" във въпросника е договорена мощност.
 
+**Изисква бизнес потвърждение – имената на плановете.** Българската страница сменя азбуката без правило: **NV Фиксиран** (кирилица), **NV Standard** (латиница), **NV Individual** (латиница), а вътре в NV Standard нивата са **„Standard Flexible"** (латиница) до **„Standard Дългосрочен"** (кирилица). Пет имена, без модел.
+
+Нищо не е преименувано, защото кои от тези са официални продуктови имена не се вижда от кода. Вместо това всеки план получи **описателен подзаглавен ред** (`nameNote`), който носи уточнението, което марковото име не може – най-важното при „NV Фиксиран": фиксиран е търговският компонент, не цената на енергията.
+
+Изберете една от двете конвенции и потвърдете:
+
+| Вариант | NV Фиксиран | NV Standard | Нива в Standard | NV Individual |
+| --- | --- | --- | --- | --- |
+| **A. Марката е на латиница** (последователно с NV Power, NV Standard) | `NV Fixed` | `NV Standard` | `Standard Flexible` / `Standard Long-term` | `NV Individual` |
+| **B. Марката е на български** (по-достъпно за производител) | `NV Фиксиран` | `NV Стандарт` | `Стандарт Гъвкав` / `Стандарт Дългосрочен` | `NV Индивидуален` |
+
+Препоръка: **вариант A**, защото „NV Power" и „NV Standard" вече са на латиница и вариант B изисква преименуване на повече имена. При всеки от двата „Фиксиран/Fixed" остава подвеждащ сам по себе си, затова подзаглавният ред остава задължителен.
+
+Ако сменяте име, то се среща и в: `TokPage` (карти, таблица, CTA, FAQ, meta), `HomePage` (2 места), `MiniConfigurator`. Търсете стария низ, преди да смените.
+
 **Изисква бизнес потвърждение – договорни обещания.** Това са търговска политика, не формулировка, затова не са пренаписвани. Всяко от тях трябва да съвпада с реалния договор:
 
 - [ ] **„Без неустойки и без обвързващи клаузи"** (`/tok/`, FAQ „Мога ли да се откажа ако не съм доволен?"). Изречението стои непосредствено до „1 месец при NV Фиксиран, 1 или 6 месеца при NV Standard". Шестмесечно предизвестие в обичайния език **е** обвързваща клауза, така че двете половини на отговора си противоречат. Потвърдете какво точно липсва: неустойка за предсрочно прекратяване, минимален срок на договора, или и двете, и формулирайте го спрямо договора.
 - [ ] **„Без депозити"** се появява на 6 места (`i18n/ui.ts`, `/tok/`, `/dostavka/`, `/oferta/`, калкулатора). Потвърдете, че важи и за двете направления и за всички планове.
 - [ ] **„Смяната е напълно безплатна, без такси, без депозити"** (`/tok/` и `/info/`). Потвърдете, че няма административна такса при никакъв сценарий.
-- [ ] **„Ако друг доставчик ти иска депозит, питай го защо."** (`/info/`) – сравнителна реплика срещу конкуренти. Решете дали я искате.
 
 **Изисква бизнес потвърждение – соларният модел** (`src/lib/solarModel.ts`):
 
 - [ ] **Собственото потребление без батерия.** `selfUse.pv` (30% за дом, 65% за бизнес и индустрия) е единственото допускане в модела без източник в проекта и е маркирано в кода. `selfUse.pv_bess` (70/80%) идва от стария калкулатор и остава непроменено. Потвърди и двата набора, за предпочитане от реални обекти.
-- [ ] **Цената на батерията, 565 €/кВтч**, е изведена от двете публикувани карти на `/solar/za-doma/`: средата на 12 800 – 17 900 € за 10 kWp + 10 kWh, минус фотоволтаичната част по 970 €/kWp. Широкият публикуван диапазон допуска 310 – 820 €/кВтч. Ако имате реална доставна цена, сложете нея.
-- [ ] **Съотношението 1 кВтч батерия на kWp** идва от домашната конфигурация. За търговски обект батерията се оразмерява по товаровия профил – калкулаторът го казва, но ако има типично съотношение за бизнес, добавете го.
+- [ ] **Цената на батерията, 565 €/kWh**, е изведена от двете публикувани карти на `/solar/za-doma/`: средата на 12 800 – 17 900 € за 10 kWp + 10 kWh, минус фотоволтаичната част по 970 €/kWp. Широкият публикуван диапазон допуска 310 – 820 €/kWh. Ако имате реална доставна цена, сложете нея.
+- [ ] **Съотношението 1 kWh батерия на kWp** идва от домашната конфигурация. За търговски обект батерията се оразмерява по товаровия профил – калкулаторът го казва, но ако има типично съотношение за бизнес, добавете го.
 - [ ] Моделът брои за икономия **само собственото потребление** и приема излишъка за нула, защото няма източник за борсова цена в проекта. Затова оценките са консервативни, а срокът на откупуване за дом излиза 19 – 28 години при публикуваните цени. Ако решите да остойностявате излишъка, това е мястото.
 
 **След преориентирането към изкупуване** – `/tok/` е основното направление на сайта:
@@ -182,7 +196,7 @@ Permissions-Policy), кеширане на `/_astro/*`, `trailingSlash: true` и
 важи.** В момента такава стойност няма никъде на сайта.
 
 **Няма публикувана цена за ток.** Офертите са формула спрямо дневния пазар на
-БНЕБ (IBEX), затова никъде не се обявява фиксирано €/кВтч, а формулите по
+БНЕБ (IBEX), затова никъде не се обявява фиксирано €/kWh, а формулите по
 плановете са в €/MWh (`/tok/`). Изречението, което го казва, е на едно място:
 `site.pricingBasis` (пълно) и `site.pricingBasisShort` (за херо и карти).
 `site.price.eurPerKwh` **не е цена по оферта** – това е индикативна крайна цена
@@ -315,12 +329,26 @@ with battery storage. The route table is under "Routing and i18n".
 
 **Units – the project rule.** Symbols are Latin everywhere, including in Bulgarian copy (kWh, not кВтч). PV peak capacity is kWp/MWp; battery power is kW/MW and capacity is kWh/MWh; exchange formulas are €/MWh and retail is €/kWh. Three values deliberately stay in kW/MW because they are a different quantity: the eased regime's "до 20 kW" is a statutory threshold, "above 1 MW" on `/dostavka/` and `/tok/` is connected capacity, and "Up to 15 kW" in the wizard is contracted capacity.
 
+**Needs business confirmation – plan names.** The Bulgarian page switches alphabet with no rule: **NV Фиксиран** (Cyrillic), **NV Standard** (Latin), **NV Individual** (Latin), and inside NV Standard the tiers read **"Standard Flexible"** (Latin) next to **"Standard Дългосрочен"** (Cyrillic). Five names, no pattern.
+
+Nothing was renamed, because which of these are official product names is not visible from the code. Instead every plan gained a **descriptive subtitle** (`nameNote`) carrying the qualifier a brand name cannot — most importantly on "NV Фиксиран": the trading component is fixed, the energy price is not.
+
+Pick one of the two conventions and confirm:
+
+| Option | NV Фиксиран | NV Standard | Standard tiers | NV Individual |
+| --- | --- | --- | --- | --- |
+| **A. Latin brand** (consistent with NV Power, NV Standard) | `NV Fixed` | `NV Standard` | `Standard Flexible` / `Standard Long-term` | `NV Individual` |
+| **B. Bulgarian brand** (more accessible to a producer) | `NV Фиксиран` | `NV Стандарт` | `Стандарт Гъвкав` / `Стандарт Дългосрочен` | `NV Индивидуален` |
+
+Recommendation: **option A**, since "NV Power" and "NV Standard" are already Latin and option B renames more of the family. Under either one, "Фиксиран/Fixed" stays misleading on its own, so the subtitle is not optional.
+
+If a name changes, it also appears in: `TokPage` (cards, table, CTAs, FAQ, meta), `HomePage` (2 places), `MiniConfigurator`. Grep the old string first.
+
 **Needs business confirmation – contractual promises.** These are commercial policy rather than wording, so they were not rewritten. Each has to match the actual contract:
 
 - [ ] **"Без неустойки и без обвързващи клаузи" / "No penalties, no lock-in clauses"** (`/tok/`, the FAQ "Can I leave if I am not happy?"). The sentence sits immediately after "1 month on NV Fixed, 1 or 6 months on NV Standard". A six-month notice period is, in ordinary language, a binding clause, so the two halves of the answer contradict each other. Confirm what is actually absent — an early-termination penalty, a minimum contract term, or both — and word it against the contract.
 - [ ] **"No deposits"** appears in 6 places (`i18n/ui.ts`, `/tok/`, `/dostavka/`, `/oferta/`, the calculator). Confirm it holds for both business areas and every plan.
 - [ ] **"Switching is completely free, no fees, no deposits"** (`/tok/` and `/info/`). Confirm there is no administrative fee under any scenario.
-- [ ] **"If another supplier asks you for a deposit, ask them why."** (`/info/`) – a comparative jab at competitors. Decide whether you want it.
 
 **Needs business confirmation – the solar model** (`src/lib/solarModel.ts`):
 
