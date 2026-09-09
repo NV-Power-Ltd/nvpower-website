@@ -34,7 +34,6 @@ const c = {
       items: [
         {
           icon: Zap,
-          badge: "Най-предсказуем",
           name: "NV Фиксиран",
           /* The name says „фиксиран"; only the component is. The qualifier rides
              on the name so a scanner cannot miss it. */
@@ -142,10 +141,6 @@ const c = {
       title: "Изпратете последното си отчитане и ще Ви покажем разликата",
       lead: `Прикачете последната фактура или отчет за произведена енергия и ще получите сравнителна оферта ${responseWithin.bg}, с конкретни числа, не с обещания.`,
     },
-    ctaBand: {
-      title: "Искате оферта за изкупуване на продукцията си?",
-      text: `Изпратете ни мощността, точката на присъединяване и профила на производство. Отговаряме ${responseWithin.bg}.`,
-    },
     faq: {
       eyebrow: "Въпроси",
       title: "Често задавани въпроси",
@@ -177,7 +172,6 @@ const c = {
       items: [
         {
           icon: Zap,
-          badge: "Most predictable",
           name: "NV Fixed",
           nameNote: "the trading component is fixed, the energy price is not",
           mechanism:
@@ -281,10 +275,6 @@ const c = {
       title: "Send us your latest settlement, we'll show you the difference",
       lead: `Attach your latest invoice or generation report and you'll get a comparative offer ${responseWithin.en}, with real numbers, not promises.`,
     },
-    ctaBand: {
-      title: "Want a buy-back offer for your output?",
-      text: `Send us the capacity, the connection point and your generation profile. We reply ${responseWithin.en}.`,
-    },
     faq: {
       eyebrow: "Questions",
       title: "Frequently asked questions",
@@ -344,14 +334,18 @@ const c = {
         <article
           class:list={["card relative flex h-full flex-col gap-5 p-7 md:p-8", i === 1 && "border-accent ring-1 ring-accent"]}
         >
-          <span
-            class:list={[
-              "absolute -top-3.5 left-6 rounded-full px-3.5 py-1.5 text-xs font-bold",
-              i === 1 ? "bg-accent text-accent-contrast" : "bg-accent/10 text-accent",
-            ]}
-          >
-            {plan.badge}
-          </span>
+          {/* Not every plan carries a badge; without the guard an empty
+              pill floats above the card. */}
+          {"badge" in plan && plan.badge && (
+            <span
+              class:list={[
+                "absolute -top-3.5 left-6 rounded-full px-3.5 py-1.5 text-xs font-bold",
+                i === 1 ? "bg-accent text-accent-contrast" : "bg-accent/10 text-accent",
+              ]}
+            >
+              {plan.badge}
+            </span>
+          )}
 
           <span class="mt-2 flex size-12 items-center justify-center rounded-xl bg-accent/10 text-accent">
             <plan.icon class="size-6" aria-hidden="true" />
@@ -478,10 +472,13 @@ const c = {
             ))}
           </tbody>
         </table>
-      <!-- A published formula is the headline, not the mechanism: settlement
-           and balancing rules are contractual. Said once, under the table. -->
-      <p class="mt-4 text-sm leading-relaxed text-muted">{c.compare.methodology}</p>
       </div>
+
+      {/* A published formula is the headline, not the mechanism: settlement and
+          balancing rules are contractual. Said once, and outside the table's
+          scroll container, where it used to inherit no padding and scroll
+          sideways out of view. */}
+      <p class="mt-5 max-w-3xl text-sm leading-relaxed text-muted">{c.compare.methodology}</p>
     </div>
   </section>
 
@@ -530,6 +527,6 @@ const c = {
   </section>
 
   <!-- 7 ▸ FINAL CTA BAND -->
-  <CtaBand locale={locale} tone="formal" title={c.ctaBand.title} text={c.ctaBand.text} />
+  <CtaBand locale={locale} variant="producer" />
 </BaseLayout>
 

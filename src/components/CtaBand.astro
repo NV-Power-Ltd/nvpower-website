@@ -8,13 +8,15 @@ interface Props {
   locale: Locale;
   title?: string;
   text?: string;
-  /** Producer, business and regulatory pages address the reader formally;
-      residential ones keep the friendly „ти". */
-  tone?: "informal" | "formal";
+  /** Which closing ask this page makes. Carries the register too: a producer
+      page is formal and about buy-back, a residential one friendly and about
+      a survey, so they are the same decision. Legal pages render no band. */
+  variant?: keyof ReturnType<typeof useUI>["ctaVariants"];
 }
-const { locale, title, text, tone = "informal" } = Astro.props;
+const { locale, title, text, variant = "general" } = Astro.props;
 const ui = useUI(locale);
-const t = { ...ui, cta: tone === "formal" ? ui.ctaFormal : ui.cta };
+const cta = ui.ctaVariants[variant];
+const t = { ...ui, cta };
 ---
 
 <!-- Dark CTA band – every page ends with one; no dead-end pages (§8) -->
@@ -25,7 +27,7 @@ const t = { ...ui, cta: tone === "formal" ? ui.ctaFormal : ui.cta };
     </h2>
     <p class="mx-auto mt-4 max-w-xl text-base text-white/70 md:text-lg">{text ?? t.cta.text}</p>
     <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-      <a href={r(locale, "oferta")} class="btn btn-primary !px-8 !py-4 text-base">
+      <a href={r(locale, variant === "company" ? "kontakti" : "oferta")} class="btn btn-primary !px-8 !py-4 text-base">
         {t.cta.primary}
         <ArrowRight class="size-4" aria-hidden="true" />
       </a>

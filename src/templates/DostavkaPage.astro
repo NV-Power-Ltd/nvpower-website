@@ -67,10 +67,6 @@ const c = {
       text: "Ако имате ВЕИ централа и търсите изкупуване на продукцията, условията са на отделна страница.",
       cta: "Вижте изкупуването от ВЕИ",
     },
-    cta: {
-      title: "Искате оферта за доставка на електроенергия?",
-      text: `Изпратете ни данните на обекта и товаровия профил, ако разполагате с него. Отговаряме ${responseWithin.bg}.`,
-    },
   },
   en: {
     title: "Electricity supply for large consumers | NV Power",
@@ -113,10 +109,6 @@ const c = {
       title: "Selling power rather than buying it?",
       text: "If you have a renewable plant and are looking for buy-back, those terms are on a separate page.",
       cta: "See renewable buy-back",
-    },
-    cta: {
-      title: "Want a supply offer?",
-      text: `Send us the site details and your load profile, if you have one. We reply ${responseWithin.en}.`,
     },
   },
 }[locale];
@@ -194,5 +186,5 @@ const c = {
     </div>
   </section>
 
-  <CtaBand locale={locale} tone="formal" title={c.cta.title} text={c.cta.text} />
+  <CtaBand locale={locale} variant="supply" />
 </BaseLayout>
