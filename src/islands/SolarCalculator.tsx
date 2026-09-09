@@ -107,8 +107,8 @@ const copy = {
     usedSelfUse: "self-consumption",
     usedPrice: "electricity price",
     usedYield: "yield",
-    surplusNote: "The rest of the generated energy goes to the grid. It is valued at zero here, but it can be sold under a buy-back contract.",
-    surplusCta: "See the buy-back terms",
+    surplusNote: "The rest of the generated energy goes to the grid. It is valued at zero here, but it can be sold under an offtake agreement.",
+    surplusCta: "See the offtake terms",
     co2Label: "CO₂ saved per year",
     co2Unit: "tonnes",
     treesPrefix: "like",
@@ -129,7 +129,7 @@ const copy = {
       m === "pv"
         ? `Self-consumption without a battery: ${pct(A.selfUse.pv.home)} for a home and ${pct(A.selfUse.pv.business)} for business and industry. Without storage the evening load cannot be met from the roof, while a business consumes mostly during the day.`
         : `Self-consumption with a battery: ${pct(A.selfUse.pv_bess.home)} for a home and ${pct(A.selfUse.pv_bess.business)} for business and industry.`,
-      "Savings come only from the energy you use yourself. The surplus is valued at zero here, although it can be sold under a buy-back contract at a market-linked price, so the estimate is a conservative one.",
+      "Savings come only from the energy you use yourself. The surplus is valued at zero here, although it can be sold under an offtake agreement at a market-linked price, so the estimate is a conservative one.",
       m === "pv"
         ? `Investment: ~€${A.capexEurPerKwp.home}/kWp for homes and ~€${A.capexEurPerKwp.business}/kWp for business and industry, turnkey, before financing, without a battery.`
         : `Investment: ~€${A.capexEurPerKwp.home}/kWp for homes and ~€${A.capexEurPerKwp.business}/kWp for business and industry, plus ~€${A.bessEurPerKwh}/kWh for the battery. The battery is sized at ${A.bessKwhPerKwp} kWh per kWp, as in the published 10 kWp + 10 kWh hybrid configuration.`,

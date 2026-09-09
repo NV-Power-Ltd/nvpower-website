@@ -82,10 +82,10 @@ const copy = {
     q3a: ["Lower bills", "Energy independence", "Selling energy", "An EV charger"],
     back: "Back",
     recTok: {
-      title: "We recommend: buy-back on an exchange-linked formula",
-      text: "We buy your output at a price linked to IBEX (БНЕБ) minus a clearly stated fee, with balancing included on NV Fixed. Switching is free and does not stop your production.",
+      title: "We recommend: offtake on an exchange-linked formula",
+      text: "We take your output at a price linked to IBEX minus a clearly stated fee, with balancing services included on NV Fixed. Switching is free and does not stop your production.",
       route: "tok",
-      cta: "See the buy-back plans",
+      cta: "See the offtake plans",
     },
     recSolarHome: {
       title: "We recommend: a hybrid home system",

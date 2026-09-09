@@ -168,11 +168,11 @@ const c = {
     },
   },
   en: {
-    title: "Electricity buy-back for renewable producers | NV Power",
-    description: `Sell your power on clear terms: NV Fixed (IBEX − €15/MWh), NV Standard or an individual offer above 1 MW. Balancing included on NV Fixed.`,
+    title: "Electricity offtake for generators | NV Power",
+    description: `Sell your generation on clear terms: NV Fixed (IBEX − €15/MWh), NV Standard or an individual offer above 1 MW. Balancing included on NV Fixed.`,
     hero: {
       h1: "Sell your power. On clear terms.",
-      sub: "A licensed electricity trader. We buy the output of renewable producers, a transparent formula with balancing included on NV Fixed.",
+      sub: "A licensed electricity trader. We take the output of generators under a transparent formula, with balancing services included on NV Fixed.",
       ctaPrimary: "Get a quote",
       ctaSecondary: "See the plans",
       checks: [responseBadge.en, "Balancing included on NV Fixed", "No deposits"],
@@ -195,7 +195,7 @@ const c = {
           term: "just 1 month's notice",
           features: [
             "Notice period: just 1 month, no long-term lock-in",
-            "Fixed balancing",
+            "Balancing services at a fixed cost",
             "Ongoing contact and support from our trading desk",
             "Ideal for small and mid-size renewable producers",
           ],
@@ -255,7 +255,7 @@ const c = {
       b2b: {
         badge: "For plants above 1 MW",
         title: "An individual offer for large renewable plants",
-        text: "For producers above 1 MW we prepare tailored buy-back terms, built around the specific generation profile.",
+        text: "For generators above 1 MW we prepare tailored offtake terms, built around the specific generation profile.",
         cta: "Request an individual offer",
         supplyNote: "Looking to buy electricity for a site of your own rather than sell it?",
         supplyCta: "See supply",
@@ -281,7 +281,7 @@ const c = {
       steps: [
         { icon: FileSearch, title: "Send us your plant details", text: "Capacity, grid connection point and generation profile. We prepare a concrete offer on the formula. It's free." },
         { icon: PenLine, title: "Sign remotely", text: "A plain-language contract, signed online. We file the paperwork with the grid operator and add you to our balancing group." },
-        { icon: Repeat, title: "From the 1st, you sell to us", text: "From the contract’s effective date the site is registered to the NV Power balancing group and buy-back starts on the agreed terms. The switch is purely administrative and fully remote." },
+        { icon: Repeat, title: "Offtake starts on the 1st", text: "From the contract’s effective date the site is registered to the NV Power balancing group and offtake starts on the agreed terms. The switch is purely administrative and fully remote." },
       ],
     },
     invoice: {
@@ -392,9 +392,9 @@ const c = {
               {plan.options.map((opt) => (
                 <div class="flex flex-col rounded-xl border border-line bg-surface-alt p-3">
                   <p class="text-[11px] leading-tight font-bold tracking-wide text-accent uppercase">{opt.label}</p>
-                  <!-- No nowrap: with the unit spelled out, "БНЕБ − 3 €/MWh" is 144px of
-                       text in a 108px box at 375px. Letting it break at the space
-                       puts the unit on its own line instead of clipping it. -->
+                  {/* No nowrap: with the unit spelled out, the formula is 144px of
+                      text in a 108px box at 375px. Letting it break at the space
+                      puts the unit on its own line instead of clipping it. */}
                   <p class="mt-2 font-[family-name:var(--font-display)] text-base leading-tight font-bold text-accent">{opt.formula}</p>
                   <p class="mt-2 text-xs leading-snug font-semibold text-body">
                     {c.plans.noticeLabel}: <span class="whitespace-nowrap">{opt.notice}</span>
@@ -421,9 +421,9 @@ const c = {
       ))}
     </div>
 
-    <!-- B2B: supply and buy-back above 1 MW. Deliberately the loudest block on
-         the page – it sits on the dark band surface the hero and CTA band use, so
-         it separates hard from the white plan cards without new colours. -->
+    {/* B2B: supply and offtake above 1 MW. Deliberately the loudest block on
+        the page – it sits on the dark band surface the hero and CTA band use, so
+        it separates hard from the white plan cards without new colours. */}
     <div
       class="mt-10 overflow-hidden rounded-2xl bg-band-deep p-8 shadow-[0_18px_50px_-18px_rgb(13_47_51/0.55)] ring-1 ring-accent/40 md:p-10"
     >

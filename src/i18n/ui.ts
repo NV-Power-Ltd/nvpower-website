@@ -159,7 +159,7 @@ export const ui = {
       producer: {
         title: "Want a quote for the electricity your plant generates?",
         text: `Send us the capacity, the connection point and the generation profile, and you will have a formula-based offer ${responseWithin.en}.`,
-        primary: "Request a buy-back offer",
+        primary: "Request an offtake offer",
         call: "Call us",
       },
       supply: {
@@ -182,7 +182,7 @@ export const ui = {
       },
       company: {
         title: "Tell us what you are looking for",
-        text: `Buy-back, supply or a solar plant, we will point you to the right area ${responseWithin.en}.`,
+        text: `Offtake, supply or a solar plant, we will point you to the right area ${responseWithin.en}.`,
         primary: "Get in touch",
         call: "Call us",
       },
@@ -196,7 +196,7 @@ export const ui = {
       legal: "Legal",
       contact: "Contact",
       links: {
-        tok: "Electricity buy-back for producers",
+        tok: "Electricity offtake for generators",
         dostavka: "Electricity supply",
         solar: "Solar systems & batteries",
         solarHome: "Solar for your home",

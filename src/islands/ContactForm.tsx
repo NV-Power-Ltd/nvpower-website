@@ -54,7 +54,7 @@ const copy = {
     phone: "Phone *",
     interest: "What is your enquiry about? *",
     interests: [
-      "Buy-back from a renewable plant",
+      "Electricity offtake from a generating plant",
       "Electricity supply (above 1 MW)",
       "A solar system for a home",
       "A solar system for a business",

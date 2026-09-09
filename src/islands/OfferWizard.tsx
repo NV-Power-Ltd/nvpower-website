@@ -175,7 +175,7 @@ function buildSteps(locale: Locale): { steps: Step[]; strings: Record<string, st
           { kind: "choice", id: "shading", label: "Shading at the site", options: ["No shading", "Partial", "Significant", "Not sure"] },
         ],
       },
-      { id: "extras", title: "Anything on top?", fields: [{ kind: "multi", id: "extras", options: ["EV charging station", "Smart consumption monitoring", "Financing / leasing", "Buy-back of generated energy"] }] },
+      { id: "extras", title: "Anything on top?", fields: [{ kind: "multi", id: "extras", options: ["EV charging station", "Smart consumption monitoring", "Financing / leasing", "Offtake of generated energy"] }] },
       {
         id: "contact",
         title: "Where do we send the quote?",

@@ -53,7 +53,9 @@ const orgLd = {
   },
   taxID: "208173515", // ЕИК
   vatID: "BG208173515",
-  sameAs: Object.values(site.socials).filter(Boolean),
+  ...(Object.values(site.socials).filter(Boolean).length
+    ? { sameAs: Object.values(site.socials).filter(Boolean) }
+    : {}),
   /* The facts a crawler or a model can use, in the channel they actually read.
      Nothing here is invented: every value comes from site.ts. */
   legalName: site.nameLegal,
@@ -126,6 +128,7 @@ const orgLd = {
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:locale" content={locale === "bg" ? "bg_BG" : "en_US"} />
+    {!noindex && <meta property="og:locale:alternate" content={locale === "bg" ? "en_US" : "bg_BG"} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />

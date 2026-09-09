@@ -38,7 +38,7 @@ export const site = {
      a crawler is not an audience for marketing copy. */
   orgDescription: {
     bg: "Лицензиран търговец на електрическа енергия и координатор на стандартна балансираща група. Изкупува електроенергия от производители, доставя електроенергия по индивидуална оферта на консуматори над 1 MW и проектира и изгражда фотоволтаични централи с батерийни системи за съхранение.",
-    en: "A licensed electricity trader and coordinator of a standard balancing group. It buys electricity from generators, supplies electricity to consumers above 1 MW under individual offers, and designs and builds photovoltaic plants with battery storage.",
+    en: "A licensed electricity trader and coordinator of a standard balancing group. It provides electricity offtake for generators, supplies electricity to consumers above 1 MW under individual offers, and designs and builds photovoltaic plants with battery storage.",
   },
 
   /** Main phone – appears in header, click-to-call and the mobile CTA bar. */
@@ -186,12 +186,12 @@ export const site = {
    */
   pricingBasis: {
     bg: "Цените по офертите са обвързани с цените на БНЕБ (IBEX)",
-    en: "Offer prices are linked to the IBEX (БНЕБ) exchange prices",
+    en: "Offer prices are linked to IBEX day-ahead prices",
   },
   /** Short form for hero lines and cards, where the sentence above is too long. */
   pricingBasisShort: {
     bg: "по цени, обвързани с БНЕБ (IBEX)",
-    en: "at prices linked to IBEX (БНЕБ)",
+    en: "at prices linked to IBEX",
   },
 
   /**
