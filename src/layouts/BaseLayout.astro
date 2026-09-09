@@ -54,6 +54,26 @@ const orgLd = {
   taxID: "208173515", // ЕИК
   vatID: "BG208173515",
   sameAs: Object.values(site.socials).filter(Boolean),
+  /* The facts a crawler or a model can use, in the channel they actually read.
+     Nothing here is invented: every value comes from site.ts. */
+  legalName: site.nameLegal,
+  description: site.orgDescription[locale],
+  logo: `${SITE_URL}/images/logo.png`,
+  image: `${SITE_URL}${ogImage}`,
+  areaServed: { "@type": "Country", name: locale === "bg" ? "България" : "Bulgaria" },
+  /* The EWRC licence, as an identifier rather than prose. */
+  identifier: {
+    "@type": "PropertyValue",
+    name: locale === "bg" ? "Лицензия КЕВР" : "EWRC licence",
+    value: "Л-878-15",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: site.phone,
+    email: site.email,
+    contactType: locale === "bg" ? "Продажби и запитвания" : "Sales and enquiries",
+    availableLanguage: ["bg", "en"],
+  },
 };
 ---
 

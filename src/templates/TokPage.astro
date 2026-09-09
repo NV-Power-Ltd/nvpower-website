@@ -6,7 +6,7 @@ import CtaBand from "../components/CtaBand.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
 import InvoiceUpload from "../islands/InvoiceUpload";
 import type { Locale } from "../config/site";
-import { site, CAN_ACCEPT_UPLOADS, responseBadge, responseWithin } from "../config/site";
+import { site, SITE_URL, CAN_ACCEPT_UPLOADS, responseBadge, responseWithin } from "../config/site";
 import { r } from "../i18n/ui";
 
 interface Props {
@@ -14,6 +14,20 @@ interface Props {
 }
 const { locale } = Astro.props;
 
+
+/* Service schema: what this page's area actually is, for crawlers and models.
+   No Offer and no price, because the price is a formula, not a number. */
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: locale === "bg" ? "Изкупуване на електрическа енергия от ВЕИ производители" : "Electricity buy-back from renewable producers",
+  serviceType: "Electricity purchase agreement",
+  description: locale === "bg" ? "Изкупуване на произведената електроенергия по цена, обвързана с борсовия пазар „Ден напред“ на БНЕБ, минус договорен търговски компонент. NV Power е координатор на стандартна балансираща група и поема балансирането." : "Purchase of generated electricity at a price linked to the IBEX day-ahead market, minus an agreed trading component. NV Power is a standard balancing group coordinator and takes on the balancing.",
+  url: `${SITE_URL}${r(locale, "tok")}`,
+  provider: { "@type": "Organization", name: site.name, url: SITE_URL },
+  areaServed: { "@type": "Country", name: locale === "bg" ? "България" : "Bulgaria" },
+  audience: { "@type": "Audience", audienceType: locale === "bg" ? "Производители на електроенергия от възобновяеми източници" : "Renewable electricity producers" },
+};
 const c = {
   bg: {
     title: "Изкупуване на ток от ВЕИ производители | NV Power",
@@ -290,7 +304,7 @@ const c = {
 }[locale];
 ---
 
-<BaseLayout locale={locale} title={c.title} description={c.description} path="/tok/">
+<BaseLayout locale={locale} title={c.title} description={c.description} path="/tok/" jsonLd={[serviceLd]}>
   <!-- 1 ▸ HERO (dark band) -->
   <section class="bg-band">
     <div class="container-site py-16 text-center md:py-24">

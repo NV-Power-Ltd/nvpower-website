@@ -8,7 +8,13 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://nvpower.bg',
-  integrations: [react(), sitemap({ filter: (page) => !page.includes('/404') })],
+  integrations: [
+    react(),
+    // /ai-info/ restates facts that the Organization and Service schema already
+    // carry, so it is noindex and stays out of the sitemap rather than
+    // competing as thin duplicate content.
+    sitemap({ filter: (page) => !page.includes('/404') && !page.includes('/ai-info') }),
+  ],
 
   i18n: {
     defaultLocale: 'bg',

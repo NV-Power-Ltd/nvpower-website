@@ -5,7 +5,7 @@ import SectionHeading from "../components/SectionHeading.astro";
 import CtaBand from "../components/CtaBand.astro";
 import FaqAccordion from "../components/FaqAccordion.astro";
 import type { Locale } from "../config/site";
-import { site, responseBadge, responseWithin } from "../config/site";
+import { site, SITE_URL, responseBadge, responseWithin } from "../config/site";
 import { r } from "../i18n/ui";
 
 interface Props {
@@ -13,6 +13,20 @@ interface Props {
 }
 const { locale } = Astro.props;
 
+
+/* Service schema: what this page's area actually is, for crawlers and models.
+   No Offer and no price, because the price is a formula, not a number. */
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: locale === "bg" ? "Проектиране и изграждане на фотоволтаични централи с батерии" : "Design and construction of photovoltaic plants with battery storage",
+  serviceType: "Solar energy engineering, procurement and construction",
+  description: locale === "bg" ? "Проектиране, изграждане, присъединяване и поддръжка на фотоволтаични централи с батерийни системи за съхранение, за дом, бизнес, индустрия и земеделие, от 5 kWp до над 1 MWp." : "Design, construction, grid connection and maintenance of photovoltaic plants with battery energy storage, for homes, business, industry and agriculture, from 5 kWp to over 1 MWp.",
+  url: `${SITE_URL}${r(locale, "solar")}`,
+  provider: { "@type": "Organization", name: site.name, url: SITE_URL },
+  areaServed: { "@type": "Country", name: locale === "bg" ? "България" : "Bulgaria" },
+  audience: { "@type": "Audience", audienceType: locale === "bg" ? "Домакинства, бизнес, индустрия и земеделски стопанства" : "Households, business, industry and farms" },
+};
 const c = {
   bg: {
     title: "Соларни системи с батерии, до ключ | NV Power",
@@ -305,7 +319,7 @@ const c = {
 }[locale];
 ---
 
-<BaseLayout locale={locale} title={c.title} description={c.description} path="/solar/">
+<BaseLayout locale={locale} title={c.title} description={c.description} path="/solar/" jsonLd={[serviceLd]}>
   <!-- 1 ▸ HERO (dark band) -->
   <section class="bg-band">
     <div class="container-site py-16 text-center md:py-24">

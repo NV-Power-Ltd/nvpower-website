@@ -4,7 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import CtaBand from "../components/CtaBand.astro";
 import type { Locale } from "../config/site";
-import { site, responseBadge, responseWithin } from "../config/site";
+import { site, SITE_URL, responseBadge, responseWithin } from "../config/site";
 import { r } from "../i18n/ui";
 
 /**
@@ -24,6 +24,20 @@ interface Props {
 }
 const { locale } = Astro.props;
 
+
+/* Service schema: what this page's area actually is, for crawlers and models.
+   No Offer and no price, because the price is a formula, not a number. */
+const serviceLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: locale === "bg" ? "Доставка на електрическа енергия по индивидуална оферта" : "Electricity supply under an individual offer",
+  serviceType: "Electricity supply",
+  description: locale === "bg" ? "Доставка на електрическа енергия за консуматори с присъединена мощност над 1 MW, по индивидуална оферта на база товаровия профил на обекта и цените на БНЕБ." : "Electricity supply for consumers with more than 1 MW of connected capacity, quoted individually against the site load profile and IBEX prices.",
+  url: `${SITE_URL}${r(locale, "dostavka")}`,
+  provider: { "@type": "Organization", name: site.name, url: SITE_URL },
+  areaServed: { "@type": "Country", name: locale === "bg" ? "България" : "Bulgaria" },
+  audience: { "@type": "Audience", audienceType: locale === "bg" ? "Консуматори с присъединена мощност над 1 MW" : "Consumers with more than 1 MW of connected capacity" },
+};
 const c = {
   bg: {
     title: "Доставка на електроенергия за големи консуматори | NV Power",
@@ -114,7 +128,7 @@ const c = {
 }[locale];
 ---
 
-<BaseLayout locale={locale} title={c.title} description={c.description} path="/dostavka/">
+<BaseLayout locale={locale} title={c.title} description={c.description} path="/dostavka/" jsonLd={[serviceLd]}>
   <!-- 1 ▸ HERO. Buyer language only; no seller vocabulary anywhere on this page. -->
   <section class="bg-band">
     <div class="container-site pt-14 pb-16 text-center md:pt-20 md:pb-20">

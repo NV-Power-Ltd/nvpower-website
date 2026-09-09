@@ -43,6 +43,18 @@ with battery storage.
 
 **Мерни единици – правилото на проекта.** Символите са на латиница навсякъде, включително в българския текст (kWh, не кВтч). Пикова мощност на ФЕЦ е kWp/MWp; мощност на батерия е kW/MW, капацитет е kWh/MWh; борсовите формули са в €/MWh, а цената на дребно в €/kWh. Три стойности умишлено остават в kW/MW, защото са различна величина: облекченият режим „до 20 kW" е нормативен праг, „над 1 MW" на `/dostavka/` и `/tok/` е присъединена мощност, а „До 15 kW" във въпросника е договорена мощност.
 
+**Машинно четимите данни и страницата `/ai-info/`.** Страницата вече **не е в футъра, е `noindex` и е извън sitemap-а**. Причината: тя не изпълнява стандартна машинно четима функция. Каналите, които краулерите и езиковите модели наистина четат – JSON-LD, sitemap, canonical, hreflang, OpenGraph – се генерират от `BaseLayout`, а страницата само преповтаряше факти от `site.ts`, които вече захранват схемата.
+
+Съдържанието е запазено като вътрешна референция на същия адрес. Нищо в кода не зависи от нея (проверено), затова махането на линка не чупи нищо. Ако решите да я премахнете напълно, проверете само `routes.ts` и езиковия превключвател.
+
+Вместо нея, машинно четимото се носи от:
+
+- **Organization + LocalBusiness** на всяка страница: име, правно име, ЕИК, ДДС, адрес, телефон, имейл, `contactPoint`, `areaServed`, лого, лиценз като `identifier` и `description` от `site.orgDescription`.
+- **Service** на `/tok/`, `/dostavka/` и `/solar/` – по едно на направление, с `audience` и `areaServed`. **Умишлено без `Offer` и без цена**, защото цената е формула, а не число.
+- **FAQPage** на `/info/`.
+
+Не добавяйте текст, писан само за да го четат езикови модели. Ако има нов факт, мястото му е в `site.ts` и в схемата.
+
 **Изисква правен преглед – текстът на чекбокса в формите.** Политиката посочва, че основанието да отговорим на запитване е **преддоговорни отношения по Ваше искане (чл. 6, ал. 1, б. „б")**. Четирите форми обаче искаха **съгласие**: „Съгласен съм NV Power да обработи данните ми…". Това твърди основание, на което политиката не се позовава.
 
 Чекбоксът вече е потвърждение, не съгласие: **„Запознах се с Политиката за поверителност."** Не е правен извод, само премахване на противоречието с политиката, към която сочи. **Финалният текст трябва да се потвърди от юрист.**
@@ -337,6 +349,18 @@ with battery storage. The route table is under "Routing and i18n".
 - [ ] **No specific panel, inverter or battery model is selected anywhere.** That is why the site promises no warranty term, cycle count or Tier-1 status. If you decide to publish a specific model, its verified specifications can go back into the copy.
 
 **Units – the project rule.** Symbols are Latin everywhere, including in Bulgarian copy (kWh, not кВтч). PV peak capacity is kWp/MWp; battery power is kW/MW and capacity is kWh/MWh; exchange formulas are €/MWh and retail is €/kWh. Three values deliberately stay in kW/MW because they are a different quantity: the eased regime's "до 20 kW" is a statutory threshold, "above 1 MW" on `/dostavka/` and `/tok/` is connected capacity, and "Up to 15 kW" in the wizard is contracted capacity.
+
+**Machine-readable data and the `/ai-info/` page.** That page is now **out of the footer, `noindex`, and excluded from the sitemap**. The reason: it serves no standards-based machine-readable purpose. The channels crawlers and language models actually read — JSON-LD, sitemap, canonical, hreflang, OpenGraph — are emitted by `BaseLayout`, and the page only restated facts from `site.ts` that already feed that schema.
+
+Its content is kept as an internal reference at the same URL. Nothing in the codebase depends on it (checked), so removing the link breaks nothing. If you decide to delete it outright, the only references to clean up are `routes.ts` and the language switcher.
+
+What carries the machine-readable job instead:
+
+- **Organization + LocalBusiness** on every page: name, legal name, company ID, VAT, address, phone, email, `contactPoint`, `areaServed`, logo, the licence as an `identifier`, and `description` from `site.orgDescription`.
+- **Service** on `/tok/`, `/dostavka/` and `/solar/` — one per business area, with `audience` and `areaServed`. **Deliberately no `Offer` and no price**, because the price is a formula rather than a number.
+- **FAQPage** on `/info/`.
+
+Do not add copy written only to be read by language models. If there is a new fact, it belongs in `site.ts` and in the schema.
 
 **Needs legal review – the form checkbox wording.** The policy states that the basis for answering an enquiry is **pre-contractual relations at your request (Art. 6(1)(b))**. All four forms nevertheless asked for **consent** — "Съгласен съм NV Power да обработи данните ми…" — claiming a basis the policy does not rely on.
 

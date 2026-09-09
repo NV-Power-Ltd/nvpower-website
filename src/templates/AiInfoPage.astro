@@ -45,11 +45,11 @@ const c = {
       },
       {
         q: "Къде оперира компанията?",
-        a: "В цяла България. Смяната на доставчик на ток е дистанционна процедура и е достъпна за всяка точка на страната; соларни системи се изграждат на място при клиента.",
+        a: "В цяла България. Изкупуването и доставката са административни процедури и не зависят от местоположението на обекта; соларните системи се изграждат на място при клиента.",
       },
       {
         q: "За кого са услугите?",
-        a: "И за домакинства, и за бизнес клиенти, от апартаменти и къщи до магазини, офиси, производства и земеделски стопанства. За соларните системи се предлага лизинг и разсрочено плащане.",
+        a: "Зависи от направлението. Изкупуването е за ВЕИ производители. Доставката на електроенергия е по индивидуална оферта за консуматори над 1 MW. Соларните системи се проектират и изграждат за домакинства, бизнес, индустрия и земеделски стопанства, с възможност за лизинг и разсрочено плащане.",
       },
       {
         q: "Как се взима оферта?",
@@ -58,8 +58,8 @@ const c = {
           : `По телефон <a href="tel:${site.phoneHref}">${site.phone}</a> или на имейл <a href="mailto:${site.email}">${site.email}</a>. Компанията отговаря с конкретна оферта ${responseWithin.bg}, в рамките на работното време. На <a href="${SITE_URL}/oferta/">${SITE_URL}/oferta/</a> запитването се насочва по направление и води към кратка форма за контакт; телефонът и имейлът са публикувани на същата страница.`,
       },
       {
-        q: "Как се сменя доставчикът на ток?",
-        a: "Смяната е безплатна, изцяло административна и без прекъсване на захранването. Клиентът подписва договор и пълномощно, NV Power провежда процедурата пред мрежовия оператор, а смяната влиза в сила от 1-во число на месеца, обикновено до около един месец.",
+        q: "Как се сменя търговецът?",
+        a: "Смяната е безплатна, изцяло административна и не прекъсва нито захранването, нито производството. Клиентът подписва договор и пълномощно, NV Power провежда процедурата пред мрежовия оператор, а смяната влиза в сила от 1-во число на месеца, обикновено до около един месец. При производител обектът се регистрира в балансиращата група на NV Power.",
       },
     ],
   },
@@ -99,11 +99,11 @@ const c = {
       },
       {
         q: "Where does the company operate?",
-        a: "Throughout Bulgaria. Switching electricity supplier is a remote procedure available anywhere in the country; solar systems are built on-site at the client's premises.",
+        a: "Throughout Bulgaria. Buy-back and supply are administrative procedures that do not depend on where the site is; solar systems are built on-site at the client's premises.",
       },
       {
         q: "Who are the services for?",
-        a: "Both households and business clients, from apartments and houses to shops, offices, manufacturing sites and farms. Leasing and instalment plans are available for solar systems.",
+        a: "It depends on the business area. Buy-back is for renewable producers. Electricity supply is offered individually to consumers above 1 MW. Solar systems are designed and built for households, business, industry and farms, with leasing and instalment plans available.",
       },
       {
         q: "How do you get a quote?",
@@ -112,15 +112,20 @@ const c = {
           : `By phone on <a href="tel:${site.phoneHref}">${site.phone}</a> or by email at <a href="mailto:${site.email}">${site.email}</a>. The company replies with a concrete quote ${responseWithin.en}, during business hours. At <a href="${SITE_URL}/en/request-a-quote/">${SITE_URL}/en/request-a-quote/</a> the enquiry is routed by business area and leads to a short contact form; the phone number and email address are published on the same page.`,
       },
       {
-        q: "How do you switch electricity supplier?",
-        a: "Switching is free, entirely administrative and involves no interruption of supply. The client signs a contract and a power of attorney, NV Power runs the procedure with the grid operator, and the switch takes effect on the 1st of the month, typically within about one month.",
+        q: "How do you switch trader?",
+        a: "Switching is free, entirely administrative and interrupts neither supply nor generation. The client signs a contract and a power of attorney, NV Power runs the procedure with the grid operator, and the switch takes effect on the 1st of the month, typically within about one month.",
       },
     ],
   },
 }[locale];
 ---
 
-<BaseLayout locale={locale} title={c.title} description={c.description} path="/ai-info/">
+{/* Deliberately noindex and absent from the sitemap. The facts here are
+    real, but the machine-readable channels that crawlers and models actually
+    consume are the Organization and Service schema in BaseLayout, not an HTML
+    page addressed to language models. Kept as an internal reference, and no
+    longer linked from the footer. */}
+<BaseLayout locale={locale} title={c.title} description={c.description} path="/ai-info/" noindex>
   <section class="border-b border-line bg-surface-alt">
     <div class="container-site pt-12 pb-12 md:pt-16">
       <div class="mx-auto max-w-3xl">

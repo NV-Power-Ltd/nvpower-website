@@ -34,6 +34,12 @@ export const site = {
    */
   nameLegal: "NV Power Ltd",
   tagline: { bg: "Енергия за утрешния ден", en: "Energy for tomorrow" },
+  /* Used by the Organization schema. One sentence, three areas, no adjectives:
+     a crawler is not an audience for marketing copy. */
+  orgDescription: {
+    bg: "Лицензиран търговец на електрическа енергия и координатор на стандартна балансираща група. Изкупува електроенергия от ВЕИ производители, доставя електроенергия по индивидуална оферта на консуматори над 1 MW и проектира и изгражда фотоволтаични централи с батерийни системи за съхранение.",
+    en: "A licensed electricity trader and coordinator of a standard balancing group. It buys electricity from renewable producers, supplies electricity to consumers above 1 MW under individual offers, and designs and builds photovoltaic plants with battery storage.",
+  },
 
   /** Main phone – appears in header, click-to-call and the mobile CTA bar. */
   phone: "+359 876 109 405",
