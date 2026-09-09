@@ -153,10 +153,14 @@ export const site = {
    * (facebook.com/nvpower) was a placeholder nobody confirmed. Paste the real
    * page here if there is one.
    */
+  /* Rendered in this order, and each one is hidden until it has a URL, so an
+     empty string never ships a dead icon. Paste the real page URLs here and the
+     buttons appear on their own, in the footer and in the Organization
+     schema's sameAs. */
   socials: {
-    facebook: "",
+    facebook: "", // [PLACEHOLDER] real NV Power Facebook page URL
+    instagram: "", // [PLACEHOLDER] real NV Power Instagram profile URL
     linkedin: "https://www.linkedin.com/company/nv-power-ltd",
-    instagram: "",
   },
 
   /**
