@@ -79,7 +79,7 @@ export default function InvoiceUpload({ locale }: { locale: Locale }) {
 
   return (
     <form onSubmit={submit} noValidate className="card grid gap-4 p-6 md:p-8">
-      <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="iu-file">
+      <label className="grid grid-rows-[1fr_auto] gap-1.5 text-sm font-semibold text-body" htmlFor="iu-file">
         {t.file}
         <input
           id="iu-file"
@@ -93,7 +93,7 @@ export default function InvoiceUpload({ locale }: { locale: Locale }) {
         <span className="text-xs font-normal text-muted">{t.fileHint}</span>
       </label>
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="iu-phone">
+        <label className="grid grid-rows-[1fr_auto] gap-1.5 text-sm font-semibold text-body" htmlFor="iu-phone">
           {t.phone}
           <input
             id="iu-phone"
@@ -108,7 +108,7 @@ export default function InvoiceUpload({ locale }: { locale: Locale }) {
             onChange={(e) => setPhone(e.target.value)}
           />
         </label>
-        <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="iu-email">
+        <label className="grid grid-rows-[1fr_auto] gap-1.5 text-sm font-semibold text-body" htmlFor="iu-email">
           {t.email}
           <input
             id="iu-email"

@@ -150,7 +150,7 @@ export default function ContactForm({ locale }: { locale: Locale }) {
   return (
     <form onSubmit={submit} noValidate className="card grid gap-4 p-6 md:p-8">
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="cf-name">
+        <label className="grid grid-rows-[1fr_auto] gap-1.5 text-sm font-semibold text-body" htmlFor="cf-name">
           {t.name}
           <input
             id="cf-name"
@@ -162,7 +162,7 @@ export default function ContactForm({ locale }: { locale: Locale }) {
             onChange={setField("name")}
           />
         </label>
-        <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="cf-company">
+        <label className="grid grid-rows-[1fr_auto] gap-1.5 text-sm font-semibold text-body" htmlFor="cf-company">
           {t.company}
           <input
             id="cf-company"
@@ -175,7 +175,7 @@ export default function ContactForm({ locale }: { locale: Locale }) {
         </label>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="cf-email">
+        <label className="grid grid-rows-[1fr_auto] gap-1.5 text-sm font-semibold text-body" htmlFor="cf-email">
           {t.email}
           <input
             id="cf-email"
@@ -189,7 +189,7 @@ export default function ContactForm({ locale }: { locale: Locale }) {
             onChange={setField("email")}
           />
         </label>
-        <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="cf-phone">
+        <label className="grid grid-rows-[1fr_auto] gap-1.5 text-sm font-semibold text-body" htmlFor="cf-phone">
           {t.phone}
           <input
             id="cf-phone"
@@ -206,14 +206,14 @@ export default function ContactForm({ locale }: { locale: Locale }) {
         </label>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="cf-interest">
+        <label className="grid grid-rows-[1fr_auto] gap-1.5 text-sm font-semibold text-body" htmlFor="cf-interest">
           {t.interest}
           <select id="cf-interest" name="interest" aria-required="true" className="field font-normal" value={v.interest} onChange={setField("interest")}>
             <option value="" disabled>{t.select}</option>
             {t.interests.map((o) => <option key={o} value={o}>{o}</option>)}
           </select>
         </label>
-        <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="cf-bill">
+        <label className="grid grid-rows-[1fr_auto] gap-1.5 text-sm font-semibold text-body" htmlFor="cf-bill">
           {t.bill}
           <select id="cf-bill" name="bill" className="field font-normal" value={v.bill} onChange={setField("bill")}>
             <option value="">{t.select}</option>
@@ -221,7 +221,7 @@ export default function ContactForm({ locale }: { locale: Locale }) {
           </select>
         </label>
       </div>
-      <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="cf-message">
+      <label className="grid grid-rows-[1fr_auto] gap-1.5 text-sm font-semibold text-body" htmlFor="cf-message">
         {t.message}
         <textarea
           id="cf-message"
@@ -235,7 +235,7 @@ export default function ContactForm({ locale }: { locale: Locale }) {
       </label>
       {/* Hidden without an endpoint — the file would be collected and dropped. */}
       {CAN_ACCEPT_UPLOADS && (
-        <label className="grid gap-1.5 text-sm font-semibold text-body" htmlFor="cf-file">
+        <label className="grid grid-rows-[1fr_auto] gap-1.5 text-sm font-semibold text-body" htmlFor="cf-file">
           {t.file}
           <input
             id="cf-file"

@@ -25,12 +25,20 @@
   --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   --input-bg: #f8f9fa;
 
+  /* Native controls follow the theme. Without this the <option> popup, the
+     scrollbars and every other browser-drawn widget keep the light palette,
+     so in dark mode the dropdown list paints a light popup while the option
+     text inherits near-white – unreadable. */
+  color-scheme: light;
+
   /* Dark band sections (footer / CTA) – dark in both themes */
   --band-bg: #212121;
   --band-bg-deep: #18181b;
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
+
   /*
    * Dark theme – deep pine/forest teal.
    * Background sits darker than the NV-letter colour (#14474b) so the logo
@@ -222,7 +230,9 @@
 
 /* Form controls – solid + light border in light theme, darker in dark theme */
 @utility field {
-  display: flex;
+  /* block, not flex: a native <select> is not a flex container and some
+     engines mis-place its label and arrow when told it is. */
+  display: block;
   width: 100%;
   border-radius: 0.625rem;
   border: 1px solid var(--line-color);
