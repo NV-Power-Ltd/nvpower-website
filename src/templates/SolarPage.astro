@@ -45,7 +45,6 @@ const c = {
       title: "Решения за всеки покрив и всеки мащаб",
       lead: "От къща с батерия до индустриална централа над 1 MWp, оразмеряваме според потреблението ти, не според каталога.",
       hintLabel: "Типична система",
-      more: "Разгледай",
       items: [
         {
           icon: Home,
@@ -53,6 +52,7 @@ const c = {
           pitch: "По-ниска сметка и ток вечер, направо от твоя покрив.",
           hint: "5–10 kWp + батерия",
           href: r(locale, "solarHome"),
+          cta: "Виж за дома",
         },
         {
           icon: Warehouse,
@@ -60,6 +60,7 @@ const c = {
           pitch: "Плоски покриви, които режат разхода точно в работните часове.",
           hint: "30–200 kWp",
           href: r(locale, "solarBiz"),
+          cta: "Виж за бизнеса",
         },
         {
           icon: Factory,
@@ -67,6 +68,7 @@ const c = {
           pitch: "Големи мощности срещу дневното потребление на производствения обект.",
           hint: "200 kWp – 1 MWp+",
           href: r(locale, "solarBiz"),
+          cta: "Виж за бизнеса",
         },
         {
           icon: Tractor,
@@ -74,6 +76,7 @@ const c = {
           pitch: "Навеси и стопански сгради захранват помпи, хладилни камери и сушилни.",
           hint: "30–500 kWp",
           href: r(locale, "solarBiz"),
+          cta: "Виж за бизнеса",
         },
       ],
     },
@@ -189,7 +192,6 @@ const c = {
       title: "Solutions for every roof and every scale",
       lead: "From a house with a battery to an industrial plant above 1 MWp, we size for your consumption, not for the catalogue.",
       hintLabel: "Typical system",
-      more: "Explore",
       items: [
         {
           icon: Home,
@@ -197,6 +199,7 @@ const c = {
           pitch: "A lower bill and power in the evening, straight from your roof.",
           hint: "5–10 kWp + battery",
           href: r(locale, "solarHome"),
+          cta: "See residential",
         },
         {
           icon: Warehouse,
@@ -204,6 +207,7 @@ const c = {
           pitch: "Flat roofs that cut your costs exactly during working hours.",
           hint: "30–200 kWp",
           href: r(locale, "solarBiz"),
+          cta: "See commercial",
         },
         {
           icon: Factory,
@@ -211,6 +215,7 @@ const c = {
           pitch: "Serious capacity against a production site's daytime consumption.",
           hint: "200 kWp – 1 MWp+",
           href: r(locale, "solarBiz"),
+          cta: "See commercial",
         },
         {
           icon: Tractor,
@@ -218,6 +223,7 @@ const c = {
           pitch: "Canopies and farm buildings power pumps, cold rooms and dryers.",
           hint: "30–500 kWp",
           href: r(locale, "solarBiz"),
+          cta: "See commercial",
         },
       ],
     },
@@ -363,7 +369,7 @@ const c = {
               <span class="font-semibold tracking-wide text-accent uppercase">{c.segments.hintLabel}:</span>
               <span class="ml-1 font-semibold text-body">{s.hint}</span>
             </p>
-            <span class="text-sm font-bold text-accent">{c.segments.more} →</span>
+            <span class="text-sm font-bold text-accent">{s.cta} →</span>
           </a>
         </li>
       ))}
