@@ -10,47 +10,67 @@ const { locale } = Astro.props;
 const t = useUI(locale);
 ---
 
-<!-- Google Consent Mode v2 banner + settings modal (§3) -->
+{/* Google Consent Mode v2 banner + settings panel (§3).
+
+    Three outcomes, kept genuinely distinct so the middle one is not a
+    relabelled "reject": accept all, reject all non-essential, or open the
+    panel and pick per category. Layout follows the reference: the settings
+    button spans the width, the two blunt choices sit side by side under it. */}
 <div
   id="cc-banner"
   hidden
-  class="fixed inset-x-3 bottom-20 z-60 mx-auto max-w-xl rounded-2xl border border-line bg-surface p-5 shadow-[0_20px_60px_-15px_rgb(13_47_51/0.4)] md:bottom-5"
+  class="fixed inset-x-3 bottom-20 z-60 mx-auto max-h-[calc(100dvh-7rem)] max-w-xl overflow-y-auto overscroll-contain rounded-2xl border border-line bg-surface p-5 shadow-[0_20px_60px_-15px_rgb(13_47_51/0.4)] md:bottom-5 md:max-h-[calc(100dvh-4rem)] md:p-6"
   role="dialog"
-  aria-label={t.consent.title}
+  aria-modal="false"
+  aria-labelledby="cc-title"
 >
-  <h2 class="flex items-center gap-2 font-[family-name:var(--font-display)] text-base font-bold text-body">
-    <span aria-hidden="true">🍪</span>
+  <h2 id="cc-title" class="font-[family-name:var(--font-display)] text-lg font-bold text-body">
     {t.consent.title}
   </h2>
-  <p class="mt-1.5 text-sm leading-relaxed text-muted">
+  <p class="mt-2 text-sm leading-relaxed text-muted">
     {t.consent.text}{" "}
-    <a href={r(locale, "privacy")} class="font-medium text-accent underline">{t.consent.privacyLink}</a>
+    <a href={r(locale, "privacy")} class="font-medium text-accent underline underline-offset-2">{t.consent.privacyLink}</a>.
   </p>
 
-  <div id="cc-settings" hidden class="mt-4 flex flex-col gap-3">
+  {/* Per-category controls. Necessary is checked and disabled because it is
+      not a choice; presenting it as one would be theatre. */}
+  <div id="cc-settings" hidden class="mt-4 flex flex-col gap-2.5">
     <label class="flex items-start gap-3 rounded-xl bg-surface-alt p-3 text-sm">
       <input type="checkbox" checked disabled class="mt-0.5 size-4 accent-accent" />
-      <span><strong class="text-body">{t.consent.necessary}</strong><br /><span class="text-muted">{t.consent.necessaryText}</span></span>
+      <span>
+        <strong class="text-body">{t.consent.necessary}</strong><br />
+        <span class="text-muted">{t.consent.necessaryText}</span>
+      </span>
     </label>
+
     <label class="flex items-start gap-3 rounded-xl bg-surface-alt p-3 text-sm">
       <input id="cc-analytics" type="checkbox" class="mt-0.5 size-4 accent-accent" />
-      <span><strong class="text-body">{t.consent.analytics}</strong><br /><span class="text-muted">{t.consent.analyticsText}</span></span>
+      <span>
+        <strong class="text-body">{t.consent.analytics}</strong><br />
+        <span class="text-muted">{t.consent.analyticsText}</span>
+      </span>
     </label>
+
+    <label class="flex items-start gap-3 rounded-xl bg-surface-alt p-3 text-sm">
+      <input id="cc-marketing" type="checkbox" class="mt-0.5 size-4 accent-accent" />
+      <span>
+        <strong class="text-body">{t.consent.marketing}</strong><br />
+        <span class="text-muted">{t.consent.marketingText}</span><br />
+        <span class="mt-1 inline-block text-xs text-muted italic">{t.consent.marketingNone}</span>
+      </span>
+    </label>
+
+    <button id="cc-save" type="button" class="btn btn-primary mt-1 !py-2.5 text-sm">{t.consent.save}</button>
   </div>
 
-  <!-- Settings sits inline to the right of the two main choices; it drops the
-       btn padding so all three fit on one row in the narrow banner. -->
-  <div class="mt-4 flex flex-wrap items-center gap-2">
-    <button id="cc-accept" type="button" class="btn btn-primary !py-2.5 text-sm">{t.consent.acceptAll}</button>
-    <button id="cc-reject" type="button" class="btn btn-outline !py-2.5 text-sm">{t.consent.rejectAll}</button>
-    <button id="cc-save" type="button" hidden class="btn btn-outline !py-2.5 text-sm">{t.consent.save}</button>
-    <button
-      id="cc-toggle"
-      type="button"
-      class="rounded-lg px-2 py-2.5 text-sm font-semibold text-muted underline transition-colors hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-    >
+  <div class="mt-4 flex flex-col gap-2">
+    <button id="cc-toggle" type="button" class="btn btn-outline w-full !py-2.5 text-sm">
       {t.consent.settings}
     </button>
+    <div class="grid grid-cols-2 gap-2">
+      <button id="cc-reject" type="button" class="btn btn-outline !py-2.5 text-sm">{t.consent.rejectAll}</button>
+      <button id="cc-accept" type="button" class="btn btn-primary !py-2.5 text-sm">{t.consent.acceptAll}</button>
+    </div>
   </div>
 </div>
 
@@ -69,8 +89,16 @@ const t = useUI(locale);
       analytics_storage: "denied",
     });
 
-    function apply(analytics) {
-      gtag("consent", "update", { analytics_storage: analytics ? "granted" : "denied" });
+    // The marketing signals are wired even though nothing sets an advertising
+    // cookie today. A stored "no" then already applies the day one is added,
+    // instead of a toggle that quietly does nothing.
+    function apply(analytics, marketing) {
+      gtag("consent", "update", {
+        analytics_storage: analytics ? "granted" : "denied",
+        ad_storage: marketing ? "granted" : "denied",
+        ad_user_data: marketing ? "granted" : "denied",
+        ad_personalization: marketing ? "granted" : "denied",
+      });
       if (analytics && gaId && !document.getElementById("ga4-src")) {
         var s = document.createElement("script");
         s.id = "ga4-src";
@@ -84,7 +112,7 @@ const t = useUI(locale);
 
     var saved = null;
     try { saved = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) {}
-    if (saved) apply(!!saved.analytics);
+    if (saved) apply(!!saved.analytics, !!saved.marketing);
 
     var banner = document.getElementById("cc-banner");
     if (!banner) return;
@@ -93,25 +121,33 @@ const t = useUI(locale);
     // reopened later. Withdrawing consent has to be as easy as giving it.
     banner.hidden = !!saved;
 
-    function decide(analytics) {
-      try { localStorage.setItem(KEY, JSON.stringify({ analytics: analytics, ts: Date.now() })); } catch (e) {}
-      apply(analytics);
+    var settings = document.getElementById("cc-settings");
+    var toggle = document.getElementById("cc-toggle");
+    var cbAnalytics = document.getElementById("cc-analytics");
+    var cbMarketing = document.getElementById("cc-marketing");
+
+    function decide(analytics, marketing) {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({ analytics: analytics, marketing: marketing, ts: Date.now() }));
+      } catch (e) {}
+      apply(analytics, marketing);
       banner.hidden = true;
     }
 
-    var settings = document.getElementById("cc-settings");
-    var toggle = document.getElementById("cc-toggle");
-    var save = document.getElementById("cc-save");
-
-    document.getElementById("cc-accept").addEventListener("click", function () { decide(true); });
-    document.getElementById("cc-reject").addEventListener("click", function () { decide(false); });
-    toggle.addEventListener("click", function () {
+    function openSettings() {
+      var current = null;
+      try { current = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) {}
+      cbAnalytics.checked = !!(current && current.analytics);
+      cbMarketing.checked = !!(current && current.marketing);
       settings.hidden = false;
-      save.hidden = false;
-      this.hidden = true;
-    });
-    save.addEventListener("click", function () {
-      decide(document.getElementById("cc-analytics").checked);
+      toggle.hidden = true;
+    }
+
+    document.getElementById("cc-accept").addEventListener("click", function () { decide(true, true); });
+    document.getElementById("cc-reject").addEventListener("click", function () { decide(false, false); });
+    toggle.addEventListener("click", openSettings);
+    document.getElementById("cc-save").addEventListener("click", function () {
+      decide(cbAnalytics.checked, cbMarketing.checked);
     });
 
     // "Cookie settings" in the footer reopens the banner with the current
@@ -120,15 +156,10 @@ const t = useUI(locale);
       var trigger = ev.target && ev.target.closest && ev.target.closest("[data-cookie-settings]");
       if (!trigger) return;
       ev.preventDefault();
-      var current = null;
-      try { current = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) {}
-      document.getElementById("cc-analytics").checked = !!(current && current.analytics);
-      settings.hidden = false;
-      save.hidden = false;
-      toggle.hidden = true;
+      openSettings();
       banner.hidden = false;
       banner.scrollIntoView({ block: "nearest" });
-      document.getElementById("cc-accept").focus();
+      document.getElementById("cc-save").focus();
     });
   })();
 </script>
