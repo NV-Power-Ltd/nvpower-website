@@ -3,8 +3,8 @@ import { ArrowUp } from "@lucide/astro";
 import type { Locale } from "../config/site";
 import { useUI } from "../i18n/ui";
 
-/* Back-to-top control – fades in as the visitor reaches the end of the page
-   (§8: no dead ends). Sits above the mobile CTA bar and below the cookie
+/* Back-to-top control – fades in once the first screen has scrolled out of
+   view (§8: no dead ends). Sits above the mobile CTA bar and below the cookie
    banner in the stacking order. */
 
 interface Props {
@@ -31,13 +31,13 @@ const t = useUI(locale);
   const btn = document.getElementById("back-to-top");
 
   if (btn) {
-    // Reveal once the viewport is within this distance of the document end.
-    const NEAR_BOTTOM = 600;
-
+    /* Reveal once the first screen has scrolled away, not on approach to the
+       document end. Waiting for the end meant that on a long page the control
+       only appeared when the visitor had almost finished scrolling, which is
+       exactly when they least need a way back up. */
     const update = () => {
-      const doc = document.documentElement;
-      const reachedEnd = window.scrollY + window.innerHeight >= doc.scrollHeight - NEAR_BOTTOM;
-      btn.toggleAttribute("data-visible", reachedEnd);
+      const pastFirstScreen = window.scrollY >= window.innerHeight * 0.9;
+      btn.toggleAttribute("data-visible", pastFirstScreen);
     };
 
     update();

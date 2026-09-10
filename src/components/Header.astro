@@ -131,11 +131,46 @@ const current = Astro.url.pathname;
 
   const btn = document.getElementById("menu-btn")!;
   const menu = document.getElementById("mobile-menu")!;
-  btn.addEventListener("click", () => {
-    const open = menu.classList.toggle("hidden") === false;
+
+  const setMenu = (open: boolean) => {
+    menu.classList.toggle("hidden", !open);
     btn.setAttribute("aria-expanded", String(open));
     btn.querySelector(".menu-open-icon")?.classList.toggle("hidden", open);
     btn.querySelector(".menu-close-icon")?.classList.toggle("hidden", !open);
+  };
+  const isOpen = () => !menu.classList.contains("hidden");
+
+  btn.addEventListener("click", () => setMenu(!isOpen()));
+
+  /* Tapping anywhere off the panel closes it. Listening on pointerdown rather
+     than click means the menu is gone before the tap lands on whatever is
+     underneath, instead of the first tap only dismissing the menu. */
+  document.addEventListener("pointerdown", (ev) => {
+    if (!isOpen()) return;
+    const target = ev.target as Node | null;
+    if (!target) return;
+    if (menu.contains(target) || btn.contains(target)) return;
+    setMenu(false);
+  });
+
+  /* Escape closes it and hands focus back to the control that opened it. */
+  document.addEventListener("keydown", (ev) => {
+    if (ev.key !== "Escape" || !isOpen()) return;
+    setMenu(false);
+    btn.focus();
+  });
+
+  /* A link to the current page, or to an anchor on it, does not reload, so the
+     panel would otherwise stay open over the destination. */
+  menu.addEventListener("click", (ev) => {
+    if ((ev.target as Element | null)?.closest("a")) setMenu(false);
+  });
+
+  /* Crossing into the desktop layout leaves a hidden panel in the open state,
+     which then reappears on the way back down. */
+  const desktop = window.matchMedia("(min-width: 1024px)");
+  desktop.addEventListener("change", (e) => {
+    if (e.matches) setMenu(false);
   });
 
   // Theme switch – persists to localStorage, applied via [data-theme] on <html>
