@@ -112,11 +112,8 @@ export const ui = {
       necessaryText: "Само тези, които поддържат основните функции и сигурността. Не могат да се изключат.",
       analytics: "Аналитични и функционални",
       analyticsText: "За събиране на статистика и запомняне на предпочитания (Google Analytics).",
-      marketing: "Маркетингови",
-      marketingText: "За показване на реклами спрямо Вашите интереси.",
-      /* Said plainly, because it is true today and the toggle would otherwise
-         suggest tracking that is not happening. */
-      marketingNone: "В момента сайтът не използва маркетингови бисквитки. Изборът Ви се запазва и важи, ако бъдат добавени.",
+      marketing: "Маркетинг",
+      marketingText: "Помага ни да измерваме ефективността на рекламите ни в Google (Google Ads).",
       privacyLink: "Политиката за поверителност",
     },
     misc: {
@@ -231,8 +228,7 @@ export const ui = {
       analytics: "Analytics and functional",
       analyticsText: "For usage statistics and remembering your preferences (Google Analytics).",
       marketing: "Marketing",
-      marketingText: "For showing advertising based on your interests.",
-      marketingNone: "The site uses no marketing cookies at present. Your choice is stored and applies if any are added.",
+      marketingText: "Helps us measure how well our Google advertising works (Google Ads).",
       privacyLink: "the Privacy Policy",
     },
     misc: {

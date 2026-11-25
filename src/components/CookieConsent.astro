@@ -1,6 +1,5 @@
 ---
 import type { Locale } from "../config/site";
-import { site } from "../config/site";
 import { useUI, r } from "../i18n/ui";
 
 interface Props {
@@ -55,8 +54,7 @@ const t = useUI(locale);
       <input id="cc-marketing" type="checkbox" class="mt-0.5 size-4 accent-accent" />
       <span>
         <strong class="text-body">{t.consent.marketing}</strong><br />
-        <span class="text-muted">{t.consent.marketingText}</span><br />
-        <span class="mt-1 inline-block text-xs text-muted italic">{t.consent.marketingNone}</span>
+        <span class="text-muted">{t.consent.marketingText}</span>
       </span>
     </label>
 
@@ -74,52 +72,35 @@ const t = useUI(locale);
   </div>
 </div>
 
-<script is:inline define:vars={{ gaId: site.gaMeasurementId }}>
+<script is:inline>
   (function () {
     var KEY = "nvpower-consent";
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { window.dataLayer.push(arguments); }
-    window.gtag = window.gtag || gtag;
+    // The tag, the consent defaults and the saved choice are handled earlier,
+    // in <head> (GoogleTag.astro). This script only drives the banner.
+    function gtag() { (window.dataLayer = window.dataLayer || []).push(arguments); }
+    var g = window.gtag || gtag;
 
-    // Consent Mode v2 defaults: everything denied until the user chooses.
-    gtag("consent", "default", {
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-      analytics_storage: "denied",
-    });
-
-    // The marketing signals are wired even though nothing sets an advertising
-    // cookie today. A stored "no" then already applies the day one is added,
-    // instead of a toggle that quietly does nothing.
     function apply(analytics, marketing) {
-      gtag("consent", "update", {
+      g("consent", "update", {
         analytics_storage: analytics ? "granted" : "denied",
         ad_storage: marketing ? "granted" : "denied",
         ad_user_data: marketing ? "granted" : "denied",
         ad_personalization: marketing ? "granted" : "denied",
       });
-      if (analytics && gaId && !document.getElementById("ga4-src")) {
-        var s = document.createElement("script");
-        s.id = "ga4-src";
-        s.async = true;
-        s.src = "https://www.googletagmanager.com/gtag/js?id=" + gaId;
-        document.head.appendChild(s);
-        gtag("js", new Date());
-        gtag("config", gaId, { anonymize_ip: true });
-      }
     }
 
     var saved = null;
     try { saved = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) {}
-    if (saved) apply(!!saved.analytics, !!saved.marketing);
+    // A choice saved before the marketing category existed is not a choice
+    // about marketing, so ask again.
+    var valid = !!saved && typeof saved.marketing === "boolean";
 
     var banner = document.getElementById("cc-banner");
     if (!banner) return;
 
     // Listeners are wired whether or not a choice exists, so the banner can be
     // reopened later. Withdrawing consent has to be as easy as giving it.
-    banner.hidden = !!saved;
+    banner.hidden = valid;
 
     var settings = document.getElementById("cc-settings");
     var toggle = document.getElementById("cc-toggle");

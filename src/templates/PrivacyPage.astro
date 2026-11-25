@@ -20,7 +20,7 @@ const c = {
     description:
       "Как NV Power събира, използва и защитава личните Ви данни: какви данни обработваме, на какво основание, колко време ги пазим и какви са правата Ви по GDPR.",
     h1: "Политика за поверителност",
-    updated: "Последна версия: септември 2026 г.",
+    updated: "Последна версия: ноември 2026 г.",
     intro:
       "Тук обясняваме ясно и без юридически жаргон какви лични данни събираме чрез сайта nvpower.bg, защо ги събираме и какви права имате. Ако нещо не Ви е ясно, пишете ни, отговаряме с удоволствие.",
     sections: [
@@ -40,7 +40,7 @@ const c = {
             ul: [
               "<strong>Данни от формите за запитване и оферта</strong>, име, телефон, имейл и данни за обекта (адрес, тип обект, месечна консумация или сметка);",
               "<strong>Файлове, които ни изпращате</strong>, например копие на фактура за ток, снимки на покрива или на електрическото табло;",
-              "<strong>Бисквитки и данни за посещението</strong>, аналитични бисквитки (Google Analytics) използваме <strong>само след Вашето изрично съгласие</strong> чрез банера за бисквитки. Работим с Google Consent Mode v2 – без съгласие не се зареждат аналитични инструменти и не се създава профил на поведението Ви.",
+              "<strong>Бисквитки и данни за посещението</strong>: сайтът използва Google таг с Google Consent Mode v2. Тагът се зарежда на всяка страница, но докато не дадете съгласие, не поставя бисквитки и изпраща само анонимни сигнали без идентификатори. Аналитични бисквитки (Google Analytics) и маркетингови бисквитки (Google Ads) се поставят <strong>само след Вашето изрично съгласие</strong> за съответната категория.",
             ],
           },
           { p: "Соларният калкулатор и мини конфигураторът работят изцяло във Вашия браузър, въведените там числа не се изпращат към нас." },
@@ -54,7 +54,8 @@ const c = {
               "<strong>За да Ви отговорим и изготвим оферта</strong>, основанието са преддоговорни отношения по Ваше искане (чл. 6, ал. 1, б. „б“ от GDPR);",
               "<strong>За да изпълним договор</strong>, ако станете наш клиент, същото основание;",
               "<strong>За да спазим законови задължения</strong>, счетоводни и данъчни изисквания (чл. 6, ал. 1, б. „в“);",
-              "<strong>За аналитика на сайта</strong>, единствено въз основа на Вашето съгласие (чл. 6, ал. 1, б. „а“), което можете да оттеглите по всяко време от настройките за бисквитки.",
+              "<strong>За аналитика на сайта</strong>, единствено въз основа на Вашето съгласие (чл. 6, ал. 1, б. „а“), което можете да оттеглите по всяко време от настройките за бисквитки;",
+              "<strong>За измерване на ефективността на рекламите ни в Google</strong>, единствено въз основа на Вашето съгласие за маркетингови бисквитки (чл. 6, ал. 1, б. „а“), което можете да оттеглите по същия начин.",
             ],
           },
         ],
@@ -73,7 +74,7 @@ const c = {
             ],
           },
           {
-            p: "Банерът предлага три категории: задължителни, аналитични и функционални, и маркетингови. Към момента сайтът не използва маркетингови бисквитки, но изборът Ви се записва и се прилага, ако такива бъдат добавени. Аналитичните бисквитки на Google Analytics се зареждат само след изричното Ви съгласие. Ако откажете или не направите избор, не се зарежда скрипт на трета страна и не се поставя бисквитка. Не използваме бисквитки за реклама, ретаргетиране или профилиране.",
+            p: "Банерът предлага три категории: задължителни, аналитични и функционални, и маркетинг. Аналитичните бисквитки на Google Analytics и маркетинговите бисквитки на Google Ads се поставят само след изричното Ви съгласие за съответната категория. Ако откажете или не направите избор, Google тагът работи без бисквитки и без идентификатори и изпраща само анонимни сигнали, които Google използва за обобщено, моделирано измерване на рекламите. Не използваме ретаргетиране и профилиране.",
           },
           {
             p: "Картата в страница „Контакти“ също не се зарежда сама. Показваме я само след като натиснете бутона, защото при зареждане Google получава IP адреса Ви.",
@@ -96,6 +97,20 @@ const c = {
         ],
       },
       {
+        h2: "Google Ads и измерване на конверсии",
+        blocks: [
+          {
+            p: "Използваме Google Ads, услуга на Google Ireland Ltd. (Gordon House, Barrow Street, Дъблин 4, Ирландия), за да измерваме дали рекламите ни в Google водят до запитване. Като конверсия отчитаме изпратена форма за запитване и клик върху телефон, имейл, Viber или WhatsApp.",
+          },
+          {
+            p: "При изпратена форма, и само ако сте дали съгласие за маркетингови бисквитки, имейлът и телефонът от формата се хешират в браузъра Ви (SHA-256), преди да бъдат изпратени до Google, за да се свърже запитването с рекламата, от която е дошло. Google не получава данните в четим вид.",
+          },
+          {
+            p: "Без съгласие за маркетинг не се поставят рекламни бисквитки и не се изпращат лични данни. Можете да оттеглите съгласието си по всяко време чрез „Настройки за бисквитки“ в долната част на всяка страница. Повече за обработката от Google: <a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">policies.google.com/privacy</a>.",
+          },
+        ],
+      },
+      {
         h2: "С кого споделяме данни",
         blocks: [
           { p: "<strong>Не продаваме личните Ви данни на никого.</strong> Споделяме ги само доколкото е необходимо за услугата:" },
@@ -104,6 +119,7 @@ const c = {
               "с мрежовия оператор и електроразпределителното дружество, при процедура по смяна на доставчик, от Ваше име и с Ваше пълномощно;",
               "с финансови и лизингови партньори, само ако кандидатствате за финансиране и само с Ваше знание;",
               "с доставчици на технически услуги (хостинг, имейл), които обработват данни по наше указание и с договор за поверителност;",
+              "с Google Ireland Ltd. (Google Ads, Google Analytics), само в обхвата на съгласието, което сте дали за бисквитки;",
               "с държавни органи, само когато законът ни задължава.",
             ],
           },
@@ -143,7 +159,7 @@ const c = {
     description:
       "How NV Power collects, uses and protects your personal data: what data we process, on what legal basis, how long we keep it and your rights under the GDPR.",
     h1: "Privacy policy",
-    updated: "Last version: September 2026",
+    updated: "Last version: November 2026",
     intro:
       "Here we explain clearly, without legal jargon, what personal data we collect through nvpower.bg, why we collect it and what rights you have. If anything is unclear, write to us, we're happy to answer.",
     sections: [
@@ -163,7 +179,7 @@ const c = {
             ul: [
               "<strong>Data from the enquiry and quote forms</strong>, name, phone, email and details about your site (address, type of site, monthly consumption or bill);",
               "<strong>Files you send us</strong>, for example a copy of an electricity invoice, photos of the roof or of the switchboard;",
-              "<strong>Cookies and visit data</strong>, we use analytics cookies (Google Analytics) <strong>only after your explicit consent</strong> via the cookie banner. We operate Google Consent Mode v2 – without consent, no analytics tools are loaded and no behavioural profile is created.",
+              "<strong>Cookies and visit data</strong>: the site uses the Google tag with Google Consent Mode v2. The tag loads on every page, but until you consent it sets no cookies and sends only anonymous, identifier-free signals. Analytics cookies (Google Analytics) and marketing cookies (Google Ads) are set <strong>only after your explicit consent</strong> to the relevant category.",
             ],
           },
           { p: "The solar calculator and the mini configurator run entirely in your browser, the numbers you enter there are not sent to us." },
@@ -177,7 +193,8 @@ const c = {
               "<strong>To reply to you and prepare a quote</strong>, the basis is pre-contractual steps taken at your request (Art. 6(1)(b) GDPR);",
               "<strong>To perform a contract</strong>, if you become our client, the same basis;",
               "<strong>To comply with legal obligations</strong>, accounting and tax requirements (Art. 6(1)(c));",
-              "<strong>For site analytics</strong>, solely based on your consent (Art. 6(1)(a)), which you can withdraw at any time from the cookie settings.",
+              "<strong>For site analytics</strong>, solely based on your consent (Art. 6(1)(a)), which you can withdraw at any time from the cookie settings;",
+              "<strong>To measure the effectiveness of our Google advertising</strong>, solely based on your consent to marketing cookies (Art. 6(1)(a)), which you can withdraw the same way.",
             ],
           },
         ],
@@ -196,7 +213,7 @@ const c = {
             ],
           },
           {
-            p: "The banner offers three categories: strictly necessary, analytics and functional, and marketing. The site uses no marketing cookies at present, but your choice is recorded and applies if any are added. Google Analytics cookies load only after your explicit consent. If you decline, or make no choice at all, no third-party script is loaded and no cookie is set. We do not use cookies for advertising, retargeting or profiling.",
+            p: "The banner offers three categories: strictly necessary, analytics and functional, and marketing. Google Analytics analytics cookies and Google Ads marketing cookies are set only after your explicit consent to the relevant category. If you decline or make no choice, the Google tag runs without cookies or identifiers and sends only anonymous signals, which Google uses for aggregated, modelled ad measurement. We do not use retargeting or profiling.",
           },
           {
             p: "The map on the “Contact” page does not load by itself either. We show it only once you press the button, because loading it shares your IP address with Google.",
@@ -219,6 +236,20 @@ const c = {
         ],
       },
       {
+        h2: "Google Ads and conversion measurement",
+        blocks: [
+          {
+            p: "We use Google Ads, a service of Google Ireland Ltd. (Gordon House, Barrow Street, Dublin 4, Ireland), to measure whether our Google advertising leads to an enquiry. We count as a conversion a submitted enquiry form and a click on our phone number, email, Viber or WhatsApp.",
+          },
+          {
+            p: "When a form is submitted, and only if you have consented to marketing cookies, the email and phone number from the form are hashed in your browser (SHA-256) before being sent to Google, so the enquiry can be matched to the ad it came from. Google does not receive them in readable form.",
+          },
+          {
+            p: "Without marketing consent no advertising cookies are set and no personal data is sent. You can withdraw consent at any time via “Cookie settings” at the bottom of every page. More on how Google processes data: <a href=\"https://policies.google.com/privacy\" target=\"_blank\" rel=\"noopener noreferrer\">policies.google.com/privacy</a>.",
+          },
+        ],
+      },
+      {
         h2: "Who we share data with",
         blocks: [
           { p: "<strong>We do not sell your personal data to anyone.</strong> We share it only to the extent necessary for the service:" },
@@ -227,6 +258,7 @@ const c = {
               "with the grid operator and the distribution company, during a supplier switching procedure, on your behalf and with your power of attorney;",
               "with finance and leasing partners, only if you apply for financing, and only with your knowledge;",
               "with technical service providers (hosting, email) that process data on our instructions and under a confidentiality agreement;",
+              "with Google Ireland Ltd. (Google Ads, Google Analytics), only within the scope of the cookie consent you have given;",
               "with public authorities, only when the law obliges us to.",
             ],
           },

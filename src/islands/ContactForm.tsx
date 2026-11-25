@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { submitLead, fileError } from "../lib/lead";
+import { ADS, setUserData, trackConversion } from "../lib/ads";
 import { useHydrated } from "../lib/useHydrated";
 import NoScriptFallback from "./NoScriptFallback";
 import type { Locale } from "../config/site";
@@ -117,6 +118,11 @@ export default function ContactForm({ locale }: { locale: Locale }) {
     }
     setState("sending");
     const result = await submitLead("contact", { ...v, privacyAcknowledged: gdpr }, hp, file);
+    // Counted only on a confirmed send: not on "err", not on "unconfigured".
+    if (result === "ok") {
+      setUserData(v.email, v.phone);
+      trackConversion(ADS.form);
+    }
     setState(result === "ok" ? "ok" : result === "unconfigured" ? "unconfigured" : "err");
   }
 

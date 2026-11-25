@@ -1,0 +1,78 @@
+---
+import { site } from "../config/site";
+import { ADS_ID, ADS } from "../lib/ads";
+
+/* Google tag + Consent Mode v2 (advanced), first thing in <head>.
+
+   Order matters and is the whole point of this file being separate from the
+   banner: the consent default has to be queued before gtag.js arrives, or the
+   tag's first hit goes out without it. gtag.js loads on every page without
+   waiting for a choice. With everything denied Google receives only cookieless
+   pings, which is what lets Ads model conversions from visitors who declined.
+
+   The stored choice is applied here as well, before the tag loads, so a
+   returning visitor who accepted is never measured as denied on page one.
+   A stored choice in the old format (no `marketing` field) is ignored, which
+   leaves the defaults denied and makes the banner ask again. */
+---
+
+<script is:inline define:vars={{ adsId: ADS_ID, gaId: site.gaMeasurementId, sendPhone: ADS.phone, sendMessage: ADS.message }}>
+  (function () {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = window.gtag || gtag;
+
+    gtag("consent", "default", {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+      wait_for_update: 500,
+    });
+    gtag("set", "ads_data_redaction", true);
+    gtag("set", "url_passthrough", true);
+
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem("nvpower-consent") || "null"); } catch (e) {}
+    if (saved && typeof saved.marketing === "boolean") {
+      gtag("consent", "update", {
+        analytics_storage: saved.analytics ? "granted" : "denied",
+        ad_storage: saved.marketing ? "granted" : "denied",
+        ad_user_data: saved.marketing ? "granted" : "denied",
+        ad_personalization: saved.marketing ? "granted" : "denied",
+      });
+    }
+
+    gtag("js", new Date());
+    gtag("config", adsId);
+    // GA4, if it is ever configured, rides on the same gtag.js: no second loader.
+    if (gaId) gtag("config", gaId, { anonymize_ip: true });
+
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + adsId;
+    document.head.appendChild(s);
+
+    /* Contact clicks, delegated once for every page. Capture phase so it runs
+       even if a handler further down stops propagation. No preventDefault and
+       no delay: tel:, mailto: and viber: never leave the page, and wa.me opens
+       exactly as before. The flag guards against double registration. */
+    if (window.__nvpAdsClicks) return;
+    window.__nvpAdsClicks = true;
+    document.addEventListener("click", function (ev) {
+      var a = ev.target && ev.target.closest && ev.target.closest("a[href]");
+      if (!a) return;
+      var href = (a.getAttribute("href") || "").toLowerCase();
+      var sendTo = null;
+      if (href.indexOf("tel:") === 0) sendTo = sendPhone;
+      else if (
+        href.indexOf("mailto:") === 0 ||
+        href.indexOf("viber:") === 0 ||
+        href.indexOf("wa.me/") !== -1 ||
+        href.indexOf("api.whatsapp.com") !== -1
+      ) sendTo = sendMessage;
+      if (!sendTo || typeof window.gtag !== "function") return;
+      window.gtag("event", "conversion", { send_to: sendTo, value: 1.0, currency: "EUR" });
+    }, { capture: true });
+  })();
+</script>
