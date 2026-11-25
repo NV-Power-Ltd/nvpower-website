@@ -6,22 +6,21 @@
    read from here. Never publish unverifiable claims.
    ========================================================================== */
 
-export const SITE_URL = "https://nvpower.bg";
+export const SITE_URL = "https://www.nvpower.bg";
 
 /**
- * Is THIS deployment the canonical site?
+ * Is this build the canonical site? Yes, since it went live on the real domain.
  *
- * false while the build lives on a *.vercel.app preview URL and nvpower.bg still
- * serves the old (Wix) site. Two things go wrong otherwise: every page declares
- * a canonical of https://nvpower.bg/... which 404s over there, so search engines
- * drop the page or guess; and the demo competes with the real site for NV Power
- * brand terms.
+ * SITE_URL is the www host because that is what Vercel serves: the apex
+ * nvpower.bg answers with a 301 to www.nvpower.bg. Canonicals, hreflang,
+ * og:url, schema and the sitemap all derive from SITE_URL, so they now name
+ * the address the pages actually live at instead of one that redirects.
  *
- * SITE_URL deliberately stays nvpower.bg so canonicals, hreflang, og:url and the
- * sitemap are already correct the moment this build becomes the real site – at
- * which point flip this to true and nothing else needs touching.
+ * Set this back to false only for a build that must stay out of search. The
+ * *.vercel.app hosts of this project are kept out separately, by an
+ * X-Robots-Tag header in vercel.json, so they never compete with www.
  */
-export const SITE_INDEXABLE = false;
+export const SITE_INDEXABLE = true;
 
 export const site = {
   name: "NV Power",

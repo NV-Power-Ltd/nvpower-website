@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://nvpower.bg',
+  site: 'https://www.nvpower.bg',
   integrations: [
     react(),
     // /ai-info/ restates facts that the Organization and Service schema already

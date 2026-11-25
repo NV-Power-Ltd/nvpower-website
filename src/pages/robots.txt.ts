@@ -14,9 +14,9 @@ Allow: /
 Sitemap: ${SITE_URL}/sitemap-index.xml
 `
     : `# Demo / preview deployment, NOT the canonical site.
-# nvpower.bg is the live site; this build declares canonicals pointing there,
+# www.nvpower.bg is the live site; this build declares canonicals pointing there,
 # so it must not be indexed or it competes with the real thing.
-# Flip SITE_INDEXABLE in src/config/site.ts when this becomes nvpower.bg.
+# Flip SITE_INDEXABLE in src/config/site.ts for the build that serves www.nvpower.bg.
 User-agent: *
 Disallow: /
 `;
